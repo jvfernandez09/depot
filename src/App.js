@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Button, DatePicker } from 'antd'
+import { Layout } from 'antd'
+import HeaderContainer from 'app/header/'
+import ModuleContainer from 'app/ModuleContainer'
+import FooterContainer from 'app/footer/'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Button type="primary">Button</Button>
-        <DatePicker />
-      </div>
-    );
+      <Layout>
+        <Layout>
+          <HeaderContainer/>
+            <ModuleContainer />
+          <FooterContainer/>
+        </Layout>
+      </Layout>
+    )
   }
 }
 
