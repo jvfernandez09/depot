@@ -5,18 +5,16 @@ import HeaderContainer from 'app/header/'
 import ModuleContainer from 'app/ModuleContainer'
 import FooterContainer from 'app/footer/'
 
-class App extends Component {
-  render() {
-    return (
+const App = () => {
+  return (
+    <Layout>
       <Layout>
-        <Layout>
-          <HeaderContainer/>
-            <ModuleContainer />
-          <FooterContainer/>
-        </Layout>
+        <HeaderContainer/>
+          <ModuleContainer />
+        <FooterContainer/>
       </Layout>
-    )
-  }
+    </Layout>
+  )
 }
 
 
