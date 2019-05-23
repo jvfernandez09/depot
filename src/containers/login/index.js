@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 import useForm from "utils/useForm"
-import validateLogin from 'utils/LoginFormValidationRules';
+import validateLogin from 'utils/LoginFormValidationRules'
 import 'login/index.scss'
 import Button from 'components/button'
 
@@ -14,7 +14,6 @@ const Login = () => {
 
   function login() {
     console.log(values)
-    console.log('Walang error');
   }
 
   return (
