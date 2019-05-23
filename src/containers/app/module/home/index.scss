@@ -1,0 +1,15 @@
+.main-body {
+  position: relative;
+  background: yellow;
+  width: 100%;
+  z-index: 1009;
+}
+
+.body-container {
+  background: #1b2d5d;
+  color: #f8d154;
+
+  > .body-content {
+
+  }
+}

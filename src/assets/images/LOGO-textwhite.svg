@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="287px" height="58px" viewBox="0 0 287 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>LOGO-textwhite</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Logo-Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Usage" transform="translate(-176.000000, -435.000000)">
+            <g id="Group-2" transform="translate(176.000000, 268.000000)">
+                <g id="LOGO-textwhite" transform="translate(0.000000, 166.500000)">
+                    <text id="GAMEWORKS" font-family="SoinSansNeue-Heavy, Soin Sans Neue" font-size="25.515" font-weight="600" letter-spacing="5" fill="#FFFFFF">
+                        <tspan x="67" y="37.5">GAMEWORK</tspan>
+                        <tspan x="271.62278" y="37.5">S</tspan>
+                    </text>
+                    <polygon id="Rectangle-2-Copy" fill="#FF530D" transform="translate(36.380978, 36.722511) rotate(-315.000000) translate(-36.380978, -36.722511) " points="46.6447549 16.3113269 46.2956469 57.0173254 32.7269807 57.1336947 32.8429664 43.6097602 26.1172017 36.8388802 32.9598628 29.9796434"></polygon>
+                    <polygon id="Rectangle-2-Copy-2" fill="#FF0000" transform="translate(19.353563, 39.059421) rotate(-45.000000) translate(-19.353563, -39.059421) " points="12.3946757 18.6482367 25.9633419 18.764606 26.3124499 59.4706045 12.7437838 59.3542352"></polygon>
+                    <polygon id="Rectangle-2" fill="#E80C7A" transform="translate(19.353563, 20.024421) rotate(-315.000000) translate(-19.353563, -20.024421) " points="12.7437838 -0.270393972 26.3124499 -0.386763322 25.9633419 40.3192352 12.3946757 40.4356045"></polygon>
+                    <polygon id="Rectangle-2-Copy-3" fill="#FF0DFF" transform="translate(38.717888, 20.024421) rotate(-225.000000) translate(-38.717888, -20.024421) " points="31.759001 -0.386763322 45.4440132 13.295557 45.6767752 40.4356045 32.108109 40.3192352"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

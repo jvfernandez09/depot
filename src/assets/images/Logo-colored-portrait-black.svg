@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="167px" height="173px" viewBox="0 0 167 173" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Logo-colored-portrait-black</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Logo-Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Usage" transform="translate(-1076.000000, -258.000000)">
+            <g id="Group-3" transform="translate(620.000000, 258.000000)">
+                <g id="Logo-colored-portrait-black" transform="translate(456.000000, 0.000000)">
+                    <polygon id="Rectangle-2-Copy" fill="#FF530D" transform="translate(101.451323, 89.037476) rotate(-315.000000) translate(-101.451323, -89.037476) " points="126.623675 38.6670001 126.641878 139.407952 76.2607693 89.0268438 93.0682616 72.2193515"></polygon>
+                    <polygon id="Rectangle-2-Copy-2" fill="#FF0000" transform="translate(59.880263, 94.986930) rotate(-45.000000) translate(-59.880263, -94.986930) " points="43.0934551 44.6265058 76.6670711 44.6265058 76.6670711 145.347354 43.0934551 145.347354"></polygon>
+                    <polygon id="Rectangle-2" fill="#E80C7A" transform="translate(59.880263, 47.480263) rotate(-315.000000) translate(-59.880263, -47.480263) " points="43.0934551 -2.88016092 76.6670711 -2.88016092 76.6670711 97.8406871 43.0934551 97.8406871"></polygon>
+                    <polygon id="Rectangle-2-Copy-3" fill="#FF0DFF" transform="translate(107.386930, 47.480263) rotate(-225.000000) translate(-107.386930, -47.480263) " points="90.6001218 -2.88016092 124.173738 30.6867368 124.173738 97.8406871 90.6001218 97.8406871"></polygon>
+                    <text id="GAMEWORKS" font-family="SoinSansNeue-Heavy, Soin Sans Neue" font-size="16.8" font-weight="600" letter-spacing="6" fill="#000000">
+                        <tspan x="0" y="171.8">GAMEWORK</tspan>
+                        <tspan x="156.3936" y="171.8">S</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

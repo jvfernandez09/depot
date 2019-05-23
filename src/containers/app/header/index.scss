@@ -1,0 +1,28 @@
+.main-navbar {
+  background: #02164c;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1009;
+
+  > .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+  }
+
+  > .nav-container > .action {
+    display: flex;
+    align-items: center;
+  }
+
+  > .nav-container > .action > .logo {
+    width: 250px;
+  }
+
+  > .nav-container > .options {
+
+  }
+}

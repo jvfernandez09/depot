@@ -22,6 +22,7 @@ const path = require('path');
      "app": path.resolve(__dirname, "src/containers/app"),
      "login": path.resolve(__dirname, "src/containers/login"),
      "utils": path.resolve(__dirname, "src/utils"),
-     "components": path.resolve(__dirname, "src/components")
+     "components": path.resolve(__dirname, "src/components"),
+     "images": path.resolve(__dirname, "src/assets/images" )
    })
   );
