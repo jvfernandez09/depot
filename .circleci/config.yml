@@ -1,0 +1,72 @@
+version: 2.1
+orbs:
+  aws-s3: circleci/aws-s3@1.0.9
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: yarn test
+      - run:
+          name: Build
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              yarn build
+            fi
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              yarn build
+            fi
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - public/*
+  deploy:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run: sudo apt-get update && sudo apt-get install -y python-dev
+      - run: sudo curl -O https://bootstrap.pypa.io/get-pip.py
+      - run: sudo python get-pip.py
+      - attach_workspace:
+          at: ~/repo
+      - run: ls -aslh
+      - aws-s3/sync:
+          from: bucket
+          to: 's3://gwx-game-central/'
+          aws-region: AWS_REGION_BLUE
+          overwrite: true
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - develop
+                - master
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore:
+                - develop
+                - master

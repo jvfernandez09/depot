@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Layout } from 'antd'
 import HomeContainer from 'app/module/home'
-import ReactHook  from 'utils/'
+import ProfileContainer from 'app/module/profile'
 import 'app/module/home/index.scss'
 const { Content } = Layout;
 
