@@ -23,7 +23,6 @@ const path = require('path');
      "login": path.resolve(__dirname, "src/containers/login"),
      "utils": path.resolve(__dirname, "src/utils"),
      "components": path.resolve(__dirname, "src/components"),
-     "graphql": path.resolve(__dirname, "src/graphql"),
      "images": path.resolve(__dirname, "src/assets/images")
    })
   );

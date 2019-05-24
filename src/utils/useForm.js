@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 const useForm = (callback, validateLogin) => {
 
-  const [input, setInputs] = useState({})
+  const [inputs, setInputs] = useState({})
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -14,19 +14,19 @@ const useForm = (callback, validateLogin) => {
 
   const handleSubmit = (event) => {
     if (event) event.preventDefault()
-    setErrors(validateLogin(input))
+    setErrors(validateLogin(inputs))
     setIsSubmitting(true)
   }
 
   const handleChange = (event) => {
     event.persist()
-    setInputs(input => ({ ...input, [event.target.name]: event.target.value }))
+    setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }))
   }
 
   return {
     handleChange,
     handleSubmit,
-    input,
+    inputs,
     errors,
   }
 }
