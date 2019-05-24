@@ -2,9 +2,6 @@ import React from "react"
 import useForm from "utils/useForm"
 import validateLogin from 'utils/LoginFormValidationRules'
 
-import { graphql } from 'react-apollo'
-
-
 
 import 'login/index.scss'
 import { Input } from 'antd'
