@@ -1,19 +1,25 @@
 import React from "react"
 import useForm from "utils/useForm"
 import validateLogin from 'utils/LoginFormValidationRules'
+
+import { graphql } from 'react-apollo'
+
+
+
 import 'login/index.scss'
 import { Input } from 'antd'
 
 const Login = () => {
   const {
-    values,
+    input,
     errors,
     handleChange,
     handleSubmit,
   } = useForm(login, validateLogin);
 
-  function login() {
-    console.log(values)
+
+
+  function login(){
   }
 
   return (
@@ -25,7 +31,7 @@ const Login = () => {
               <div>
                 <label>Email Address</label>
                 <div>
-                  <Input type="email" name="email" onChange={handleChange} value={values.email || ''} required />
+                  <Input type="email" name="email" onChange={handleChange} value={input.email || ''} required />
                   {errors.email && (
                     <p className="help is-danger">{errors.email}</p>
                   )}
@@ -34,7 +40,7 @@ const Login = () => {
               <div>
                 <label>Password</label>
                 <div>
-                  <Input type="password" name="password" onChange={handleChange} value={values.password || ''} required />
+                  <Input type="password" name="password" onChange={handleChange} value={input.password || ''} required />
                 </div>
                 {errors.password && (
                   <p>{errors.password}</p>
