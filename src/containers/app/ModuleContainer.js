@@ -10,7 +10,7 @@ export default class ModuleContainer extends Component {
     return(
       <Content  className='main-body'>
         <HomeContainer />
-        <ReactHook />
+        <ProfileContainer />
       </Content>
     )
   }

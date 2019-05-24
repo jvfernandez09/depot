@@ -8,11 +8,9 @@ import FooterContainer from 'app/footer/'
 const App = () => {
   return (
     <Layout>
-      <Layout>
-        <HeaderContainer/>
-          <ModuleContainer />
-        <FooterContainer/>
-      </Layout>
+      <HeaderContainer/>
+        <ModuleContainer />
+      <FooterContainer/>
     </Layout>
   )
 }
