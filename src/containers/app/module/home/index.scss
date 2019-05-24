@@ -1,8 +1,8 @@
 .main-body {
   position: relative;
-  background: yellow;
   width: 100%;
   z-index: 1009;
+  height: calc(100vh - 124px);
 }
 
 .body-container {
