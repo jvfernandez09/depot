@@ -1,4 +1,6 @@
 import React from "react"
+import { withRouter } from "react-router-dom"
+
 import useForm from "utils/useForm"
 import validateLogin from 'utils/LoginFormValidationRules'
 import 'login/index.scss'
@@ -17,25 +19,26 @@ const Login = (props) => {
     handleSubmit,
   } = useForm(login, validateLogin);
 
-  function login(){
-    const variables = inputs
+
+  async function login(){
+    const variables = {input: inputs}
     const { loginUser } = props
 
     loginUser({ variables }).then(response => {
-      console.log(response)
-    }).catch(e => {
-      console.log(e)
+      localStorage.setItem('AUTH_TOKEN', response.data.loginUser.token)
+    }).then(() => {
+      props.history.push('/')
+    }).catch((e) => {
+      console.error(e)
     })
-
   }
-
 
   return (
     <div>
       <div>
         <div>
           <div>
-            <form onSubmit={handleSubmit} noValidate>
+            <form>
               <div>
                 <label>Email Address</label>
                 <div>
@@ -54,7 +57,7 @@ const Login = (props) => {
                   <p>{errors.password}</p>
                 )}
               </div>
-              <button>Login</button>
+              <button onClick={handleSubmit}>Login</button>
             </form>
           </div>
         </div>
@@ -65,6 +68,7 @@ const Login = (props) => {
 
 
 export default compose(
+  withRouter,
   withApollo,
   graphql(LOGIN_USER, { name: 'loginUser' })
 )(Login)

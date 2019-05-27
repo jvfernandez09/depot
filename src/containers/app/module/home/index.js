@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
-class HomeContainer extends Component {  
+class HomeContainer extends Component {
   render(){
+    console.log(localStorage)
     return(
       <div className="body-container">
         <div className="body-content">

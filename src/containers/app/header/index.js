@@ -8,6 +8,11 @@ import { ReactComponent as Logo } from 'images/Gameworks-logo.svg'
 
 const { Header } = Layout;
 export default class HeaderContainer extends Component {
+
+  logout(){
+    localStorage.clear()
+  }
+
   render(){
     return (
       <Header className='main-navbar'>
@@ -19,7 +24,7 @@ export default class HeaderContainer extends Component {
             <Link to="/home">Home</Link>
             <Link to="/profile">Profile</Link>
             <Link to="/wallet">Wallet</Link>
-            <Link to="/"> Logout </Link>
+            <Link to="/" onClick={this.logout}> Logout </Link>
           </div>
         </div>
       </Header>

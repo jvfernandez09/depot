@@ -7,15 +7,20 @@ const useForm = (callback, validateLogin) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
+    console.log(errors, isSubmitting)
     if (Object.keys(errors).length === 0 && isSubmitting) {
       callback()
+    } else {
+      setIsSubmitting(false)
     }
   }, [errors, isSubmitting, callback])
 
   const handleSubmit = (event) => {
-    if (event) event.preventDefault()
-    setErrors(validateLogin(inputs))
-    setIsSubmitting(true)
+    if (event){
+      event.preventDefault()
+      setErrors(validateLogin(inputs))
+      setIsSubmitting(true)
+    }
   }
 
   const handleChange = (event) => {
@@ -27,7 +32,7 @@ const useForm = (callback, validateLogin) => {
     handleChange,
     handleSubmit,
     inputs,
-    errors,
+    errors
   }
 }
 

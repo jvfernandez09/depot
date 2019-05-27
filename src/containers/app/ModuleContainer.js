@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd'
+import PrivateRoute from '../../privateRoutes'
 
 import HomeContainer from 'app/module/home'
 import ProfileContainer from 'app/module/profile'
@@ -13,10 +14,10 @@ const ModuleContainer = () => {
   return (
     <Content  className='main-body'>
       <Switch>
-        <Route path="/home" component={HomeContainer} />
-        <Route path="/profile" component={ProfileContainer} />
-        <Route path="/wallet" component={WalletContainer} />
-        <Route path="/" component={HomeContainer} />
+        <PrivateRoute exac path="/home" component={HomeContainer} />
+        <PrivateRoute exac path="/profile" component={ProfileContainer} />
+        <PrivateRoute exac path="/wallet" component={WalletContainer} />
+        <PrivateRoute exac path="/" component={HomeContainer} />
       </Switch>
     </Content>
   )
