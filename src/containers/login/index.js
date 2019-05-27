@@ -4,12 +4,13 @@ import { withRouter } from "react-router-dom"
 import useForm from "utils/useForm"
 import validateLogin from 'utils/LoginFormValidationRules'
 import 'login/index.scss'
+import Input from 'components/input'
 
 import { compose, graphql, withApollo } from 'react-apollo'
 
 import LOGIN_USER from '../../../src/graphql/login'
 
-import { Input } from 'antd'
+// import { Input } from 'antd'
 
 const Login = (props) => {
   const {

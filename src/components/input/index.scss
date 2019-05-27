@@ -1,0 +1,30 @@
+@import "../../common";
+
+$width: 160px;
+$height: 46px;
+
+.input {
+  & {
+    border-radius: 2px;
+    border: none;
+    border-bottom: 1px solid $light-gray;
+    color: $vulcan;
+    padding: $pad + 2 $pad * 2;
+    width: 100%;
+    min-height: $height;
+    height: $height;
+    box-shadow: none;
+    background: #fff;
+    transition: border-color ease-in-out .15s;
+    background-image: none;
+    font-size: $font-size-base;
+  }
+}
+
+.ant-input:hover {
+  box-shadow: none;
+}
+
+.ant-input:focus {
+  box-shadow: none;
+}

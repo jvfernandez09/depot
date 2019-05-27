@@ -1,0 +1,43 @@
+$font-size-base:                  12px;
+$line-height-base:                1.7;
+$font-weight-light:               300;
+$font-weight-regular:             400;
+$font-weight-bold:                700;
+
+// Sizes ------------------------------------------------
+$pad:                             8px;
+$ms:                              1.25;
+
+$sidebar-width:                   198px;
+$navbar-height:                   50px;
+
+// Z-Index ----------------------------------------------
+$z-index-sidenav:                 1010;
+$z-index-secondary:               1020;
+$z-index-navbar-top:              1030;
+
+// Colors -----------------------------------------------
+$pattens-blue:                    #F1F5F8;
+$blue-gray:                       #3B4971;
+$wedgewood:                       #021342;
+$blue:                            #2E5BFF;
+$deep-blue:                       #061A55;
+
+$fire-red:                        #EC1A1A;
+
+$yellow:                          #F8D154;
+
+$dark-gray:                       #7f8088;
+$gray:                            #AEAEAE;
+$light-gray:                      #D8D8D8;
+$white-smoke:                     #E5E5E5;
+$solitude:                        #E4EBF0;
+
+$black:                           #0B1618;
+$alabaster:                       #F1F5F8;
+$vulcan:                          #37393C;
+$ink:                             #9098AE; // body text color
+
+// Specific-use Colors ----------------------------------
+$primary-color:                   $yellow;
+$border-color:                    $light-gray;
