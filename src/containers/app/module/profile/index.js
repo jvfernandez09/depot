@@ -29,5 +29,4 @@ const ProfileContainer = (props) => {
 
 export default compose(
   withApollo,
-  graphql(GET_PROFILE)
 )(ProfileContainer)

@@ -20,7 +20,7 @@ const GET_WALLET_BALANCE = gql`
       path: "/v1/wallets/{args.walletAddress}/balance",
       method: "GET"
     ) {
-      data
+      balance
     }
   }
 `
