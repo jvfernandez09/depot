@@ -1,0 +1,36 @@
+@import "../../common";
+
+button {
+  & {
+    display: inline-block;
+    margin-bottom: 0; 
+    font-weight: $font-weight-bold;
+    font-size: $font-size-base;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    position: relative;
+    border-radius: 6px;
+    @include user-select(none);
+    padding: 6px 12px;
+    transition: all 0.33s cubic-bezier(0.21, 0.65, 0.53, 0.62);
+    line-height: $line-height-base;
+    text-transform: uppercase;
+  }
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-lg {
+  padding: 10px 20px;
+}
+
+.btn-primary {
+  @include button-variant($vulcan, $primary-color, $primary-color);
+}

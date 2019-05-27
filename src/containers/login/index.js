@@ -4,12 +4,15 @@ import { withRouter } from "react-router-dom"
 import useForm from "utils/useForm"
 import validateLogin from 'utils/LoginFormValidationRules'
 import 'login/index.scss'
+import Input from 'components/input'
+import Button from 'components/button'
+import { ReactComponent as Logo } from 'images/Gameworks-logo.svg'
 
 import { compose, graphql, withApollo } from 'react-apollo'
 
 import LOGIN_USER from '../../../src/graphql/login'
 
-import { Input } from 'antd'
+// import { Input } from 'antd'
 
 const Login = (props) => {
   const {
@@ -37,10 +40,13 @@ const Login = (props) => {
   return (
     <div>
       <div>
-        <div>
-          <div>
+        <div className='session-container'>
+          <div className='content'>
+            <div className='head'>
+              <Logo className='logo' />
+            </div>
             <form>
-              <div>
+              <div className='form-group'>
                 <label>Email Address</label>
                 <div>
                   <Input type="email" name="email" onChange={handleChange} value={inputs.email || ''} required />
@@ -49,7 +55,7 @@ const Login = (props) => {
                   )}
                 </div>
               </div>
-              <div>
+              <div className='form-group'>
                 <label>Password</label>
                 <div>
                   <Input type="password" name="password" onChange={handleChange} value={inputs.password || ''} required />
@@ -58,7 +64,7 @@ const Login = (props) => {
                   <p>{errors.password}</p>
                 )}
               </div>
-              <button onClick={handleSubmit}>Login</button>
+              <Button onClick={handleSubmit} className='btn-primary btn-block btn-lg'>Login</Button>
             </form>
           </div>
         </div>
