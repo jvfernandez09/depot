@@ -1,3 +1,30 @@
+
+@font-face {
+  font-family: 'SoinSansNeue';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local('SoinSansNeue'),
+    local('SoinSansNeue'),
+    url(/src/assets/fonts/SoinSansNeue-Medium.otf) format('otf'),
+}
+
+@font-face {
+  font-family: 'SoinSansNeue';
+  font-style: bold;
+  font-weight: 900;
+  src:
+    local('SoinSansNeue'),
+    local('SoinSansNeue'),
+    url(/src/assets/fonts/SoinSansNeue-Bold.otf) format('otf'),
+}
+
+
+$sans: 'SoinSansNeue', "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$sans-bold: 'SoinSansNeue-Bold', "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
+$font-family-base:                $sans;
+$font-family-bold:                $sans-bold;
 $font-size-base:                  12px;
 $line-height-base:                1.7;
 $font-weight-light:               300;
@@ -41,3 +68,65 @@ $ink:                             #9098AE; // body text color
 // Specific-use Colors ----------------------------------
 $primary-color:                   $yellow;
 $border-color:                    $light-gray;
+
+
+//Mixins ------------------------------------------------
+@mixin user-select($value) {
+  -webkit-user-select: $value;
+  -moz-user-select: $value;
+  -ms-user-select: $value;
+  user-select: $value;
+}
+
+@mixin button-variant($color, $background, $border) {
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+
+  &:focus,
+  &.focus {
+    color: $color;
+    background-color: darken($background, 10%);
+        border-color: darken($border, 25%);
+  }
+  &:hover {
+    color: $color;
+    background-color: darken($background, 10%);
+        border-color: darken($border, 12%);
+  }
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    color: $color;
+    background-color: darken($background, 10%);
+        border-color: darken($border, 12%);
+
+    &:hover,
+    &:focus,
+    &.focus {
+      color: $color;
+      background-color: darken($background, 17%);
+          border-color: darken($border, 25%);
+    }
+  }
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus,
+    &.focus {
+      background-color: $background;
+          border-color: $border;
+    }
+  }
+
+  .badge {
+    color: $background;
+    background-color: $color;
+  }
+}

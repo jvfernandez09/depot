@@ -5,11 +5,10 @@ $height: 46px;
 
 .input {
   & {
-    border-radius: 2px;
     border: none;
     border-bottom: 1px solid $light-gray;
-    color: $vulcan;
-    padding: $pad + 2 $pad * 2;
+    color: #fff;
+    padding: $pad + 2 $pad;
     width: 100%;
     min-height: $height;
     height: $height;
@@ -18,13 +17,16 @@ $height: 46px;
     transition: border-color ease-in-out .15s;
     background-image: none;
     font-size: $font-size-base;
+    background: transparent;
   }
-}
 
-.ant-input:hover {
-  box-shadow: none;
-}
+  &:hover {
+    border-color: $primary-color;
+  }
 
-.ant-input:focus {
-  box-shadow: none;
+  &:focus, &:active {
+    border-bottom: 1px solid $primary-color;
+    box-shadow: none;
+    outline: none;
+  }
 }

@@ -23,7 +23,9 @@ code {
 
 html, body {
   height: 100%;
-  font-size: 12px;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  background: #021342;
 }
 
 p {
@@ -49,10 +51,9 @@ a {
 label {
   display: inline-block;
   max-width: 100%;
-  margin-bottom: $pad;
   color: $blue-gray;
   text-transform: uppercase;
-  font-weight: $font-weight-bold;
+  font-weight: 900;
 }
 
 input[type="search"] {
