@@ -11,7 +11,6 @@ const ProfileContainer = (props) => {
         {({ data, loading, error }) => {
           if (loading) return <p> Loading </p>
           if (error) return <p>ERROR</p>
-          console.log(data.getProfile.data)
           return(
             <div>
               <div>First Name: {data.getProfile.data.attributes.firstName}</div>
@@ -20,7 +19,6 @@ const ProfileContainer = (props) => {
               <div>Confirmed At: {data.getProfile.data.attributes.confirmedAt}</div>
               <div>Confirmed Sent At: {data.getProfile.data.attributes.confirmedSentAt}</div>
               <div>Wallet Address: {data.getProfile.data.attributes.walletAddress}</div>
-
             </div>
           )
         }}
@@ -31,5 +29,5 @@ const ProfileContainer = (props) => {
 
 export default compose(
   withApollo,
-  graphql(GET_PROFILE, { name: 'getProfile' })
+  graphql(GET_PROFILE)
 )(ProfileContainer)

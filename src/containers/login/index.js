@@ -26,6 +26,7 @@ const Login = (props) => {
 
     loginUser({ variables }).then(response => {
       localStorage.setItem('AUTH_TOKEN', response.data.loginUser.token)
+      localStorage.setItem('walletAddress', response.data.loginUser.user.data.attributes.walletAddress)
     }).then(() => {
       props.history.push('/')
     }).catch((e) => {
