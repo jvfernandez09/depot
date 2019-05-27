@@ -10,17 +10,13 @@ const useForm = (callback, validateLogin) => {
     console.log(errors, isSubmitting)
     if (Object.keys(errors).length === 0 && isSubmitting) {
       callback()
-    } else {
-      setIsSubmitting(false)
     }
   }, [errors, isSubmitting, callback])
 
   const handleSubmit = (event) => {
-    if (event){
-      event.preventDefault()
+    if (event) event.preventDefault()
       setErrors(validateLogin(inputs))
       setIsSubmitting(true)
-    }
   }
 
   const handleChange = (event) => {

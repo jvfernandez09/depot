@@ -9,8 +9,6 @@ import { ApolloProvider } from "react-apollo"
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { RestLink } from 'apollo-link-rest'
 import { setContext } from 'apollo-link-context'
-import { createHttpLink } from 'apollo-link-http';
-import { ApolloLink } from 'apollo-link'
 
 import './index.css'
 import App from './App'

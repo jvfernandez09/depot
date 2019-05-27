@@ -21,7 +21,7 @@ const Login = (props) => {
 
 
   async function login(){
-    const variables = {input: inputs}
+    const variables = { input: inputs }
     const { loginUser } = props
 
     loginUser({ variables }).then(response => {

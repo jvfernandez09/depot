@@ -1,4 +1,4 @@
-import React, { useEffect, useState }from 'react'
+import React from 'react'
 import { compose, graphql, withApollo, Query } from 'react-apollo'
 
 import GET_PROFILE from '../../../../../src/graphql/profile'
