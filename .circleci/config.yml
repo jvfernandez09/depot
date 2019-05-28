@@ -1,6 +1,4 @@
-version: 2.1
-orbs:
-  aws-s3: circleci/aws-s3@1.0.9
+version: 2
 jobs:
   build:
     working_directory: ~/repo
@@ -30,24 +28,29 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - public/*
+            - build/*
   deploy:
     working_directory: ~/repo
     docker:
       - image: circleci/node:latest
     steps:
-      - checkout
       - run: sudo apt-get update && sudo apt-get install -y python-dev
       - run: sudo curl -O https://bootstrap.pypa.io/get-pip.py
       - run: sudo python get-pip.py
+      - run: sudo pip install awscli --upgrade
+      - run: aws --version
       - attach_workspace:
           at: ~/repo
       - run: ls -aslh
-      - aws-s3/sync:
-          from: bucket
-          to: 's3://gwx-game-central/'
-          aws-region: AWS_REGION_BLUE
-          overwrite: true
+      - run:
+          name: Deploy
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              aws s3 sync build s3://gwx-token-depot/ --delete
+            fi
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              aws s3 sync build s3://gwx-token-depot/ --delete
+            fi
 
 workflows:
   version: 2
