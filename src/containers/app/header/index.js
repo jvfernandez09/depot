@@ -1,13 +1,10 @@
 import React, { Component} from 'react'
 import { Layout } from 'antd';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
 import 'app/header/index.scss'
 import {ReactComponent as Logo} from 'assets/images/Gameworks-logo.svg'
 
 import { Menu, Icon } from 'antd';
-
-const { SubMenu }  = Menu;
 
 const { Header } = Layout;
 export default class HeaderContainer extends Component {

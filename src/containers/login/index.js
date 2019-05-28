@@ -1,6 +1,4 @@
 import React from "react"
-import { withRouter } from "react-router-dom"
-
 import useForm from "utils/useForm"
 import validateLogin from 'utils/LoginFormValidationRules'
 import 'login/index.scss'
@@ -20,6 +18,7 @@ const Login = (props) => {
     errors,
     handleChange,
     handleSubmit,
+    isSubmitting
   } = useForm(login, validateLogin);
 
 
@@ -32,8 +31,10 @@ const Login = (props) => {
       localStorage.setItem('walletAddress', response.data.loginUser.user.data.attributes.walletAddress)
     }).then(() => {
       props.history.push('/')
-    }).catch((e) => {
-      console.error(e)
+    }).catch((errors) => {
+      console.log(errors.networkError.result.errors)
+      console.log(errors.networkError.result.message)
+
     })
   }
 
@@ -64,7 +65,7 @@ const Login = (props) => {
                   <p>{errors.password}</p>
                 )}
               </div>
-              <Button onClick={handleSubmit} className='btn-primary btn-block btn-lg'>Login</Button>
+              <Button onClick={handleSubmit} loading={isSubmitting} className='btn-primary btn-block btn-lg'>Login</Button>
             </form>
           </div>
         </div>
@@ -75,7 +76,6 @@ const Login = (props) => {
 
 
 export default compose(
-  withRouter,
   withApollo,
   graphql(LOGIN_USER, { name: 'loginUser' })
 )(Login)

@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { isEmpty } from 'lodash'
 
 const useForm = (callback, validateLogin) => {
 
@@ -6,17 +7,13 @@ const useForm = (callback, validateLogin) => {
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  useEffect(() => {
-    console.log(errors, isSubmitting)
-    if (Object.keys(errors).length === 0 && isSubmitting) {
+  const handleSubmit = (event) => {
+    setErrors(validateLogin(inputs))
+    setIsSubmitting(true)
+    if(isEmpty(Object.keys(errors))){
       callback()
     }
-  }, [errors, isSubmitting, callback])
-
-  const handleSubmit = (event) => {
-    if (event) event.preventDefault()
-      setErrors(validateLogin(inputs))
-      setIsSubmitting(true)
+    setIsSubmitting(false)
   }
 
   const handleChange = (event) => {
@@ -28,7 +25,8 @@ const useForm = (callback, validateLogin) => {
     handleChange,
     handleSubmit,
     inputs,
-    errors
+    errors,
+    isSubmitting
   }
 }
 

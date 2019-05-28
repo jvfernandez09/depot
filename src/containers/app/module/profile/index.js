@@ -1,5 +1,5 @@
 import React from 'react'
-import { compose, graphql, withApollo, Query } from 'react-apollo'
+import { compose, withApollo, Query } from 'react-apollo'
 
 import GET_PROFILE from '../../../../../src/graphql/profile'
 

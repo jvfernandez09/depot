@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { compose, graphql, withApollo, Query } from 'react-apollo'
+import React from 'react'
+import { compose, withApollo, Query } from 'react-apollo'
 
 import WALLET from '../../../../../src/graphql/wallet'
 
