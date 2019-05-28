@@ -6,7 +6,7 @@ import validateLogin from 'utils/LoginFormValidationRules'
 import 'login/index.scss'
 import Input from 'components/input'
 import Button from 'components/button'
-import { ReactComponent as Logo } from 'images/Gameworks-logo.svg'
+import {ReactComponent as Logo} from 'assets/images/Gameworks-logo.svg'
 
 import { compose, graphql, withApollo } from 'react-apollo'
 

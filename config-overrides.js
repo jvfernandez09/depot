@@ -9,12 +9,9 @@ const path = require('path');
    fixBabelImports('import', {
      libraryName: 'antd',
      libraryDirectory: 'es',
-     style: 'true',
+     style: 'css',
    }),
-   addLessLoader({
-     javascriptEnabled: true,
-     modifyVars: { '@primary-color': '#ffc000' },
-   }),
+
    addWebpackAlias({
      "package": path.resolve(__dirname, "package.json"),
      "res": path.resolve(__dirname, "src/res"),
@@ -23,6 +20,6 @@ const path = require('path');
      "login": path.resolve(__dirname, "src/containers/login"),
      "utils": path.resolve(__dirname, "src/utils"),
      "components": path.resolve(__dirname, "src/components"),
-     "images": path.resolve(__dirname, "src/assets/images")
+     "assets": path.resolve(__dirname, "src/assets"),
    })
   );

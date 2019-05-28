@@ -1,10 +1,13 @@
 import React, { Component} from 'react'
 import { Layout } from 'antd';
-import { Link } from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
 import 'app/header/index.scss'
-import { ReactComponent as Logo } from 'images/Gameworks-logo.svg'
+import {ReactComponent as Logo} from 'assets/images/Gameworks-logo.svg'
 
+import { Menu, Icon } from 'antd';
+
+const { SubMenu }  = Menu;
 
 const { Header } = Layout;
 export default class HeaderContainer extends Component {
@@ -21,10 +24,24 @@ export default class HeaderContainer extends Component {
             <Logo className='logo' />
           </div>
           <div className="options">
-            <Link to="/home">Home</Link>
-            <Link to="/profile">Profile</Link>
-            <Link to="/wallet">Wallet</Link>
-            <Link to="/" onClick={this.logout}> Logout </Link>
+            <Menu mode="horizontal">
+              <Menu.Item key="1">
+                <Icon type="mail" />
+                Home
+              </Menu.Item>
+              <Menu.Item key="2">
+                <Icon type="profile" />
+                Profile
+              </Menu.Item>
+              <Menu.Item key="3">
+                <Icon type="wallet" />
+                Wallet
+              </Menu.Item>
+              <Menu.Item key="4">
+                <Icon type="logout" />
+                Logout
+              </Menu.Item>
+            </Menu>
           </div>
         </div>
       </Header>
