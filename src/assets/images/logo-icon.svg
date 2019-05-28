@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1070px" height="1070px" viewBox="0 0 1070 1070" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>logo</title>
+    <desc>Created with Sketch.</desc>
+    <g id="gamecentral" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="gamecentral-landing" transform="translate(-47.000000, -665.000000)">
+            <g id="logo" transform="translate(47.000000, 665.000000)">
+                <polygon id="Rectangle-2-Copy" fill="#FF530D" transform="translate(668.684012, 668.382277) rotate(-315.000000) translate(-668.684012, -668.382277) " points="857.476652 290.603707 857.613169 1046.16085 479.754856 668.302535 605.811048 542.246343"></polygon>
+                <polygon id="Rectangle-2-Copy-2" fill="#FF0000" transform="translate(356.901060, 713.003180) rotate(-45.000000) translate(-356.901060, -713.003180) " points="231 335.3 482.80212 335.3 482.80212 1090.70636 231 1090.70636"></polygon>
+                <polygon id="Rectangle-2" fill="#E80C7A" transform="translate(356.901060, 356.703180) rotate(-315.000000) translate(-356.901060, -356.703180) " points="231 -21 482.80212 -21 482.80212 734.40636 231 734.40636"></polygon>
+                <polygon id="Rectangle-2-Copy-3" fill="#FF0DFF" transform="translate(713.201060, 356.703180) rotate(-225.000000) translate(-713.201060, -356.703180) " points="587.3 -21 839.10212 230.751733 839.10212 734.40636 587.3 734.40636"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

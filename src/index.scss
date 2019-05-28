@@ -1,0 +1,85 @@
+@import "./common";
+/*body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Soin Sans Neue";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #021342;
+}
+
+code {
+  font-family: 'Soin Sans Neue';
+}
+*/
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  height: 100%;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  background: #021342;
+}
+
+p {
+  // font-family: $sans;
+  margin-bottom: 0;
+  color: $ink;
+}
+
+a {
+  & {
+    color: #fff;
+  }
+
+  &:hover {
+    color: primary-color;
+  }
+
+  &, &:hover, &:active, &:focus {
+    text-decoration: none;
+  }
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  color: $blue-gray;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+input[type="search"] {
+  box-sizing: border-box;;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 4px 0 0;
+  margin-top: 1px \9; // IE8-9
+  line-height: normal;
+}
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: menulist-button;
+  appearance: menulist-button;
+}
+
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+textarea::-webkit-input-placeholder {
+  color: $light-gray;
+}
