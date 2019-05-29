@@ -21,7 +21,7 @@ export default class HeaderContainer extends Component {
             <Logo className='logo' />
           </div>
           <div className="options">
-            <Menu mode="horizontal">
+            <Menu className="nav-bar" mode="horizontal">
               <Menu.Item key="1">
                 <Icon type="mail" />
                 Home
