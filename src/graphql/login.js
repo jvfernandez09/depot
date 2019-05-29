@@ -9,13 +9,7 @@ const LOGIN_USER = gql`
       method: "POST"
     ) {
       token
-      user{
-        data{
-          attributes{
-            walletAddress
-          }
-        }
-      }
+      user
     }
   }
 `
