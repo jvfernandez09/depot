@@ -1,5 +1,5 @@
 import React  from 'react'
-import {BrowserRouter as Router, Switch} from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { Layout } from 'antd'
 import PrivateRoute from '../../privateRoutes'
 
@@ -13,13 +13,11 @@ const { Content } = Layout;
 const ModuleContainer = () => {
   return (
     <Content  className='main-body'>
-      <Router>
-        <Switch>
-          <PrivateRoute exac path="/home" component={HomeContainer} />
-          <PrivateRoute exac path="/profile" component={ProfileContainer} />
-          <PrivateRoute exac path="/wallet" component={WalletContainer} />
-        </Switch>
-      </Router>
+      <Switch>
+        <PrivateRoute exac path="/home" component={HomeContainer} />
+        <PrivateRoute exac path="/profile" component={ProfileContainer} />
+        <PrivateRoute exac path="/wallet" component={WalletContainer} />
+      </Switch>
     </Content>
   )
 }
