@@ -1,29 +1,67 @@
+@import "./src/styles/variables";
 
 .main-navbar {
-  background: #02164c;
-  width: 100%;
-  height: 80px;
-  z-index: 1009;
-
-  > .nav-container {
+  & {
+    background: $navbar-color;
+    width: 100%;
+    height: 60px;
+    z-index: 1009;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 10px;
   }
+}
 
-  > .nav-container > .action {
+.nav-container {
+  & {
     display: flex;
     align-items: center;
+    width: 100%;
   }
 
-  > .nav-container > .action > .logo {
-    width: 250px;
+  > .action {
+    display: flex;
+    align-items: center;
   }
 
-  > .nav-container > .options > .nav-bar {
-    background: #02164c;
-    color: #f8d154;
+  > .action > .logo {
+    width: 160px;
+  }
+
+  > .options {
+    margin-left: $pad * 3;
+  }
+
+  > .user {
+    margin-left: auto;
+  }
+}
+
+.nav-bar {
+  & {
+    background: transparent;
+    color: #fff;
     border-bottom: none;
   }
+}
+
+// overrides antDesign
+.ant-menu-horizontal > .ant-menu-item {
+  & {
+    top: 0;
+    vertical-align: unset;
+    border: none;
+  }
+  &:hover {
+    color: $primary-color;
+    border-bottom: none;
+    top: 0;
+  }
+}
+
+.ant-menu-horizontal > .ant-menu-item-selected {
+  color: $primary-color;
+  border: none;
+}
+
+.ant-menu-item {
+  transition: none;
 }

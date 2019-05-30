@@ -10,8 +10,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { RestLink } from 'apollo-link-rest'
 import { setContext } from 'apollo-link-context'
 
-import './index.scss'
 import App from './App'
+import './index.scss'
 import Login from 'login'
 import * as serviceWorker from './serviceWorker'
 

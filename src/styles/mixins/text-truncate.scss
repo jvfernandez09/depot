@@ -1,0 +1,8 @@
+@mixin text-truncate($line, $word, $height) {
+  display: -webkit-box;
+  -webkit-line-clamp: ($line);
+  word-break: $word;
+  height: $height;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

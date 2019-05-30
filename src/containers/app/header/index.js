@@ -29,19 +29,21 @@ class HeaderContainer extends Component {
           <div className="options">
             <Menu className="nav-bar" mode="horizontal">
               <Menu.Item route='/home' onClick={this.menu} key="1">
-                <Icon type="mail" />
                 Home
               </Menu.Item>
               <Menu.Item route='/profile' onClick={this.menu} key="2">
-                <Icon type="profile" />
                 Profile
               </Menu.Item>
               <Menu.Item route='/wallet' onClick={this.menu} key="3">
-                <Icon type="wallet" />
                 Wallet
               </Menu.Item>
+            </Menu>
+          </div>
+          <div className='user'>
+            <div className='avatar'>
+            </div>
+            <Menu className='nav-bar' mode="horizontal">
               <Menu.Item onClick={this.logout} key="4">
-                <Icon type="logout" />
                 Logout
               </Menu.Item>
             </Menu>
