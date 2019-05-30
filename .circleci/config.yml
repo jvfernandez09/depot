@@ -46,10 +46,10 @@ jobs:
           name: Deploy
           command: |
             if [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              aws s3 sync build s3://gwx-token-depot/ --delete
+              aws s3 sync public s3://gwx-token-depot/ --delete
             fi
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              aws s3 sync build s3://gwx-token-depot/ --delete
+              aws s3 sync public s3://gwx-token-depot/ --delete
             fi
 
 workflows:
