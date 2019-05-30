@@ -5,7 +5,6 @@ import {BrowserRouter as Router, Switch} from 'react-router-dom';
 
 import HeaderContainer from 'app/header/'
 import ModuleContainer from 'app/ModuleContainer'
-import FooterContainer from 'app/footer/'
 
 const App = () => {
   return (
