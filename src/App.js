@@ -15,7 +15,7 @@ const App = () => {
           <Layout>
             <HeaderContainer/>
               <ModuleContainer />
-            <FooterContainer/>
+            {/*<FooterContainer/>*/}
           </Layout>
         </Fragment>
       </Switch>

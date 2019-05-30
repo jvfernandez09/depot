@@ -1,6 +1,6 @@
-@import "../../common";
+@import "./src/styles/common";
 
-button {
+.button {
   & {
     display: inline-block;
     margin-bottom: 0; 
@@ -20,6 +20,7 @@ button {
     transition: all 0.33s cubic-bezier(0.21, 0.65, 0.53, 0.62);
     line-height: $line-height-base;
     text-transform: uppercase;
+    height: unset;
   }
 }
 

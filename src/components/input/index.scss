@@ -1,4 +1,4 @@
-@import "../../common";
+@import "./src/styles/common";
 
 $width: 160px;
 $height: 46px;
@@ -13,11 +13,11 @@ $height: 46px;
     min-height: $height;
     height: $height;
     box-shadow: none;
-    background: #fff;
     transition: border-color ease-in-out .15s;
     background-image: none;
     font-size: $font-size-base;
     background: transparent;
+    border-radius: 0;
   }
 
   &:hover {

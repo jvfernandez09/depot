@@ -1,4 +1,4 @@
-@import "./common";
+@import "./src/styles/variables";
 /*body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Soin Sans Neue";
@@ -26,6 +26,23 @@ html, body {
   font-size: $font-size-base;
   font-family: $font-family-base;
   background: #021342;
+}
+
+body::before {
+  content: '';
+  background: url('assets/images/logo-icon.svg') no-repeat;
+  height: 110%;
+  width: 100%;
+  position: fixed;
+  opacity: .08;
+  right: 15%;
+  bottom: -6%;
+  background-size: contain;
+}
+
+.ant-layout {
+  background: transparent;
+  color: #fff;
 }
 
 p {

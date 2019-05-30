@@ -65,7 +65,7 @@ const Login = (props) => {
                   <p>{errors.password}</p>
                 )}
               </div>
-              <Button onClick={handleSubmit} loading={isSubmitting} className='btn-primary btn-block btn-lg'>Login</Button>
+              <Button onClick={handleSubmit} loading={isSubmitting} className='button btn-primary btn-block btn-lg'>Login</Button>
             </form>
           </div>
         </div>
