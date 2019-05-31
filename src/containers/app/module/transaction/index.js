@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Table, Input, DatePicker } from 'antd'
+import { Table, Input, DatePicker, Card } from 'antd'
 const Search = Input.Search
 const { RangePicker } = DatePicker
 
@@ -82,16 +82,18 @@ const columns = [
   return(
     <div>
       Transaction History
-      <div >
-        <Search
-          placeholder="search payment mode"
-          style={{ width: '50%' }}
-        />
-        <RangePicker style={{ width: '50%'}}/>
-      </div>
-      <div>
-        <Table dataSource={dataSource} columns={columns} pagination={{ defaultPageSize: 5 }} />
-      </div>
+      <Card>
+        <div>
+          <Search
+            placeholder="search payment mode"
+            style={{ width: '50%' }}
+          />
+          <RangePicker style={{ width: '50%'}}/>
+        </div>
+        <div>
+          <Table dataSource={dataSource} columns={columns} pagination={{ defaultPageSize: 5 }} />
+        </div>
+      </Card>
     </div>
   )
 }
