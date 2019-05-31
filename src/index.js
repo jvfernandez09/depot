@@ -16,7 +16,7 @@ import Login from 'login'
 import * as serviceWorker from './serviceWorker'
 
 const restLink = new RestLink({
-  uri: "http://registry-staging.gameworks.io",
+  uri: "https://registry-staging.gameworks.io",
   headers: {
     "Content-Type": "application/json"
   }
