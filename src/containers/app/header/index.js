@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 import 'app/header/index.scss'
 import {ReactComponent as Logo} from 'assets/images/Gameworks-logo.svg'
 
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
 
 const { Header } = Layout;
 
