@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { compose, withApollo, Query } from 'react-apollo'
 import { Tabs } from 'antd'
 
+import TransactionContainer from 'app/module/transaction'
 import WALLET from '../../../../../src/graphql/wallet'
 import '../wallet/index.scss'
 
@@ -31,7 +32,7 @@ const WalletContainer = (props) => {
             </div>
           </TabPane>
           <TabPane tab='Transaction History' key='2'>
-            <span>Transactions.</span>
+            <TransactionContainer />
           </TabPane>
         </Tabs>
      </div>
