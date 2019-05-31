@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { compose, withApollo, Query } from 'react-apollo'
-import { Spin, Tabs, Card, Button } from 'antd'
+import { Tabs, Card, Button } from 'antd'
 
 import TransactionContainer from 'app/module/transaction'
 import WALLET from '../../../../../src/graphql/wallet'

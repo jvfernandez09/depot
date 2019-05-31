@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Table, Input, DatePicker, Card } from 'antd'
 const Search = Input.Search
 const { RangePicker } = DatePicker
