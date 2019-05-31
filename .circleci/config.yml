@@ -28,7 +28,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - public/*
+            - build/*
   deploy:
     working_directory: ~/repo
     docker:
