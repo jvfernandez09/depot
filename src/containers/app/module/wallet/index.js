@@ -38,9 +38,9 @@ const WalletContainer = (props) => {
               </Card>
               Game List
               <Card>
-                <Card> Crypto Keno <Button class='primary-btn'> Add Funds+ </Button>
+                <Card> Crypto Keno <Button className='primary-btn'> Add Funds+ </Button>
                  </Card>
-                <Card> Shaker  <Button class='primary-btn'> Add Funds+ </Button> 
+                <Card> Shaker  <Button className='primary-btn'> Add Funds+ </Button> 
                 </Card>
               </Card>
             </div>
