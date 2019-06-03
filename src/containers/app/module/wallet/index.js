@@ -27,10 +27,11 @@ const WalletContainer = (props) => {
                       if (loading) return <p> Loading </p>
                       if (error) return <p>ERROR</p>
                       const convertedBalance = (data.getWalletBalance.balance.gwx + "").split(".")
+                      const newBalance = parseInt(convertedBalance[0])
                       return(
                         <div className='balance'>
                           <div className='title'>GWX</div>
-                          <span style={{ fontSize: '3.5rem' }}>{convertedBalance[0]}</span><span>.</span><span style={{ fontSize: '1.5rem' }}>{convertedBalance[1]}</span>
+                          <span style={{ fontSize: '3.5rem' }}>{newBalance.toLocaleString()}</span><span>.</span><span style={{ fontSize: '1.5rem' }}>{convertedBalance[1]}</span>
                         </div>
                       )
                     }}
