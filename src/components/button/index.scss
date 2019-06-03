@@ -14,7 +14,7 @@
     border: 1px solid transparent;
     white-space: nowrap;
     position: relative;
-    border-radius: 6px;
+    border-radius: 8px;
     @include user-select(none);
     padding: 6px 12px;
     transition: all 0.33s cubic-bezier(0.21, 0.65, 0.53, 0.62);
@@ -34,4 +34,8 @@
 
 .btn-primary {
   @include button-variant($vulcan, $primary-color, $primary-color);
+
+  &.-outline {
+    @include button-variant(#fff, transparent, $primary-color);
+  }
 }
