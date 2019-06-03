@@ -1,3 +1,134 @@
-.body-container {  
-  color: #f8d154;
+@import "./src/styles/variables";
+
+.body-container {
+  > .header {
+    color: $primary-color;
+    font-weight: 900;
+    margin-bottom: $pad * 2;
+  }
+}
+
+
+.body-content {
+  > .title {
+    margin-bottom: $pad * 2 - 4;
+  }
+
+  > .title:nth-child(3) {
+    margin-top: $pad * 2;
+  }
+}
+
+.game-card {
+  & {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  > .info {
+    display: flex;
+  }
+
+  > .info > .image {
+    height: 120px;
+    width: 260px;
+  }
+
+   > .right > .item {
+    margin: 0;
+    color: $primary-color;
+  }
+
+  > .right > .action,
+  > .right > .item {
+    text-align: right;
+  }
+
+  > .right > .action:hover {
+    color: $primary-color;
+    cursor: pointer;
+  }
+}
+
+.game-details {
+  & {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: $pad * 2;
+  }
+
+  > .title {
+    font-weight: 300;
+  }
+}
+
+.card-divider {
+  border-top: 1px solid $dark-border;
+  width: 100%;
+  margin: $pad * 2 0;
+}
+
+// overrides antdesign
+.ant-tabs {
+  > .ant-tabs-left-bar,
+  > .ant-tabs-left-content {
+    border: 0;
+    color: #fff;
+  }
+
+  > .ant-tabs-left-content {
+    padding-left: $pad * 8;
+  }
+
+  > .ant-tabs-left-bar .ant-tabs-ink-bar {
+    right: 98%;
+  }
+
+  > .ant-tabs-left-bar .ant-tabs-tab {
+    text-align: left;
+    padding: $pad * 2 $pad * 2;
+  }
+}
+
+.ant-tabs-nav {
+  .ant-tabs-tab-active,
+  .ant-tabs-tab:hover {
+    color: $primary-color;
+  }
+
+  .ant-tabs-tab-active {
+    background: $deep-blue;
+    font-weight: 400;
+  }
+}
+
+.ant-tabs-ink-bar {
+  & {
+    background: $blue;
+    right: 170px;
+  }
+}
+
+.ant-tabs-tab {
+  > span > i > svg {
+    height: 20px;
+    width: 20px;
+  }
+
+  > span {
+    display: flex;
+  }
+}
+
+.ant-tabs-nav-container {
+  width: 225px;
+}
+
+.ant-card {
+  background: $black;
+  color: #fff;
+  border: none;
+  border-radius: 8px
 }
