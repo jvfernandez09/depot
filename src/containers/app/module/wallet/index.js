@@ -2,6 +2,9 @@ import React, { Fragment } from 'react'
 import { compose, withApollo, Query } from 'react-apollo'
 import { Spin, Tabs, Card, Button, Icon } from 'antd'
 
+import ModalWrapper from 'app/module/wallet/wallet_modal'
+import useModal from 'app/module/wallet/wallet_modal/useModal'
+
 import TransactionContainer from 'app/module/transaction'
 import WALLET from '../../../../../src/graphql/wallet'
 import GET_PROFILE from '../../../../../src/graphql/profile'
@@ -11,8 +14,11 @@ import {ReactComponent as SampleGame} from 'assets/images/sample-game.svg'
 
 const { TabPane } = Tabs;
 
+
 const WalletContainer = (props) => {
   const walletAddress = localStorage.getItem('walletAddress')
+  const {isShowing, toggle} = useModal()
+
   return(
     <Fragment>
       <div className="body-container">
