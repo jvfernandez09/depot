@@ -17,7 +17,7 @@ const { TabPane } = Tabs;
 
 const WalletContainer = (props) => {
   const walletAddress = localStorage.getItem('walletAddress')
-  const {isShowing, toggle} = useModal()
+  const { isShowing, toggle } = useModal()
 
   return(
     <Fragment>
