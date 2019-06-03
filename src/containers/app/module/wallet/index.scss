@@ -12,6 +12,7 @@
 .body-content {
   > .title {
     margin-bottom: $pad * 2 - 4;
+    letter-spacing: 1px;
   }
 
   > .title:nth-child(3) {
@@ -53,8 +54,8 @@
   }
 
   > .info > .image {
-    height: 120px;
-    width: 260px;
+    height: 100px;
+    width: 225px;
   }
 
    > .right > .item {
