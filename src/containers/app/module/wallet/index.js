@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { compose, withApollo, Query } from 'react-apollo'
 import { Spin, Tabs, Card, Button, Icon } from 'antd'
 
-import ModalWrapper from 'app/module/wallet/wallet_modal'
+import WalletModal from 'app/module/wallet/wallet_modal'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 
 import TransactionContainer from 'app/module/transaction'
@@ -54,7 +54,12 @@ const WalletContainer = (props) => {
                       )
                     }}
                   </Query>
-                  <Button className='button btn-primary -outline'> + Add Funds </Button>
+                  <Button className='button btn-primary -outline' onClick={toggle}> Add Funds+ </Button>
+                  <WalletModal
+                   isShowing={isShowing}
+                   hide={toggle}
+                   walletAddress={walletAddress}
+                  />
                 </div>
               </Card>
               <h2 className='title'>Game List</h2>
