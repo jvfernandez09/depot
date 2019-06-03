@@ -19,6 +19,28 @@
   }
 }
 
+.wallet-container {
+  & {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  > .balance {
+    display: flex;
+    color: $primary-color;
+    align-items: baseline;
+    font-weight: 500;
+  }
+
+  > .balance > .title {
+    bottom: 21px;
+    position: relative;
+    margin-right: 4px;
+    font-weight: 600;
+  }
+}
+
 .game-card {
   & {
     display: flex;

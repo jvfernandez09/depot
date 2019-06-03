@@ -21,23 +21,21 @@ const WalletContainer = (props) => {
               <h2 className='title'>Wallet</h2>
               <Card>
                 <div className='wallet-container'>
-                  <div className='top'>Wallet Balance</div>
+                  <p className='top'>Wallet Balance</p>
                   <Query query={WALLET.GET_WALLET_BALANCE} variables={{ walletAddress }} fetchPolicy='network-only'>
                     {({ data, loading, error }) => {
                       if (loading) return <p> Loading </p>
                       if (error) return <p>ERROR</p>
                       const convertedBalance = (data.getWalletBalance.balance.gwx + "").split(".")
                       return(
-                      <div>
-                        <div>
-                          GWX BALANCE :
-                          <span style={{ fontSize: '64px' }}>{convertedBalance[0]}</span><span>.</span><span style={{ fontSize: '20px' }}>{convertedBalance[1]}</span>
+                        <div className='balance'>
+                          <div className='title'>GWX</div>
+                          <span style={{ fontSize: '3.5rem' }}>{convertedBalance[0]}</span><span>.</span><span style={{ fontSize: '1.5rem' }}>{convertedBalance[1]}</span>
                         </div>
-                      </div>
                       )
                     }}
                   </Query>
-                  <Button className='primary-btn'> Add Funds+ </Button>
+                  <Button className='button btn-primary -outline'> + Add Funds </Button>
                 </div>
               </Card>
               <h2 className='title'>Game List</h2>
