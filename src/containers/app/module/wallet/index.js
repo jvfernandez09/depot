@@ -23,12 +23,12 @@ const WalletContainer = (props) => {
                   {({ data, loading, error }) => {
                     if (loading) return <p> Loading </p>
                     if (error) return <p>ERROR</p>
+                    const convertedBalance = (data.getWalletBalance.balance.gwx + "").split(".")
                     return(
                       <div>
-                        {// <div>XEM BALANCE: {data.getWalletBalance.balance.xem}</div>
-                        }
                         <div>
-                          GWX BALANCE : {data.getWalletBalance.balance.gwx}
+                          GWX BALANCE :
+                          <span style={{ fontSize: '64px' }}>{convertedBalance[0]}</span><span>.</span><span style={{ fontSize: '20px' }}>{convertedBalance[1]}</span>
                           <Button class='primary-btn'> Add Funds+ </Button>
                         </div>
                       </div>
