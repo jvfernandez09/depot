@@ -24,7 +24,7 @@ const WalletContainer = (props) => {
                   <p className='top'>Wallet Balance</p>
                   <Query query={WALLET.GET_WALLET_BALANCE} variables={{ walletAddress }} fetchPolicy='network-only'>
                     {({ data, loading, error }) => {
-                      if (loading) return <p> Loading </p>
+                      if (loading) return <Spin />
                       if (error) return <p>ERROR</p>
                       const convertedBalance = (data.getWalletBalance.balance.gwx + "").split(".")
                       const newBalance = parseInt(convertedBalance[0])
@@ -41,7 +41,7 @@ const WalletContainer = (props) => {
               </Card>
               <h2 className='title'>Game List</h2>
               <Card>
-                <div className='game-card'> 
+                <div className='game-card'>
                   <div className='info'>
                     <div className='image'>
                       <SampleGame />
@@ -66,7 +66,7 @@ const WalletContainer = (props) => {
                   </div>
                  </div>
                  <div className='card-divider'></div>
-                 <div className='game-card'> 
+                 <div className='game-card'>
                   <div className='info'>
                     <div className='image'>
                       <SampleGame />
