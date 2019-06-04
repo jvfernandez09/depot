@@ -4,6 +4,8 @@ import { Spin, Tabs, Card, Button, Icon } from 'antd'
 
 import TransactionContainer from 'app/module/transaction'
 import WALLET from '../../../../../src/graphql/wallet'
+import GET_PROFILE from '../../../../../src/graphql/profile'
+
 import '../wallet/index.scss'
 import {ReactComponent as SampleGame} from 'assets/images/sample-game.svg'
 
@@ -14,7 +16,17 @@ const WalletContainer = (props) => {
   return(
     <Fragment>
       <div className="body-container">
-        <h1 className='header'>Bruce Lee's Personal Wallet</h1>
+        <Query query={GET_PROFILE}>
+          {({ data, loading, error }) => {
+            if (loading) return <p> Loading </p>
+            if (error) return <p>ERROR</p>
+            const firstName = data.getProfile.data.attributes.firstName
+            const lastName = data.getProfile.data.attributes.lastName.slice(-1) === 's' ?
+              data.getProfile.data.attributes.lastName : data.getProfile.data.attributes.lastName+"'s"
+              
+            return <h1 className='header'>{firstName+' '+lastName} PERSONAL WALLET</h1>
+          }}
+        </Query>
         <Tabs tabPosition='left'>
           <TabPane tab={<span><Icon type='wallet' />My Wallet</span>} key='1'>
             <div className="body-content">

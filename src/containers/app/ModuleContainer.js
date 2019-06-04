@@ -3,7 +3,6 @@ import { Switch } from 'react-router-dom';
 import { Layout } from 'antd'
 import PrivateRoute from '../../privateRoutes'
 
-import HomeContainer from 'app/module/home'
 import ProfileContainer from 'app/module/profile'
 import WalletContainer from 'app/module/wallet'
 import 'app/module/home/index.scss'
