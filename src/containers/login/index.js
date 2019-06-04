@@ -39,6 +39,12 @@ const Login = (props) => {
     })
   }
 
+  function onKeyPress(e){
+    if(e.which === 13) {
+      handleSubmit()
+    }
+  }
+
   return (
     <div>
       <div>
@@ -55,7 +61,7 @@ const Login = (props) => {
                     type="email"
                     name="email"
                     onChange={handleChange}
-                    onKeyPress={handleSubmit}
+                    onKeyPress={onKeyPress}
                     value={inputs.email || ''}
                     required
                   />
@@ -71,7 +77,7 @@ const Login = (props) => {
                     type="password"
                     name="password"
                     onChange={handleChange}
-                    onKeyPress={handleSubmit}
+                    onKeyPress={onKeyPress}
                     value={inputs.password || ''}
                     required
                   />
