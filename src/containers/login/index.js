@@ -30,7 +30,7 @@ const Login = (props) => {
       localStorage.setItem('AUTH_TOKEN', response.data.loginUser.token)
       localStorage.setItem('walletAddress', response.data.loginUser.user.data.attributes.walletAddress)
     }).then(() => {
-      props.history.push('/')
+      props.history.push('/wallet')
     }).catch((errors) => {
       console.log(errors.networkError.result.errors)
       console.log(errors.networkError.result.message)
