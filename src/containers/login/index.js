@@ -10,7 +10,7 @@ import { compose, graphql, withApollo } from 'react-apollo'
 
 import LOGIN_USER from '../../../src/graphql/login'
 
-// import { Input } from 'antd'
+import Notification from 'utils/notification'
 
 const Login = (props) => {
   const {
@@ -32,9 +32,10 @@ const Login = (props) => {
     }).then(() => {
       props.history.push('/wallet')
     }).catch((errors) => {
-      console.log(errors.networkError.result.errors)
-      console.log(errors.networkError.result.message)
-
+      Notification.show({
+        type: 'error',
+        message: errors.networkError.result.message
+      })
     })
   }
 
@@ -52,7 +53,7 @@ const Login = (props) => {
                 <div>
                   <Input type="email" name="email" onChange={handleChange} value={inputs.email || ''} required />
                   {errors.email && (
-                    <p className="help is-danger">{errors.email}</p>
+                    <p style={{ color: 'red'}}>{errors.email}</p>
                   )}
                 </div>
               </div>
@@ -62,7 +63,7 @@ const Login = (props) => {
                   <Input type="password" name="password" onChange={handleChange} value={inputs.password || ''} required />
                 </div>
                 {errors.password && (
-                  <p>{errors.password}</p>
+                  <p style={{ color: 'red'}}>{errors.password}</p>
                 )}
               </div>
               <Button onClick={handleSubmit} loading={isSubmitting} className='button btn-primary btn-block btn-lg'>Login</Button>
