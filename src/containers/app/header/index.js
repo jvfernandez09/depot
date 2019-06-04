@@ -28,9 +28,9 @@ class HeaderContainer extends Component {
           </div>
           <div className="options">
             <Menu className="nav-bar" mode="horizontal">
-              <Menu.Item route='/home' onClick={this.menu} key="1">
+              {/* <Menu.Item route='/home' onClick={this.menu} key="1">
                 Home
-              </Menu.Item>
+              </Menu.Item> */}
               <Menu.Item route='/profile' onClick={this.menu} key="2">
                 Profile
               </Menu.Item>
