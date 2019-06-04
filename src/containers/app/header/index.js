@@ -10,6 +10,12 @@ const { Header } = Layout;
 
 class HeaderContainer extends Component {
 
+  componentDidMount(){
+    if (this.props.history.location.pathname === '/') {
+      this.props.history.push('/wallet')
+    }
+  }
+
   menu = (e) => {
     this.props.history.push(e.domEvent.currentTarget.getAttribute('route'))
   }
@@ -24,7 +30,7 @@ class HeaderContainer extends Component {
       <Header className='main-navbar'>
         <div className="nav-container">
           <div className="action">
-            <Logo className='logo' />
+            <Logo className='logo' onClick={() => this.props.history.push('/wallet')}/>
           </div>
           <div className="options">
             <Menu className="nav-bar" mode="horizontal">
