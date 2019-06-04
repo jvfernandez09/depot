@@ -14,8 +14,6 @@ const ModuleContainer = () => {
   return (
     <Content  className='main-body'>
       <Switch>
-        {/* <PrivateRoute exac path="/home" component={HomeContainer} /> */}
-        <PrivateRoute exac path="/" component={WalletContainer} />
         <PrivateRoute exac path="/profile" component={ProfileContainer} />
         <PrivateRoute exac path="/wallet" component={WalletContainer} />
       </Switch>
