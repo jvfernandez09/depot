@@ -4,6 +4,7 @@ import validateLogin from 'utils/LoginFormValidationRules'
 import 'login/index.scss'
 import Input from 'components/input'
 import Button from 'components/button'
+import { version } from 'package'
 import {ReactComponent as Logo} from 'assets/images/Gameworks-logo.svg'
 
 import { compose, graphql, withApollo } from 'react-apollo'
@@ -21,6 +22,7 @@ const Login = (props) => {
     isSubmitting
   } = useForm(login, validateLogin);
 
+  console.log(version)
 
   async function login(){
     const variables = { input: inputs }
