@@ -51,7 +51,14 @@ const Login = (props) => {
               <div className='form-group'>
                 <label>Email Address</label>
                 <div>
-                  <Input type="email" name="email" onChange={handleChange} value={inputs.email || ''} required />
+                  <Input
+                    type="email"
+                    name="email"
+                    onChange={handleChange}
+                    onKeyPress={handleSubmit}
+                    value={inputs.email || ''}
+                    required
+                  />
                   {errors.email && (
                     <p style={{ color: 'red'}}>{errors.email}</p>
                   )}
@@ -60,13 +67,25 @@ const Login = (props) => {
               <div className='form-group'>
                 <label>Password</label>
                 <div>
-                  <Input type="password" name="password" onChange={handleChange} value={inputs.password || ''} required />
+                  <Input
+                    type="password"
+                    name="password"
+                    onChange={handleChange}
+                    onKeyPress={handleSubmit}
+                    value={inputs.password || ''}
+                    required
+                  />
                 </div>
                 {errors.password && (
                   <p style={{ color: 'red'}}>{errors.password}</p>
                 )}
               </div>
-              <Button onClick={handleSubmit} loading={isSubmitting} className='button btn-primary btn-block btn-lg'>Login</Button>
+              <Button
+                onClick={handleSubmit}
+                loading={isSubmitting}
+                className='button btn-primary btn-block btn-lg'
+              >Login
+              </Button>
             </form>
           </div>
         </div>
