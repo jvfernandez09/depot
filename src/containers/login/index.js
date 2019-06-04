@@ -10,7 +10,7 @@ import { compose, graphql, withApollo } from 'react-apollo'
 
 import LOGIN_USER from '../../../src/graphql/login'
 
-// import { Input } from 'antd'
+import Notification from 'utils/notification'
 
 const Login = (props) => {
   const {
@@ -32,9 +32,10 @@ const Login = (props) => {
     }).then(() => {
       props.history.push('/')
     }).catch((errors) => {
-      console.log(errors.networkError.result.errors)
-      console.log(errors.networkError.result.message)
-
+      Notification.show({
+        type: 'error',
+        message: errors.networkError.result.message
+      })
     })
   }
 
