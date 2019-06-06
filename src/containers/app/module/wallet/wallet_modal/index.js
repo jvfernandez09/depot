@@ -35,13 +35,14 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
           }>
 
           <div>
-            <span >Your wallet address {walletAddress} </span>
+            <span >Your wallet address {'*'.repeat(walletAddress.length)} </span>
           </div>
 
           <div>
             <span> Amount: </span>
             <Input
               name='amount'
+              type='number'
               onChange={handleChange}
             />
           </div>
@@ -55,11 +56,10 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
               onChange={handleChangeSelect}
               >
               <Option value="BTC">Bitcoin</Option>
+              <Option value="XEM">XEM</Option>
               <Option value="Etherium">Etherium</Option>
           </Select>
           </div>
-
-
         </Modal>
         ) : null
       }
