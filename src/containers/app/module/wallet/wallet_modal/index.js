@@ -9,7 +9,8 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
   const { handleChange, handleChangeSelect, inputs, handleSubmit, isLoading } = useModal(addFunds)
 
   function addFunds(){
-    console.log(inputs)
+    const variables = { ...inputs, walletAddress}
+    console.log(variables)
     hide()
   }
   return(
@@ -32,19 +33,33 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
             </Button>
             ]
           }>
-          <Input
-            name='amount'
-            onChange={handleChange}
-          />
-          <Select
-            placeholder='Select Payment Method'
-            name='type'
-            style={{ width: '100%'}}
-            onChange={handleChangeSelect}
-            >
-            <Option value="BTC">Bitcoin</Option>
-            <Option value="Etherium">Etherium</Option>
+
+          <div>
+            <span >Your wallet address {walletAddress} </span>
+          </div>
+
+          <div>
+            <span> Amount: </span>
+            <Input
+              name='amount'
+              onChange={handleChange}
+            />
+          </div>
+
+          <div>
+            <span> Payment Method: </span>
+            <Select
+              placeholder='Select Payment Method'
+              name='type'
+              style={{ width: '100%'}}
+              onChange={handleChangeSelect}
+              >
+              <Option value="BTC">Bitcoin</Option>
+              <Option value="Etherium">Etherium</Option>
           </Select>
+          </div>
+
+
         </Modal>
         ) : null
       }
