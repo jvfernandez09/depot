@@ -26,6 +26,7 @@ class HeaderContainer extends Component {
   }
 
   render(){
+
     return (
       <Header className='main-navbar'>
         <div className="nav-container">
@@ -33,14 +34,17 @@ class HeaderContainer extends Component {
             <Logo className='logo' onClick={() => this.props.history.push('/wallet')}/>
           </div>
           <div className="options">
-            <Menu className="nav-bar" mode="horizontal">
+            <Menu
+              selectedKeys={this.props.history.location.pathname === '/' ? ['wallet'] : [`${this.props.history.location.pathname.substring(1)}`]}
+              className="nav-bar"
+              mode="horizontal">
               {/* <Menu.Item route='/home' onClick={this.menu} key="1">
                 Home
               </Menu.Item> */}
-              <Menu.Item route='/profile' onClick={this.menu} key="2">
+              <Menu.Item route='/profile' onClick={this.menu} key="profile">
                 Profile
               </Menu.Item>
-              <Menu.Item route='/wallet' onClick={this.menu} key="3">
+              <Menu.Item route='/wallet' onClick={this.menu} key="wallet">
                 Wallet
               </Menu.Item>
             </Menu>
