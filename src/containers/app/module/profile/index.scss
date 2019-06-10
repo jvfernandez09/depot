@@ -1,0 +1,46 @@
+@import "./src/styles/variables";
+
+.body-container {
+  > .header {
+    color: $primary-color;
+    font-weight: 900;
+    margin-bottom: $pad * 2;
+  }
+}
+
+.body-content {
+  > .title {
+    margin-bottom: $pad * 2 - 4;
+    margin-top: $pad * 2 - 4;
+    letter-spacing: 1px;
+  }
+
+  > .title:nth-child(3) {
+    margin-top: $pad * 2;
+  }
+}
+
+.profile-header {
+  & {
+    display: flex;
+    align-items: center;
+  }
+
+  > .profile-details {
+    font-weight: 500;
+    letter-spacing: .5px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: $pad * 2;
+  }
+}
+
+// overides antd
+.ant-card {
+  background: $black;
+  color: #fff;
+  border: none;
+  border-radius: 8px
+}
