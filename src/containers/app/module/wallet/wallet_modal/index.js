@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Steps, message, Modal, Input, Select, Button } from 'antd'
+import { Steps, Modal, Input, Select, Button } from 'antd'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 import '../../wallet/wallet_modal/index.scss'
 
@@ -9,7 +9,7 @@ const { Option } = Select
 const { Step } = Steps
 
 const WalletModal = ({ isShowing, hide, walletAddress }) => {
-  const { handleChange, handleChangeSelect, inputs, handleSubmit, isLoading } = useModal(addFunds)
+  const { handleChange, handleChangeSelect, inputs, handleSubmit } = useModal(addFunds)
   const [isShowQr, isSetShowQr] = useState(false)
   const [done, setDone] = useState(false)
   const [current, setCurrent] = useState(0)
