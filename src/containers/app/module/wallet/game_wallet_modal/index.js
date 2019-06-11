@@ -5,21 +5,21 @@ import '../../wallet/wallet_modal/index.scss'
 
 const { Option } = Select
 
-const WalletModal = ({ isShowing, hide, walletAddress }) => {
-  const { handleChange, handleChangeSelect, inputs, handleSubmit, isLoading } = useModal(addFunds)
+const GameWalletModal = ({ isGameShowing, hide, walletAddress }) => {
+  const { handleChange, handleChangeSelect, inputs, handleSubmit, isLoading } = useModal(addGameWallet)
 
-  function addFunds(){
+  function addGameWallet(){
     const variables = { ...inputs, walletAddress}
     console.log(variables)
     hide()
   }
   return(
     <Fragment>
-      {isShowing ? (
+      {isGameShowing ? (
         <Modal
-          title='Top Up Wallet'
-          visible={isShowing}
+          title='Add GWX Token'
           onCancel={hide}
+          visible={isGameShowing}
           footer={[
             <Button
               key="2"
@@ -49,16 +49,16 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
           </div>
 
           <div>
-            <span> Payment Method: </span>
+            <span> Choose Wallet: </span>
             <Select
               placeholder='Select Payment Method'
               name='type'
               style={{ width: '100%'}}
               onChange={handleChangeSelect}
               >
-              <Option value="BTC">Bitcoin</Option>
-              <Option value="XEM">XEM</Option>
-              <Option value="Etherium">Etherium</Option>
+              <Option value="BTC">Bitcoin Wallet</Option>
+              <Option value="XEM">XEM Wallet</Option>
+              <Option value="Etherium">Etherium Wallet</Option>
           </Select>
           </div>
         </Modal>
@@ -68,4 +68,4 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
   )
 }
 
-export default WalletModal
+export default GameWalletModal
