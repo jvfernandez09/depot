@@ -72,12 +72,12 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
   function formInput(){
     return (
       <div>
-        <div>
-          <span >Your wallet address {'*'.repeat(walletAddress.length)} </span>
+        <div className="form-group">
+          <label className="form-label" >Your wallet address {'*'.repeat(walletAddress.length)} </label>
         </div>
 
-        <div>
-          <span> Amount: </span>
+        <div className="form-group">
+          <label className="form-label"> Amount: </label>
           <Input
             name='amount'
             type='number'
@@ -85,8 +85,8 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
           />
         </div>
 
-        <div>
-          <span> Payment Method: </span>
+        <div className="form-group">
+          <label className="form-label"> Payment Method: </label>
           <Select
             placeholder='Select Payment Method'
             name='type'
@@ -119,17 +119,17 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
           visible={isShowing}
           onCancel={hide}
           footer={[current > 0 && (
-            <Button key="3" style={{ marginLeft: 8 }} onClick={() => prev()}>
+            <Button className="button btn-primary" key="3" style={{ marginLeft: 8 }} onClick={() => prev()}>
               Previous
             </Button>
             ),
             current < steps.length - 1 && (
-              <Button key="1" type="primary" onClick={() => next()}>
+              <Button className="button btn-primary" key="1" type="primary" onClick={() => next()}>
                 Next
               </Button>
             ),
             current === steps.length - 1 && (
-              <Button key="2" type="primary" onClick={() => doneTransaction()}>
+              <Button className="button btn-primary" key="2" type="primary" onClick={() => doneTransaction()}>
                 Done
               </Button>
             )
@@ -142,17 +142,17 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
           </Steps>
           <div className="steps-action">
             {current < steps.length - 1 && isShowQr === false ? (
-              <div>
+              <div className="form-body">
                 {formInput()}
               </div>
             ) : null }
             {current > 0 && isShowQr ?  (
-              <div>
+              <div className="form-body">
                 {generateQR()}
               </div>
             ) : null }
             { current === steps.length - 1 &&  done ? (
-              <div>
+              <div className="form-body">
                 {confirmTransaction()}
               </div>
             ) : null}

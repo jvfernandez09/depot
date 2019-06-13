@@ -1,3 +1,12 @@
+@import "./src/styles/variables";
+
+.form-body {
+  padding: 32px;
+}
+
+.form-label {
+  color: #fff;
+}
 .ant-modal-mask{
   position: fixed;
   top: 0;
@@ -20,6 +29,121 @@
   outline: 0;
 }
 
+.ant-modal-footer {
+  border-color: $primary-color;
+}
+
 .ant-select-dropdown{
   z-index:2000;
+}
+
+.ant-modal-content {
+  background: #0D172E;
+
+  > .ant-modal-header {
+    background: none;
+    border: none;
+  }
+}
+
+.ant-modal-header  > .ant-modal-title {
+  color: #fff;
+  text-align: center;
+}
+
+.ant-steps-item-process > .ant-steps-item-icon {
+  background: $primary-color;
+  border-color: $primary-color;
+  background-color: none;
+
+  > .ant-steps-icon {
+    color: #fff;
+  }
+}
+
+.ant-steps-item-finish > .ant-steps-item-icon {
+  background-color: $primary-color;
+  border-color: $primary-color;
+
+  > .ant-steps-icon {
+    color: #fff;
+  }
+}
+
+.ant-steps-item-wait > .ant-steps-item-content > .ant-steps-item-title {
+ color: $primary-color;
+}
+.ant-steps-item-wait > .ant-steps-item-content > .ant-steps-item-title:after {
+  background-color: $primary-color;
+ }
+.ant-steps-item-process > .ant-steps-item-content > .ant-steps-item-title {
+  color: $primary-color;
+}
+.ant-steps-item-process > .ant-steps-item-content > .ant-steps-item-title:after {
+  background-color: $primary-color;
+}
+.ant-steps-item-finish > .ant-steps-item-content > .ant-steps-item-title {
+  color: $primary-color;
+}
+.ant-steps-item-finish > .ant-steps-item-content > .ant-steps-item-title:after {
+  background-color: $primary-color;
+}
+
+.ant-input {
+  border: none;
+  border-bottom: 1px solid #D8D8D8;
+  color: #fff;
+  padding: 10px 8px;
+  width: 100%;
+  min-height: 46px;
+  height: 46px;
+  box-shadow: none;
+  transition: border-color ease-in-out .15s;
+  background-image: none;
+  font-size: 14px;
+  background: transparent;
+  border-radius: 0;
+
+  &:hover {
+    border-color: $primary-color
+  }
+}
+
+.ant-select-selection--single {
+  border: none;
+  background: none;
+  border-bottom: 1px solid #D8D8D8;
+  border-radius: 0;
+
+  &:hover {
+    border-color: $primary-color;
+  }
+}
+
+.ant-select-selection__rendered {
+  background: none;
+}
+
+.ant-select-selection-selected-value {
+  color: #fff
+}
+
+.ant-select-dropdown {
+  background-color: #0D172E;
+}
+
+.ant-select-dropdown-menu-item:hover:not(.ant-select-dropdown-menu-item-disabled) {
+  background-color: $primary-color;
+}
+
+.ant-select-dropdown-menu-item-active:not(.ant-select-dropdown-menu-item-disabled) {
+  background-color: $primary-color;
+}
+
+.ant-select-dropdown-menu-item-selected {
+  background-color: $primary-color;
+}
+
+.ant-select-dropdown-menu-item {
+  color: #fff;
 }
