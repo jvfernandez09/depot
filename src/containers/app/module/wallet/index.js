@@ -38,7 +38,7 @@ const WalletContainer = (props) => {
             )
           }}
         </Query>
-        <Button className='button btn-primary -outline' onClick={toggle}> Add Funds+ </Button>
+        <Button className='button btn-primary -outline' onClick={toggle}> Buy GWX+ </Button>
         <WalletModal
          isShowing={isShowing}
          hide={toggle}
@@ -64,14 +64,14 @@ const WalletContainer = (props) => {
               <Tabs tabPosition='left'>
                 <TabPane tab={<span><Icon type='wallet' />My Wallet</span>} key='1'>
                   <div className="body-content">
-                    <h2 className='title'>Wallet</h2>
+                    <h2 className='title'>My GWX Wallet</h2>
                     <Card>
                       <div className='wallet-container'>
-                        <p className='top'>Wallet Balance</p>
+                        <p className='top'>My Wallet</p>
                         {walletAddress && walletBalance(walletAddress)}
                       </div>
                     </Card>
-                    <h2 className='title'>Game List</h2>
+                    <h2 className='title'>My Game Wallets</h2>
                     <Card>
                       <div className='game-card'>
                         <div className='info'>
@@ -93,7 +93,7 @@ const WalletContainer = (props) => {
                             GWX 225
                           </h2>
                           <div className='action' onClick={gameToggle}>
-                            + Add Funds
+                            + Add GWX
                           </div>
                         </div>
                        </div>
@@ -118,7 +118,7 @@ const WalletContainer = (props) => {
                             GWX 225
                           </h2>
                           <div className='action' onClick={gameToggle}>
-                            + Add Funds
+                            + Add GWX
                           </div>
                         </div>
                        </div>

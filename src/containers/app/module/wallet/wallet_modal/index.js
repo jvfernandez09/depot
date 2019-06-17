@@ -73,7 +73,7 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
     return (
       <div>
         <div className="form-group">
-          <label className="form-label" >Your wallet address {'*'.repeat(walletAddress.length)} </label>
+          <label className="form-label" >Your wallet address {walletAddress} </label>
         </div>
 
         <div className="form-group">
@@ -115,7 +115,7 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
     <Fragment>
       {isShowing ? (
         <Modal
-          title='Top Up Wallet'
+          title='Buy GWX'
           visible={isShowing}
           onCancel={hide}
           footer={[current > 0 && (
