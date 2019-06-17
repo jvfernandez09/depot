@@ -73,7 +73,7 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
     return (
       <div>
         <div className="form-group">
-          <label className="form-label" >Your wallet address {walletAddress} </label>
+          <label className="form-label" >Your wallet address: {walletAddress} </label>
         </div>
 
         <div className="form-group">
@@ -148,7 +148,7 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
             ) : null }
             {current > 0 && isShowQr ?  (
               <div className="form-body">
-                {generateQR()}
+                <div className="qr-code">{generateQR()}</div>
               </div>
             ) : null }
             { current === steps.length - 1 &&  done ? (
