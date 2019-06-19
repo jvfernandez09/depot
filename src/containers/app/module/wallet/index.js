@@ -49,6 +49,33 @@ const WalletContainer = (props) => {
     )
   }
 
+  function xemWalletBalance(walletAddress) {
+    return (
+      <Fragment>
+        <Query query={WALLET.GET_WALLET_BALANCE} variables={{ walletAddress }} fetchPolicy='network-only'>
+          {({ data, loading, error }) => {
+            if (loading) return <Spin />
+            if (error) return <p>ERROR</p>
+            const convertedXEMBalance = (data.getWalletBalance.balance.xem + "").split(".")
+            const newBalance = parseInt(convertedXEMBalance[0])
+            return(
+              <div className='balance'>
+                <div className='title'>XEM</div>
+                <span style={{ fontSize: '3.5rem'}}>{newBalance.toLocaleString()}</span><span>.</span><span style={{ fontSize: '1.5rem' }}>{convertedXEMBalance[1]}</span>
+              </div>
+            )
+          }}
+        </Query>
+        <Button className='button btn-primary -outline'> Buy GWX+ </Button>
+        <WalletModal
+          isShowing={isShowing}
+          hide={toggle}
+          walletAddress={walletAddress}
+        />
+      </Fragment>
+    )
+  }
+
   return(
     <div className="body-container">
       <Query query={GET_PROFILE}>
@@ -68,8 +95,15 @@ const WalletContainer = (props) => {
                     <h2 className='title'>My GWX Wallet</h2>
                     <Card>
                       <div className='wallet-container'>
-                        <p className='top'>My Wallet</p>
+                        <p className='top'>Amount:</p>
                         {walletAddress && walletBalance(walletAddress)}
+                      </div>
+                    </Card>
+                    <h2 className='title'>My XEM Wallet</h2>
+                    <Card>
+                      <div className='wallet-container'>
+                        <p className='top'>Amount:</p>
+                        {walletAddress && xemWalletBalance(walletAddress)}
                       </div>
                     </Card>
                     <h2 className='title'>My Game Wallets</h2>
