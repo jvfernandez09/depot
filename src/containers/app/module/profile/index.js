@@ -32,7 +32,7 @@ const ProfileContainer = (props) => {
               </Query>
             </div>
           </Card>
-          <h2 className="title"> Recent Activity </h2>
+          {/* <h2 className="title"> Recent Activity </h2>
           <Card>
             <div className="game-card">
               <div className='info'>
@@ -50,7 +50,7 @@ const ProfileContainer = (props) => {
               </div>
              </div>
             </div>
-          </Card>
+          </Card> */}
         </div>
       </div>
     </Fragment>

@@ -9,6 +9,7 @@ import GameWalletModal from 'app/module/wallet/game_wallet_modal'
 import useGameModal from 'app/module/wallet/game_wallet_modal/useGameModal'
 
 import TransactionContainer from 'app/module/transaction'
+import ProfileContainer from 'app/module/profile'
 import WALLET from '../../../../../src/graphql/wallet'
 import GET_PROFILE from '../../../../../src/graphql/profile'
 
@@ -130,7 +131,10 @@ const WalletContainer = (props) => {
                     </Card>
                   </div>
                 </TabPane>
-                <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='2'>
+                <TabPane tab={<span><Icon type='profile' />My Profile</span>} key='2'>
+                  <ProfileContainer />
+                </TabPane>
+                <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='3'>
                   <TransactionContainer />
                 </TabPane>
               </Tabs>
