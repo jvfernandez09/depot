@@ -32,25 +32,6 @@ const ProfileContainer = (props) => {
               </Query>
             </div>
           </Card>
-          {/* <h2 className="title"> Recent Activity </h2>
-          <Card>
-            <div className="game-card">
-              <div className='info'>
-                <div className='image'>
-                  <SampleGame />
-                </div>
-                <div className='game-details'>
-                  <h1 className='title'>
-                    Crypto Keno
-                  </h1>
-                <div className='time'>
-                  <p>87 hrs on record</p>
-                  <p>last played on Dec, 2018</p>
-                </div>
-              </div>
-             </div>
-            </div>
-          </Card> */}
         </div>
       </div>
     </Fragment>
