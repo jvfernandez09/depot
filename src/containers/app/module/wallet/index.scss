@@ -93,6 +93,10 @@
   margin: $pad * 2 0;
 }
 
+.hide-button {
+  opacity: 0;
+}
+
 // overrides antdesign
 .ant-tabs {
   > .ant-tabs-left-bar,
