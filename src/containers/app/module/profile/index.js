@@ -4,8 +4,6 @@ import { Card, Avatar } from 'antd'
 
 import GET_PROFILE from '../../../../../src/graphql/profile'
 import '../profile/index.scss'
-import { ReactComponent as SampleGame } from 'assets/images/sample-game.svg'
-
 
 const ProfileContainer = (props) => {
   return (
