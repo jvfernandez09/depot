@@ -2,7 +2,7 @@ import React, { Component} from 'react'
 import {withRouter} from 'react-router-dom';
 import { Layout } from 'antd';
 import 'app/header/index.scss'
-import {ReactComponent as Logo} from 'assets/images/Gameworks-logo.svg'
+import {ReactComponent as Logo} from 'assets/images/LOGO-tokendepot.svg'
 
 import { Menu } from 'antd';
 
