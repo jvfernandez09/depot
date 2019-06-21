@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { compose, withApollo, Query } from 'react-apollo'
 import { Card, Avatar } from 'antd'
 
@@ -7,7 +7,7 @@ import '../profile/index.scss'
 
 const ProfileContainer = (props) => {
   return (
-    <Fragment>
+    <>
       <div className="body-container">
         <div className="body-content">
           <Card>
@@ -32,7 +32,7 @@ const ProfileContainer = (props) => {
           </Card>
         </div>
       </div>
-    </Fragment>
+    </>
   )
 }
 

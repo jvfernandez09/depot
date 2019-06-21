@@ -29,7 +29,7 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
     },
   ]
 
-  function next(num) {
+  function next() {
     const count = current + 1
       if(count === 1){
         handleSubmit()

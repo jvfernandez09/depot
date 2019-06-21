@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import './App.css';
 import { Layout } from 'antd'
 import {BrowserRouter as Router, Switch} from 'react-router-dom';
@@ -10,13 +10,13 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Fragment>
+        <>
           <Layout>
             <HeaderContainer/>
               <ModuleContainer />
             {/*<FooterContainer/>*/}
           </Layout>
-        </Fragment>
+        </>
       </Switch>
     </Router>
   )
