@@ -66,12 +66,7 @@ const WalletContainer = (props) => {
             )
           }}
         </Query>
-        <Button className='button btn-primary -outline'> Buy GWX+ </Button>
-        <WalletModal
-          isShowing={isShowing}
-          hide={toggle}
-          walletAddress={walletAddress}
-        />
+        <Button className='hide-button'> Buy GWX+ </Button>
       </Fragment>
     )
   }
