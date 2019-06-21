@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Steps, Modal, Input, Select, Button } from 'antd'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 import '../../wallet/wallet_modal/index.scss'
@@ -13,6 +13,7 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
   const [isShowQr, isSetShowQr] = useState(false)
   const [done, setDone] = useState(false)
   const [current, setCurrent] = useState(0)
+  const userId = localStorage.getItem('userId')
   const steps = [
     {
       title: 'Top up',
@@ -41,9 +42,16 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
   }
 
   function prev() {
-    const count = current - 1
-    isSetShowQr(false)
-    setCurrent(count)
+    let count
+    if (current === 2){
+      count = current - 1
+      isSetShowQr(true)
+      setCurrent(count)
+    } else {
+      count = current - 1
+      isSetShowQr(false)
+      setCurrent(count)
+    }
   }
 
 
@@ -55,7 +63,7 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
   }
 
   function addFunds(){
-    const variables = { ...inputs, walletAddress}
+    const variables = { ...inputs, walletAddress, userId}
     console.log(variables)
     isSetShowQr(true)
     generateQR(variables)
@@ -79,7 +87,7 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
         <div className="form-group">
           <label className="form-label"> Amount: </label>
           <Input
-            name='amount'
+            name='quantity'
             type='number'
             onChange={handleChange}
           />
@@ -89,7 +97,7 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
           <label className="form-label"> Payment Method: </label>
           <Select
             placeholder='Select Payment Method'
-            name='type'
+            name='transactionType'
             style={{ width: '100%'}}
             onChange={handleChangeSelect}
             >
@@ -112,7 +120,7 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
   }
 
   return(
-    <Fragment>
+    <>
       {isShowing ? (
         <Modal
           title='Buy GWX'
@@ -160,7 +168,7 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
         </Modal>
         ) : null
       }
-    </Fragment>
+    </>
   )
 }
 

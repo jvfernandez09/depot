@@ -1,4 +1,4 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom';
 import { Layout } from 'antd';
 import 'app/header/index.scss'
@@ -47,7 +47,7 @@ class HeaderContainer extends Component {
               <Menu.Item route='/profile' onClick={this.menu} key="profile">
                 Profile
               </Menu.Item>
-            </Menu> */} 
+            </Menu> */}
           </div>
           <div className='user'>
             <div className='avatar'>

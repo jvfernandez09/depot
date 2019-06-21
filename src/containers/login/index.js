@@ -29,6 +29,7 @@ const Login = (props) => {
     const { loginUser } = props
 
     loginUser({ variables }).then(response => {
+      localStorage.setItem('userId', response.data.loginUser.user.data.id)
       localStorage.setItem('AUTH_TOKEN', response.data.loginUser.token)
     }).then(() => {
       props.history.push('/wallet')
