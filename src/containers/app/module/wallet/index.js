@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { compose, withApollo, Query } from 'react-apollo'
 import { Spin, Tabs, Card, Button, Icon } from 'antd'
 
@@ -24,7 +24,7 @@ const WalletContainer = (props) => {
 
   function walletBalance(walletAddress){
     return (
-      <Fragment>
+      <>
         <Query query={WALLET.GET_WALLET_BALANCE} variables={{ walletAddress }} fetchPolicy='network-only'>
           {({ data, loading, error }) => {
             if (loading) return <Spin />
@@ -45,13 +45,13 @@ const WalletContainer = (props) => {
          hide={toggle}
          walletAddress={walletAddress}
         />
-      </Fragment>
+      </>
     )
   }
 
   function xemWalletBalance(walletAddress) {
     return (
-      <Fragment>
+      <>
         <Query query={WALLET.GET_WALLET_BALANCE} variables={{ walletAddress }} fetchPolicy='network-only'>
           {({ data, loading, error }) => {
             if (loading) return <Spin />
@@ -67,7 +67,7 @@ const WalletContainer = (props) => {
           }}
         </Query>
         <Button className='hide-button'> Buy GWX+ </Button>
-      </Fragment>
+      </>
     )
   }
 
@@ -82,7 +82,7 @@ const WalletContainer = (props) => {
             data.getProfile.data.attributes.lastName : data.getProfile.data.attributes.lastName+"'s"
           const walletAddress = data.getProfile.data.attributes.walletAddress
           return (
-            <Fragment>
+            <>
               <h1 className='header'>{firstName+' '+lastName} PERSONAL WALLET</h1>
               <Tabs tabPosition='left'>
                 <TabPane tab={<span><Icon type='wallet' />My Wallet</span>} key='1'>
@@ -167,7 +167,7 @@ const WalletContainer = (props) => {
                   <TransactionContainer />
                 </TabPane>
               </Tabs>
-            </Fragment>
+            </>
           )
         }}
       </Query>
