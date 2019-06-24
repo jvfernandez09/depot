@@ -24,23 +24,25 @@ const GameWalletModal = ({ isGameShowing, hide, walletAddress }) => {
             <Button
               key="2"
               type="primary"
+              className="button btn-primary"
               onClick={hide}>Cancel
             </Button>,
             <Button
               key="1"
               type="primary"
+              className="button btn-primary"
               loading={isLoading}
               onClick={handleSubmit}>Add Funds
             </Button>
             ]
           }>
 
-          <div>
-            <span >Your wallet address {'*'.repeat(walletAddress.length)} </span>
+          <div className="form-group">
+            <label className="form-label">Your wallet address: {walletAddress} </label>
           </div>
 
-          <div>
-            <span> Amount: </span>
+          <div className="form-group">
+            <label className="form-label"> Amount: </label>
             <Input
               name='amount'
               type='number'
@@ -48,17 +50,16 @@ const GameWalletModal = ({ isGameShowing, hide, walletAddress }) => {
             />
           </div>
 
-          <div>
-            <span> Choose Wallet: </span>
+          <div className="form-group">
+            <label className="form-label"> Choose Wallet: </label>
             <Select
               placeholder='Select Payment Method'
               name='type'
               style={{ width: '100%'}}
               onChange={handleChangeSelect}
               >
-              <Option value="BTC">Bitcoin Wallet</Option>
-              <Option value="XEM">XEM Wallet</Option>
-              <Option value="Etherium">Etherium Wallet</Option>
+              <Option value="GWX">My GMX Wallet</Option>
+              <Option value="XEM">My XEM Wallet</Option>
           </Select>
           </div>
         </Modal>
