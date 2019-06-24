@@ -50,7 +50,7 @@ jobs:
               aws s3 sync build s3://gwx-token-depot/ --delete
             fi
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              aws s3 sync build s3://gwx-token-depot/ --delete
+              aws s3 sync build s3://gwx-token-depot-prod/ --delete
             fi
 
 workflows:
