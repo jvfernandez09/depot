@@ -28,8 +28,11 @@
     "react-scripts": "3.0.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": "ENVFILE=.env && react-app-rewired start",
+    "start:staging": "ENVFILE=.env.staging && react-app-rewired start",
+    "start:prod": "ENVFILE=.env.production && react-app-rewired start",
+    "build:staging": "ENVFILE=.env.staging && react-app-rewired build",
+    "build:prod": "ENVFILE=.env.production && react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },

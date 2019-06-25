@@ -15,8 +15,12 @@ import './index.scss'
 import Login from 'login'
 import * as serviceWorker from './serviceWorker'
 
+
+console.log(process.env)
+
+
 const restLink = new RestLink({
-  uri: "https://registry-staging.gameworks.io",
+  uri: process.env,
   headers: {
     "Content-Type": "application/json"
   }
