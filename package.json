@@ -12,6 +12,7 @@
     "apollo-link-rest": "^0.7.3",
     "babel-plugin-import": "^1.11.2",
     "customize-cra": "^0.2.12",
+    "env-cmd": "^9.0.3",
     "graphql": "^14.3.1",
     "graphql-anywhere": "^4.2.2",
     "graphql-tag": "^2.10.1",
@@ -28,8 +29,11 @@
     "react-scripts": "3.0.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": "env-cmd -f .env react-app-rewired start",
+    "start:staging": "env-cmd -f .env.staging react-app-rewired start",
+    "start:prod": "env-cmd -f .env.production react-app-rewired start",
+    "build:staging": "env-cmd -f .env.staging react-app-rewired build",
+    "build:prod": "env-cmd -f .env.production react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },

@@ -15,8 +15,14 @@ import './index.scss'
 import Login from 'login'
 import * as serviceWorker from './serviceWorker'
 
+
+
+const API = process.env.REACT_APP_ENV === 'staging' || process.env.REACT_APP_ENV === 'development' ? process.env.REACT_APP_GWX_STAGING_URL
+: process.env.REACT_APP_GWX_PROD_URL
+
+
 const restLink = new RestLink({
-  uri: "https://registry-staging.gameworks.io",
+  uri: API,
   headers: {
     "Content-Type": "application/json"
   }
