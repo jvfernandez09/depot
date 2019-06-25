@@ -85,7 +85,7 @@ const WalletContainer = (props) => {
             <>
               <h1 className='header'>{firstName+' '+lastName} PERSONAL WALLET</h1>
               <Tabs tabPosition='left'>
-                <TabPane tab={<span><Icon type='wallet' />My Wallet</span>} key='1'>
+                <TabPane tab={<span><Icon type='wallet' />My Wallets</span>} key='1'>
                   <div className="body-content">
                     <h2 className='title'>My GWX Wallet</h2>
                     <Card>
