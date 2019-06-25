@@ -16,11 +16,13 @@ import Login from 'login'
 import * as serviceWorker from './serviceWorker'
 
 
-console.log(process.env)
+
+const API = process.env.REACT_APP_ENV === 'staging' || process.env.REACT_APP_ENV === 'development' ? process.env.REACT_APP_GWX_STAGING_URL
+: process.env.REACT_APP_GWX_PROD_URL
 
 
 const restLink = new RestLink({
-  uri: process.env,
+  uri: API,
   headers: {
     "Content-Type": "application/json"
   }
