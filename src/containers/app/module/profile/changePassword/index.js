@@ -1,14 +1,12 @@
 import React from 'react'
-import { compose, graphql, withApollo, Query } from 'react-apollo'
+import { compose, graphql, withApollo } from 'react-apollo'
 
-import Input from 'components/input'
-import Button from 'components/button'
+import { Input, Button } from 'antd'
 
 import useForm from "utils/useForm"
 import validateChangePassword from 'utils/changePasswordFormValidationRules'
 
 import CHANGE_PASSWORD from '../../../../../../src/graphql/changePassword'
-import GET_PROFILE from '../../../../../../src/graphql/profile'
 
 const ChangePasswordCotainer = (props) => {
   const {

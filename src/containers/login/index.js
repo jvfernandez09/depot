@@ -6,7 +6,6 @@ import validateLogin from 'utils/LoginFormValidationRules'
 import 'login/index.scss'
 import Input from 'components/input'
 import Button from 'components/button'
-import { version } from 'package'
 import {ReactComponent as Logo} from 'assets/images/LOGO.svg'
 import { isNil } from 'lodash'
 
