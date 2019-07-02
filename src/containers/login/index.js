@@ -1,4 +1,6 @@
 import React from "react"
+import { compose, graphql, withApollo } from 'react-apollo'
+
 import useForm from "utils/useForm"
 import validateLogin from 'utils/LoginFormValidationRules'
 import 'login/index.scss'
@@ -7,7 +9,6 @@ import Button from 'components/button'
 import { version } from 'package'
 import {ReactComponent as Logo} from 'assets/images/LOGO.svg'
 import { isEmpty } from 'lodash'
-import { compose, graphql, withApollo } from 'react-apollo'
 
 import LOGIN_USER from '../../../src/graphql/login'
 

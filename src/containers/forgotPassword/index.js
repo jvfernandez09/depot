@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { compose, graphql, withApollo } from 'react-apollo'
+
 import useForm from "utils/useForm"
 import validateEmail from 'utils/emailFormValidationRules'
+import Notification from 'utils/notification'
+
 import { Input } from 'antd'
 import Button from 'components/button'
 import 'forgotPassword/index.scss'
@@ -8,17 +12,30 @@ import { ReactComponent as Logo } from 'assets/images/LOGO.svg'
 
 import FORGOT_PASSWORD from '../../../src/graphql/forgotPassword'
 
-const ForgotPassword = () => {
+const ForgotPassword = (props) => {
   const {
     inputs,
     errors,
     handleChange,
     handleSubmit,
     isSubmitting
-  } = useForm(forgotPassword, validateEmail);
+  } = useForm(resetPassword, validateEmail);
 
-  function forgotPassword(){
-    console.log(inputs)
+  function resetPassword(){
+    const { forgotPassword } = props
+    const variables = { input: inputs }
+    
+    forgotPassword({ variables }).then(response => {
+      if(response){
+        Notification.show({
+          type: 'success',
+          message: 'Temporary Password Was Sent to Your Email'
+        })
+        props.history.push('/login')
+      }
+    }).catch((errors) => {
+      console.log(errors)
+    })
   }
 
   return (
@@ -59,4 +76,7 @@ const ForgotPassword = () => {
   )
 }
 
-export default ForgotPassword
+export default compose(
+  withApollo,
+  graphql(FORGOT_PASSWORD, { name: 'forgotPassword' })
+)(ForgotPassword)
