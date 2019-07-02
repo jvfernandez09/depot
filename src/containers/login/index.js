@@ -8,7 +8,7 @@ import Input from 'components/input'
 import Button from 'components/button'
 import { version } from 'package'
 import {ReactComponent as Logo} from 'assets/images/LOGO.svg'
-import { isEmpty } from 'lodash'
+import { isNil } from 'lodash'
 
 import LOGIN_USER from '../../../src/graphql/login'
 
@@ -23,8 +23,6 @@ const Login = (props) => {
     isSubmitting
   } = useForm(login, validateLogin);
 
-  console.log(version)
-
   async function login(){
     const variables = { input: inputs }
     const { loginUser } = props
@@ -32,9 +30,13 @@ const Login = (props) => {
     loginUser({ variables }).then(response => {
       localStorage.setItem('userId', response.data.loginUser.user.data.id)
       localStorage.setItem('AUTH_TOKEN', response.data.loginUser.token)
-      if(!isEmpty(response.data.loginUser.resetPasswordSentAt)){
+      if(!isNil(response.data.loginUser.resetPasswordSentAt)){
         props.history.push('/wallet')
       } else {
+        Notification.show({
+          type: 'info',
+          message: 'Please change your password.'
+        })
         props.history.push('/change')
       }
     }).catch((errors) => {
@@ -64,7 +66,7 @@ const Login = (props) => {
                 <label>Email Address</label>
                 <div>
                   <Input
-                    type="email"
+                    type="text"
                     name="email"
                     onChange={handleChange}
                     onKeyPress={onKeyPress}

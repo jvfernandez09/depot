@@ -8,7 +8,6 @@ import Notification from 'utils/notification'
 import { Input } from 'antd'
 import Button from 'components/button'
 import 'forgotPassword/index.scss'
-import { ReactComponent as Logo } from 'assets/images/LOGO.svg'
 
 import FORGOT_PASSWORD from '../../../src/graphql/forgotPassword'
 
@@ -21,15 +20,15 @@ const ForgotPassword = (props) => {
     isSubmitting
   } = useForm(resetPassword, validateEmail);
 
-  function resetPassword(){
+  async function resetPassword(){
     const { forgotPassword } = props
     const variables = { input: inputs }
-    
+
     forgotPassword({ variables }).then(response => {
       if(response){
         Notification.show({
           type: 'success',
-          message: 'Temporary Password Was Sent to Your Email'
+          message: 'Temporary password was sent to your e-mail. Please change password after login.'
         })
         props.history.push('/login')
       }
@@ -55,7 +54,7 @@ const ForgotPassword = (props) => {
                     type="email"
                     name="email"
                     onChange={handleChange}
-                    value={inputs.email}
+                    value={inputs.email || ''}
                     required
                   />
                   {errors.email && (
@@ -65,6 +64,7 @@ const ForgotPassword = (props) => {
                 <Button
                   className='button btn-primary btn-block btn-lg'
                   onClick={handleSubmit}
+                  loading={isSubmitting}
                 > Send Temporary Password
                 </Button>
               </div>
