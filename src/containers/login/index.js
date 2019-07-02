@@ -6,7 +6,7 @@ import Input from 'components/input'
 import Button from 'components/button'
 import { version } from 'package'
 import {ReactComponent as Logo} from 'assets/images/LOGO.svg'
-
+import { isEmpty } from 'lodash'
 import { compose, graphql, withApollo } from 'react-apollo'
 
 import LOGIN_USER from '../../../src/graphql/login'
@@ -31,8 +31,11 @@ const Login = (props) => {
     loginUser({ variables }).then(response => {
       localStorage.setItem('userId', response.data.loginUser.user.data.id)
       localStorage.setItem('AUTH_TOKEN', response.data.loginUser.token)
-    }).then(() => {
-      props.history.push('/wallet')
+      if(!isEmpty(response.data.loginUser.resetPasswordSentAt)){
+        props.history.push('/wallet')
+      } else {
+        props.history.push('/change')
+      }
     }).catch((errors) => {
       Notification.show({
         type: 'error',
@@ -72,7 +75,11 @@ const Login = (props) => {
                   )}
                 </div>
               </div>
+
               <div className='form-group'>
+                <div style = {{ textAlign: 'right' }}>
+                  <a href='/reset'> Forgot password? </a>
+                </div>
                 <label>Password</label>
                 <div>
                   <Input

@@ -1,0 +1,35 @@
+@import "./src/styles/variables";
+
+.form-group {
+  & {
+    position: relative;
+    margin-bottom: $pad * 3;
+    width: 100%;
+  }
+}
+
+.session-container {
+  & {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  > .content {
+    width: 350px;
+  }
+
+  > .content > .head {
+    text-align: center;
+    margin-bottom: $pad * 8;
+  }
+
+  > .content > .head > .logo {
+    width: 90%;
+  }
+
+  > .content > form > button {
+    margin-top: $pad * 2;
+  }
+}
