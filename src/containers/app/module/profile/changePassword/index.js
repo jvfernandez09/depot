@@ -24,6 +24,10 @@ const ChangePasswordCotainer = (props) => {
     changePassword({ variables }).then(response => {
       if(response){
         props.history.push('/wallet')
+        Notification.show({
+          type: 'success',
+          message: 'Password Updated.'
+        })
 
       }
     }).catch((errors) => {
