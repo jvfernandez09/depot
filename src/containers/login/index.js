@@ -7,7 +7,7 @@ import 'login/index.scss'
 import Input from 'components/input'
 import Button from 'components/button'
 import {ReactComponent as Logo} from 'assets/images/LOGO.svg'
-import { isNil } from 'lodash'
+import { isNull } from 'lodash'
 
 import LOGIN_USER from '../../../src/graphql/login'
 
@@ -29,7 +29,8 @@ const Login = (props) => {
     loginUser({ variables }).then(response => {
       localStorage.setItem('userId', response.data.loginUser.user.data.id)
       localStorage.setItem('AUTH_TOKEN', response.data.loginUser.token)
-      if(!isNil(response.data.loginUser.resetPasswordSentAt)){
+      console.log(response.data.loginUser.user.data.attributes.resetPasswordSentAt)
+      if(isNull(response.data.loginUser.user.data.attributes.resetPasswordSentAt)){
         props.history.push('/wallet')
       } else {
         Notification.show({

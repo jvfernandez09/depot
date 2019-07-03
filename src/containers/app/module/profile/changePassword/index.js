@@ -22,7 +22,10 @@ const ChangePasswordCotainer = (props) => {
     const { changePassword } = props
 
     changePassword({ variables }).then(response => {
-      console.log(response)
+      if(response){
+        props.history.push('/wallet')
+
+      }
     }).catch((errors) => {
       console.log(errors)
     })
