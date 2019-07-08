@@ -59,9 +59,9 @@ const WalletContainer = (props) => {
             const convertedXEMBalance = (data.getWalletBalance.balance.xem + "").split(".")
             const newBalance = parseInt(convertedXEMBalance[0])
             return(
-              <div className='balance'>
+              <div className='balance -small'>
                 <div className='title'>XEM</div>
-                <span style={{ fontSize: '3.5rem'}}>{newBalance.toLocaleString()}</span><span>.</span><span style={{ fontSize: '1.5rem' }}>{convertedXEMBalance[1]}</span>
+                <span style={{ fontSize: '3rem'}}>{newBalance.toLocaleString()}</span><span>.</span><span style={{ fontSize: '1rem' }}>{convertedXEMBalance[1]}</span>
               </div>
             )
           }}
@@ -94,14 +94,14 @@ const WalletContainer = (props) => {
                         {walletAddress && walletBalance(walletAddress)}
                       </div>
                     </Card>
-                    <h2 className='title'>My XEM Wallet</h2>
+                    <h2 className='title -pad'>My XEM Wallet</h2>
                     <Card>
                       <div className='wallet-container'>
                         <p className='top'>Amount:</p>
                         {walletAddress && xemWalletBalance(walletAddress)}
                       </div>
                     </Card>
-                    <h2 className='title'>My Game Wallets</h2>
+                    <h2 className='title -pad'>My Game Wallets</h2>
                     <Card>
                       <div className='game-card'>
                         <div className='info'>

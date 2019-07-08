@@ -1,0 +1,122 @@
+@import "./src/styles/variables";
+
+.action-container {
+  & {
+    margin-bottom: $pad * 4;
+  }
+
+  > .sub {
+    color: #9098AE;
+    margin-bottom: $pad;
+  }
+
+  > .date > .ant-input:hover,
+  > .date > .ant-input:focus {
+    border: none;
+    border-bottom: 1px solid $primary-color;
+    box-shadow: none;
+  }
+
+  > .date > .ant-input > .anticon > svg,
+  > .date > .ant-input > .anticon-close-circle > svg,
+  .ant-calendar-range-picker-separator {
+    background: #0B1618;
+    color: $gray;
+  }
+}
+
+// overrides antDesign 
+.ant-calendar-picker:focus .ant-calendar-picker-input:not(.ant-input-disabled) {
+  box-shadow: none;
+  border-color: $primary-color;
+}
+
+.ant-table-thead {
+  > tr {
+    background: #0B1618;
+  }
+
+  > tr > th {
+    color: $primary-color;
+    border-bottom: 3px solid lighten($black, 5%);
+    font-size: 1.1rem
+  }
+
+  .ant-table-column-title {
+    white-space: nowrap;
+  }
+}
+
+.ant-table-tbody {
+  > tr > td {
+    color: #fff;
+    border-color: lighten($black, 5%);
+  }
+
+  > tr > td:not(:first-child) {
+    white-space: nowrap;
+  }
+}
+
+.ant-table-tbody > tr:hover:not(.ant-table-expanded-row) > td {
+  background: rgba(255,255,255,.075)
+}
+
+.ant-table-pagination.ant-pagination {
+  margin-top: $pad * 4;
+  margin-bottom: 0;
+}
+
+.ant-pagination-disabled.ant-pagination-prev > .ant-pagination-item-link,
+.ant-pagination-disabled.ant-pagination-next > .ant-pagination-item-link,
+.ant-pagination-disabled.ant-pagination-prev > .ant-pagination-item-link:hover,
+.ant-pagination-disabled.ant-pagination-next > .ant-pagination-item-link:hover {
+  background: $black;
+  border-color: darken($dark-gray, 15%);
+  color: darken($dark-gray, 15%);
+}
+
+.ant-pagination-prev > .ant-pagination-item-link,
+.ant-pagination-next > .ant-pagination-item-link {
+  background: $black;
+  border-color: lighten($dark-gray, 10%);
+  color: lighten($dark-gray, 10%);
+}
+
+.ant-pagination-prev > .ant-pagination-item-link:hover,
+.ant-pagination-next > .ant-pagination-item-link:hover {
+  border-color: $primary-color;
+  color: $primary-color;
+}
+
+.ant-pagination-item {
+  & {
+    background: $black;
+    border-color: lighten($dark-gray, 10%);
+  }
+
+  &:hover {
+    border-color: $primary-color;
+
+    > a {
+      color: $primary-color;
+    }
+  }
+
+  > a {
+    color: lighten($dark-gray, 10%)
+  }
+}
+
+.ant-pagination-item-active {
+  &,
+  &:hover {
+    background: $black;
+    border-color: $primary-color !important;
+  }
+
+  > a,
+  > a:hover {
+    color: $primary-color !important;
+  }
+}
