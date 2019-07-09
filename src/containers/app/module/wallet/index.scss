@@ -15,9 +15,13 @@
     letter-spacing: 1px;
   }
 
-  > .title:nth-child(3) {
-    margin-top: $pad * 2;
+  > .title.-pad {
+    margin-top: $pad * 5;
   }
+
+  // > .title:nth-child(3) {
+  //   margin-top: $pad * 2;
+  // }
 }
 
 .wallet-container {
@@ -32,6 +36,15 @@
     color: $primary-color;
     align-items: baseline;
     font-weight: 500;
+  }
+
+  .balance.-small {
+    color: #fff;
+    font-weight: 400;
+
+    > .title {
+      font-size: 12px;
+    }
   }
 
   > .balance > .title {

@@ -80,6 +80,9 @@ const Login = (props) => {
               </div>
 
               <div className='form-group'>
+                <div style = {{ textAlign: 'right' }}>
+                  <a href='/reset'> Forgot password? </a>
+                </div>
                 <label>Password</label>
                 <div>
                   <Input

@@ -1,5 +1,7 @@
 import React from 'react'
 import { Table, Input, DatePicker, Card } from 'antd'
+import '../transaction/index.scss'
+
 const Search = Input.Search
 const { RangePicker } = DatePicker
 
@@ -80,18 +82,17 @@ const columns = [
 ]
 
   return(
-    <div>
-      Transaction History
+    <div className='body-content'>
+      <h2 className='title'>My Transactions</h2>
       <Card>
-        <div>
-          <Search
-            placeholder="search payment mode"
-            style={{ width: '50%' }}
-          />
-          <RangePicker style={{ width: '50%'}}/>
+        <div className='action-container'>
+          <div className='sub'>
+            Sort transactions by date:
+          </div>
+          <RangePicker style={{ width: '50%'}} className='date'/>
         </div>
-        <div>
-          <Table dataSource={dataSource} columns={columns} pagination={{ defaultPageSize: 5 }} />
+        <div className='table-container'>
+          <Table dataSource={dataSource} columns={columns} pagination={{ defaultPageSize: 5 }} className='table' />
         </div>
       </Card>
     </div>

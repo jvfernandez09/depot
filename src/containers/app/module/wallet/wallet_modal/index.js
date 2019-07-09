@@ -79,9 +79,10 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
 
   function formInput(){
     return (
-      <div>
-        <div className="form-group">
-          <label className="form-label" >Your wallet address: {walletAddress} </label>
+      <div className='content'>
+        <div className="item">
+          <p className="title" >Your wallet address:</p>
+          <div className='sub'>{walletAddress}</div>
         </div>
 
         <div className="form-group">
@@ -90,6 +91,7 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
             name='quantity'
             type='number'
             onChange={handleChange}
+            className='input'
           />
         </div>
 
@@ -113,8 +115,8 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
 
   function confirmTransaction(){
     return(
-      <div>
-        Your Transaction is Pending
+      <div className='end'>
+        Done! Your transaction is pending.
       </div>
     )
   }
@@ -123,11 +125,20 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
     <>
       {isShowing ? (
         <Modal
-          title='Buy GWX'
+          title={
+            <div className='header-container'>
+              <div className='title'>Buy GWX</div>
+              <Steps current={current}>
+                {steps.map(item => (
+                  <Step key={item.title} title={item.title} />
+                ))}
+              </Steps>
+            </div>
+          }
           visible={isShowing}
           onCancel={hide}
           footer={[current > 0 && (
-            <Button className="button btn-primary" key="3" style={{ marginLeft: 8 }} onClick={() => prev()}>
+            <Button className="button btn-primary -light" key="3" style={{ marginLeft: 8 }} onClick={() => prev()}>
               Previous
             </Button>
             ),
@@ -143,11 +154,6 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
             )
           ]}>
 
-          <Steps current={current}>
-            {steps.map(item => (
-              <Step key={item.title} title={item.title} />
-            ))}
-          </Steps>
           <div className="steps-action">
             {current < steps.length - 1 && isShowQr === false ? (
               <div className="form-body">
