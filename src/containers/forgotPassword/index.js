@@ -4,6 +4,7 @@ import { compose, graphql, withApollo } from 'react-apollo'
 import useForm from "utils/useForm"
 import validateEmail from 'utils/emailFormValidationRules'
 import Notification from 'utils/notification'
+import { ReactComponent as Logo } from 'assets/images/LOGO.svg'
 
 import { Input } from 'antd'
 import Button from 'components/button'
@@ -43,6 +44,7 @@ const ForgotPassword = (props) => {
         <div className='session-container'>
           <div className='content'>
             <div className='head'>
+              <Logo className='logo' />
             </div>
             <form>
               <div className='form-group'>

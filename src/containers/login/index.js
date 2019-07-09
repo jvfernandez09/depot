@@ -80,9 +80,6 @@ const Login = (props) => {
               </div>
 
               <div className='form-group'>
-                <div style = {{ textAlign: 'right' }}>
-                  <a href='/reset'> Forgot password? </a>
-                </div>
                 <label>Password</label>
                 <div>
                   <Input
@@ -97,6 +94,9 @@ const Login = (props) => {
                 {errors.password && (
                   <p style={{ color: 'red'}}>{errors.password}</p>
                 )}
+                <div className='forgot-pass'>
+                  <a href='/reset'> Forgot password? </a>
+                </div>
               </div>
               <Button
                 onClick={handleSubmit}
