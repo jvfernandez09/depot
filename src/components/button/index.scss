@@ -38,4 +38,8 @@
   &.-outline {
     @include button-variant(#fff, transparent, $primary-color);
   }
+
+  &.-light {
+    @include button-variant($vulcan, lighten($primary-color, 20%), lighten($primary-color, 20%));
+  }
 }

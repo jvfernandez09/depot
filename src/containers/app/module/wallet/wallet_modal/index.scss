@@ -1,7 +1,30 @@
 @import "./src/styles/variables";
 
 .form-body {
-  padding: 32px;
+  & {
+    padding: $pad * 2 $pad * 4 0;
+    height: 250px;
+  }
+
+  > .content > .item {
+    margin-bottom: $pad * 2;
+  }
+
+  > .content > .item > .title {
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: $pad;
+  }
+
+  > .content > .item > .sub {
+    color: $primary-color;
+    font-size: 1.3rem; 
+  }
+
+  > .end {
+    color: #fff;
+    font-size: 1.2rem
+  }
 }
 
 .qr-code {
@@ -9,8 +32,27 @@
 }
 
 .form-label {
-  color: #fff;
+  color: $ink;
 }
+
+.header-container {
+  & {
+    padding: 0 $pad * 3;
+  }
+
+  > .title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 12px;
+    font-weight: 400;
+  }
+
+  > .ant-steps {
+    margin-top: $pad * 5;
+  }
+}
+
+
 .ant-modal-mask{
   position: fixed;
   top: 0;
@@ -34,11 +76,18 @@
 }
 
 .ant-modal {
-  width: 550px !important;
+  width: 600px !important;
+  height: 540px !important;
 }
 
 .ant-modal-footer {
-  border-color: $primary-color;
+  & {
+    border-color: transparent;
+  }
+
+  > button {
+    width: 100px;
+  }
 }
 
 .ant-select-dropdown{
@@ -56,7 +105,6 @@
 
 .ant-modal-header  > .ant-modal-title {
   color: #fff;
-  text-align: center;
 }
 
 .ant-steps-item-process > .ant-steps-item-icon {
@@ -65,7 +113,7 @@
   background-color: none;
 
   > .ant-steps-icon {
-    color: #fff;
+    color: $black;
   }
 }
 
@@ -74,7 +122,16 @@
   border-color: $primary-color;
 
   > .ant-steps-icon {
-    color: #fff;
+    color: $black;
+  }
+}
+
+.ant-steps-item-wait .ant-steps-item-icon {
+  border-color: $primary-color;
+  background: transparent;
+  
+  > .ant-steps-icon {
+    color: $primary-color;
   }
 }
 
@@ -122,8 +179,12 @@
   background: none;
   border-bottom: 1px solid #D8D8D8;
   border-radius: 0;
+  height: 38px;
+  margin-top: $pad;
 
-  &:hover {
+  &:hover,
+  &:focus {
+    box-shadow: none;
     border-color: $primary-color;
   }
 }
@@ -142,14 +203,17 @@
 
 .ant-select-dropdown-menu-item:hover:not(.ant-select-dropdown-menu-item-disabled) {
   background-color: $primary-color;
+  color: $black;
 }
 
 .ant-select-dropdown-menu-item-active:not(.ant-select-dropdown-menu-item-disabled) {
   background-color: $primary-color;
+  color: $black;
 }
 
 .ant-select-dropdown-menu-item-selected {
   background-color: $primary-color;
+  color: $black;
 }
 
 .ant-select-dropdown-menu-item {
