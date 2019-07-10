@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { isEmpty } from 'lodash'
 
-const useForm = (callback, validateLogin) => {
+const useForm = (callback, validateForm) => {
 
   const [inputs, setInputs] = useState({})
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = (event) => {
-    setErrors(validateLogin(inputs))
+    setErrors(validateForm(inputs))
     setIsSubmitting(true)
     if(isEmpty(Object.keys(errors))){
       callback()

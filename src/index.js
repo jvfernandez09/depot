@@ -13,6 +13,7 @@ import { setContext } from 'apollo-link-context'
 import App from './App'
 import './index.scss'
 import Login from 'login'
+import ForgotPassword from 'forgotPassword'
 import * as serviceWorker from './serviceWorker'
 
 
@@ -48,6 +49,7 @@ ReactDOM.render(
     <Router>
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/reset" component={ForgotPassword} />
         <PrivateRoute exac path="/" component={App} />
       </Switch>
     </Router>

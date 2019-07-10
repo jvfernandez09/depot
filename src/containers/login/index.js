@@ -1,13 +1,13 @@
 import React from "react"
+import { compose, graphql, withApollo } from 'react-apollo'
+
 import useForm from "utils/useForm"
 import validateLogin from 'utils/LoginFormValidationRules'
 import 'login/index.scss'
 import Input from 'components/input'
 import Button from 'components/button'
-import { version } from 'package'
 import {ReactComponent as Logo} from 'assets/images/LOGO.svg'
-
-import { compose, graphql, withApollo } from 'react-apollo'
+import { isNull } from 'lodash'
 
 import LOGIN_USER from '../../../src/graphql/login'
 
@@ -22,8 +22,6 @@ const Login = (props) => {
     isSubmitting
   } = useForm(login, validateLogin);
 
-  console.log(version)
-
   async function login(){
     const variables = { input: inputs }
     const { loginUser } = props
@@ -31,8 +29,16 @@ const Login = (props) => {
     loginUser({ variables }).then(response => {
       localStorage.setItem('userId', response.data.loginUser.user.data.id)
       localStorage.setItem('AUTH_TOKEN', response.data.loginUser.token)
-    }).then(() => {
-      props.history.push('/wallet')
+      console.log(response.data.loginUser.user.data.attributes.resetPasswordSentAt)
+      if(isNull(response.data.loginUser.user.data.attributes.resetPasswordSentAt)){
+        props.history.push('/wallet')
+      } else {
+        Notification.show({
+          type: 'info',
+          message: 'Please change your password.'
+        })
+        props.history.push('/change')
+      }
     }).catch((errors) => {
       Notification.show({
         type: 'error',
@@ -60,7 +66,7 @@ const Login = (props) => {
                 <label>Email Address</label>
                 <div>
                   <Input
-                    type="email"
+                    type="text"
                     name="email"
                     onChange={handleChange}
                     onKeyPress={onKeyPress}
@@ -72,6 +78,7 @@ const Login = (props) => {
                   )}
                 </div>
               </div>
+
               <div className='form-group'>
                 <label>Password</label>
                 <div>
@@ -87,6 +94,9 @@ const Login = (props) => {
                 {errors.password && (
                   <p style={{ color: 'red'}}>{errors.password}</p>
                 )}
+                <div className='forgot-pass'>
+                  <a href='/reset'> Forgot password? </a>
+                </div>
               </div>
               <Button
                 onClick={handleSubmit}
