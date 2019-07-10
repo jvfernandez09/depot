@@ -1,8 +1,7 @@
 import React from 'react'
-import { Table, Input, DatePicker, Card } from 'antd'
+import { Table, DatePicker, Card } from 'antd'
 import '../transaction/index.scss'
 
-// const Search = Input.Search
 const { RangePicker } = DatePicker
 
 const TransactionContainer = (props) => {
