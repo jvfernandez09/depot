@@ -28,11 +28,17 @@ const ChangePasswordCotainer = (props) => {
           type: 'success',
           message: 'Password Updated.'
         })
-
       }
     }).catch((errors) => {
       console.log(errors)
     })
+  }
+
+  function onKeyPress(e){
+    if(e.which === 13) {
+      e.preventDefault()
+      handleSubmit()
+    }
   }
 
   return (
@@ -50,6 +56,7 @@ const ChangePasswordCotainer = (props) => {
                     type="password"
                     name="password"
                     onChange={handleChange}
+                    onKeyPress={onKeyPress}
                     value={inputs.password || ''}
                     required
                   />
@@ -66,6 +73,7 @@ const ChangePasswordCotainer = (props) => {
                     type="password"
                     name="passwordConfirmation"
                     value={inputs.passwordConfirmation || ''}
+                    onKeyPress={onKeyPress}
                     onChange={handleChange}
                     required
                   />

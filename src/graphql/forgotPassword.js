@@ -9,7 +9,7 @@ const FORGOT_PASSWORD = gql`
       path: "/v1/auth/forgot",
       method: "POST"
     ) {
-      message
+      data
     }
   }
 `

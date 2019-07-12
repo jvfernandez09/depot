@@ -22,8 +22,9 @@ const ForgotPassword = (props) => {
   } = useForm(resetPassword, validateEmail);
 
   async function resetPassword(){
-    const { forgotPassword } = props
     const variables = { input: inputs }
+    const { forgotPassword } = props
+
 
     forgotPassword({ variables }).then(response => {
       if(response){
@@ -36,6 +37,13 @@ const ForgotPassword = (props) => {
     }).catch((errors) => {
       console.log(errors)
     })
+  }
+
+  function onKeyPress(e){
+    if(e.which === 13) {
+      e.preventDefault()
+      handleSubmit()
+    }
   }
 
   return (
@@ -56,7 +64,8 @@ const ForgotPassword = (props) => {
                     type="email"
                     name="email"
                     onChange={handleChange}
-                    value={inputs.email || ''}
+                    onKeyPress={onKeyPress}
+                    value={inputs.email}
                     required
                   />
                   {errors.email && (
