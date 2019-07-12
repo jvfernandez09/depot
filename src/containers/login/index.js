@@ -29,7 +29,7 @@ const Login = (props) => {
     loginUser({ variables }).then(response => {
       localStorage.setItem('userId', response.data.loginUser.user.data.id)
       localStorage.setItem('AUTH_TOKEN', response.data.loginUser.token)
-      console.log(response.data.loginUser.user.data.attributes.resetPasswordSentAt)
+
       if(isNull(response.data.loginUser.user.data.attributes.resetPasswordSentAt)){
         props.history.push('/wallet')
       } else {
@@ -49,6 +49,7 @@ const Login = (props) => {
 
   function onKeyPress(e){
     if(e.which === 13) {
+      e.preventDefault()
       handleSubmit()
     }
   }
