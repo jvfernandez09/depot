@@ -17,14 +17,18 @@ const GameWalletModal = ({ isGameShowing, hide, walletAddress }) => {
     <Fragment>
       {isGameShowing ? (
         <Modal
-          title='Add GWX Token'
+          title={
+            <div className='header-container'>
+              <div className='title'>Add GWX Token</div>
+            </div>
+          }
           onCancel={hide}
           visible={isGameShowing}
           footer={[
             <Button
               key="2"
               type="primary"
-              className="button btn-primary"
+              className="button btn-primary -light"
               onClick={hide}>Cancel
             </Button>,
             <Button
@@ -37,30 +41,35 @@ const GameWalletModal = ({ isGameShowing, hide, walletAddress }) => {
             ]
           }>
 
-          <div className="form-group">
-            <label className="form-label">Your wallet address: {walletAddress} </label>
-          </div>
+          <div className='form-body'>
+            <div className='content'>
+              <div className="item">
+                <p className='title'>Your wallet address:</p>
+                <div className="sub">{walletAddress} </div>
+              </div>
 
-          <div className="form-group">
-            <label className="form-label"> Amount: </label>
-            <Input
-              name='amount'
-              type='number'
-              onChange={handleChange}
-            />
-          </div>
+              <div className="form-group">
+                <label className="form-label"> Amount: </label>
+                <Input
+                  name='amount'
+                  type='number'
+                  onChange={handleChange}
+                />
+              </div>
 
-          <div className="form-group">
-            <label className="form-label"> Choose Wallet: </label>
-            <Select
-              placeholder='Select Payment Method'
-              name='type'
-              style={{ width: '100%'}}
-              onChange={handleChangeSelect}
-              >
-              <Option value="GWX">My GMX Wallet</Option>
-              <Option value="XEM">My XEM Wallet</Option>
-          </Select>
+              <div className="form-group">
+                <label className="form-label"> Choose Wallet: </label>
+                <Select
+                  placeholder='Select Payment Method'
+                  name='type'
+                  style={{ width: '100%'}}
+                  onChange={handleChangeSelect}
+                  >
+                  <Option value="GWX">GWX Wallet</Option>
+                  <Option value="XEM">XEM Wallet</Option>
+                </Select>
+              </div>
+            </div>
           </div>
         </Modal>
         ) : null

@@ -39,7 +39,7 @@ const WalletContainer = (props) => {
             )
           }}
         </Query>
-        <Button className='button btn-primary -outline' onClick={toggle}> Buy GWX+ </Button>
+        <Button className='button btn-primary -outline' onClick={toggle}> Buy GWX </Button>
         <WalletModal
          isShowing={isShowing}
          hide={toggle}

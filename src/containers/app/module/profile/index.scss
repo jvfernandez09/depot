@@ -23,19 +23,46 @@
 .profile-header {
   & {
     display: flex;
-    align-items: center;
+    position: relative;
   }
+}
 
-  > .profile-details {
-    font-weight: 500;
-    letter-spacing: .5px;
-    padding: 16px;
+.profile-details {
+  & {
+    margin-left: $pad * 2;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-left: $pad * 2;
+  }
+
+  > .top > .name {
+    font-size: 2.3rem;
+    line-height: 1;
+    font-weight: 500;
+  }
+
+  > .top > .sub {
+    margin-top: $pad - 4;
+    color: $light-gray;
+  }
+
+  > .top > .created {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  > .bottom > .label {
+    color: $ink;
+  }
+
+  > .bottom > .item {
+    color: $primary-color;
+    font-size: 1.2rem;
   }
 }
+
+
 
 // overides antd
 .ant-card {
