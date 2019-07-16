@@ -53,6 +53,11 @@
     margin-right: 4px;
     font-weight: 600;
   }
+
+  > button {
+    padding-left: $pad * 3;
+    padding-right: $pad * 3;
+  }
 }
 
 .game-card {

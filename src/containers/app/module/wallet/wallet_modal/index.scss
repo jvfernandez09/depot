@@ -86,7 +86,7 @@
   }
 
   > button {
-    width: 100px;
+    width: 120px;
   }
 }
 
@@ -198,7 +198,7 @@
 }
 
 .ant-select-dropdown {
-  background-color: #0D172E;
+  background-color: lighten(#0D172E, 5%);
 }
 
 .ant-select-dropdown-menu-item:hover:not(.ant-select-dropdown-menu-item-disabled) {
