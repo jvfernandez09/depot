@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
+import { compose, graphql, withApollo, Query } from 'react-apollo'
+
 import { Steps, Modal, Input, Select, Button } from 'antd'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 import '../../wallet/wallet_modal/index.scss'
 
 import {ReactComponent as SampleQR} from 'assets/images/sample_qr_code.svg'
 
+import TRANSACTIONS from '../../../../../../src/graphql/transaction'
+
 const { Option } = Select
 const { Step } = Steps
 
-const WalletModal = ({ isShowing, hide, walletAddress }) => {
+const WalletModal = ({ props, userId, isShowing, hide, walletAddress }) => {
   const { handleChange, handleChangeSelect, inputs, handleSubmit } = useModal(addFunds)
   const [isShowQr, isSetShowQr] = useState(false)
   const [done, setDone] = useState(false)
   const [current, setCurrent] = useState(0)
-  const userId = localStorage.getItem('userId')
+  console.log(props)
   const steps = [
     {
       title: 'Top up',
@@ -121,6 +125,23 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
     )
   }
 
+
+  function transaction(userId){
+    return(
+      <Query query={TRANSACTIONS.ALL_TRANSACTIONS} variables={{ userId }} fetchPolicy='network-only'>
+      {({ data, loading, error }) => {
+        if (loading) return <p> test </p>
+        if (error) return <p>ERROR</p>
+        return(
+          <>
+            <p>test</p>
+          </>
+        )
+      }}
+      </Query>
+    )
+  }
+
   return(
     <>
       {isShowing ? (
@@ -155,6 +176,7 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
           ]}>
 
           <div className="steps-action">
+            {userId && transaction(userId)}
             {current < steps.length - 1 && isShowQr === false ? (
               <div className="form-body">
                 {formInput()}
@@ -174,8 +196,13 @@ const WalletModal = ({ isShowing, hide, walletAddress }) => {
         </Modal>
         ) : null
       }
+
+
     </>
   )
 }
 
-export default WalletModal
+export default compose(
+  withApollo,
+  graphql(TRANSACTIONS.CREATE_TRANSACTION, { name: 'createTransaction' })
+)(WalletModal)

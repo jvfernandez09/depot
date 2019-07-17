@@ -6,7 +6,8 @@ const GET_WALLET_ACCOUNT = gql`
     @rest(
       type: "Wallet",
       path: "/v1/wallets/{args.walletAddress}",
-      method: "GET"
+      method: "GET",
+      endpoint: "v1"
     ) {
       data
     }
@@ -18,7 +19,8 @@ const GET_WALLET_BALANCE = gql`
     @rest(
       type: "Wallet",
       path: "/v1/wallets/{args.walletAddress}/balance",
-      method: "GET"
+      method: "GET",
+      endpoint: "v1"
     ) {
       balance
     }
@@ -30,13 +32,13 @@ const GET_ALL_GAMES = gql`
     getAllGames @rest(
       type: "Game",
       path: "/v1/games",
-      method: "GET"
+      method: "GET",
+      endpoint: "v1"
     ) {
       data
     }
   }
 `
-
 
 export default {
   GET_WALLET_ACCOUNT,

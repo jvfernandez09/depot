@@ -24,10 +24,22 @@ const API = process.env.REACT_APP_ENV === 'staging' || process.env.REACT_APP_ENV
 
 const restLink = new RestLink({
   uri: API,
+  endpoints: {
+    v1: API,
+    v2: 'http://54.251.162.83'
+  },
   headers: {
     "Content-Type": "application/json"
   }
-})
+});
+
+//
+// const restLink = new RestLink({
+//   uri: API,
+//   headers: {
+//     "Content-Type": "application/json"
+//   }
+// })
 
 const authLink = setContext((_, { headers }) => {
   const token = window.localStorage.getItem('AUTH_TOKEN')

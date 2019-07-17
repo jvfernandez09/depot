@@ -5,7 +5,8 @@ const GET_PROFILE = gql`
     getProfile @rest(
       type: "Profile",
       path: "/v1/auth/me",
-      method: "GET"
+      method: "GET",
+      endpoint: "v1"
     ) {
       data
     }

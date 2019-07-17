@@ -22,7 +22,7 @@ const WalletContainer = (props) => {
   const { isShowing, toggle } = useModal()
   const { isGameShowing, gameToggle } = useGameModal()
 
-  function walletBalance(walletAddress){
+  function walletBalance(walletAddress, userId){
     return (
       <>
         <Query query={WALLET.GET_WALLET_BALANCE} variables={{ walletAddress }} fetchPolicy='network-only'>
@@ -41,6 +41,8 @@ const WalletContainer = (props) => {
         </Query>
         <Button className='button btn-primary -outline' onClick={toggle}> Buy GWX </Button>
         <WalletModal
+         props={props}
+         userId={userId}
          isShowing={isShowing}
          hide={toggle}
          walletAddress={walletAddress}
@@ -72,7 +74,7 @@ const WalletContainer = (props) => {
   }
 
   return(
-    <div className="body-container">
+    <div className="body-container" >
       <Query query={GET_PROFILE}>
         {({ data, loading, error }) => {
           if (loading) return <Spin />
@@ -81,6 +83,8 @@ const WalletContainer = (props) => {
           const lastName = data.getProfile.data.attributes.lastName.slice(-1) === 's' ?
             data.getProfile.data.attributes.lastName : data.getProfile.data.attributes.lastName+"'s"
           const walletAddress = data.getProfile.data.attributes.walletAddress
+          const userId = data.getProfile.data.id
+
           return (
             <>
               <h1 className='header'>{firstName+' '+lastName} PERSONAL WALLET</h1>
@@ -91,7 +95,7 @@ const WalletContainer = (props) => {
                     <Card>
                       <div className='wallet-container'>
                         <p className='top'>Amount:</p>
-                        {walletAddress && walletBalance(walletAddress)}
+                        {walletAddress && walletBalance(walletAddress, userId)}
                       </div>
                     </Card>
                     <h2 className='title -pad'>My XEM Wallet</h2>
