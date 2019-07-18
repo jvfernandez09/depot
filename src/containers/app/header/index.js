@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 import 'app/header/index.scss'
 import {ReactComponent as Logo} from 'assets/images/LOGO-tokendepot.svg'
 
-import { Menu } from 'antd';
+import { Menu, Dropdown, Icon, Button } from 'antd';
 
 const { Header } = Layout;
 
@@ -26,6 +26,14 @@ class HeaderContainer extends Component {
   }
 
   render(){
+
+    const userMenu = (
+      <Menu className='nav-bar' mode="horizontal">
+        <Menu.Item key="1" onClick={this.logout}>
+          <label className="logout-icon">Logout<Icon type="logout"/></label>
+        </Menu.Item>
+      </Menu>
+    )
 
     return (
       <Header className='main-navbar'>
@@ -52,11 +60,9 @@ class HeaderContainer extends Component {
           <div className='user'>
             <div className='avatar'>
             </div>
-            <Menu className='nav-bar' mode="horizontal">
-              <Menu.Item onClick={this.logout} key="4">
-                Logout
-              </Menu.Item>
-            </Menu>
+            <Dropdown overlay={userMenu}>
+              <Button className="user-icon"><Icon type="user"/></Button>
+            </Dropdown>
           </div>
         </div>
       </Header>

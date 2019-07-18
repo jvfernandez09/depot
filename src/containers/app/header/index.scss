@@ -44,6 +44,24 @@
 }
 
 // overrides antDesign
+.user-icon {
+  border-color: $primary-color;
+  color: $primary-color;
+  background-color: $navbar-color;
+
+  &:hover {
+    background: #FFF;
+  }
+}
+
+.logout-icon {
+  color: $primary-color;
+  margin-right: 8px;
+}
+
+.ant-dropdown-menu-item {
+  background: $navbar-color;
+}
 .ant-menu-horizontal > .ant-menu-item {
   & {
     top: 0;
