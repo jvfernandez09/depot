@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
-import { compose, graphql, withApollo, Query } from 'react-apollo'
-
-import { Steps, Modal, Input, Select, Button } from 'antd'
+import React, { useState, useEffect } from 'react';
+import { graphql, compose, withApollo, Query } from 'react-apollo'
+import { isEmpty } from 'lodash'
+import { Steps, Modal, Input, Select, Button, Spin } from 'antd'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 import '../../wallet/wallet_modal/index.scss'
 
+import TRANSACTIONS from '../../../../../../src/graphql/transaction'
+
 import {ReactComponent as SampleQR} from 'assets/images/sample_qr_code.svg'
 
-import TRANSACTIONS from '../../../../../../src/graphql/transaction'
 
 const { Option } = Select
 const { Step } = Steps
 
-const WalletModal = ({ props, userId, isShowing, hide, walletAddress }) => {
+const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddress }) => {
   const { handleChange, handleChangeSelect, inputs, handleSubmit } = useModal(addFunds)
   const [isShowQr, isSetShowQr] = useState(false)
   const [done, setDone] = useState(false)
   const [current, setCurrent] = useState(0)
-  console.log(props)
+  const [quantityToReceive, setQuantityToReceive] = useState('')
+
   const steps = [
     {
       title: 'Top up',
@@ -32,6 +34,34 @@ const WalletModal = ({ props, userId, isShowing, hide, walletAddress }) => {
       content: 'Done',
     },
   ]
+
+
+  useEffect(() => {
+    if(!isEmpty(inputs.gwxToTransfer) && !isEmpty(inputs.transactionType)){
+      convert()
+    }
+  });
+
+  function convert(){
+    let value = inputs.gwxToTransfer
+    return(
+      <Query query={TRANSACTIONS.CONVERT_BTC} variables={{ btc: value }} fetchPolicy='network-only'>
+        {({ data, loading, error }) => {
+          if (loading) return <Spin />
+          if (error) return <p>ERROR</p>
+            const converted = [data]
+            setQuantityToReceive(converted[0].convertAmount.gwx)
+            return(
+              <>
+                <div className="form-group">
+                <label className="form-label"> Conversion: {quantityToReceive} </label>
+                </div>
+              </>
+            )
+        }}
+      </Query>
+    )
+  }
 
   function next() {
     const count = current + 1
@@ -58,7 +88,6 @@ const WalletModal = ({ props, userId, isShowing, hide, walletAddress }) => {
     }
   }
 
-
   function doneTransaction(){
     isSetShowQr(false)
     setDone(false)
@@ -67,8 +96,24 @@ const WalletModal = ({ props, userId, isShowing, hide, walletAddress }) => {
   }
 
   function addFunds(){
-    const variables = { ...inputs, walletAddress, userId}
-    console.log(variables)
+    const variables = { ...inputs, gwxWalletAddress, userId, quantityToReceive}
+    const key = Object.keys(variables).map((key) => { return key.split(/(?=[A-Z])/).join('_').toLowerCase() })
+    const value = Object.values(variables).map((values) => { return values })
+
+    let newVariables = key.reduce(function(obj, key, index) {
+      obj[key] = value[index]
+      return obj
+    }, {})
+
+
+    const parameter = { input: newVariables }
+
+    createTransaction({ variables: parameter }).then(response => {
+      console.log(response)
+    }).catch((errors) => {
+      console.log(errors)
+    })
+
     isSetShowQr(true)
     generateQR(variables)
   }
@@ -86,13 +131,13 @@ const WalletModal = ({ props, userId, isShowing, hide, walletAddress }) => {
       <div className='content'>
         <div className="item">
           <p className="title" >Your wallet address:</p>
-          <div className='sub'>{walletAddress}</div>
+          <div className='sub'>{gwxWalletAddress}</div>
         </div>
 
         <div className="form-group">
           <label className="form-label"> Amount: </label>
           <Input
-            name='quantity'
+            name='gwxToTransfer'
             type='number'
             onChange={handleChange}
             className='input'
@@ -112,6 +157,9 @@ const WalletModal = ({ props, userId, isShowing, hide, walletAddress }) => {
             <Option value="Etherium">Etherium</Option>
         </Select>
         </div>
+
+
+          {!isEmpty(inputs.gwxToTransfer) && !isEmpty(inputs.transactionType) ? convert() : null}
       </div>
     )
   }
@@ -122,23 +170,6 @@ const WalletModal = ({ props, userId, isShowing, hide, walletAddress }) => {
       <div className='end'>
         Done! Your transaction is pending.
       </div>
-    )
-  }
-
-
-  function transaction(userId){
-    return(
-      <Query query={TRANSACTIONS.ALL_TRANSACTIONS} variables={{ userId }} fetchPolicy='network-only'>
-      {({ data, loading, error }) => {
-        if (loading) return <p> test </p>
-        if (error) return <p>ERROR</p>
-        return(
-          <>
-            <p>test</p>
-          </>
-        )
-      }}
-      </Query>
     )
   }
 
@@ -176,7 +207,6 @@ const WalletModal = ({ props, userId, isShowing, hide, walletAddress }) => {
           ]}>
 
           <div className="steps-action">
-            {userId && transaction(userId)}
             {current < steps.length - 1 && isShowQr === false ? (
               <div className="form-body">
                 {formInput()}

@@ -15,7 +15,7 @@ const useModal = (callback) => {
   }
 
   const handleChangeSelect = (event, props) => {
-    setInputs(inputs => ({ ...inputs, type: props.props.value }))
+    setInputs(inputs => ({ ...inputs, transactionType: props.props.value }))
   }
 
   const handleSubmit = (event) => {

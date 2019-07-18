@@ -9,12 +9,13 @@ import GameWalletModal from 'app/module/wallet/game_wallet_modal'
 import useGameModal from 'app/module/wallet/game_wallet_modal/useGameModal'
 
 import TransactionContainer from 'app/module/transaction'
+
 import ProfileContainer from 'app/module/profile'
 import WALLET from '../../../../../src/graphql/wallet'
 import GET_PROFILE from '../../../../../src/graphql/profile'
 
 import '../wallet/index.scss'
-import {ReactComponent as SampleGame} from 'assets/images/sample-game.svg'
+import { ReactComponent as SampleGame } from 'assets/images/sample-game.svg'
 
 const { TabPane } = Tabs;
 
@@ -41,11 +42,10 @@ const WalletContainer = (props) => {
         </Query>
         <Button className='button btn-primary -outline' onClick={toggle}> Buy GWX </Button>
         <WalletModal
-         props={props}
-         userId={userId}
-         isShowing={isShowing}
-         hide={toggle}
-         walletAddress={walletAddress}
+          userId={userId}
+          isShowing={isShowing}
+          hide={toggle}
+          gwxWalletAddress={walletAddress}
         />
       </>
     )
