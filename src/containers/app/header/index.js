@@ -30,7 +30,7 @@ class HeaderContainer extends Component {
     const userMenu = (
       <Menu className='nav-bar' mode="horizontal">
         <Menu.Item key="1" onClick={this.logout}>
-          <label>Logout<Icon type="logout"/></label>
+          <label className="logout-icon">Logout<Icon type="logout"/></label>
         </Menu.Item>
       </Menu>
     )
@@ -61,7 +61,7 @@ class HeaderContainer extends Component {
             <div className='avatar'>
             </div>
             <Dropdown overlay={userMenu}>
-              <Button><Icon type="user"/></Button>
+              <Button className="user-icon"><Icon type="user"/></Button>
             </Dropdown>
           </div>
         </div>
