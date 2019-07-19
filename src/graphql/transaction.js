@@ -45,10 +45,40 @@ const CONVERT_BTC = gql`
   }
 `
 
+const CONVERT_XEM = gql`
+  query convertBtc {
+    convertAmount(xem: $xem)
+    @rest(
+      type: "Convert XEM",
+      path: "/v1/top_up_transactions/calculate/xem/{args.btc}/to_gwx",
+      method: "GET",
+      endpoint: "v2"
+    ) {
+      btc
+      gwx
+    }
+  }
+`
 
+const CONVERT_ETH = gql`
+  query convertBtc {
+    convertAmount(eth: $eth)
+    @rest(
+      type: "Convert BTC",
+      path: "/v1/top_up_transactions/calculate/eth/{args.btc}/to_gwx",
+      method: "GET",
+      endpoint: "v2"
+    ) {
+      btc
+      gwx
+    }
+  }
+`
 
 export default {
   ALL_TRANSACTIONS,
   CREATE_TRANSACTION,
-  CONVERT_BTC
+  CONVERT_BTC,
+  CONVERT_XEM,
+  CONVERT_ETH
 }
