@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { graphql, compose, withApollo, Query } from 'react-apollo'
 import { isEmpty } from 'lodash'
 import { Steps, Modal, Input, Select, Button, Spin } from 'antd'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 import '../../wallet/wallet_modal/index.scss'
 
+import QRCode from "qrcode.react";
+
 import TRANSACTIONS from '../../../../../../src/graphql/transaction'
-
-import {ReactComponent as SampleQR} from 'assets/images/sample_qr_code.svg'
-
 
 const { Option } = Select
 const { Step } = Steps
@@ -17,6 +16,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   const { handleChange, handleChangeSelect, inputs, handleSubmit } = useModal(addFunds)
   const [isShowQr, isSetShowQr] = useState(false)
   const [done, setDone] = useState(false)
+  const [qrCode, setQrCode] = useState('')
   const [current, setCurrent] = useState(0)
   const [quantityToReceive, setQuantityToReceive] = useState('')
 
@@ -36,14 +36,9 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   ]
 
 
-  useEffect(() => {
-    if(!isEmpty(inputs.gwxToTransfer) && !isEmpty(inputs.transactionType)){
-      convert()
-    }
-  });
-
   function convert(){
     let value = inputs.gwxToTransfer
+
     return(
       <Query query={TRANSACTIONS.CONVERT_BTC} variables={{ btc: value }} fetchPolicy='network-only'>
         {({ data, loading, error }) => {
@@ -95,7 +90,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     hide()
   }
 
-  function addFunds(){
+  async function addFunds(){
     const variables = { ...inputs, gwxWalletAddress, userId, quantityToReceive}
     const key = Object.keys(variables).map((key) => { return key.split(/(?=[A-Z])/).join('_').toLowerCase() })
     const value = Object.values(variables).map((values) => { return values })
@@ -109,22 +104,15 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     const parameter = { input: newVariables }
 
     createTransaction({ variables: parameter }).then(response => {
-      console.log(response)
+      // generateQR(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
+      isSetShowQr(true)
+      setQrCode(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
     }).catch((errors) => {
       console.log(errors)
     })
 
-    isSetShowQr(true)
-    generateQR(variables)
   }
 
-  function generateQR(response){
-    return (
-      <div>
-       <SampleQR />
-      </div>
-    )
-  }
 
   function formInput(){
     return (
@@ -152,7 +140,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             style={{ width: '100%'}}
             onChange={handleChangeSelect}
             >
-            <Option value="BTC">Bitcoin</Option>
+            <Option value="btc">Bitcoin</Option>
             <Option value="XEM">XEM</Option>
             <Option value="Etherium">Etherium</Option>
         </Select>
@@ -172,7 +160,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       </div>
     )
   }
-
   return(
     <>
       {isShowing ? (
@@ -214,7 +201,14 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             ) : null }
             {current > 0 && isShowQr ?  (
               <div className="form-body">
-                <div className="qr-code">{generateQR()}</div>
+                <div className="qr-code">{
+                  qrCode ? (
+                    <QRCode
+                      style={{ height: '200px', width: '200px' }}
+                      value={`${qrCode}`}
+                    />
+                  ) : null
+                }</div>
               </div>
             ) : null }
             { current === steps.length - 1 &&  done ? (

@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 
 const ALL_TRANSACTIONS = gql`
   query allTransactions {
-    getWalletAccount(userId: $userId)
+    getAllTransaction(userId: $userId)
     @rest(
       type: "Transactions",
       path: "/v1/top_up_transactions?user_id={args.userId}",
@@ -24,8 +24,7 @@ const CREATE_TRANSACTION = gql`
       method: "POST",
       endpoint: "v2"
     ) {
-      token
-      user
+      data
     }
   }
 `

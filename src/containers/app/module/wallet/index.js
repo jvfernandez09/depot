@@ -84,7 +84,6 @@ const WalletContainer = (props) => {
             data.getProfile.data.attributes.lastName : data.getProfile.data.attributes.lastName+"'s"
           const walletAddress = data.getProfile.data.attributes.walletAddress
           const userId = data.getProfile.data.id
-
           return (
             <>
               <h1 className='header'>{firstName+' '+lastName} PERSONAL WALLET</h1>
@@ -168,7 +167,9 @@ const WalletContainer = (props) => {
                   <ProfileContainer />
                 </TabPane>
                 <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='3'>
-                  <TransactionContainer />
+                  <TransactionContainer
+                    userId={userId}
+                  />
                 </TabPane>
               </Tabs>
             </>

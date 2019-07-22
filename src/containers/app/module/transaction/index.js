@@ -1,10 +1,17 @@
 import React from 'react'
-import { Table, DatePicker, Card } from 'antd'
+import { graphql, compose, withApollo, Query } from 'react-apollo'
+import { Table, DatePicker, Card, Spin } from 'antd'
+
+import TRANSACTIONS from '../../../../../src/graphql/transaction'
+
 import '../transaction/index.scss'
 
 const { RangePicker } = DatePicker
 
-const TransactionContainer = (props) => {
+
+const TransactionContainer = (props, userId) => {
+
+
   const dataSource = [
   {
     key: '1',
@@ -85,6 +92,25 @@ const columns = [
   },
 ]
 
+  function getTransaction(props){
+    const userId = props.userId
+    return(
+      <Query query={TRANSACTIONS.ALL_TRANSACTIONS} variables={{ userId }}>
+      {({ data, loading, error }) => {
+        if (loading) return <Spin />
+        if (error) return <p>ERROR</p>
+        console.log([data])
+        return(
+          <div>
+            {data}
+          </div>
+        )
+
+      }}
+      </Query>
+    )
+  }
+
   return(
     <div className='body-content'>
       <h2 className='title'>My Transactions</h2>
@@ -96,11 +122,13 @@ const columns = [
           <RangePicker style={{ width: '50%'}} className='date'/>
         </div>
         <div className='table-container'>
-          <Table dataSource={dataSource} columns={columns} pagination={{ defaultPageSize: 5 }} className='table' />
+        {getTransaction(props)}
         </div>
       </Card>
     </div>
   )
 }
 
-export default TransactionContainer
+export default compose(
+  withApollo
+)(TransactionContainer)
