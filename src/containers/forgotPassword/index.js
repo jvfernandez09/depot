@@ -35,7 +35,10 @@ const ForgotPassword = (props) => {
         props.history.push('/login')
       }
     }).catch((errors) => {
-      console.log(errors)
+      Notification.show({
+        type: 'error',
+        message: errors.networkError.result.message
+      })
     })
   }
 
