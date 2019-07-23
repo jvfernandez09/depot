@@ -223,11 +223,14 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
               <div className="form-body">
                 <div className="qr-code">{
                   qrCode ? (
-                    <QRCode
-                      size={256}
-                      renderAs='svg'
-                      value={`${qrCode}`}
-                    />
+                    <>
+                      <div style={{ backgroundColor: 'white' }}>
+                        <QRCode
+                          size={220}
+                          value={`${JSON.stringify(qrCode)}`}
+                        />
+                      </div>
+                    </>
                   ) : null
                 }</div>
               </div>
