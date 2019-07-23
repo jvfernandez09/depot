@@ -6,7 +6,8 @@ const LOGIN_USER = gql`
     @rest(
       type: "Login",
       path: "/v1/auth/login",
-      method: "POST"
+      method: "POST",
+      endpoint: "v1"
     ) {
       token
       user

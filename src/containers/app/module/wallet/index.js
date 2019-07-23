@@ -9,12 +9,13 @@ import GameWalletModal from 'app/module/wallet/game_wallet_modal'
 import useGameModal from 'app/module/wallet/game_wallet_modal/useGameModal'
 
 import TransactionContainer from 'app/module/transaction'
+
 import ProfileContainer from 'app/module/profile'
 import WALLET from '../../../../../src/graphql/wallet'
 import GET_PROFILE from '../../../../../src/graphql/profile'
 
 import '../wallet/index.scss'
-import {ReactComponent as SampleGame} from 'assets/images/sample-game.svg'
+import { ReactComponent as SampleGame } from 'assets/images/sample-game.svg'
 
 const { TabPane } = Tabs;
 
@@ -22,7 +23,7 @@ const WalletContainer = (props) => {
   const { isShowing, toggle } = useModal()
   const { isGameShowing, gameToggle } = useGameModal()
 
-  function walletBalance(walletAddress){
+  function walletBalance(walletAddress, userId){
     return (
       <>
         <Query query={WALLET.GET_WALLET_BALANCE} variables={{ walletAddress }} fetchPolicy='network-only'>
@@ -41,9 +42,10 @@ const WalletContainer = (props) => {
         </Query>
         <Button className='button btn-primary -outline' onClick={toggle}> Buy GWX </Button>
         <WalletModal
-         isShowing={isShowing}
-         hide={toggle}
-         walletAddress={walletAddress}
+          userId={userId}
+          isShowing={isShowing}
+          hide={toggle}
+          gwxWalletAddress={walletAddress}
         />
       </>
     )
@@ -72,7 +74,7 @@ const WalletContainer = (props) => {
   }
 
   return(
-    <div className="body-container">
+    <div className="body-container" >
       <Query query={GET_PROFILE}>
         {({ data, loading, error }) => {
           if (loading) return <Spin />
@@ -81,6 +83,7 @@ const WalletContainer = (props) => {
           const lastName = data.getProfile.data.attributes.lastName.slice(-1) === 's' ?
             data.getProfile.data.attributes.lastName : data.getProfile.data.attributes.lastName+"'s"
           const walletAddress = data.getProfile.data.attributes.walletAddress
+          const userId = data.getProfile.data.id
           return (
             <>
               <h1 className='header'>{firstName+' '+lastName} PERSONAL WALLET</h1>
@@ -91,7 +94,7 @@ const WalletContainer = (props) => {
                     <Card>
                       <div className='wallet-container'>
                         <p className='top'>Amount:</p>
-                        {walletAddress && walletBalance(walletAddress)}
+                        {walletAddress && walletBalance(walletAddress, userId)}
                       </div>
                     </Card>
                     <h2 className='title -pad'>My XEM Wallet</h2>
@@ -164,7 +167,9 @@ const WalletContainer = (props) => {
                   <ProfileContainer />
                 </TabPane>
                 <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='3'>
-                  <TransactionContainer />
+                  <TransactionContainer
+                    userId={userId}
+                  />
                 </TabPane>
               </Tabs>
             </>

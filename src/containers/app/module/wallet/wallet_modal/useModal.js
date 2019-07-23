@@ -3,7 +3,6 @@ import { useState } from 'react';
 const useModal = (callback) => {
   const [inputs, setInputs] = useState({})
   const [isShowing, setIsShowing] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
 
   function toggle() {
     setIsShowing(!isShowing);
@@ -15,13 +14,11 @@ const useModal = (callback) => {
   }
 
   const handleChangeSelect = (event, props) => {
-    setInputs(inputs => ({ ...inputs, type: props.props.value }))
+    setInputs(inputs => ({ ...inputs, transactionType: props.props.value }))
   }
 
   const handleSubmit = (event) => {
-    setIsLoading(true)
     callback()
-    setIsLoading(false)
   }
 
   return {
@@ -30,8 +27,7 @@ const useModal = (callback) => {
     handleChange,
     inputs,
     handleChangeSelect,
-    handleSubmit,
-    isLoading
+    handleSubmit
   }
 };
 
