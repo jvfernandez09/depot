@@ -37,7 +37,7 @@ const ForgotPassword = (props) => {
     }).catch((errors) => {
       Notification.show({
         type: 'error',
-        message: errors.networkError.result.message
+        message: 'Email not found'
       })
     })
   }
