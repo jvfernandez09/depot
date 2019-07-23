@@ -49,7 +49,7 @@ const CONVERT_XEM = gql`
     convertAmount(xem: $xem)
     @rest(
       type: "Convert XEM",
-      path: "/v1/top_up_transactions/calculate/xem/{args.btc}/to_gwx",
+      path: "/v1/top_up_transactions/calculate/xem/{args.xem}/to_gwx",
       method: "GET",
       endpoint: "v2"
     ) {
@@ -64,7 +64,7 @@ const CONVERT_ETH = gql`
     convertAmount(eth: $eth)
     @rest(
       type: "Convert BTC",
-      path: "/v1/top_up_transactions/calculate/eth/{args.btc}/to_gwx",
+      path: "/v1/top_up_transactions/calculate/eth/{args.eth}/to_gwx",
       method: "GET",
       endpoint: "v2"
     ) {

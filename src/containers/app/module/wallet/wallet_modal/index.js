@@ -38,9 +38,28 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
 
   function convert(){
     let value = inputs.gwxToTransfer
+    let convertTo
+    let queryType
+    console.log(value)
+    switch(inputs.transactionType){
+      case 'btc':
+        convertTo = { btc: value }
+        queryType = TRANSACTIONS.CONVERT_BTC
+        break;
+      case 'eth':
+        convertTo = { eth: value }
+        queryType = TRANSACTIONS.CONVERT_ETH
+        break;
+      case 'xem':
+        convertTo = { xem: value }
+        queryType = TRANSACTIONS.CONVERT_XEM
+        break;
+      default:
+        break;
+    }
 
     return(
-      <Query query={TRANSACTIONS.CONVERT_BTC} variables={{ btc: value }} fetchPolicy='network-only'>
+      <Query query={queryType} variables={ convertTo } fetchPolicy='network-only'>
         {({ data, loading, error }) => {
           if (loading) return <Spin />
           if (error) return <p>ERROR</p>
@@ -141,8 +160,8 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             onChange={handleChangeSelect}
             >
             <Option value="btc">Bitcoin</Option>
-            <Option value="XEM">XEM</Option>
-            <Option value="Etherium">Etherium</Option>
+            <Option value="xem">XEM</Option>
+            <Option value="eth">Etherium</Option>
         </Select>
         </div>
 
