@@ -1,7 +1,7 @@
 import React from 'react'
-import { graphql, compose, withApollo, Query } from 'react-apollo'
+import { compose, withApollo, Query } from 'react-apollo'
 import { Table, DatePicker, Card, Spin } from 'antd'
-
+import { upperFirst, upperCase } from 'lodash'
 import TRANSACTIONS from '../../../../../src/graphql/transaction'
 
 import '../transaction/index.scss'
@@ -11,101 +11,63 @@ const { RangePicker } = DatePicker
 
 const TransactionContainer = (props, userId) => {
 
-
-  const dataSource = [
-  {
-    key: '1',
-    details: '1000',
-    amountFee: 32,
-    paymentMode: 'Paypal',
-    timeStamp: '2019-09-12'
-  },
-  {
-    key: '2',
-    details: '500',
-    amountFee: 45,
-    paymentMode: 'BTC',
-    timeStamp: '2019-09-15'
-  },
-  {
-    key: '3',
-    details: '2000',
-    amountFee: 55,
-    paymentMode: 'NEM',
-    timeStamp: '2019-09-17'
-  },
-  {
-    key: '4',
-    details: '300',
-    amountFee: 150,
-    paymentMode: 'Coins.ph',
-    timeStamp: '2019-09-12'
-  },
-  {
-    key: '5',
-    details: '4000',
-    amountFee: 200,
-    paymentMode: 'Paypal',
-    timeStamp: '2019-09-01'
-  },
-  {
-    key: '6',
-    details: '1500',
-    amountFee: 350,
-    paymentMode: 'BTC',
-    timeStamp: '2019-09-25'
-  },
-  {
-    key: '7',
-    details: '3500',
-    amountFee: 500,
-    paymentMode: 'BTC',
-    timeStamp: '2019-09-25'
-  },
-];
-
 const columns = [
   {
-    title: 'Details',
-    dataIndex: 'details',
-    key: 'details',
+    title: 'ID',
+    dataIndex: 'transactionId',
+    key: 'transactionId'
   },
   {
-    title: 'Fee',
-    dataIndex: 'amountFee',
-    key: 'amountFee',
+    title: 'Type',
+    dataIndex: 'transactionType',
+    key: 'transactionType'
+  },
+  {
+    title: 'Receiving Wallet Address',
+    dataIndex: 'topUpReceivingWalletAddress',
+    key: 'topUpReceivingWalletAddress',
+  },
+  {
+    title: 'GWX To Transfer',
+    dataIndex: 'gwxToTransfer',
+    key: 'gwxToTransfer',
+  },
+  {
+    title: 'Quantity to Receive',
+    dataIndex: 'quantityToReceive',
+    key: 'quantityToReceive'
   },
   {
     title: 'Status',
     dataIndex: 'status',
     key: 'status'
-  },
-  {
-    title: 'Payment Mode',
-    dataIndex: 'paymentMode',
-    key: 'paymentMode',
-  },
-  {
-    title: 'Timestamp',
-    dataIndex: 'timeStamp',
-    key: 'timeStamp',
-  },
+  }
 ]
 
   function getTransaction(props){
+    let rowItems = []
     const userId = props.userId
     return(
       <Query query={TRANSACTIONS.ALL_TRANSACTIONS} variables={{ userId }}>
       {({ data, loading, error }) => {
         if (loading) return <Spin />
         if (error) return <p>ERROR</p>
-        console.log([data])
-        return(
-          <div>
-            {data}
-          </div>
+        const converted = [data]
+        converted[0].getAllTransaction.data.map((value, i) =>
+          rowItems.push({
+            key: i,
+            transactionId: value.attributes.transaction_id,
+            transactionType: value.attributes.transaction_type.toUpperCase(),
+            topUpReceivingWalletAddress: value.attributes.top_up_receiving_wallet_address,
+            gwxToTransfer: value.attributes.gwx_to_transfer,
+            quantityToReceive: value.attributes.quantity_to_receive,
+            status: upperFirst(upperCase(value.attributes.status))
+          })
         )
 
+        return(
+          <Table dataSource={rowItems} columns={columns}  pagination={{ pageSize: 5 }}/>
+        )
       }}
       </Query>
     )
