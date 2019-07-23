@@ -16,7 +16,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   const { handleChange, handleChangeSelect, inputs, handleSubmit } = useModal(addFunds)
   const [isShowQr, isSetShowQr] = useState(false)
   const [done, setDone] = useState(false)
-  const [qrCode, setQrCode] = useState('')
+  const [qrCode, setQrCode] = useState({})
   const [current, setCurrent] = useState(0)
   const [quantityToReceive, setQuantityToReceive] = useState('')
 
@@ -125,7 +125,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     createTransaction({ variables: parameter }).then(response => {
       // generateQR(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
       isSetShowQr(true)
-      setQrCode(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
+      setQrCode({ data: { addr: response.data.createTransaction.data.attributes.top_up_receiving_wallet_address}})
     }).catch((errors) => {
       console.log(errors)
     })
@@ -179,6 +179,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       </div>
     )
   }
+  console.log(qrCode)
   return(
     <>
       {isShowing ? (
@@ -223,7 +224,8 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                 <div className="qr-code">{
                   qrCode ? (
                     <QRCode
-                      style={{ height: '200px', width: '200px' }}
+                      size={256}
+                      renderAs='svg'
                       value={`${qrCode}`}
                     />
                   ) : null
