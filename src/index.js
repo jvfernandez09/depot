@@ -26,7 +26,7 @@ const restLink = new RestLink({
   uri: API,
   endpoints: {
     v1: API,
-    v2: 'http://54.251.162.83'
+    v2: 'https://54.251.162.83'
   },
   headers: {
     "Content-Type": "application/json"
