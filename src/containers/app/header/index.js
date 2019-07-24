@@ -30,7 +30,7 @@ class HeaderContainer extends Component {
     const userMenu = (
       <Menu className='nav-bar' mode="horizontal">
         <Menu.Item key="1" onClick={this.logout}>
-          <label className="logout-icon">Logout<Icon type="logout"/></label>
+          <label className="logout-icon">Logout<Icon style={{ marginLeft: 8 }} type="logout"/></label>
         </Menu.Item>
       </Menu>
     )
@@ -40,22 +40,6 @@ class HeaderContainer extends Component {
         <div className="nav-container">
           <div className="action">
             <Logo className='logo' onClick={() => this.props.history.push('/wallet')}/>
-          </div>
-          <div className="options">
-            {/* <Menu
-              selectedKeys={this.props.history.location.pathname === '/' ? ['wallet'] : [`${this.props.history.location.pathname.substring(1)}`]}
-              className="nav-bar"
-              mode="horizontal">
-              {/* <Menu.Item route='/home' onClick={this.menu} key="1">
-                Home
-              </Menu.Item> */}
-              {/* <Menu.Item route='/wallet' onClick={this.menu} key="wallet">
-                Wallet
-              </Menu.Item>
-              <Menu.Item route='/profile' onClick={this.menu} key="profile">
-                Profile
-              </Menu.Item>
-            </Menu> */}
           </div>
           <div className='user'>
             <div className='avatar'>
