@@ -17,6 +17,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   const [isShowQr, isSetShowQr] = useState(false)
   const [done, setDone] = useState(false)
   const [qrCode, setQrCode] = useState({})
+  const [transactionSummary, setTransactionSummary] = useState ({})
   const [current, setCurrent] = useState(0)
   const [quantityToReceive, setQuantityToReceive] = useState('')
 
@@ -123,13 +124,18 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     const parameter = { input: newVariables }
 
     createTransaction({ variables: parameter }).then(response => {
-      // generateQR(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
       isSetShowQr(true)
       setQrCode({ data: { addr: response.data.createTransaction.data.attributes.top_up_receiving_wallet_address}})
+      setTransactionSummary({ data: {
+        wallet_address: response.data.createTransaction.data.attributes.top_up_receiving_wallet_address,
+        gwx_to_transfer: response.data.createTransaction.data.attributes.gwx_to_transfer,
+        quantity_to_receive: response.data.createTransaction.data.attributes.quantity_to_receive,
+        status: 'Pending',
+        transaction_id: response.data.createTransaction.data.attributes.transaction_id
+      }})
     }).catch((errors) => {
       console.log(errors)
     })
-
   }
 
 
@@ -173,9 +179,17 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
 
 
   function confirmTransaction(){
+    console.log(transactionSummary, 'set')
     return(
       <div className='end'>
-        Done! Your transaction is pending.
+        <ul>
+          <label>Transaction Summary</label>
+          <li>Transaction #: <span>{transactionSummary.data.transaction_id}</span></li>
+          <li>Receiving Wallet Address: <span>{transactionSummary.data.wallet_address}</span></li>
+          <li>GWX to Transfer: <span>{transactionSummary.data.gwx_to_transfer}</span></li>
+          <li>Quantity to Receive: <span>{transactionSummary.data.quantity_to_receive}</span></li>
+          <li>Status: <span>Pending</span></li>
+        </ul>
       </div>
     )
   }
