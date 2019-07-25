@@ -30,7 +30,7 @@ class HeaderContainer extends Component {
     const userMenu = (
       <Menu className='nav-bar' mode="horizontal">
         <Menu.Item key="1" onClick={this.logout}>
-          <label className="logout-icon">Logout<Icon style={{ marginLeft: 8 }} type="logout"/></label>
+          <Icon style={{ marginRight: 8, color: '#F8D154' }} type="logout"/><label className="logout-icon">Logout</label>
         </Menu.Item>
       </Menu>
     )
