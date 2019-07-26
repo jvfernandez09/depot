@@ -116,13 +116,14 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     const value = Object.values(variables).map((values) => { return values })
 
     let newVariables = key.reduce(function(obj, key, index) {
-      obj[key] = value[index]
+      obj[key] = value[index].toString()
       return obj
     }, {})
 
 
-    const parameter = { input: newVariables }
 
+    const parameter = { input: newVariables }
+    console.log(parameter)
     createTransaction({ variables: parameter }).then(response => {
       isSetShowQr(true)
       if (response.data.createTransaction.data.attributes.transaction_type === 'btc' || response.data.createTransaction.data.attributes.transactionType === 'eth'){
