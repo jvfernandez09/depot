@@ -18,7 +18,17 @@ const columns = [
     key: 'transactionId'
   },
   {
-    title: 'Receiving Wallet Address',
+    title: 'Date',
+    dataIndex: 'date',
+    key: 'date'
+  },
+  {
+    title: 'Type',
+    dataIndex: 'transactionType',
+    key: 'transactionType'
+  },
+  {
+    title: 'Wallet Address',
     dataIndex: 'topUpReceivingWalletAddress',
     key: 'topUpReceivingWalletAddress',
   },
@@ -28,7 +38,7 @@ const columns = [
     key: 'gwxToTransfer',
   },
   {
-    title: 'Quantity to Receive',
+    title: 'Fee',
     dataIndex: 'quantityToReceive',
     key: 'quantityToReceive'
   },
@@ -48,12 +58,12 @@ const columns = [
         if (loading) return <Spin />
         if (error) return <p>ERROR</p>
         const converted = [data]
-        console.log(converted)
         converted[0].getAllTransaction.data.map((value, i) =>
           rowItems.push({
             key: i,
             transactionId: value.attributes.transaction_id,
-            transactionType: value.attributes.transaction_type.toUpperCase(),
+            date: '',
+            transactionType: 'SENDING',
             topUpReceivingWalletAddress: toUpper(value.attributes.top_up_receiving_wallet_address),
             gwxToTransfer: value.attributes.gwx_to_transfer+' '+toUpper(value.attributes.transaction_type),
             quantityToReceive: value.attributes.quantity_to_receive,
@@ -62,7 +72,7 @@ const columns = [
         )
 
         return(
-          <Table dataSource={rowItems} columns={columns}  pagination={{ pageSize: 5 }}/>
+          <Table dataSource={rowItems} columns={columns}  pagination={{ pageSize: 5 }} scroll={{ x: 'fit-content' }}/>
         )
       }}
       </Query>
