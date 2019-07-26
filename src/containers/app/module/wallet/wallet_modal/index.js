@@ -41,7 +41,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     let value = inputs.gwxToTransfer
     let convertTo
     let queryType
-    console.log(value)
+
     switch(inputs.transactionType){
       case 'btc':
         convertTo = { btc: value }
@@ -179,7 +179,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
 
 
   function confirmTransaction(){
-    console.log(transactionSummary, 'set')
     return(
       <div className='end'>
         <ul>
@@ -193,7 +192,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       </div>
     )
   }
-  console.log(qrCode)
+
   return(
     <>
       {isShowing ? (
