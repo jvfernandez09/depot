@@ -125,7 +125,11 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
 
     createTransaction({ variables: parameter }).then(response => {
       isSetShowQr(true)
-      setQrCode({ data: { addr: response.data.createTransaction.data.attributes.top_up_receiving_wallet_address}})
+      if (response.data.createTransaction.data.attributes.transaction_type === 'btc' || response.data.createTransaction.data.attributes.transactionType === 'eth'){
+        setQrCode(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
+      } else {
+        setQrCode({ data: { addr: response.data.createTransaction.data.attributes.top_up_receiving_wallet_address}})
+      }
       setTransactionSummary({ data: {
         wallet_address: response.data.createTransaction.data.attributes.top_up_receiving_wallet_address,
         gwx_to_transfer: response.data.createTransaction.data.attributes.gwx_to_transfer,
