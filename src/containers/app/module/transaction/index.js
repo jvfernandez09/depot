@@ -1,7 +1,7 @@
 import React from 'react'
 import { compose, withApollo, Query } from 'react-apollo'
 import { Table, DatePicker, Card, Spin } from 'antd'
-import { upperFirst, upperCase } from 'lodash'
+import { upperFirst, upperCase, toUpper } from 'lodash'
 import TRANSACTIONS from '../../../../../src/graphql/transaction'
 
 import '../transaction/index.scss'
@@ -16,11 +16,6 @@ const columns = [
     title: 'ID',
     dataIndex: 'transactionId',
     key: 'transactionId'
-  },
-  {
-    title: 'Type',
-    dataIndex: 'transactionType',
-    key: 'transactionType'
   },
   {
     title: 'Receiving Wallet Address',
@@ -53,13 +48,14 @@ const columns = [
         if (loading) return <Spin />
         if (error) return <p>ERROR</p>
         const converted = [data]
+        console.log(converted)
         converted[0].getAllTransaction.data.map((value, i) =>
           rowItems.push({
             key: i,
             transactionId: value.attributes.transaction_id,
             transactionType: value.attributes.transaction_type.toUpperCase(),
-            topUpReceivingWalletAddress: value.attributes.top_up_receiving_wallet_address,
-            gwxToTransfer: value.attributes.gwx_to_transfer,
+            topUpReceivingWalletAddress: toUpper(value.attributes.top_up_receiving_wallet_address),
+            gwxToTransfer: value.attributes.gwx_to_transfer+' '+toUpper(value.attributes.transaction_type),
             quantityToReceive: value.attributes.quantity_to_receive,
             status: upperFirst(upperCase(value.attributes.status))
           })

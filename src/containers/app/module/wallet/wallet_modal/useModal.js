@@ -4,6 +4,10 @@ const useModal = (callback) => {
   const [inputs, setInputs] = useState({})
   const [isShowing, setIsShowing] = useState(false)
 
+  const initialState = () => {
+    setInputs({})
+  }
+
   function toggle() {
     setIsShowing(!isShowing);
   }
@@ -27,7 +31,8 @@ const useModal = (callback) => {
     handleChange,
     inputs,
     handleChangeSelect,
-    handleSubmit
+    handleSubmit,
+    initialState
   }
 };
 

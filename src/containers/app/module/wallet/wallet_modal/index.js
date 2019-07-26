@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { graphql, compose, withApollo, Query } from 'react-apollo'
-import { isEmpty } from 'lodash'
+import { isEmpty, toUpper } from 'lodash'
 import { Steps, Modal, Input, Select, Button, Spin } from 'antd'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 import '../../wallet/wallet_modal/index.scss'
@@ -13,13 +13,13 @@ const { Option } = Select
 const { Step } = Steps
 
 const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddress }) => {
-  const { handleChange, handleChangeSelect, inputs, handleSubmit } = useModal(addFunds)
+  const { handleChange, handleChangeSelect, inputs, handleSubmit, initialState } = useModal(addFunds)
   const [isShowQr, isSetShowQr] = useState(false)
   const [done, setDone] = useState(false)
   const [qrCode, setQrCode] = useState({})
   const [transactionSummary, setTransactionSummary] = useState ({})
   const [current, setCurrent] = useState(0)
-  const [quantityToReceive, setQuantityToReceive] = useState('')
+  const [quantityToReceive, setQuantityToReceive] = useState(0)
 
   const steps = [
     {
@@ -37,11 +37,12 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   ]
 
 
+
   function convert(){
     let value = inputs.gwxToTransfer
     let convertTo
     let queryType
-    console.log(value)
+
     switch(inputs.transactionType){
       case 'btc':
         convertTo = { btc: value }
@@ -107,6 +108,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     isSetShowQr(false)
     setDone(false)
     setCurrent(0)
+    setQuantityToReceive(0)
     hide()
   }
 
@@ -116,16 +118,20 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     const value = Object.values(variables).map((values) => { return values })
 
     let newVariables = key.reduce(function(obj, key, index) {
-      obj[key] = value[index]
+      obj[key] = value[index].toString()
       return obj
     }, {})
-
 
     const parameter = { input: newVariables }
 
     createTransaction({ variables: parameter }).then(response => {
+      initialState()
       isSetShowQr(true)
-      setQrCode({ data: { addr: response.data.createTransaction.data.attributes.top_up_receiving_wallet_address}})
+      if (response.data.createTransaction.data.attributes.transaction_type === 'btc' || response.data.createTransaction.data.attributes.transactionType === 'eth'){
+        setQrCode(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
+      } else {
+        setQrCode({ data: { addr: toUpper(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)}})
+      }
       setTransactionSummary({ data: {
         wallet_address: response.data.createTransaction.data.attributes.top_up_receiving_wallet_address,
         gwx_to_transfer: response.data.createTransaction.data.attributes.gwx_to_transfer,
@@ -167,7 +173,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             >
             <Option value="btc">Bitcoin</Option>
             <Option value="xem">XEM</Option>
-            <Option value="eth">Etherium</Option>
         </Select>
         </div>
 
@@ -179,7 +184,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
 
 
   function confirmTransaction(){
-    console.log(transactionSummary, 'set')
     return(
       <div className='end'>
         <ul>
@@ -193,7 +197,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       </div>
     )
   }
-  console.log(qrCode)
+
   return(
     <>
       {isShowing ? (
