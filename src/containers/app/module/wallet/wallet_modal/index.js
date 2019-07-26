@@ -13,13 +13,13 @@ const { Option } = Select
 const { Step } = Steps
 
 const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddress }) => {
-  const { handleChange, handleChangeSelect, inputs, handleSubmit } = useModal(addFunds)
+  const { handleChange, handleChangeSelect, inputs, handleSubmit, initialState } = useModal(addFunds)
   const [isShowQr, isSetShowQr] = useState(false)
   const [done, setDone] = useState(false)
   const [qrCode, setQrCode] = useState({})
   const [transactionSummary, setTransactionSummary] = useState ({})
   const [current, setCurrent] = useState(0)
-  const [quantityToReceive, setQuantityToReceive] = useState('')
+  const [quantityToReceive, setQuantityToReceive] = useState(0)
 
   const steps = [
     {
@@ -35,6 +35,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       content: 'Done',
     },
   ]
+
 
 
   function convert(){
@@ -107,6 +108,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     isSetShowQr(false)
     setDone(false)
     setCurrent(0)
+    setQuantityToReceive(0)
     hide()
   }
 
@@ -120,11 +122,10 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       return obj
     }, {})
 
-
-
     const parameter = { input: newVariables }
-    console.log(parameter)
+
     createTransaction({ variables: parameter }).then(response => {
+      initialState()
       isSetShowQr(true)
       if (response.data.createTransaction.data.attributes.transaction_type === 'btc' || response.data.createTransaction.data.attributes.transactionType === 'eth'){
         setQrCode(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
@@ -172,7 +173,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             >
             <Option value="btc">Bitcoin</Option>
             <Option value="xem">XEM</Option>
-            <Option value="eth">Etherium</Option>
         </Select>
         </div>
 
