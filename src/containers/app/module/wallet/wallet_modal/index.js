@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { graphql, compose, withApollo, Query } from 'react-apollo'
-import { isEmpty } from 'lodash'
+import { isEmpty, toUpper } from 'lodash'
 import { Steps, Modal, Input, Select, Button, Spin } from 'antd'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 import '../../wallet/wallet_modal/index.scss'
@@ -130,7 +130,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       if (response.data.createTransaction.data.attributes.transaction_type === 'btc' || response.data.createTransaction.data.attributes.transactionType === 'eth'){
         setQrCode(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
       } else {
-        setQrCode({ data: { addr: response.data.createTransaction.data.attributes.top_up_receiving_wallet_address}})
+        setQrCode({ data: { addr: toUpper(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)}})
       }
       setTransactionSummary({ data: {
         wallet_address: response.data.createTransaction.data.attributes.top_up_receiving_wallet_address,
