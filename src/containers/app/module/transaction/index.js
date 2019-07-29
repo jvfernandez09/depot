@@ -33,12 +33,12 @@ const columns = [
     key: 'topUpReceivingWalletAddress',
   },
   {
-    title: 'GWX To Transfer',
+    title: 'Fee',
     dataIndex: 'gwxToTransfer',
     key: 'gwxToTransfer',
   },
   {
-    title: 'Fee',
+    title: 'GWX to Transfer',
     dataIndex: 'quantityToReceive',
     key: 'quantityToReceive'
   },
