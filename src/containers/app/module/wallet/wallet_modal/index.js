@@ -130,7 +130,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       if (response.data.createTransaction.data.attributes.transaction_type === 'btc' || response.data.createTransaction.data.attributes.transactionType === 'eth'){
         setQrCode(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
       } else {
-        setQrCode({ data: { addr: toUpper(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)}})
+        setQrCode(JSON.stringify({ data: { addr: toUpper(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)}}))
       }
       setTransactionSummary({ data: {
         wallet_address: response.data.createTransaction.data.attributes.top_up_receiving_wallet_address,
@@ -245,7 +245,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                       <div style={{ backgroundColor: 'white', padding: 8 }}>
                         <QRCode
                           size={220}
-                          value={`${JSON.stringify(qrCode)}`}
+                          value={`${qrCode}`}
                         />
                       </div>
                     </>
