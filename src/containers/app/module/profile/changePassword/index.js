@@ -7,6 +7,7 @@ import useForm from "utils/useForm"
 import validateChangePassword from 'utils/changePasswordFormValidationRules'
 
 import CHANGE_PASSWORD from '../../../../../../src/graphql/changePassword'
+import Notification from 'utils/notification'
 
 const ChangePasswordCotainer = (props) => {
   const {
@@ -18,10 +19,20 @@ const ChangePasswordCotainer = (props) => {
   } = useForm(changePassword, validateChangePassword)
 
   function changePassword(){
-    const variables = { input: inputs }
+    const variables = { ...inputs }
     const { changePassword } = props
 
-    changePassword({ variables }).then(response => {
+    const key = Object.keys(variables).map((key) => { return key.split(/(?=[A-Z])/).join('_').toLowerCase() })
+    const value = Object.values(variables).map((values) => { return values })
+
+    let newVariables = key.reduce(function(obj, key, index) {
+      obj[key] = value[index]
+      return obj
+    }, {})
+
+    const parameter = { input: newVariables }
+
+    changePassword({ variables: parameter }).then(response => {
       if(response){
         props.history.push('/wallet')
         Notification.show({
