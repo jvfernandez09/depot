@@ -30,7 +30,7 @@ const WalletContainer = (props) => {
           {({ data, loading, error }) => {
             if (loading) return <Spin />
             if (error) return <p>ERROR</p>
-            const convertedBalance = (data.getWalletBalance.balance.gwx + "").split(".")
+            const convertedBalance = parseFloat(Math.round(data.getWalletBalance.balance.gwx * 100) / 100).toFixed(6).split(".")
             const newBalance = parseInt(convertedBalance[0])
             return(
               <div className='balance'>
@@ -58,7 +58,7 @@ const WalletContainer = (props) => {
           {({ data, loading, error }) => {
             if (loading) return <Spin />
             if (error) return <p>ERROR</p>
-            const convertedXEMBalance = (data.getWalletBalance.balance.xem + "").split(".")
+            const convertedXEMBalance = parseFloat(Math.round(data.getWalletBalance.balance.xem * 100) / 100).toFixed(6).split(".")
             const newBalance = parseInt(convertedXEMBalance[0])
             return(
               <div className='balance -small'>
