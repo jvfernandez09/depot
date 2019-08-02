@@ -29,20 +29,18 @@ const Login = (props) => {
     const variables = { input: inputs }
     const clientCred = {
       input: {
-        client_id: "THNqdkclVCxdD6Mh8gDwW9hzlA9qxMhU-FxSdIU3PEA",
-        client_secret: "-_u_J1s_7lmPRKCZ7FQfNKqWyL0iW0CEQhPw-ocCXHg",
-        grant_type: "client_credentials",
-        redirect_uri: "urn:ietf:wg:oauth:2.0:oob"
+        clientId: "THNqdkclVCxdD6Mh8gDwW9hzlA9qxMhU-FxSdIU3PEA",
+        clientSecret: "-_u_J1s_7lmPRKCZ7FQfNKqWyL0iW0CEQhPw-ocCXHg",
+        grantType: "client_credentials",
+        redirectUri: "urn:ietf:wg:oauth:2.0:oob"
       }
     }
 
-    const clientId = "THNqdkclVCxdD6Mh8gDwW9hzlA9qxMhU"
     const response = await authenticateClientCred({ variables: clientCred })
-
     localStorage.setItem('AUTH_TOKEN', response.data.authenticateClientCred.access_token)
 
     loginUser({ variables }).then( async response => {
-      const wasd = await authenticate(clientId, response.data.loginUser.token)
+      const wasd = await authenticate(clientCred.input.client_id, response.data.loginUser.token)
       // localStorage.setItem('AUTH_TOKEN', response.data.loginUser.token)
 
     }).catch((errors) => {
@@ -69,17 +67,14 @@ const Login = (props) => {
   async function authenticate(clientId, token){
     const { client } = props
     const redirectUri = "urn:ietf:wg:oauth:2.0:oob"
-    const variables = {
-      clientId: clientId,
-      token: token,
-      redirectUri: redirectUri
-    }
-
-    console.log(token)
 
     client.query({
       query: AUTHENTICATE.AUTHORIZE,
-      variables
+      variables: {
+        clientId: clientId,
+        token: token,
+        redirectUri: redirectUri
+      }
     }).then(response => {
       console.log("Response",response)
     }).catch((errors) => {
