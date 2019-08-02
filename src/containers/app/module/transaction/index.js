@@ -33,12 +33,12 @@ const columns = [
     key: 'topUpReceivingWalletAddress',
   },
   {
-    title: 'Fee',
+    title: 'GWX to Transfer',
     dataIndex: 'gwxToTransfer',
     key: 'gwxToTransfer',
   },
   {
-    title: 'GWX to Transfer',
+    title: 'Payment',
     dataIndex: 'quantityToReceive',
     key: 'quantityToReceive'
   },
@@ -62,11 +62,11 @@ const columns = [
           rowItems.push({
             key: i,
             transactionId: value.attributes.transaction_id,
-            date: '',
+            date: value.attributes.created_at,
             transactionType: 'SENDING',
             topUpReceivingWalletAddress: toUpper(value.attributes.top_up_receiving_wallet_address),
-            gwxToTransfer: value.attributes.gwx_to_transfer+' '+toUpper(value.attributes.transaction_type),
-            quantityToReceive: value.attributes.quantity_to_receive,
+            gwxToTransfer: value.attributes.gwx_to_transfer,
+            quantityToReceive: value.attributes.quantity_to_receive+' '+toUpper(value.attributes.transaction_type),
             status: upperFirst(upperCase(value.attributes.status))
           })
         )
