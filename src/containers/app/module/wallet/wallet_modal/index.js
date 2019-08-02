@@ -19,7 +19,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   const [qrCode, setQrCode] = useState({})
   const [transactionSummary, setTransactionSummary] = useState ({})
   const [current, setCurrent] = useState(0)
-  const [quantityToReceive, setQuantityToReceive] = useState(0)
+  const [gwxToTransfer, setGwxToTransfer] = useState(0)
 
   const steps = [
     {
@@ -39,7 +39,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
 
 
   function convert(){
-    let value = inputs.gwxToTransfer
+    let value = inputs.quantityToReceive
     let convertTo
     let queryType
 
@@ -66,11 +66,11 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
           if (loading) return <Spin />
           if (error) return <p>ERROR</p>
             const converted = [data]
-            setQuantityToReceive(converted[0].convertAmount.gwx)
+            setGwxToTransfer(converted[0].convertAmount.gwx)
             return(
               <>
                 <div className="form-group">
-                <label className="form-label"> Conversion: {quantityToReceive} </label>
+                <label className="form-label"> Conversion: {gwxToTransfer} </label>
                 </div>
               </>
             )
@@ -108,12 +108,12 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     isSetShowQr(false)
     setDone(false)
     setCurrent(0)
-    setQuantityToReceive(0)
+    setGwxToTransfer(0)
     hide()
   }
 
   async function addFunds(){
-    const variables = { ...inputs, gwxWalletAddress, userId, quantityToReceive}
+    const variables = { ...inputs, gwxWalletAddress, userId, gwxToTransfer}
     const key = Object.keys(variables).map((key) => { return key.split(/(?=[A-Z])/).join('_').toLowerCase() })
     const value = Object.values(variables).map((values) => { return values })
 
@@ -137,7 +137,8 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
         gwx_to_transfer: response.data.createTransaction.data.attributes.gwx_to_transfer,
         quantity_to_receive: response.data.createTransaction.data.attributes.quantity_to_receive,
         status: 'Pending',
-        transaction_id: response.data.createTransaction.data.attributes.transaction_id
+        transaction_id: response.data.createTransaction.data.attributes.transaction_id,
+        created_at: response.data.createTransaction.data.attributes.created_at
       }})
     }).catch((errors) => {
       console.log(errors)
@@ -156,7 +157,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
         <div className="form-group">
           <label className="form-label"> Amount: </label>
           <Input
-            name='gwxToTransfer'
+            name='quantityToReceive'
             type='number'
             onChange={handleChange}
             className='input'
@@ -177,7 +178,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
         </div>
 
 
-          {!isEmpty(inputs.gwxToTransfer) && !isEmpty(inputs.transactionType) ? convert() : null}
+          {!isEmpty(inputs.quantityToReceive) && !isEmpty(inputs.transactionType) ? convert() : null}
       </div>
     )
   }
@@ -189,6 +190,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
         <ul>
           <label>Transaction Summary</label>
           <li>Transaction #: <span>{transactionSummary.data.transaction_id}</span></li>
+          <li>Transaction Date: <span>{transactionSummary.data.created_at}</span></li>
           <li>Receiving Wallet Address: <span>{transactionSummary.data.wallet_address}</span></li>
           <li>GWX to Transfer: <span>{transactionSummary.data.gwx_to_transfer}</span></li>
           <li>Quantity to Receive: <span>{transactionSummary.data.quantity_to_receive}</span></li>
