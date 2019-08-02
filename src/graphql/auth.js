@@ -23,7 +23,7 @@ const AUTHENTICATE_CODE_GRANT = gql`
       method: "POST",
       endpoint: "v1"
     ) {
-      client_credential
+      access_token
     }
   }
 `

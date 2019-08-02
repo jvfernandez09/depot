@@ -33,7 +33,7 @@ const restLink = new RestLink({
   headers: {
     "Content-Type": "application/json"
   },
-  fieldNameDenormalizer: key => humps.decamelize(key),
+  fieldNameDenormalizer: key => humps.decamelize(key)
 })
 
 const authLink = setContext((_, { headers }) => {

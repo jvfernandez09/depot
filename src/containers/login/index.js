@@ -1,5 +1,5 @@
-import React from "react"
-import { compose, graphql, withApollo, Query } from 'react-apollo'
+import React, { useState } from "react"
+import { compose, graphql, withApollo } from 'react-apollo'
 
 import useForm from "utils/useForm"
 import validateLogin from 'utils/LoginFormValidationRules'
@@ -12,7 +12,6 @@ import { isNull } from 'lodash'
 import LOGIN_USER from '../../../src/graphql/login'
 import AUTHENTICATE from '../../../src/graphql/auth'
 
-
 import Notification from 'utils/notification'
 
 const Login = (props) => {
@@ -20,12 +19,14 @@ const Login = (props) => {
     inputs,
     errors,
     handleChange,
-    handleSubmit,
-    isSubmitting
-  } = useForm(login, validateLogin);
+    handleSubmit
+  } = useForm(login, validateLogin)
+
+  const [isLoading, setLoading] = useState(false)
 
   async function login(){
-    const { loginUser, authenticateClientCred, getAuthorize } = props
+    setLoading(true)
+    const { loginUser, authenticateClientCred } = props
     const variables = { input: inputs }
     const clientCred = {
       input: {
@@ -35,52 +36,47 @@ const Login = (props) => {
         redirectUri: "urn:ietf:wg:oauth:2.0:oob"
       }
     }
-
-    const response = await authenticateClientCred({ variables: clientCred })
-    localStorage.setItem('AUTH_TOKEN', response.data.authenticateClientCred.access_token)
-
+    await authenticateClientCred({ variables: clientCred })
     loginUser({ variables }).then( async response => {
-      const wasd = await authenticate(clientCred.input.client_id, response.data.loginUser.token)
-      // localStorage.setItem('AUTH_TOKEN', response.data.loginUser.token)
-
+      const result  = await authenticate(clientCred.input.clientId, response.data.loginUser.token)
+      const responseData = await obtainAccess(clientCred, result.data.getAuthorize.redirect_uri.code)
+      localStorage.setItem('AUTH_TOKEN', responseData.data.authenticateCodeGrant.access_token)
+      if(isNull(response.data.loginUser.user.data.attributes.resetPasswordSentAt)){
+        props.history.push('/wallet')
+      } else {
+        Notification.show({
+          type: 'info',
+          message: 'Please change your password.'
+        })
+        props.history.push('/change')
+      }
     }).catch((errors) => {
-      console.log(errors)
+      Notification.show({
+        type: 'error',
+        message: errors.networkError.result.message
+      })
     })
-
-    //   // if(isNull(response.data.loginUser.user.data.attributes.resetPasswordSentAt)){
-    //   //   props.history.push('/wallet')
-    //   // } else {
-    //   //   Notification.show({
-    //   //     type: 'info',
-    //   //     message: 'Please change your password.'
-    //   //   })
-    //   //   props.history.push('/change')
-    //   // }
-    // }).catch((errors) => {
-    //   // Notification.show({
-    //   //   type: 'error',
-    //   //   message: errors.networkError.result.message
-    //   // })
-    // })
+    setLoading(false)
   }
 
-  async function authenticate(clientId, token){
+  function authenticate(clientId, token){
     const { client } = props
     const redirectUri = "urn:ietf:wg:oauth:2.0:oob"
-
-    client.query({
+    return client.query({
       query: AUTHENTICATE.AUTHORIZE,
       variables: {
         clientId: clientId,
         token: token,
         redirectUri: redirectUri
       }
-    }).then(response => {
-      console.log("Response",response)
-    }).catch((errors) => {
-      console.log(errors)
     })
+  }
 
+  function obtainAccess(clientCred, code){
+    const variables = { ...clientCred.input, code }
+    const newVariables = { input: variables }
+    const { authenticateCodeGrant } = props
+    return authenticateCodeGrant({ variables: newVariables })
   }
 
   function onKeyPress(e){
@@ -137,7 +133,7 @@ const Login = (props) => {
               </div>
               <Button
                 onClick={handleSubmit}
-                loading={isSubmitting}
+                loading={isLoading}
                 className='button btn-primary btn-block btn-lg'
               >Login
               </Button>
@@ -153,5 +149,6 @@ const Login = (props) => {
 export default compose(
   withApollo,
   graphql(LOGIN_USER, { name: 'loginUser' }),
-  graphql(AUTHENTICATE.AUTHENTICATE_CLIENT_CRED, { name: 'authenticateClientCred' })
+  graphql(AUTHENTICATE.AUTHENTICATE_CLIENT_CRED, { name: 'authenticateClientCred' }),
+  graphql(AUTHENTICATE.AUTHENTICATE_CODE_GRANT, { name: 'authenticateCodeGrant' })
 )(Login)
