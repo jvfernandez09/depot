@@ -30,6 +30,7 @@ const WalletContainer = (props) => {
           {({ data, loading, error }) => {
             if (loading) return <Spin />
             if (error) return <p>ERROR</p>
+            if (data.getWalletBalance.balance.gwx === undefined) return data.getWalletBalance.balance.gwx = 0
             const convertedBalance = parseFloat(Math.round(data.getWalletBalance.balance.gwx * 100) / 100).toFixed(6).split(".")
             const newBalance = parseInt(convertedBalance[0])
             return(
