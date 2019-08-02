@@ -1,27 +1,25 @@
 import gql from 'graphql-tag'
 
-
-
 const AUTHENTICATE_CLIENT_CRED = gql`
-  mutation authenticateClientCred {
+  mutation AUTHENTICATE_CLIENT_CRED {
     authenticateClientCred(input: $input)
     @rest(
-      type: "Authenticate Client Cred",
-      path: "/v2/oauth/token",
+      type: "AuthenticateClientCred",
+      path: "/oauth/token",
       method: "POST",
       endpoint: "v1"
     ) {
-      client_credential
+      access_token
     }
   }
 `
 
 const AUTHENTICATE_CODE_GRANT = gql`
-  mutation authenticateCodeGrant {
+  mutation AUTHENTICATE_CODE_GRANT {
     authenticateCodeGrant(input: $input)
     @rest(
-      type: "Authenticate Code Grant",
-      path: "/v2/oauth/token",
+      type: "AuthenticateCodeGrant",
+      path: "/oauth/token",
       method: "POST",
       endpoint: "v1"
     ) {
@@ -31,17 +29,23 @@ const AUTHENTICATE_CODE_GRANT = gql`
 `
 
 const AUTHORIZE = gql`
-  query authorize {
-    getAuthorize @rest(
-      type: "Authorize User",
-      path: "/v2/oauth/authorize?client_id{args.clientId}&redirect_uri={args.redirectUri}&response_type=code&jwt={args.token}",
-      method: "GET",
-      endpoint: "v1"
+  query AUTHORIZE {
+    getAuthorize (
+      clientId: $clientId,
+      redirectUri: $redirectUri,
+      token: $token
+    )
+    @rest(
+      type: "AuthorizeUser",
+      endpoint: "v1",
+      path: "/oauth/authorize?client_id={args.clientId}&redirect_uri={args.redirectUri}&response_type=code&jwt={args.token}"
     ) {
-      data
+      redirect_uri
     }
   }
 `
+
+
 export default {
   AUTHENTICATE_CLIENT_CRED,
   AUTHENTICATE_CODE_GRANT,
