@@ -6,7 +6,7 @@ const CHANGE_PASSWORD = gql`
     changePassword(input: $input)
     @rest(
       type: "Change",
-      path: "/v1/auth/update_password",
+      path: "/v2/auth/update_password",
       method: "PUT",
       endpoint: "v1"
     ) {

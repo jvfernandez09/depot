@@ -36,10 +36,11 @@ const Login = (props) => {
         redirectUri: "urn:ietf:wg:oauth:2.0:oob"
       }
     }
-    await authenticateClientCred({ variables: clientCred })
+    const accessToken = await authenticateClientCred({ variables: clientCred })
+    localStorage.setItem('AUTH_TOKEN', accessToken.data.authenticateClientCred.access_token)
     loginUser({ variables }).then( async response => {
-      const result  = await authenticate(clientCred.input.clientId, response.data.loginUser.token)
-      const responseData = await obtainAccess(clientCred, result.data.getAuthorize.redirect_uri.code)
+      const result  = await authenticate(clientCred.input.clientId, response.data.loginUser.token, clientCred.input.redirectUri)
+      const responseData = await obtainAccess(result.data.getAuthorize.redirect_uri.code)
       localStorage.setItem('AUTH_TOKEN', responseData.data.authenticateCodeGrant.access_token)
       if(isNull(response.data.loginUser.user.data.attributes.resetPasswordSentAt)){
         props.history.push('/wallet')
@@ -57,22 +58,30 @@ const Login = (props) => {
       })
     })
     setLoading(false)
+  
   }
 
-  function authenticate(clientId, token){
+  function authenticate(clientId, token, uri){
     const { client } = props
-    const redirectUri = "urn:ietf:wg:oauth:2.0:oob"
     return client.query({
       query: AUTHENTICATE.AUTHORIZE,
       variables: {
         clientId: clientId,
         token: token,
-        redirectUri: redirectUri
+        redirectUri: uri
       }
     })
   }
 
-  function obtainAccess(clientCred, code){
+  function obtainAccess(code){
+    const clientCred = {
+      input: {
+        clientId: "THNqdkclVCxdD6Mh8gDwW9hzlA9qxMhU-FxSdIU3PEA",
+        clientSecret: "-_u_J1s_7lmPRKCZ7FQfNKqWyL0iW0CEQhPw-ocCXHg",
+        grantType: "authorization_code",
+        redirectUri: "urn:ietf:wg:oauth:2.0:oob"
+      }
+    }
     const variables = { ...clientCred.input, code }
     const newVariables = { input: variables }
     const { authenticateCodeGrant } = props

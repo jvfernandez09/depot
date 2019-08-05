@@ -5,7 +5,7 @@ const GET_WALLET_ACCOUNT = gql`
     getWalletAccount(walletAddress: $walletAddress)
     @rest(
       type: "Wallet",
-      path: "/v1/wallets/{args.walletAddress}",
+      path: "/v2/wallets/{args.walletAddress}",
       method: "GET",
       endpoint: "v1"
     ) {
@@ -18,7 +18,7 @@ const GET_WALLET_BALANCE = gql`
     getWalletBalance(walletAddress: $walletAddress)
     @rest(
       type: "Wallet",
-      path: "/v1/wallets/{args.walletAddress}/balance",
+      path: "/v2/wallets/{args.walletAddress}/balance",
       method: "GET",
       endpoint: "v1"
     ) {
