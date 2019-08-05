@@ -5,15 +5,12 @@ const useForm = (callback, validateForm) => {
 
   const [inputs, setInputs] = useState({})
   const [errors, setErrors] = useState({})
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = (event) => {
     setErrors(validateForm(inputs))
-    setIsSubmitting(true)
     if(isEmpty(Object.keys(errors))){
       callback()
     }
-    setIsSubmitting(false)
   }
 
   const handleChange = (event) => {
@@ -25,8 +22,7 @@ const useForm = (callback, validateForm) => {
     handleChange,
     handleSubmit,
     inputs,
-    errors,
-    isSubmitting
+    errors
   }
 }
 

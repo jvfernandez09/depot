@@ -6,7 +6,7 @@ const FORGOT_PASSWORD = gql`
     forgotPassword(input: $input)
     @rest(
       type: "ForgotPassword",
-      path: "/v1/auth/forgot",
+      path: "/v2/auth/forgot",
       method: "POST",
       endpoint: "v1"
     ) {

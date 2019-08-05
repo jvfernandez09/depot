@@ -5,7 +5,7 @@ const LOGIN_USER = gql`
     loginUser(input: $input)
     @rest(
       type: "Login",
-      path: "/v1/auth/login",
+      path: "/v2/auth/login",
       method: "POST",
       endpoint: "v1"
     ) {

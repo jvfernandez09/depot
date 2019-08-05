@@ -16,6 +16,8 @@ import Login from 'login'
 import ForgotPassword from 'forgotPassword'
 import * as serviceWorker from './serviceWorker'
 
+import humps from 'humps'
+
 const API = process.env.REACT_APP_ENV === 'staging' || process.env.REACT_APP_ENV === 'development' ? process.env.REACT_APP_GWX_STAGING_URL
 : process.env.REACT_APP_GWX_PROD_URL
 
@@ -30,7 +32,8 @@ const restLink = new RestLink({
   },
   headers: {
     "Content-Type": "application/json"
-  }
+  },
+  fieldNameDenormalizer: key => humps.decamelize(key)
 })
 
 const authLink = setContext((_, { headers }) => {
@@ -38,7 +41,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      Authorization: token ? `Basic ${token}` : ''
+      Authorization: token ? `Bearer ${token}` : ''
     }
   }
 })
