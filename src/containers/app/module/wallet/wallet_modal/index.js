@@ -36,8 +36,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     },
   ]
 
-
-
   function convert(){
     let value = inputs.quantityToReceive
     let convertTo
@@ -66,7 +64,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
           if (loading) return <Spin />
           if (error) return <p>ERROR</p>
             const converted = [data]
-            setGwxToTransfer(converted[0].convertAmount.gwx)
+            setGwxToTransfer(converted[0].convertAmount.gwx.toString())
             return(
               <>
                 <div className="form-group">
@@ -114,15 +112,8 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
 
   async function addFunds(){
     const variables = { ...inputs, gwxWalletAddress, userId, gwxToTransfer}
-    const key = Object.keys(variables).map((key) => { return key.split(/(?=[A-Z])/).join('_').toLowerCase() })
-    const value = Object.values(variables).map((values) => { return values })
 
-    let newVariables = key.reduce(function(obj, key, index) {
-      obj[key] = value[index].toString()
-      return obj
-    }, {})
-
-    const parameter = { input: newVariables }
+    const parameter = { input: variables }
 
     createTransaction({ variables: parameter }).then(response => {
       initialState()
@@ -183,7 +174,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     )
   }
 
-
   function confirmTransaction(){
     return(
       <div className='end'>
@@ -199,6 +189,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       </div>
     )
   }
+
 
   return(
     <>
@@ -227,7 +218,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
               </Button>
             ),
             current === steps.length - 1 && (
-              <Button className="button btn-primary" key="2" type="primary" onClick={() => doneTransaction()}>
+              <Button className="button btn-primary" key="2" type="primary"  onClick={() => doneTransaction()}>
                 Done
               </Button>
             )
