@@ -10,13 +10,25 @@
     margin-bottom: $pad * 2;
   }
 
-  > .content > .item > .title {
+  > .content > .flex {
+    display: flex;
+    align-items: center;
+    margin-bottom: $pad * 2;
+  }
+
+  > .content > .flex > .item:first-child {
+    width: 300px
+  }
+
+  > .content > .item > .title,
+  > .content > .flex > .item > .title {
     font-weight: 900;
     text-transform: uppercase;
     margin-bottom: $pad;
   }
 
-  > .content > .item > .sub {
+  > .content > .item > .sub,
+  > .content > .flex > .item > .sub {
     color: $primary-color;
     font-size: 1.3rem; 
   }
@@ -29,6 +41,11 @@
 
 .qr-code {
   text-align: center;
+
+  canvas {
+    background: #fff;
+    padding: $pad * 2 - 4;
+  }
 }
 
 .form-label {
@@ -92,6 +109,10 @@
 
 .ant-select-dropdown{
   z-index:2000;
+}
+
+.ant-modal-body {
+  padding-top: 0;
 }
 
 .ant-modal-content {

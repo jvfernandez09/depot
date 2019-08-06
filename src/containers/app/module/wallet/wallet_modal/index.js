@@ -176,16 +176,51 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
 
   function confirmTransaction(){
     return(
-      <div className='end'>
-        <ul>
-          <label>Transaction Summary</label>
-          <li>Transaction #: <span>{transactionSummary.data.transaction_id}</span></li>
-          <li>Transaction Date: <span>{transactionSummary.data.created_at}</span></li>
-          <li>Receiving Wallet Address: <span>{transactionSummary.data.wallet_address}</span></li>
-          <li>GWX to Transfer: <span>{transactionSummary.data.gwx_to_transfer}</span></li>
-          <li>Quantity to Receive: <span>{transactionSummary.data.quantity_to_receive}</span></li>
-          <li>Status: <span>Pending</span></li>
-        </ul>
+      <div className='content'>
+        <div className='flex'>
+          <div className='item'>
+            <p className='title'>
+              transaction number
+            </p>
+            <div className='sub'>
+              {transactionSummary.data.transaction_id}
+            </div>
+          </div>
+          <div className='item'>
+            <p className='title'>
+              status
+            </p>
+            <div className='sub'>
+              Pending
+            </div>
+          </div>
+        </div>
+        <div className='flex'>
+          <div className='item'>
+            <p className='title'>
+              gwx to transfer
+            </p>
+            <div className='sub'>
+              {transactionSummary.data.gwx_to_transfer}
+            </div>
+          </div>
+          <div className='item'>
+            <p className='title'>
+              quantity to receive
+            </p>
+            <div className='sub'>
+              {transactionSummary.data.quantity_to_receive}
+            </div>
+          </div>
+        </div>
+        <div className='item'>
+          <p className='title'>
+            receiving wallet address
+          </p>
+          <div className='sub'>
+            {transactionSummary.data.wallet_address}
+          </div>
+        </div>
       </div>
     )
   }
@@ -235,7 +270,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                 <div className="qr-code">{
                   qrCode ? (
                     <>
-                      <div style={{ backgroundColor: 'white', padding: 8 }}>
+                      <div>
                         <QRCode
                           size={220}
                           value={`${qrCode}`}
