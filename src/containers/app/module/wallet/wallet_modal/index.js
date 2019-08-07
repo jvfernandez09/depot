@@ -20,7 +20,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   const [transactionSummary, setTransactionSummary] = useState ({})
   const [current, setCurrent] = useState(0)
   const [gwxToTransfer, setGwxToTransfer] = useState(0)
-
   const steps = [
     {
       title: 'Top up',

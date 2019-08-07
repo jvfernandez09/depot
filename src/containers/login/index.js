@@ -30,8 +30,8 @@ const Login = (props) => {
     const variables = { input: inputs }
     const clientCred = {
       input: {
-        clientId: "THNqdkclVCxdD6Mh8gDwW9hzlA9qxMhU-FxSdIU3PEA",
-        clientSecret: "-_u_J1s_7lmPRKCZ7FQfNKqWyL0iW0CEQhPw-ocCXHg",
+        clientId: process.env.REACT_APP_GWX_CLIENT_ID,
+        clientSecret: process.env.REACT_APP_GWX_CLIENT_SECRET,
         grantType: "client_credentials",
         redirectUri: "urn:ietf:wg:oauth:2.0:oob"
       }
@@ -58,7 +58,7 @@ const Login = (props) => {
       })
     })
     setLoading(false)
-  
+
   }
 
   function authenticate(clientId, token, uri){
@@ -76,8 +76,8 @@ const Login = (props) => {
   function obtainAccess(code){
     const clientCred = {
       input: {
-        clientId: "THNqdkclVCxdD6Mh8gDwW9hzlA9qxMhU-FxSdIU3PEA",
-        clientSecret: "-_u_J1s_7lmPRKCZ7FQfNKqWyL0iW0CEQhPw-ocCXHg",
+        clientId: process.env.REACT_APP_GWX_CLIENT_ID,
+        clientSecret: process.env.REACT_APP_GWX_CLIENT_SECRET,
         grantType: "authorization_code",
         redirectUri: "urn:ietf:wg:oauth:2.0:oob"
       }
