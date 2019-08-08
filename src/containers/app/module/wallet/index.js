@@ -5,8 +5,8 @@ import { Spin, Tabs, Card, Button, Icon } from 'antd'
 import WalletModal from 'app/module/wallet/wallet_modal'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 
-import GameWalletModal from 'app/module/wallet/game_wallet_modal'
-import useGameModal from 'app/module/wallet/game_wallet_modal/useGameModal'
+// import GameWalletModal from 'app/module/wallet/game_wallet_modal'
+// import useGameModal from 'app/module/wallet/game_wallet_modal/useGameModal'
 
 import TransactionContainer from 'app/module/transaction'
 
@@ -15,13 +15,13 @@ import WALLET from '../../../../../src/graphql/wallet'
 import GET_PROFILE from '../../../../../src/graphql/profile'
 
 import '../wallet/index.scss'
-import { ReactComponent as SampleGame } from 'assets/images/sample-game.svg'
+// import { ReactComponent as SampleGame } from 'assets/images/sample-game.svg'
 
 const { TabPane } = Tabs;
 
 const WalletContainer = (props) => {
   const { isShowing, toggle } = useModal()
-  const { isGameShowing, gameToggle } = useGameModal()
+  // const { isGameShowing, gameToggle } = useGameModal()
 
   function walletBalance(walletAddress, userId){
     return (
