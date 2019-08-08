@@ -30,7 +30,8 @@
   > .content > .item > .sub,
   > .content > .flex > .item > .sub {
     color: $primary-color;
-    font-size: 1.3rem; 
+    font-size: 1.3rem;
+    white-space: nowrap;
   }
 
   > .end {
