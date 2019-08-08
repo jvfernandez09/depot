@@ -31,7 +31,7 @@ const WalletContainer = (props) => {
             if (loading) return <Spin />
             if (error) return <p>ERROR</p>
             if (data.getWalletBalance.balance.gwx === undefined) return data.getWalletBalance.balance.gwx = 0
-            const convertedBalance = parseFloat(Math.round(data.getWalletBalance.balance.gwx * 100) / 100).toFixed(6).split(".")
+            const convertedBalance = data.getWalletBalance.balance.gwx.toFixed(6).split(".")
             const newBalance = parseInt(convertedBalance[0])
             return(
               <div className='balance'>
@@ -59,7 +59,8 @@ const WalletContainer = (props) => {
           {({ data, loading, error }) => {
             if (loading) return <Spin />
             if (error) return <p>ERROR</p>
-            const convertedXEMBalance = parseFloat(Math.round(data.getWalletBalance.balance.xem * 100) / 100).toFixed(6).split(".")
+            const convertedXEMBalance = data.getWalletBalance.balance.xem.toFixed(6).split(".")
+            console.log(convertedXEMBalance)
             const newBalance = parseInt(convertedXEMBalance[0])
             return(
               <div className='balance -small'>
@@ -106,62 +107,63 @@ const WalletContainer = (props) => {
                       </div>
                     </Card>
                     <h2 className='title -pad'>My Game Wallets</h2>
-                    <Card>
-                      <div className='game-card'>
-                        <div className='info'>
-                          <div className='image'>
-                            <SampleGame />
-                          </div>
-                          <div className='game-details'>
-                            <h1 className='title'>
-                              Crypto Keno
-                            </h1>
-                            <div className='time'>
-                              <p>87 hrs on record</p>
-                              <p>last played on Dec, 2018</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='right'>
-                          <h2 className='item'>
-                            GWX 225
-                          </h2>
-                          <div className='action' onClick={gameToggle}>
-                            + Add GWX
-                          </div>
-                        </div>
-                       </div>
-                       <div className='card-divider'></div>
-                       <div className='game-card'>
-                        <div className='info'>
-                          <div className='image'>
-                            <SampleGame />
-                          </div>
-                          <div className='game-details'>
-                            <h1 className='title'>
-                              Crypto Keno
-                            </h1>
-                            <div className='time'>
-                              <p>87 hrs on record</p>
-                              <p>last played on Dec, 2018</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='right'>
-                          <h2 className='item'>
-                            GWX 225
-                          </h2>
-                          <div className='action' onClick={gameToggle}>
-                            + Add GWX
-                          </div>
-                        </div>
-                       </div>
-                       <GameWalletModal
-                        isGameShowing={isGameShowing}
-                        hide={gameToggle}
-                        walletAddress={walletAddress}
-                       />
-                    </Card>
+                    {// <Card>
+                    //   <div className='game-card'>
+                    //     <div className='info'>
+                    //       <div className='image'>
+                    //         <SampleGame />
+                    //       </div>
+                    //       <div className='game-details'>
+                    //         <h1 className='title'>
+                    //           Crypto Keno
+                    //         </h1>
+                    //         <div className='time'>
+                    //           <p>87 hrs on record</p>
+                    //           <p>last played on Dec, 2018</p>
+                    //         </div>
+                    //       </div>
+                    //     </div>
+                    //     <div className='right'>
+                    //       <h2 className='item'>
+                    //         GWX 225
+                    //       </h2>
+                    //       <div className='action' onClick={gameToggle}>
+                    //         + Add GWX
+                    //       </div>
+                    //     </div>
+                    //    </div>
+                    //    <div className='card-divider'></div>
+                    //    <div className='game-card'>
+                    //     <div className='info'>
+                    //       <div className='image'>
+                    //         <SampleGame />
+                    //       </div>
+                    //       <div className='game-details'>
+                    //         <h1 className='title'>
+                    //           Crypto Keno
+                    //         </h1>
+                    //         <div className='time'>
+                    //           <p>87 hrs on record</p>
+                    //           <p>last played on Dec, 2018</p>
+                    //         </div>
+                    //       </div>
+                    //     </div>
+                    //     <div className='right'>
+                    //       <h2 className='item'>
+                    //         GWX 225
+                    //       </h2>
+                    //       <div className='action' onClick={gameToggle}>
+                    //         + Add GWX
+                    //       </div>
+                    //     </div>
+                    //    </div>
+                    //    <GameWalletModal
+                    //     isGameShowing={isGameShowing}
+                    //     hide={gameToggle}
+                    //     walletAddress={walletAddress}
+                    //    />
+                    // </Card>
+                  }
                   </div>
                 </TabPane>
                 <TabPane tab={<span><Icon type='profile' />My Profile</span>} key='2'>
