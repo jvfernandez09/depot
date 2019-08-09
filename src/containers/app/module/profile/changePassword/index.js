@@ -41,7 +41,10 @@ const ChangePasswordCotainer = (props) => {
         })
       }
     }).catch((errors) => {
-      console.log(errors)
+      Notification.show({
+        type: 'error',
+        message: errors.networkError.result.errors[0]
+      })
     })
   }
 
