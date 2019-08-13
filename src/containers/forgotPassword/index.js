@@ -9,7 +9,7 @@ import { ReactComponent as Logo } from 'assets/images/LOGO.svg'
 import { Input } from 'antd'
 import Button from 'components/button'
 import 'forgotPassword/index.scss'
-
+import AUTHENTICATE from '../../../src/graphql/auth'
 import FORGOT_PASSWORD from '../../../src/graphql/forgotPassword'
 
 const ForgotPassword = (props) => {
@@ -23,9 +23,17 @@ const ForgotPassword = (props) => {
 
   async function resetPassword(){
     const variables = { input: inputs }
-    const { forgotPassword } = props
-
-
+    const { forgotPassword, authenticateClientCred } = props
+    const clientCred = {
+      input: {
+        clientId: process.env.REACT_APP_GWX_CLIENT_ID,
+        clientSecret: process.env.REACT_APP_GWX_CLIENT_SECRET,
+        grantType: "client_credentials",
+        redirectUri: "urn:ietf:wg:oauth:2.0:oob"
+      }
+    }
+    const accessToken = await authenticateClientCred({ variables: clientCred })
+    localStorage.setItem('AUTH_TOKEN', accessToken.data.authenticateClientCred.access_token)
     forgotPassword({ variables }).then(response => {
       if(response){
         Notification.show({
@@ -92,5 +100,6 @@ const ForgotPassword = (props) => {
 
 export default compose(
   withApollo,
-  graphql(FORGOT_PASSWORD, { name: 'forgotPassword' })
+  graphql(FORGOT_PASSWORD, { name: 'forgotPassword' }),
+  graphql(AUTHENTICATE.AUTHENTICATE_CLIENT_CRED, { name: 'authenticateClientCred' })
 )(ForgotPassword)
