@@ -15,12 +15,16 @@ const columns = [
   {
     title: 'ID',
     dataIndex: 'transactionId',
-    key: 'transactionId'
+    key: 'transactionId',
+    defaultSortOrder: 'ascend',
+    sorter: (a, b) => b.transactionId - a.transactionId
   },
   {
     title: 'Date',
     dataIndex: 'date',
-    key: 'date'
+    key: 'date',
+    defaultSortOrder: 'ascend',
+    sorter: (a, b) => new Date(a.date) - new Date(b.date)
   },
   {
     title: 'Type',
