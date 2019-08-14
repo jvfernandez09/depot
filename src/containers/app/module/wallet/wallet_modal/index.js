@@ -157,18 +157,31 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
 
         <div className="form-group">
           <label className="form-label"> Payment Method: </label>
-          <Select
-            placeholder='Select Payment Method'
-            name='transactionType'
-            style={{ width: '100%'}}
-            onChange={handleChangeSelect}
-            >
-            <Option value="btc">Bitcoin</Option>
-            <Option value="xem">XEM</Option>
-        </Select>
+          {process.env.REACT_APP_ENV === 'staging' || process.env.REACT_APP_ENV === 'development' ? (
+            <>
+            <Select
+              placeholder='Select Payment Method'
+              name='transactionType'
+              style={{ width: '100%'}}
+              onChange={handleChangeSelect}
+              >
+              <Option value="btc">Bitcoin</Option>
+              <Option value="xem">XEM</Option>
+            </Select>
+            </>
+          ) : (
+            <Select
+              placeholder='Select Payment Method'
+              name='transactionType'
+              style={{ width: '100%'}}
+              onChange={handleChangeSelect}
+              >
+              <Option value="btc">Bitcoin</Option>
+              <Option value="xem">XEM</Option>
+              <Option value="eth">Etherium</Option>
+            </Select>
+          )}
         </div>
-
-
           {!isEmpty(inputs.quantityToReceive) && !isEmpty(inputs.transactionType) ? convert() : null}
       </div>
     )
