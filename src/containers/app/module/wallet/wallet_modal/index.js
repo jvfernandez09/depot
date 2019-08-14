@@ -63,11 +63,12 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
           if (loading) return <Spin />
           if (error) return <p>ERROR</p>
             const converted = [data]
+            let formattedValue = converted[0].convertAmount.gwx.toFixed(8)
             setGwxToTransfer(converted[0].convertAmount.gwx.toString())
             return(
               <>
                 <div className="form-group">
-                <label className="form-label"> Conversion: {gwxToTransfer} </label>
+                <label className="form-label"> Conversion: {formattedValue} </label>
                 </div>
               </>
             )
