@@ -47,6 +47,24 @@
   }
 }
 
+.ant-table-thead {
+  > tr > th.ant-table-column-sort {
+    background: transparent;
+   }
+}
+
+.ant-table-thead {
+  > tr > th.ant-table-column-has-actions.ant-table-column-has-sorters:hover {
+    background: #0B1618;
+  }
+}
+
+.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner 
+.ant-table-column-sorter-up.on, .ant-table-thead > tr > th .ant-table-column-sorter 
+.ant-table-column-sorter-inner .ant-table-column-sorter-down.on {
+  color: $primary-color;
+}
+
 .ant-table-tbody {
   > tr > td {
     color: #fff;
