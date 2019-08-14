@@ -60,7 +60,6 @@ const WalletContainer = (props) => {
             if (loading) return <Spin />
             if (error) return <p>ERROR</p>
             const convertedXEMBalance = data.getWalletBalance.balance.xem.toFixed(6).split(".")
-            console.log(convertedXEMBalance)
             const newBalance = parseInt(convertedXEMBalance[0])
             return(
               <div className='balance -small'>
