@@ -13,9 +13,6 @@ const HeaderContainer = (props) => {
   const [xem, setXem] = useState(0)
 
   useEffect(() => {
-    if (props.history.location.pathname === '/') {
-      props.history.push('/wallet')
-    }
     try{
       setInterval(async ()=> {
         const res = await fetch("http://api.coinlayer.com/live?access_key=db606cd5788e91d14bac4c187e0df218")
