@@ -19,11 +19,14 @@ const HeaderContainer = (props) => {
     }
     try{
       setInterval(async ()=> {
-        const res = await fetch("http://api.coinlayer.com/live?access_key=db606cd5788e91d14bac4c187e0df218")
+        const res = await fetch(`http://api.coinlayer.com/live?access_key=${process.env.REACT_APP_GWX_ACCESS_KEY}`)
         const blocks = await res.json()
-        setBtc(blocks.rates.BTC)
-        setEth(blocks.rates.ETH)
-        setXem(blocks.rates.XEM)
+        let btc = 0.003 / parseFloat(blocks.rates.BTC)
+        let eth = 0.003 / parseFloat(blocks.rates.ETH)
+        let xem = 0.003 / parseFloat(blocks.rates.XEM)
+        setBtc(btc.toFixed(8))
+        setEth(eth.toFixed(8))
+        setXem(xem.toFixed(6))
       },  600000)
     } catch(e){
       console.log(e)
@@ -36,12 +39,15 @@ const HeaderContainer = (props) => {
   }
 
   function getConversion(){
-    fetch("http://api.coinlayer.com/live?access_key=db606cd5788e91d14bac4c187e0df218")
+    fetch(`http://api.coinlayer.com/live?access_key=${process.env.REACT_APP_GWX_ACCESS_KEY}`)
       .then(res => res.json())
       .then((result) => {
-        setBtc(result.rates.BTC)
-        setEth(result.rates.ETH)
-        setXem(result.rates.XEM)
+        let btc = 0.003 / parseFloat(result.rates.BTC)
+        let eth = 0.003 / parseFloat(result.rates.ETH)
+        let xem = 0.003 / parseFloat(result.rates.XEM)
+        setBtc(btc.toFixed(8))
+        setEth(eth.toFixed(8))
+        setXem(xem.toFixed(6))
       })
   }
 
@@ -55,9 +61,10 @@ const HeaderContainer = (props) => {
           <div className='avatar'>
           </div>
           {getConversion()}
-          <span style={{ color: '#F8D154'}}> BTC: {btc} |</span>
-          <span style={{ color: '#F8D154'}}> ETH: {eth} |</span>
-          <span style={{ color: '#F8D154'}}> XEM: {xem} </span>
+          <span style={{ color: '#F8D154'}}> BUY 1 GWX: 0.003 USD | </span>
+          <span style={{ color: '#F8D154'}}> {btc} BTC |</span>
+          <span style={{ color: '#F8D154'}}> {eth} ETH |</span>
+          <span style={{ color: '#F8D154'}}> {xem} XEM </span>
           <Dropdown overlay={
             <Menu className='nav-bar'>
               <Menu.Item key="1" onClick={() => logout  ()}>
