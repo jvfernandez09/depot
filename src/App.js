@@ -6,13 +6,13 @@ import {BrowserRouter as Router, Switch} from 'react-router-dom';
 import HeaderContainer from 'app/header/'
 import ModuleContainer from 'app/ModuleContainer'
 
-const App = (props) => {
+const App = () => {
   return (
     <Router>
       <Switch>
         <>
           <Layout>
-            <HeaderContainer history={props.history}/>
+            <HeaderContainer/>
               <ModuleContainer />
             {/*<FooterContainer/>*/}
           </Layout>

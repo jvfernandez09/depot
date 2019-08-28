@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import {withRouter} from 'react-router-dom';
 import { Layout } from 'antd';
 import 'app/header/index.scss'
 import { ReactComponent as Logo } from 'assets/images/LOGO-tokendepot.svg'
@@ -13,6 +14,9 @@ const HeaderContainer = (props) => {
   const [xem, setXem] = useState(0)
 
   useEffect(() => {
+    if (props.history.location.pathname === '/') {
+      props.history.push('/wallet')
+    }
     try{
       setInterval(async ()=> {
         const res = await fetch("http://api.coinlayer.com/live?access_key=db606cd5788e91d14bac4c187e0df218")
@@ -20,7 +24,7 @@ const HeaderContainer = (props) => {
         setBtc(blocks.rates.BTC)
         setEth(blocks.rates.ETH)
         setXem(blocks.rates.XEM)
-      },  60000)
+      },  600000)
     } catch(e){
       console.log(e)
     }
@@ -45,7 +49,7 @@ const HeaderContainer = (props) => {
     <Header className='main-navbar'>
       <div className="nav-container">
         <div className="action">
-          <Logo className='logo' onClick={() => props.history.push('/wallet')}/>
+          <Logo className='logo'/>
         </div>
         <div className='user'>
           <div className='avatar'>
@@ -56,7 +60,7 @@ const HeaderContainer = (props) => {
           <span style={{ color: '#F8D154'}}> XEM: {xem} </span>
           <Dropdown overlay={
             <Menu className='nav-bar'>
-              <Menu.Item key="1" onClick={() => logout()}>
+              <Menu.Item key="1" onClick={() => logout  ()}>
                 <Icon style={{ marginRight: 8, color: '#F8D154' }} type="logout"/><label className="logout-icon">Logout</label>
               </Menu.Item>
             </Menu>
@@ -69,4 +73,4 @@ const HeaderContainer = (props) => {
   )
 }
 
-export default HeaderContainer
+export default withRouter(HeaderContainer)
