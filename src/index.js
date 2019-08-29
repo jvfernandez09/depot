@@ -49,9 +49,6 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   link: authLink.concat(restLink),
-  fetchOptions: {
-    mode: 'no-cors',
-  },
   cache: new InMemoryCache()
 })
 
