@@ -12,7 +12,7 @@ const App = () => {
       <Switch>
         <>
           <Layout>
-            <HeaderContainer/>
+            <HeaderContainer />
               <ModuleContainer />
             {/*<FooterContainer/>*/}
           </Layout>
@@ -23,4 +23,4 @@ const App = () => {
 }
 
 
-export default App;
+export default App

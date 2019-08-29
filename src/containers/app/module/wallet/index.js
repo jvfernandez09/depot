@@ -1,5 +1,5 @@
-import React from 'react'
-import { compose, withApollo, Query } from 'react-apollo'
+import React, { useEffect } from 'react'
+import { compose, withApollo, graphql, Query } from 'react-apollo'
 import { Spin, Tabs, Card, Button, Icon } from 'antd'
 
 import WalletModal from 'app/module/wallet/wallet_modal'
@@ -13,6 +13,7 @@ import TransactionContainer from 'app/module/transaction'
 import ProfileContainer from 'app/module/profile'
 import WALLET from '../../../../../src/graphql/wallet'
 import GET_PROFILE from '../../../../../src/graphql/profile'
+import AUTHENTICATE from '../../../../../src/graphql/auth'
 
 import '../wallet/index.scss'
 // import { ReactComponent as SampleGame } from 'assets/images/sample-game.svg'
@@ -22,6 +23,32 @@ const { TabPane } = Tabs;
 const WalletContainer = (props) => {
   const { isShowing, toggle } = useModal()
   // const { isGameShowing, gameToggle } = useGameModal()
+
+  useEffect(() => {
+    try{
+      const { refToken } = props
+      const refreshToken = localStorage.getItem('REF_TOKEN')
+      const clientCred = {
+        input: {
+          clientId: process.env.REACT_APP_GWX_CLIENT_ID,
+          clientSecret: process.env.REACT_APP_GWX_CLIENT_SECRET,
+          grantType: "refresh_token"
+        }
+      }
+      const variables = { ...clientCred.input, refreshToken: refreshToken }
+      setInterval(async () => {
+        refToken({ variables: { input: variables } }).then(response =>{
+          localStorage.setItem('AUTH_TOKEN', response.data.refToken.access_token)
+          localStorage.setItem('REF_TOKEN', response.data.refToken.refresh_token)
+        }).catch((errors) => {
+          console.log(errors)
+        })
+      },  60000)
+    }
+    catch(e){
+      console.log(e)
+    }
+  })
 
   function walletBalance(walletAddress, userId){
     return (
@@ -74,8 +101,28 @@ const WalletContainer = (props) => {
     )
   }
 
+  function token(){
+    const { refToken } = props
+    const refreshToken = localStorage.getItem('REF_TOKEN')
+    const clientCred = {
+      input: {
+        clientId: process.env.REACT_APP_GWX_CLIENT_ID,
+        clientSecret: process.env.REACT_APP_GWX_CLIENT_SECRET,
+        grantType: "refresh_token"
+      }
+    }
+    const variables = { ...clientCred.input, refreshToken: refreshToken }
+    refToken({ variables: { input: variables } }).then(response =>{
+      localStorage.setItem('AUTH_TOKEN', response.data.refToken.access_token)
+      localStorage.setItem('REF_TOKEN', response.data.refToken.refresh_token)
+    }).catch((errors) => {
+      console.log(errors)
+    })
+  }
+
   return(
-    <div className="body-container" >
+    <div className="body-container">
+    {token()}
       <Query query={GET_PROFILE}>
         {({ data, loading, error }) => {
           if (loading) return <Spin />
@@ -183,5 +230,6 @@ const WalletContainer = (props) => {
 }
 
 export default compose(
-  withApollo
+  withApollo,
+  graphql(AUTHENTICATE.REF_TOKEN, { name: 'refToken'})
 )(WalletContainer)
