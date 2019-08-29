@@ -28,7 +28,8 @@ const restLink = new RestLink({
   uri: API,
   endpoints: {
     v1: API,
-    v2: TOKEN_DEPOT_API
+    v2: TOKEN_DEPOT_API,
+    v3: process.env.REACT_APP_GWX_CRYPTO
   },
   headers: {
     "Content-Type": "application/json"
@@ -41,13 +42,16 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      Authorization: token ? `Bearer ${token}` : ''
+      Authorization: token ? `Bearer ${token}` : '',
     }
   }
 })
 
 const client = new ApolloClient({
   link: authLink.concat(restLink),
+  fetchOptions: {
+    mode: 'no-cors',
+  },
   cache: new InMemoryCache()
 })
 
