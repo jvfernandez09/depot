@@ -148,6 +148,8 @@ const Login = (props) => {
               >Login
               </Button>
             </form>
+              <span style={{ color: '#F8D154', zIndex: '999'}}> Don't have any account?</span>
+              <a href="https://play.google.com/store/apps/details?id=com.gameworksmobilewallet"> Register Now! </a>
           </div>
         </div>
       </div>
