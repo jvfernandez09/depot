@@ -24,6 +24,7 @@ const AUTHENTICATE_CODE_GRANT = gql`
       endpoint: "v1"
     ) {
       access_token
+      refresh_token
     }
   }
 `
@@ -45,9 +46,25 @@ const AUTHORIZE = gql`
   }
 `
 
+const REF_TOKEN = gql`
+  mutation REF_TOKEN {
+    refToken(input: $input)
+    @rest(
+      type: "RefToken",
+      path: "/oauth/token",
+      method: "POST",
+      endpoint: "v1"
+    ) {
+      access_token
+      refresh_token
+    }
+  }
+`
+
 
 export default {
   AUTHENTICATE_CLIENT_CRED,
   AUTHENTICATE_CODE_GRANT,
-  AUTHORIZE
+  AUTHORIZE,
+  REF_TOKEN
 }

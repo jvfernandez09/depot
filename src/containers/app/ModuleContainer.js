@@ -1,5 +1,5 @@
-import React  from 'react'
-import { Switch } from 'react-router-dom';
+import React from 'react'
+import { Switch } from 'react-router-dom'
 import { Layout } from 'antd'
 import PrivateRoute from '../../privateRoutes'
 
@@ -11,7 +11,7 @@ import 'app/module/home/index.scss'
 
 const { Content } = Layout;
 
-const ModuleContainer = () => {
+const ModuleContainer = (props) => {
   return (
     <Content  className='main-body'>
       <Switch>
