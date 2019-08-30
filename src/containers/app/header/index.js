@@ -19,11 +19,14 @@ const HeaderContainer = (props) => {
     }
     try{
       setInterval(async ()=> {
-        const res = await fetch(`http://api.coinlayer.com/live?access_key=${process.env.REACT_APP_GWX_ACCESS_KEY}`)
-        const blocks = await res.json()
-        let btc = 0.003 / parseFloat(blocks.rates.BTC)
-        let eth = 0.003 / parseFloat(blocks.rates.ETH)
-        let xem = 0.003 / parseFloat(blocks.rates.XEM)
+        // const res = await fetch(`http://api.coinlayer.com/live?access_key=${process.env.REACT_APP_GWX_ACCESS_KEY}`)
+        // const blocks = await res.json()
+        // let btc = 0.003 / parseFloat(blocks.rates.BTC)
+        // let eth = 0.003 / parseFloat(blocks.rates.ETH)
+        // let xem = 0.003 / parseFloat(blocks.rates.XEM)
+        let btc = 0
+        let eth = 0
+        let xem = 0
         setBtc(btc.toFixed(8))
         setEth(eth.toFixed(8))
         setXem(xem.toFixed(6))
@@ -42,9 +45,19 @@ const HeaderContainer = (props) => {
     fetch(`http://api.coinlayer.com/live?access_key=${process.env.REACT_APP_GWX_ACCESS_KEY}`)
       .then(res => res.json())
       .then((result) => {
-        let btc = 0.003 / parseFloat(result.rates.BTC)
-        let eth = 0.003 / parseFloat(result.rates.ETH)
-        let xem = 0.003 / parseFloat(result.rates.XEM)
+        // let btc = 0.003 / parseFloat(result.rates.BTC)
+        // let eth = 0.003 / parseFloat(result.rates.ETH)
+        // let xem = 0.003 / parseFloat(result.rates.XEM)
+        let btc = 0
+        let eth = 0
+        let xem = 0
+        setBtc(btc.toFixed(8))
+        setEth(eth.toFixed(8))
+        setXem(xem.toFixed(6))
+      }).catch((e) => {
+        let btc = 0
+        let eth = 0
+        let xem = 0
         setBtc(btc.toFixed(8))
         setEth(eth.toFixed(8))
         setXem(xem.toFixed(6))

@@ -1,17 +1,18 @@
-import React from 'react'
-import { compose, withApollo, Query } from 'react-apollo'
+import React, { useState, useEffect } from 'react'
+import { compose, withApollo } from 'react-apollo'
 import { Table, DatePicker, Card, Spin } from 'antd'
-import { upperFirst, upperCase, toUpper } from 'lodash'
+import { upperFirst, upperCase, toUpper, isNaN } from 'lodash'
 import TRANSACTIONS from '../../../../../src/graphql/transaction'
 
 import '../transaction/index.scss'
 
 const { RangePicker } = DatePicker
 
-
 const TransactionContainer = (props, userId) => {
-
-const columns = [
+  const [dataSource, setDataSource] = useState()
+  const [filterSource, setFilterSource] = useState('')
+  const [isLoading, setLoading] = useState(false)
+  const columns = [
   {
     title: 'ID',
     dataIndex: 'transactionId',
@@ -23,7 +24,6 @@ const columns = [
     title: 'Date',
     dataIndex: 'date',
     key: 'date',
-    defaultSortOrder: 'ascend',
     sorter: (a, b) => new Date(a.date) - new Date(b.date)
   },
   {
@@ -53,34 +53,55 @@ const columns = [
   }
 ]
 
-  function getTransaction(props){
+  useEffect(() => {
+    getTransaction(props)
+  }, [props])
+
+  async function getTransaction(props){
+    setLoading(true)
     let rowItems = []
     const userId = props.userId
-    return(
-      <Query query={TRANSACTIONS.ALL_TRANSACTIONS} variables={{ userId }}>
-      {({ data, loading, error }) => {
-        if (loading) return <Spin />
-        if (error) return <p>ERROR</p>
-        const converted = [data]
-        converted[0].getAllTransaction.data.map((value, i) =>
-          rowItems.push({
-            key: i,
-            transactionId: value.attributes.transaction_id,
-            date: value.attributes.created_at,
-            transactionType: 'SENDING',
-            topUpReceivingWalletAddress: toUpper(value.attributes.top_up_receiving_wallet_address),
-            gwxToTransfer: value.attributes.gwx_to_transfer,
-            quantityToReceive: value.attributes.quantity_to_receive+' '+toUpper(value.attributes.transaction_type),
-            status: upperFirst(upperCase(value.attributes.status))
-          })
-        )
+    const { client } = props
 
-        return(
-          <Table dataSource={rowItems} columns={columns}  pagination={{ pageSize: 5 }} scroll={{ x: 'fit-content' }}/>
-        )
-      }}
-      </Query>
-    )
+    await client.query({
+      query: TRANSACTIONS.ALL_TRANSACTIONS,
+      variables: {
+        userId
+      }
+    }).then(result => [result][0].data.getAllTransaction.data.map((value, i) => (
+        rowItems.push({
+          key: i,
+          transactionId: value.attributes.transaction_id,
+          date: value.attributes.created_at,
+          transactionType: 'SENDING',
+          topUpReceivingWalletAddress: toUpper(value.attributes.top_up_receiving_wallet_address),
+          gwxToTransfer: value.attributes.gwx_to_transfer,
+          quantityToReceive: value.attributes.quantity_to_receive+' '+toUpper(value.attributes.transaction_type),
+          status: upperFirst(upperCase(value.attributes.status))
+        })
+      ))
+    ).catch((errors) => {
+      console.log(errors)
+    })
+    setDataSource(rowItems)
+    setLoading(false)
+  }
+
+  function filterDate(date){
+    setLoading(true)
+    const start = new Date(date[0]).getTime()
+    const end = new Date(date[1]).getTime()
+
+    if (!isNaN(start) && !isNaN(end)){
+      let result = dataSource.filter(d => { let time = new Date(d.date).getTime()
+        return (start < time && time < end)
+      })
+      setFilterSource(result)
+    } else {
+      setFilterSource('')
+      setDataSource(dataSource)
+    }
+    setLoading(false)
   }
 
   return(
@@ -91,10 +112,24 @@ const columns = [
           <div className='sub'>
             Sort transactions by date:
           </div>
-          <RangePicker style={{ width: '50%'}} className='date'/>
+          <RangePicker
+            style={{ width: '50%'}}
+            className='date'
+            onChange={(date, dateString) => {
+              filterDate(dateString)
+            }}
+          />
         </div>
         <div className='table-container'>
-        {getTransaction(props)}
+          {isLoading ? <Spin /> :
+            <Table
+              dataSource={filterSource === '' ? dataSource : filterSource}
+              columns={columns}
+              loading={isLoading}
+              pagination={{ pageSize: 5 }}
+              scroll={{ x: 'fit-content' }}
+            />
+          }
         </div>
       </Card>
     </div>
