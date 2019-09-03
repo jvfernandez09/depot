@@ -1,18 +1,19 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import PrivateRoute from './privateRoutes'
 
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
 
 import { ApolloClient } from "apollo-client"
 import { ApolloProvider } from "react-apollo"
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { InMemoryCache } from 'apollo-cache-inmemory'
 import { RestLink } from 'apollo-link-rest'
 import { setContext } from 'apollo-link-context'
 
 import App from './App'
 import './index.scss'
 import Login from 'login'
+import Register from 'register'
 import ForgotPassword from 'forgotPassword'
 import * as serviceWorker from './serviceWorker'
 
@@ -57,6 +58,7 @@ ReactDOM.render(
     <Router>
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
         <Route path="/reset" component={ForgotPassword} />
         <PrivateRoute exac path="/" component={App} />
       </Switch>

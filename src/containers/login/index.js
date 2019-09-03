@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Link } from 'react-router-dom'
 import { compose, graphql, withApollo } from 'react-apollo'
 
 import useForm from "utils/useForm"
@@ -147,9 +148,13 @@ const Login = (props) => {
                 className='button btn-primary btn-block btn-lg'
               >Login
               </Button>
+              <div className='form-group'>
+                <div className='register'>
+                  <span className='register-font'>Don't have any account? </span>
+                  <Link to="/register"> Register Now! </Link>
+                </div>
+              </div>
             </form>
-              <span style={{ color: '#F8D154', zIndex: '999'}}> Don't have any account?</span>
-              <a href="https://play.google.com/store/apps/details?id=com.gameworksmobilewallet"> Register Now! </a>
           </div>
         </div>
       </div>
