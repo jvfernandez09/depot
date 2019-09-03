@@ -240,6 +240,11 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             {transactionSummary.data.wallet_address}
           </div>
         </div>
+        <div className='item'>
+          <div className='sub-text'>
+            Make sure you allocate enough fuel otherwise transaction confirmation may reach up to 24 hours.
+          </div>
+        </div>
       </div>
     )
   }
