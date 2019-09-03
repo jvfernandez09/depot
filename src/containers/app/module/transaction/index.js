@@ -5,7 +5,6 @@ import { upperFirst, upperCase, toUpper, isNaN } from 'lodash'
 import TRANSACTIONS from '../../../../../src/graphql/transaction'
 
 import '../transaction/index.scss'
-
 const { RangePicker } = DatePicker
 
 const TransactionContainer = (props, userId) => {
@@ -89,8 +88,10 @@ const TransactionContainer = (props, userId) => {
 
   function filterDate(date){
     setLoading(true)
-    const start = new Date(date[0]).getTime()
-    const end = new Date(date[1]).getTime()
+    let start = `${date[0]+ "T00:00:00"}`
+    let end = `${date[1]+ "T23:59:59"}`
+    start = new Date(start).getTime()
+    end = new Date(end).getTime()
 
     if (!isNaN(start) && !isNaN(end)){
       let result = dataSource.filter(d => { let time = new Date(d.date).getTime()
