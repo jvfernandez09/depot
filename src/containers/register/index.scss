@@ -1,0 +1,202 @@
+@import "./src/styles/common";
+
+.form-group {
+  & {
+    position: relative;
+    margin-bottom: $pad * 3;
+    width: 100%;
+  }
+
+  &.-nopad {
+    margin: 0;
+  }
+}
+
+.body-layout {
+  & {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &.-top {
+    align-items: unset;
+  }
+
+  > .divider {
+    height: 320px;
+    border-left: 1px solid $border-color;
+  }
+
+  > .left.-half {
+    width: 50%;
+  }
+
+  > .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  > .item > a {
+    margin: $pad * 4 0 $pad * 3;
+    z-index: 1;
+  }
+}
+
+.body-container {
+  & {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0D172E;
+    padding: $pad * 7;
+    border-radius: 8px;
+    z-index: 1;
+    margin-bottom: $pad * 2;
+  }
+
+  > .content {
+    width: 400px;
+  }
+
+  > .width {
+    width: 100% !important;
+  }
+
+  > .content > .head {
+    margin-bottom: $pad * 8;
+    text-align: center;
+  }
+
+  > .content > .head > .title,
+  > .content > .head > .sub {
+    color: #fff;
+    text-transform: uppercase;
+    font-family: $sans
+  }
+
+  > .content > .head > .title > .highlight {
+    color: #f8d154;
+    text-transform: uppercase;
+    font-family: $sans
+  }
+
+
+
+  > .content > .head > .title {
+    font-weight: 700;
+  }
+
+  > .content > form > .others {
+    margin-top: $pad * 2;
+  }
+
+  > .content > form > .others > a {
+    color: $light-gray;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  > .content > .head > .google-play {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+  }
+}
+
+.link-action {
+  & {
+    display: flex;
+    justify-content: center;
+  }
+
+  > a {
+    margin-left: $pad;
+    color: $primary-color;
+  }
+
+  > a:hover {
+    color: darken($primary-color, 15%);
+  }
+}
+
+.right-details {
+  & {
+    height: 345px;
+  }
+
+  > .title {
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 900;
+  }
+
+  > .content {
+    display: flex;
+    align-items: center;
+  }
+
+  > .content.-column {
+    flex-direction: column;
+  }
+
+  > .content > .details > button {
+    position: absolute;
+    bottom: 11px;
+  }
+
+  > .content > .details {
+    position: relative;
+  }
+
+  > .content,
+  > .content > .details {
+    height: 94%
+  }
+
+  > .content > .image {
+    margin-left: $pad * 2;
+    position: relative;
+    left: 18px;
+    bottom: 18px;
+  }
+}
+
+.list-item {
+  > .item {
+    display: flex;
+    align-items: center;
+    margin-bottom: $pad * 2;
+  }
+
+  > .item > .square {
+    height: 5px;
+    width: 5px;
+    background: $primary-color;
+    margin-bottom: $pad - 4;
+    margin-right: $pad;
+  }
+
+  > .item > .info {
+    color: #fff;
+  }
+}
+
+.button-form {
+  margin: $pad * 3 0
+}
+
+.two-fields {
+  & {
+    display: flex;
+  }
+
+  > .form-group:first-child {
+    margin-right: $pad * 4;
+  }
+}

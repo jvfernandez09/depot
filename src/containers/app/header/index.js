@@ -21,9 +21,9 @@ const HeaderContainer = (props) => {
       setInterval(async ()=> {
         // const res = await fetch(`http://api.coinlayer.com/live?access_key=${process.env.REACT_APP_GWX_ACCESS_KEY}`)
         // const blocks = await res.json()
-        // let btc = 0.003 / parseFloat(blocks.rates.BTC)
-        // let eth = 0.003 / parseFloat(blocks.rates.ETH)
-        // let xem = 0.003 / parseFloat(blocks.rates.XEM)
+        // let btc = 0.20 / parseFloat(blocks.rates.BTC)
+        // let eth = 0.20 / parseFloat(blocks.rates.ETH)
+        // let xem = 0.20 / parseFloat(blocks.rates.XEM)
         let btc = 0
         let eth = 0
         let xem = 0
@@ -45,9 +45,9 @@ const HeaderContainer = (props) => {
     fetch(`http://api.coinlayer.com/live?access_key=${process.env.REACT_APP_GWX_ACCESS_KEY}`)
       .then(res => res.json())
       .then((result) => {
-        // let btc = 0.003 / parseFloat(result.rates.BTC)
-        // let eth = 0.003 / parseFloat(result.rates.ETH)
-        // let xem = 0.003 / parseFloat(result.rates.XEM)
+        // let btc = 0.20 / parseFloat(result.rates.BTC)
+        // let eth = 0.20 / parseFloat(result.rates.ETH)
+        // let xem = 0.20 / parseFloat(result.rates.XEM)
         let btc = 0
         let eth = 0
         let xem = 0
@@ -74,7 +74,7 @@ const HeaderContainer = (props) => {
           <div className='avatar'>
           </div>
           {getConversion()}
-          <span style={{ color: '#F8D154'}}> BUY 1 GWX: 0.003 USD | </span>
+          <span style={{ color: '#F8D154'}}> BUY 1 GWX: 0.20 USD | </span>
           <span style={{ color: '#F8D154'}}> {btc} BTC |</span>
           <span style={{ color: '#F8D154'}}> {eth} ETH |</span>
           <span style={{ color: '#F8D154'}}> {xem} XEM </span>

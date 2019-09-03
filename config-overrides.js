@@ -18,6 +18,7 @@ const path = require('path');
      "lib": path.resolve(__dirname, "src/lib"),
      "app": path.resolve(__dirname, "src/containers/app"),
      "login": path.resolve(__dirname, "src/containers/login"),
+     "register": path.resolve(__dirname, "src/containers/register"),
      "forgotPassword": path.resolve(__dirname, "src/containers/forgotPassword"),
      "utils": path.resolve(__dirname, "src/utils"),
      "components": path.resolve(__dirname, "src/components"),
