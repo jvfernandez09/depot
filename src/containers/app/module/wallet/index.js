@@ -43,7 +43,7 @@ const WalletContainer = (props) => {
         }).catch((errors) => {
           console.log(errors)
         })
-      },  60000)
+      },  7000000)
     }
     catch(e){
       console.log(e)
