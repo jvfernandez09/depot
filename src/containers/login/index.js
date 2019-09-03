@@ -43,6 +43,7 @@ const Login = (props) => {
       const responseData = await obtainAccess(result.data.getAuthorize.redirect_uri.code)
       localStorage.setItem('AUTH_TOKEN', responseData.data.authenticateCodeGrant.access_token)
       localStorage.setItem('REF_TOKEN', responseData.data.authenticateCodeGrant.refresh_token)
+      localStorage.setItem('timeStamp', new Date().getTime())
       if(isNull(response.data.loginUser.user.data.attributes.resetPasswordSentAt)){
         props.history.push('/wallet')
       } else {
