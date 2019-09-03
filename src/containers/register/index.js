@@ -18,15 +18,15 @@ const Register = () => {
           <Link to='/'>
             <Logo className='logo'/>
           </Link>
-          <div className='body-container'>
-            <div className='content width'>
-              <div className='head'>
-                <h1 className='title'>
+          <div className='register-container'>
+            <div className='content-register width'>
+              <div className='head-register'>
+                <h1 className='title-register'>
                   CREATE ACCOUNT
                 </h1>
-                <h1 className='title'>
+                <h1 className='title-register'>
                   <span>USING</span>
-                  <span className='highlight'> GAMEWORKS WALLET MOBILE APP</span>
+                  <span className='highlight-register'> GAMEWORKS WALLET MOBILE APP</span>
                 </h1>
                 <div className='google-play'>
                   <GooglePlay onClick={() => window.open('https://play.google.com/store/apps/details?id=com.gameworksmobilewallet&hl=en','_blank')} />

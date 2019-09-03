@@ -15,11 +15,11 @@
 .body-layout {
   & {
     display: flex;
-    justify-content: space-between;
+    justify-content-register: space-between;
     align-items: center;
   }
 
-  &.-top {
+  &.-top-register {
     align-items: unset;
   }
 
@@ -36,7 +36,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content-register: center;
     width: 100%;
   }
 
@@ -46,11 +46,11 @@
   }
 }
 
-.body-container {
+.register-container {
   & {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content-register: center;
     background: #0D172E;
     padding: $pad * 7;
     border-radius: 8px;
@@ -58,7 +58,7 @@
     margin-bottom: $pad * 2;
   }
 
-  > .content {
+  > .content-register {
     width: 400px;
   }
 
@@ -66,19 +66,19 @@
     width: 100% !important;
   }
 
-  > .content > .head {
+  > .content-register > .head-register {
     margin-bottom: $pad * 8;
     text-align: center;
   }
 
-  > .content > .head > .title,
-  > .content > .head > .sub {
+  > .content-register > .head-register > .title-register,
+  > .content-register > .head-register > .sub-register-register {
     color: #fff;
     text-transform: uppercase;
     font-family: $sans
   }
 
-  > .content > .head > .title > .highlight {
+  > .content-register > .head-register > .title-register > .highlight-register {
     color: #f8d154;
     text-transform: uppercase;
     font-family: $sans
@@ -86,15 +86,15 @@
 
 
 
-  > .content > .head > .title {
+  > .content-register > .head-register > .title-register {
     font-weight: 700;
   }
 
-  > .content > form > .others {
+  > .content-register > form > .others {
     margin-top: $pad * 2;
   }
 
-  > .content > form > .others > a {
+  > .content-register > form > .others > a {
     color: $light-gray;
 
     &:hover {
@@ -102,7 +102,7 @@
     }
   }
 
-  > .content > .head > .google-play {
+  > .content-register > .head-register > .google-play {
     margin-top: 2rem;
     margin-bottom: 2rem;
     cursor: pointer;
@@ -112,7 +112,7 @@
 .link-action {
   & {
     display: flex;
-    justify-content: center;
+    justify-content-register: center;
   }
 
   > a {
@@ -130,36 +130,36 @@
     height: 345px;
   }
 
-  > .title {
+  > .title-register {
     text-transform: uppercase;
     color: #fff;
     font-weight: 900;
   }
 
-  > .content {
+  > .content-register {
     display: flex;
     align-items: center;
   }
 
-  > .content.-column {
+  > .content-register.-column {
     flex-direction: column;
   }
 
-  > .content > .details > button {
+  > .content-register > .details > button {
     position: absolute;
     bottom: 11px;
   }
 
-  > .content > .details {
+  > .content-register > .details {
     position: relative;
   }
 
-  > .content,
-  > .content > .details {
+  > .content-register,
+  > .content-register > .details {
     height: 94%
   }
 
-  > .content > .image {
+  > .content-register > .image {
     margin-left: $pad * 2;
     position: relative;
     left: 18px;
