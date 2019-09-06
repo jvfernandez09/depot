@@ -11,7 +11,7 @@ import 'app/module/home/index.scss'
 
 const { Content } = Layout;
 
-const ModuleContainer = (props) => {
+const ModuleContainer = () => {
   return (
     <Content  className='main-body'>
       <Switch>
