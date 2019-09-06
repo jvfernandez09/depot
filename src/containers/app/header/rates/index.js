@@ -12,7 +12,7 @@ const Rate = (props) => {
     try{
       setInterval(async ()=> {
         getConversion()
-      },  1800000)
+      },  600000)
     } catch(e){
       console.log(e)
     }
