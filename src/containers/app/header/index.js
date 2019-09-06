@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import {withRouter} from 'react-router-dom';
-import { Layout } from 'antd';
+import { compose, withApollo } from 'react-apollo'
+import { Layout } from 'antd'
 import 'app/header/index.scss'
 import { ReactComponent as Logo } from 'assets/images/LOGO-tokendepot.svg'
 
-import { Menu, Dropdown, Icon, Button } from 'antd';
+import { Menu, Dropdown, Icon, Button } from 'antd'
+import REAL_TIME_RATES from '../../../../src/graphql/realTimeRates'
 
 const { Header } = Layout;
 
@@ -14,54 +15,34 @@ const HeaderContainer = (props) => {
   const [xem, setXem] = useState(0)
 
   useEffect(() => {
-    if (props.history.location.pathname === '/') {
-      props.history.push('/wallet')
-    }
     try{
       setInterval(async ()=> {
-        // const res = await fetch(`http://api.coinlayer.com/live?access_key=${process.env.REACT_APP_GWX_ACCESS_KEY}`)
-        // const blocks = await res.json()
-        // let btc = 0.20 / parseFloat(blocks.rates.BTC)
-        // let eth = 0.20 / parseFloat(blocks.rates.ETH)
-        // let xem = 0.20 / parseFloat(blocks.rates.XEM)
-        let btc = 0
-        let eth = 0
-        let xem = 0
-        setBtc(btc.toFixed(8))
-        setEth(eth.toFixed(8))
-        setXem(xem.toFixed(6))
-      },  600000)
+        getConversion()
+      },  1800000)
     } catch(e){
       console.log(e)
     }
   })
 
+  function getConversion(){
+    const { client } = props
+    client.query({
+      query: REAL_TIME_RATES
+    }).then((result) => {
+      let btc = 0.019 / parseFloat(result.data.rates.data.attributes.btc_rate)
+      let eth = 0.019 / parseFloat(result.data.rates.data.attributes.btc_rate)
+      let xem = 0.019 / parseFloat(result.data.rates.data.attributes.btc_rate)
+      setBtc(btc.toFixed(8))
+      setEth(eth.toFixed(8))
+      setXem(xem.toFixed(6))
+    }).catch((e) => {
+      console.log(e)
+    })
+  }
+
   function logout(){
     localStorage.clear()
     window.location.replace('/')
-  }
-
-  function getConversion(){
-    fetch(`http://api.coinlayer.com/live?access_key=${process.env.REACT_APP_GWX_ACCESS_KEY}`)
-      .then(res => res.json())
-      .then((result) => {
-        // let btc = 0.20 / parseFloat(result.rates.BTC)
-        // let eth = 0.20 / parseFloat(result.rates.ETH)
-        // let xem = 0.20 / parseFloat(result.rates.XEM)
-        let btc = 0
-        let eth = 0
-        let xem = 0
-        setBtc(btc.toFixed(8))
-        setEth(eth.toFixed(8))
-        setXem(xem.toFixed(6))
-      }).catch((e) => {
-        let btc = 0
-        let eth = 0
-        let xem = 0
-        setBtc(btc.toFixed(8))
-        setEth(eth.toFixed(8))
-        setXem(xem.toFixed(6))
-      })
   }
 
   return (
@@ -74,13 +55,13 @@ const HeaderContainer = (props) => {
           <div className='avatar'>
           </div>
           {getConversion()}
-          <span style={{ color: '#F8D154'}}> BUY 1 GWX: 0.20 USD | </span>
+          <span style={{ color: '#F8D154'}}> BUY 1 GWX: 0.019 USD | </span>
           <span style={{ color: '#F8D154'}}> {btc} BTC |</span>
           <span style={{ color: '#F8D154'}}> {eth} ETH |</span>
           <span style={{ color: '#F8D154'}}> {xem} XEM </span>
           <Dropdown overlay={
             <Menu className='nav-bar'>
-              <Menu.Item key="1" onClick={() => logout  ()}>
+              <Menu.Item key="1" onClick={() => logout()}>
                 <Icon style={{ marginRight: 8, color: '#F8D154' }} type="logout"/><label className="logout-icon">Logout</label>
               </Menu.Item>
             </Menu>
@@ -93,4 +74,6 @@ const HeaderContainer = (props) => {
   )
 }
 
-export default withRouter(HeaderContainer)
+export default compose(
+  withApollo,
+)(HeaderContainer)
