@@ -128,7 +128,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       else {
         setQrCode(JSON.stringify({ data: { addr: toUpper(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)}}))
       }
-      
+
       setTransactionSummary({ data: {
         wallet_address: response.data.createTransaction.data.attributes.top_up_receiving_wallet_address,
         gwx_to_transfer: response.data.createTransaction.data.attributes.gwx_to_transfer,

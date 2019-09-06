@@ -9,7 +9,7 @@ const ProfileContainer = (props) => {
   return (
     <>
       <div className="body-content">
-        <h2 className='title'>User Details</h2>  
+        <h2 className='title'>User Details</h2>
         <Card>
           <div className="profile-header">
             <Avatar shape="square" size={150} icon="user" />

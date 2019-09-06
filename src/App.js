@@ -14,7 +14,6 @@ const App = () => {
           <Layout>
             <HeaderContainer />
               <ModuleContainer />
-            {/*<FooterContainer/>*/}
           </Layout>
         </>
       </Switch>
