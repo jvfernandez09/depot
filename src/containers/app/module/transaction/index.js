@@ -3,6 +3,7 @@ import { compose, withApollo } from 'react-apollo'
 import { Table, DatePicker, Card, Spin } from 'antd'
 import { upperFirst, upperCase, toUpper, isNaN } from 'lodash'
 import TRANSACTIONS from '../../../../../src/graphql/transaction'
+import dayjs from 'dayjs'
 
 import '../transaction/index.scss'
 const { RangePicker } = DatePicker
@@ -31,17 +32,17 @@ const TransactionContainer = (props, userId) => {
     key: 'transactionType'
   },
   {
-    title: 'Wallet Address',
+    title: 'Transaction ID',
     dataIndex: 'topUpReceivingWalletAddress',
     key: 'topUpReceivingWalletAddress',
   },
   {
-    title: 'GWX to Transfer',
+    title: 'GWX Purchased',
     dataIndex: 'gwxToTransfer',
     key: 'gwxToTransfer',
   },
   {
-    title: 'Payment',
+    title: 'Amount Paid',
     dataIndex: 'quantityToReceive',
     key: 'quantityToReceive'
   },
@@ -71,8 +72,8 @@ const TransactionContainer = (props, userId) => {
         rowItems.push({
           key: i,
           transactionId: value.attributes.transaction_id,
-          date: value.attributes.created_at,
-          transactionType: 'SENDING',
+          date: dayjs(value.attributes.created_at).format('DD-MMM-YYYY, hh:mm'),
+          transactionType: 'BUY',
           topUpReceivingWalletAddress: toUpper(value.attributes.top_up_receiving_wallet_address),
           gwxToTransfer: value.attributes.gwx_to_transfer,
           quantityToReceive: value.attributes.quantity_to_receive+' '+toUpper(value.attributes.transaction_type),
@@ -107,7 +108,7 @@ const TransactionContainer = (props, userId) => {
 
   return(
     <div className='body-content'>
-      <h2 className='title'>My Transactions</h2>
+      <h2 className='title'>Purchase History</h2>
       <Card>
         <div className='action-container'>
           <div className='sub'>
