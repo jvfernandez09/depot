@@ -107,7 +107,7 @@ const TransactionContainer = (props, userId) => {
 
   return(
     <div className='body-content'>
-      <h2 className='title'>My Transactions</h2>
+      <h2 className='title'>Purchase History</h2>
       <Card>
         <div className='action-container'>
           <div className='sub'>
