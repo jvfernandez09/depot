@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { graphql, compose, withApollo, Query } from 'react-apollo'
 import { isEmpty, toUpper } from 'lodash'
-import { Steps, Modal, Input, Select, Button, Spin, Icon } from 'antd'
+import { Steps, Modal, Input, Select, Button, Spin } from 'antd'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 import '../../wallet/wallet_modal/index.scss'
 
@@ -11,7 +11,6 @@ import TRANSACTIONS from '../../../../../../src/graphql/transaction'
 
 const { Option } = Select
 const { Step } = Steps
-const { TextArea } = Input
 
 const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddress }) => {
   const { handleChange, handleChangeSelect, inputs, handleSubmit, initialState } = useModal(addFunds)
@@ -109,11 +108,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     setCurrent(0)
     setGwxToTransfer(0)
     hide()
-  }
-
-  function handleCopy () {
-    alert('copied')
-    document.execCommand('copy')
   }
 
   async function addFunds(){
