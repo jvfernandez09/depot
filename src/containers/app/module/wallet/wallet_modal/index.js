@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { graphql, compose, withApollo, Query } from 'react-apollo'
 import { isEmpty, toUpper } from 'lodash'
-import { Steps, Modal, Input, Select, Button, Spin } from 'antd'
+import { Steps, Modal, Input, Select, Button, Spin, Icon } from 'antd'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 import '../../wallet/wallet_modal/index.scss'
 
@@ -11,12 +11,14 @@ import TRANSACTIONS from '../../../../../../src/graphql/transaction'
 
 const { Option } = Select
 const { Step } = Steps
+const { TextArea } = Input
 
 const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddress }) => {
   const { handleChange, handleChangeSelect, inputs, handleSubmit, initialState } = useModal(addFunds)
   const [isShowQr, isSetShowQr] = useState(false)
   const [done, setDone] = useState(false)
   const [qrCode, setQrCode] = useState({})
+  const [walletAddress, setWalletAddress] = useState('')
   const [transactionSummary, setTransactionSummary] = useState ({})
   const [current, setCurrent] = useState(0)
   const [gwxToTransfer, setGwxToTransfer] = useState(0)
@@ -26,7 +28,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       content: 'Top up',
     },
     {
-      title: 'Generate QR',
+      title: 'Scan QR',
       content: 'Generate QR',
     },
     {
@@ -67,8 +69,8 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             setGwxToTransfer(converted[0].convertAmount.gwx.toString())
             return(
               <>
-                <label>You will receive:</label>
-                <p className='convert-value'>{formattedValue}</p>
+                <label>You will pay:</label>
+                <p className='convert-value'>{`${formattedValue}` + '  ' + `${toUpper(inputs.transactionType)}`}</p>
               </>
             )
         }}
@@ -109,6 +111,11 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     hide()
   }
 
+  function handleCopy () {
+    alert('copied')
+    document.execCommand('copy')
+  }
+
   async function addFunds(){
     const variables = { ...inputs, gwxWalletAddress, userId, gwxToTransfer}
 
@@ -120,12 +127,15 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       isSetShowQr(true)
       if(response.data.createTransaction.data.attributes.transaction_type === 'btc'){
         setQrCode(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
+        setWalletAddress(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
       }
       else if(response.data.createTransaction.data.attributes.transaction_type === 'eth'){
         setQrCode(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
+        setWalletAddress(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
       }
       else {
         setQrCode(JSON.stringify({ data: { addr: toUpper(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)}}))
+        setWalletAddress(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
       }
 
       setTransactionSummary({ data: {
@@ -153,6 +163,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
         <div className="form-group">
           <label className="form-label"> Amount: </label>
           <Input
+            placeholder="GWX"
             name='quantityToReceive'
             type='number'
             onChange={handleChange}
@@ -221,7 +232,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
               gwx to transfer
             </p>
             <div className='sub'>
-              {transactionSummary.data.gwx_to_transfer}
+              {transactionSummary.data.quantity_to_receive}
             </div>
           </div>
           <div className='item'>
@@ -229,7 +240,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
               quantity to receive
             </p>
             <div className='sub'>
-              {transactionSummary.data.quantity_to_receive}
+              {transactionSummary.data.gwx_to_transfer}
             </div>
           </div>
         </div>
@@ -300,6 +311,11 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                           size={220}
                           value={`${qrCode}`}
                         />
+                        <div>
+                          <label>WALLET ADDRESS:</label>
+                          <p className="convert-value">{walletAddress}</p>
+                          {/* <Input addonAfter={<Icon type="copy" onClick={handleCopy} />} value={walletAddress} /> */}
+                        </div>
                       </div>
                     </>
                   ) : null
