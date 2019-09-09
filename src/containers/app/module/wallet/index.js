@@ -79,27 +79,27 @@ const WalletContainer = (props) => {
     )
   }
 
-  function xemWalletBalance(walletAddress) {
-    return (
-      <>
-        <Query query={WALLET.GET_WALLET_BALANCE} variables={{ walletAddress }} fetchPolicy='network-only'>
-          {({ data, loading, error }) => {
-            if (loading) return <Spin />
-            if (error) return <p>ERROR</p>
-            const convertedXEMBalance = data.getWalletBalance.balance.xem.toFixed(6).split(".")
-            const newBalance = parseInt(convertedXEMBalance[0])
-            return(
-              <div className='balance -small'>
-                <div className='title'>XEM</div>
-                <span style={{ fontSize: '3rem'}}>{newBalance.toLocaleString()}</span><span>.</span><span style={{ fontSize: '1rem' }}>{convertedXEMBalance[1]}</span>
-              </div>
-            )
-          }}
-        </Query>
-        <Button className='hide-button'> Buy GWX+ </Button>
-      </>
-    )
-  }
+  // function xemWalletBalance(walletAddress) {
+  //   return (
+  //     <>
+  //       <Query query={WALLET.GET_WALLET_BALANCE} variables={{ walletAddress }} fetchPolicy='network-only'>
+  //         {({ data, loading, error }) => {
+  //           if (loading) return <Spin />
+  //           if (error) return <p>ERROR</p>
+  //           const convertedXEMBalance = data.getWalletBalance.balance.xem.toFixed(6).split(".")
+  //           const newBalance = parseInt(convertedXEMBalance[0])
+  //           return(
+  //             <div className='balance -small'>
+  //               <div className='title'>XEM</div>
+  //               <span style={{ fontSize: '3rem'}}>{newBalance.toLocaleString()}</span><span>.</span><span style={{ fontSize: '1rem' }}>{convertedXEMBalance[1]}</span>
+  //             </div>
+  //           )
+  //         }}
+  //       </Query>
+  //       <Button className='hide-button'> Buy GWX+ </Button>
+  //     </>
+  //   )
+  // }
 
   function token(){
     const { refToken } = props
@@ -151,8 +151,8 @@ const WalletContainer = (props) => {
                         <p className='top'>Amount:</p>
                         {walletAddress && xemWalletBalance(walletAddress)}
                       </div>
-                    </Card>
-                    <h2 className='title -pad'>My Game Wallets</h2> */}
+                    </Card> */}
+                    {/* <h2 className='title -pad'>My Game Wallets</h2> */}
                     {// <Card>
                     //   <div className='game-card'>
                     //     <div className='info'>
