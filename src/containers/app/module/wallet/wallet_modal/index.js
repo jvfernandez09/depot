@@ -70,7 +70,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             return(
               <>
                 <label>You will pay:</label>
-                <p className='convert-value'>{formattedValue}</p>
+                <p className='convert-value'>{`${formattedValue}` + '  ' + `${toUpper(inputs.transactionType)}`}</p>
               </>
             )
         }}
