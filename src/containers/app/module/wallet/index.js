@@ -145,14 +145,14 @@ const WalletContainer = (props) => {
                         {walletAddress && walletBalance(walletAddress, userId)}
                       </div>
                     </Card>
-                    <h2 className='title -pad'>My XEM Wallet</h2>
+                    {/* <h2 className='title -pad'>My XEM Wallet</h2>
                     <Card>
                       <div className='wallet-container'>
                         <p className='top'>Amount:</p>
                         {walletAddress && xemWalletBalance(walletAddress)}
                       </div>
                     </Card>
-                    <h2 className='title -pad'>My Game Wallets</h2>
+                    <h2 className='title -pad'>My Game Wallets</h2> */}
                     {// <Card>
                     //   <div className='game-card'>
                     //     <div className='info'>
