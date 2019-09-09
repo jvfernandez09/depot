@@ -67,9 +67,8 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             setGwxToTransfer(converted[0].convertAmount.gwx.toString())
             return(
               <>
-                <div className="form-group">
-                <label className="form-label"> Conversion: {formattedValue} </label>
-                </div>
+                <label>You will receive:</label>
+                <p className='convert-value'>{formattedValue}</p>
               </>
             )
         }}
@@ -188,7 +187,9 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             </Select>
           )}
         </div>
+        <div className='form-group'>
           {!isEmpty(inputs.quantityToReceive) && !isEmpty(inputs.transactionType) ? convert() : null}
+        </div>
       </div>
     )
   }

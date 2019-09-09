@@ -214,12 +214,15 @@ const WalletContainer = (props) => {
                 </TabPane>
                 <TabPane tab={<span><Icon type='profile' />My Profile</span>} key='2'>
                   <ProfileContainer />
-                </TabPane>
-                <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='3'>
                   <TransactionContainer
                     userId={userId}
                   />
                 </TabPane>
+                {/* <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='3'>
+                  <TransactionContainer
+                    userId={userId}
+                  />
+                </TabPane> */}
               </Tabs>
             </>
           )
