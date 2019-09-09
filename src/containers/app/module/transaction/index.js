@@ -72,7 +72,7 @@ const TransactionContainer = (props, userId) => {
         rowItems.push({
           key: i,
           transactionId: value.attributes.transaction_id,
-          date: dayjs(value.attributes.created_at).format('DD-MMM-YYYY, hh:mm'),
+          date: dayjs(value.attributes.created_at).format('DD-MMM-YYYY, HH:mm'),
           transactionType: 'BUY',
           topUpReceivingWalletAddress: toUpper(value.attributes.top_up_receiving_wallet_address),
           gwxToTransfer: value.attributes.gwx_to_transfer,
@@ -108,7 +108,7 @@ const TransactionContainer = (props, userId) => {
 
   return(
     <div className='body-content'>
-      <h2 className='title'>Purchase History</h2>
+      <h2 className='title'>Transaction History</h2>
       <Card>
         <div className='action-container'>
           <div className='sub'>
