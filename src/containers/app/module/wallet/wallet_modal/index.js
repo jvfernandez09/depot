@@ -64,7 +64,8 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
           if (loading) return <Spin />
           if (error) return <p>ERROR</p>
             const converted = [data]
-            let formattedValue = converted[0].convertAmount.gwx.toFixed(8)
+            let formattedValue = inputs.transactionType === "xem" ? converted[0].convertAmount.gwx.toFixed(6) :
+            converted[0].convertAmount.gwx.toFixed(8)
             setGwxToTransfer(converted[0].convertAmount.gwx.toString())
             const convertedValue = formattedValue+' '+toUpper(inputs.transactionType)
             return(
