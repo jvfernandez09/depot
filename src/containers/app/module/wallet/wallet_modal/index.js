@@ -66,10 +66,11 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             const converted = [data]
             let formattedValue = converted[0].convertAmount.gwx.toFixed(8)
             setGwxToTransfer(converted[0].convertAmount.gwx.toString())
+            const convertedValue = formattedValue+' '+toUpper(inputs.transactionType)
             return(
               <>
                 <label>You will pay:</label>
-                <p className='convert-value'>{`${formattedValue}` + '  ' + `${toUpper(inputs.transactionType)}`}</p>
+                <p className='convert-value'>{convertedValue}</p>
               </>
             )
         }}
