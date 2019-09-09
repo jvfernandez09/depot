@@ -159,7 +159,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
         <div className="form-group">
           <label className="form-label"> Amount: </label>
           <Input
-            placeholder="GWX"
+            placeholder="Input GWX"
             name='quantityToReceive'
             type='number'
             onChange={handleChange}
