@@ -27,7 +27,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       content: 'Top up',
     },
     {
-      title: 'Generate QR',
+      title: 'Scan QR',
       content: 'Generate QR',
     },
     {
