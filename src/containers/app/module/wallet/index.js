@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { compose, withApollo, graphql, Query, getDataFromTree } from 'react-apollo'
+import { compose, withApollo, graphql, Query } from 'react-apollo'
 import { Spin, Tabs, Card, Button, Icon } from 'antd'
 
 import WalletModal from 'app/module/wallet/wallet_modal'
