@@ -33,16 +33,16 @@ const TransactionContainer = (props, userId) => {
   },
   {
     title: 'Transaction ID',
-    dataIndex: 'topUpReceivingWalletAddress',
-    key: 'topUpReceivingWalletAddress',
+    dataIndex: 'gwxTransactionHash',
+    key: 'gwxTransactionHash',
   },
   {
-    title: 'GWX Purchased',
+    title: 'Amount Paid',
     dataIndex: 'gwxToTransfer',
     key: 'gwxToTransfer',
   },
   {
-    title: 'Amount Paid',
+    title: 'GWX Transferred',
     dataIndex: 'quantityToReceive',
     key: 'quantityToReceive'
   },
@@ -74,9 +74,11 @@ const TransactionContainer = (props, userId) => {
           transactionId: value.attributes.transaction_id,
           date: dayjs(value.attributes.created_at).format('DD-MMM-YYYY, HH:mm'),
           transactionType: 'BUY',
-          topUpReceivingWalletAddress: toUpper(value.attributes.top_up_receiving_wallet_address),
-          gwxToTransfer: value.attributes.gwx_to_transfer,
-          quantityToReceive: value.attributes.quantity_to_receive+' '+toUpper(value.attributes.transaction_type),
+          gwxTransactionHash: value.attributes.gwx_transaction_hash,
+          quantityToReceive: value.attributes.transaction_type === "xem" ?
+          parseFloat(value.attributes.gwx_to_transfer).toFixed(6)+' '+toUpper(value.attributes.transaction_type) :
+          parseFloat(value.attributes.gwx_to_transfer).toFixed(8)+' '+toUpper(value.attributes.transaction_type),
+          gwxToTransfer: value.attributes.quantity_to_receive,
           status: upperFirst(upperCase(value.attributes.status))
         })
       ))
@@ -105,6 +107,37 @@ const TransactionContainer = (props, userId) => {
     }
     setLoading(false)
   }
+
+
+  columns[3].render = (text, record) => (
+    <a
+      rel="noopener noreferrer"
+      target="_blank" href={`http://explorer.nemtool.com/?fbclid=IwAR16X2gZe-pC0gUDpjzGKvbNc8AoLaLjWFO9-HIRuzbDE1dhj2J6MPewoI0#/s_tx?hash=${record.gwxTransactionHash}`}>
+      {record.gwxTransactionHash}
+    </a>
+  )
+
+  columns[4].render = (text, record) => (
+    <>
+      <div style={{ width: '10%'}}>{record.quantityToReceive} </div>
+    </>
+  )
+
+  columns[5].render = (text, record) => (
+    <>
+      <div style={{ width: '10%'}}> {record.gwxToTransfer} </div>
+    </>
+  )
+
+  columns[6].render = (text, record) =>(
+    <>
+      {record.status === "PENDING" ?
+      <span style={{ color: 'orange'}}> {record.status} </span>
+      : record.status === "INITIATED" || record.status === "TRANSACTION UNSUCCESSFUL" ?
+      <span style={{ color: 'red'}}> {record.status} </span>
+      : <span style={{ color: 'green'}}> {record.status} </span>}
+    </>
+  )
 
   return(
     <div className='body-content'>
