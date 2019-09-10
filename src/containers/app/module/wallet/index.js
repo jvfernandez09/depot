@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { compose, withApollo, graphql, Query } from 'react-apollo'
+import { compose, withApollo, graphql, Query, getDataFromTree } from 'react-apollo'
 import { Spin, Tabs, Card, Button, Icon } from 'antd'
 
 import WalletModal from 'app/module/wallet/wallet_modal'
@@ -62,10 +62,10 @@ const WalletContainer = (props) => {
             const newBalance = parseInt(convertedBalance[0])
             return(
               <div className='balance'>
-                <div className={data.getWalletBalance.balance.unconfirmed_incoming === 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing === 0.0 ? 'title' : '-unconfirmed'}>GWX</div>
-                <span style={{ fontSize: '3.5rem' }} className={data.getWalletBalance.balance.unconfirmed_incoming === 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing === 0.0 ? '' : 'unconfirmed'}>{isNaN(newBalance) ? 0 : newBalance.toLocaleString()}</span>
-                <span className={data.getWalletBalance.balance.unconfirmed_incoming === 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing === 0.0 ? '' : 'unconfirmed'}>.</span>
-                <span style={{ fontSize: '1.5rem' }} className={data.getWalletBalance.balance.unconfirmed_incoming === 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing === 0.0 ? '' : 'unconfirmed'}>{isNaN(convertedBalance) ? '000000' : convertedBalance[1]}</span>
+                <div className={data.getWalletBalance.balance.unconfirmed_incoming !== 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing !== 0.0 ? '-unconfirmed' : 'title '}>GWX</div>
+                <span style={{ fontSize: '3.5rem' }} className={data.getWalletBalance.balance.unconfirmed_incoming !== 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing !== 0.0 ? 'unconfirmed' : ''}>{isNaN(newBalance) ? 0 : newBalance.toLocaleString()}</span>
+                <span className={data.getWalletBalance.balance.unconfirmed_incoming !== 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing !== 0.0 ? 'unconfirmed' : ''}>.</span>
+                <span style={{ fontSize: '1.5rem' }} className={data.getWalletBalance.balance.unconfirmed_incoming !== 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing !== 0.0 ? 'unconfirmed' : ''}>{isNaN(convertedBalance) ? '000000' : convertedBalance[1]}</span>
               </div>
             )
           }}
