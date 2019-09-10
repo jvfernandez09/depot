@@ -71,7 +71,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             setPay(formattedValue)
             setGwxToTransfer(converted[0].convertAmount.gwx.toString())
             const convertedValue = formattedValue+' '+toUpper(inputs.transactionType)
-            return(
+              return(
               <>
                 <label>You will pay:</label>
                 <p className='convert-value'>{convertedValue}</p>
@@ -181,7 +181,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
               >
               <Option value="btc">Bitcoin</Option>
               <Option value="xem">XEM</Option>
-              <Option value="eth">Etherium</Option>
+              <Option value="eth">Ethereum</Option>
             </Select>
           )}
         </div>
