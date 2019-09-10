@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { graphql, compose, withApollo, Query } from 'react-apollo'
 import { isEmpty, toUpper } from 'lodash'
-import { Steps, Modal, Input, Select, Button, Spin } from 'antd'
+import { Steps, Modal, Input, Select, Button, Spin, Icon } from 'antd'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 import '../../wallet/wallet_modal/index.scss'
 import ConfirmTransaction from './confirmTransaction'
@@ -199,7 +200,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       />
     )
   }
-
+  
   return(
     <>
       {isShowing ? (
@@ -267,7 +268,16 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                         </div>
                         <div>
                           <label>WALLET ADDRESS:</label>
-                          <p className="convert-value">{walletAddress}</p>
+                          <p className="convert-value">{walletAddress}
+                            <CopyToClipboard text={walletAddress}>
+                              <Icon
+                                type="copy"
+                                theme="twoTone"
+                                style={{ marginLeft: '4px'}}
+                              />
+                            </CopyToClipboard>
+                          </p>
+
                           {/* <Input addonAfter={<Icon type="copy" onClick={handleCopy} />} value={walletAddress} /> */}
                         </div>
                       </div>
@@ -276,6 +286,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                 }</div>
               </div>
             ) : null }
+
             { current === steps.length - 1 &&  done ? (
               <div className="form-body">
                 {confirmTransaction()}
