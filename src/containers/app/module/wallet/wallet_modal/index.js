@@ -4,7 +4,7 @@ import { isEmpty, toUpper } from 'lodash'
 import { Steps, Modal, Input, Select, Button, Spin } from 'antd'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 import '../../wallet/wallet_modal/index.scss'
-
+import ConfirmTransaction from './confirmTransaction'
 import QRCode from "qrcode.react";
 
 import TRANSACTIONS from '../../../../../../src/graphql/transaction'
@@ -21,6 +21,8 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   const [transactionSummary, setTransactionSummary] = useState ({})
   const [current, setCurrent] = useState(0)
   const [gwxToTransfer, setGwxToTransfer] = useState(0)
+  const [pay, setPay] = useState(0)
+  const [loading, setLoading] = useState(false)
   const steps = [
     {
       title: 'Top up',
@@ -66,6 +68,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             const converted = [data]
             let formattedValue = inputs.transactionType === "xem" ? converted[0].convertAmount.gwx.toFixed(6) :
             converted[0].convertAmount.gwx.toFixed(8)
+            setPay(formattedValue)
             setGwxToTransfer(converted[0].convertAmount.gwx.toString())
             const convertedValue = formattedValue+' '+toUpper(inputs.transactionType)
             return(
@@ -80,6 +83,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   }
 
   function next() {
+    setLoading(true)
     const count = current + 1
       if(count === 1){
         handleSubmit()
@@ -89,25 +93,14 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
         setDone(true)
       }
     setCurrent(count)
-  }
-
-  function prev() {
-    let count
-    if (current === 2){
-      count = current - 1
-      isSetShowQr(true)
-      setCurrent(count)
-    } else {
-      count = current - 1
-      isSetShowQr(false)
-      setCurrent(count)
-    }
+    setLoading(false)
   }
 
   function doneTransaction(){
     isSetShowQr(false)
     setDone(false)
     setCurrent(0)
+    initialState()
     setGwxToTransfer(0)
     hide()
   }
@@ -118,8 +111,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     const parameter = { input: variables }
 
     createTransaction({ variables: parameter }).then(response => {
-      console.log(response)
-      initialState()
       isSetShowQr(true)
       if(response.data.createTransaction.data.attributes.transaction_type === 'btc'){
         setQrCode(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
@@ -203,60 +194,11 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
 
   function confirmTransaction(){
     return(
-      <div className='content'>
-        <div className='flex'>
-          <div className='item'>
-            <p className='title'>
-              transaction number
-            </p>
-            <div className='sub'>
-              {transactionSummary.data.transaction_id}
-            </div>
-          </div>
-          <div className='item'>
-            <p className='title'>
-              status
-            </p>
-            <div className='sub'>
-              Pending
-            </div>
-          </div>
-        </div>
-        <div className='flex'>
-          <div className='item'>
-            <p className='title'>
-              gwx to transfer
-            </p>
-            <div className='sub'>
-              {transactionSummary.data.quantity_to_receive}
-            </div>
-          </div>
-          <div className='item'>
-            <p className='title'>
-              quantity to receive
-            </p>
-            <div className='sub'>
-              {transactionSummary.data.gwx_to_transfer}
-            </div>
-          </div>
-        </div>
-        <div className='item'>
-          <p className='title'>
-            receiving wallet address
-          </p>
-          <div className='sub'>
-            {transactionSummary.data.wallet_address}
-          </div>
-        </div>
-        <div className='item'>
-          <div className='sub-text'>
-            Make sure you allocate enough fuel otherwise transaction confirmation may reach up to 24 hours.
-          </div>
-        </div>
-      </div>
+      <ConfirmTransaction
+        transactionSummary={transactionSummary}
+      />
     )
   }
-
 
   return(
     <>
@@ -273,19 +215,30 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             </div>
           }
           visible={isShowing}
-          onCancel={hide}
-          footer={[current > 0 && (
-            <Button className="button btn-primary -light" key="3" style={{ marginLeft: 8 }} onClick={() => prev()}>
-              Previous
-            </Button>
-            ),
-            current < steps.length - 1 && (
-              <Button className="button btn-primary" key="1" type="primary" onClick={() => next()}>
+          onCancel={()=> {
+            hide()
+            initialState()
+            setCurrent(0)
+            isSetShowQr(false)
+          }}
+          footer={[current < steps.length - 1 && (
+              <Button
+                className="button btn-primary"
+                key="1"
+                type="primary"
+                loading={loading}
+                disabled={!isEmpty(inputs.quantityToReceive) && !isEmpty(inputs.transactionType) ? false : true}
+                onClick={() => next()}
+              >
                 Next
               </Button>
             ),
             current === steps.length - 1 && (
-              <Button className="button btn-primary" key="2" type="primary"  onClick={() => doneTransaction()}>
+              <Button
+                className="button btn-primary"
+                key="2" type="primary"
+                onClick={() =>  doneTransaction() }
+              >
                 Done
               </Button>
             )
@@ -308,6 +261,11 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                           value={`${qrCode}`}
                         />
                         <div>
+                          <label>You will pay:</label>
+                          <p className="convert-value">{pay}</p>
+                          {/* <Input addonAfter={<Icon type="copy" onClick={handleCopy} />} value={walletAddress} /> */}
+                        </div>
+                        <div>
                           <label>WALLET ADDRESS:</label>
                           <p className="convert-value">{walletAddress}</p>
                           {/* <Input addonAfter={<Icon type="copy" onClick={handleCopy} />} value={walletAddress} /> */}
@@ -325,10 +283,8 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
             ) : null}
           </div>
         </Modal>
-        ) : null
+      ) : null
       }
-
-
     </>
   )
 }

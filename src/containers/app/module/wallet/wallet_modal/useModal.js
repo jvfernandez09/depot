@@ -9,7 +9,7 @@ const useModal = (callback) => {
   }
 
   function toggle() {
-    setIsShowing(!isShowing);
+    setIsShowing(!isShowing)
   }
 
   const handleChange = (event) => {
