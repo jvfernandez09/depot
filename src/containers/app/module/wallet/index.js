@@ -53,7 +53,7 @@ const WalletContainer = (props) => {
   function walletBalance(walletAddress, userId){
     return (
       <>
-        <Query query={WALLET.GET_WALLET_BALANCE} variables={{ walletAddress }} fetchPolicy='network-only'>
+        <Query query={WALLET.GET_WALLET_BALANCE} variables={{ walletAddress }} fetchPolicy='network-only' pollInterval={15000}>
           {({ data, loading, error }) => {
             if (loading) return <Spin />
             if (error) return <p>ERROR</p>
@@ -62,8 +62,10 @@ const WalletContainer = (props) => {
             const newBalance = parseInt(convertedBalance[0])
             return(
               <div className='balance'>
-                <div className='title'>GWX</div>
-                <span style={{ fontSize: '3.5rem' }}>{newBalance.toLocaleString()}</span><span>.</span><span style={{ fontSize: '1.5rem' }}>{convertedBalance[1]}</span>
+                <div className={data.getWalletBalance.balance.unconfirmed_incoming !== 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing !== 0.0 ? '-unconfirmed' : 'title '}>GWX</div>
+                <span style={{ fontSize: '3.5rem' }} className={data.getWalletBalance.balance.unconfirmed_incoming !== 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing !== 0.0 ? 'unconfirmed' : ''}>{isNaN(newBalance) ? 0 : newBalance.toLocaleString()}</span>
+                <span className={data.getWalletBalance.balance.unconfirmed_incoming !== 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing !== 0.0 ? 'unconfirmed' : ''}>.</span>
+                <span style={{ fontSize: '1.5rem' }} className={data.getWalletBalance.balance.unconfirmed_incoming !== 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing !== 0.0 ? 'unconfirmed' : ''}>{isNaN(convertedBalance) ? '000000' : convertedBalance[1]}</span>
               </div>
             )
           }}
