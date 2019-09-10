@@ -54,6 +54,14 @@
     font-weight: 600;
   }
 
+  > .balance > .-unconfirmed {
+    bottom: 21px;
+    position: relative;
+    margin-right: 4px;
+    font-weight: 600;
+    color: rgb(235, 0, 121);
+  }
+
   > button {
     padding-left: $pad * 3;
     padding-right: $pad * 3;
@@ -113,6 +121,10 @@
 
 .hide-button {
   opacity: 0;
+}
+
+.unconfirmed {
+  color: rgb(235, 0, 121);
 }
 
 // overrides antdesign
