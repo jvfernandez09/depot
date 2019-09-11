@@ -125,7 +125,7 @@ const TransactionContainer = (props, userId) => {
 
   columns[5].render = (text, record) => (
     <>
-      <div> {record.gwxToTransfer} </div>
+      <div> {parseFloat(record.gwxToTransfer).toFixed(2)} </div>
     </>
   )
 
