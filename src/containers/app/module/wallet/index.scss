@@ -180,9 +180,12 @@
 }
 
 .ant-tabs-nav-container {
-  width: 225px;
+  width: 100%;
 }
 
+.ant-tabs-nav-wrap {
+  color: $dark-gray
+}
 .ant-card {
   background: $black;
   color: #fff;

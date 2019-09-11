@@ -69,11 +69,11 @@ const ProfileContainer = (props) => {
                 if (error) return <p>ERROR</p>
                 const userId = data.getProfile.data.id
                 return (
-                  <Tabs tabPosition='top'>
+                  <Tabs  defaultActiveKey="1" tabPosition='top'>
                     <TabPane tab={<span><Icon type='wallet' />My Wallets</span>} key='1'>
                       <WalletContainer />
                     </TabPane>
-                    <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='3'>
+                    <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='2'>
                       <TransactionContainer
                         userId={userId}
                       />
