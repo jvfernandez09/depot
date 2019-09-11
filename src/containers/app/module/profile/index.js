@@ -1,6 +1,7 @@
 import React from 'react'
 import { compose, withApollo, Query } from 'react-apollo'
 import { Spin, Tabs, Icon, Card, Avatar } from 'antd'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import GET_PROFILE from '../../../../../src/graphql/profile'
 import '../profile/index.scss'
@@ -51,6 +52,13 @@ const ProfileContainer = (props) => {
                         </div>
                         <div className='item'>
                           {data.getProfile.data.attributes.walletAddress}
+                          <CopyToClipboard text={data.getProfile.data.attributes.walletAddress}>
+                              <Icon
+                                type="copy"
+                                theme="twoTone"
+                                style={{ marginLeft: '4px'}}
+                              />
+                            </CopyToClipboard>
                         </div>
                       </div>
                     </div>
