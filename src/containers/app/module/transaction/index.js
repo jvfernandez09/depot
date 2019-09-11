@@ -42,7 +42,7 @@ const TransactionContainer = (props, userId) => {
     key: 'gwxToTransfer',
   },
   {
-    title: 'GWX Transferred',
+    title: 'GWX Purchased',
     dataIndex: 'quantityToReceive',
     key: 'quantityToReceive'
   },
@@ -119,13 +119,13 @@ const TransactionContainer = (props, userId) => {
 
   columns[4].render = (text, record) => (
     <>
-      <div style={{ width: '10%'}}>{record.quantityToReceive} </div>
+      <div>{record.quantityToReceive} </div>
     </>
   )
 
   columns[5].render = (text, record) => (
     <>
-      <div style={{ width: '10%'}}> {record.gwxToTransfer} </div>
+      <div> {parseFloat(record.gwxToTransfer).toFixed(2)} </div>
     </>
   )
 
@@ -145,7 +145,7 @@ const TransactionContainer = (props, userId) => {
       <Card>
         <div className='action-container'>
           <div className='sub'>
-            Sort transactions by date:
+            Filter transactions by date:
           </div>
           <RangePicker
             style={{ width: '50%'}}
