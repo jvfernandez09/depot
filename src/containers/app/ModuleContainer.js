@@ -17,7 +17,7 @@ const ModuleContainer = () => {
       <Switch>
         <PrivateRoute exac path="/profile" component={ProfileContainer} />
         <PrivateRoute exac path="/change" component={ChangePasswordContainer} />
-        <PrivateRoute exac path="/wallet" component={WalletContainer} />
+        <PrivateRoute exac path="/" component={WalletContainer} />
       </Switch>
     </Content>
   )
