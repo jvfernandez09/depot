@@ -1,4 +1,4 @@
-@import "./src/styles/variables";
+@import "./src/styles/common";
 
 .action-container {
   & {
@@ -42,6 +42,11 @@
     font-size: 1rem
   }
 
+  > tr > th:nth-child(5),
+  > tr > th:nth-child(6) {
+    text-align: right
+  }
+
   .ant-table-column-title {
     white-space: nowrap;
   }
@@ -74,6 +79,24 @@
 
   > tr > td:not(:first-child) {
     white-space: nowrap;
+  }
+
+  > tr > td:nth-child(4) > a {
+    // @include text-truncate(3, unset, auto)
+    display: block;
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  > tr > td:nth-child(4) > a:hover {
+    color: $primary-color;
+  }
+
+  > tr > td:nth-child(5) > div,
+  > tr > td:nth-child(6) > div {
+    text-align: right;
   }
 }
 

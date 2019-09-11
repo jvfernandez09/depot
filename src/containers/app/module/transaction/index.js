@@ -119,13 +119,13 @@ const TransactionContainer = (props, userId) => {
 
   columns[4].render = (text, record) => (
     <>
-      <div style={{ width: '10%' }}>{record.quantityToReceive} </div>
+      <div>{record.quantityToReceive} </div>
     </>
   )
 
   columns[5].render = (text, record) => (
     <>
-      <div style={{ width: '10%' }}> {record.gwxToTransfer} </div>
+      <div> {record.gwxToTransfer} </div>
     </>
   )
 
