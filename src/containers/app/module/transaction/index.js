@@ -145,7 +145,7 @@ const TransactionContainer = (props, userId) => {
       <Card>
         <div className='action-container'>
           <div className='sub'>
-            Sort transactions by date:
+            Filter transactions by date:
           </div>
           <RangePicker
             style={{ width: '50%'}}
