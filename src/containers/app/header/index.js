@@ -12,7 +12,7 @@ const HeaderContainer = (props) => {
 
   useEffect(() => {
     if (props.history.location.pathname === '/') {
-       props.history.push('/wallet')
+       props.history.push('/profile')
     }
   })
 

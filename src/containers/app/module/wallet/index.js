@@ -1,24 +1,21 @@
 import React, { useEffect } from 'react'
 import { compose, withApollo, graphql, Query } from 'react-apollo'
-import { Spin, Tabs, Card, Button, Icon } from 'antd'
+import { Spin, Card, Button } from 'antd'
 
 import WalletModal from 'app/module/wallet/wallet_modal'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 
 // import GameWalletModal from 'app/module/wallet/game_wallet_modal'
 // import useGameModal from 'app/module/wallet/game_wallet_modal/useGameModal'
+// import TransactionContainer from 'app/module/transaction'
+// import ProfileContainer from 'app/module/profile'
 
-import TransactionContainer from 'app/module/transaction'
-
-import ProfileContainer from 'app/module/profile'
 import WALLET from '../../../../../src/graphql/wallet'
 import GET_PROFILE from '../../../../../src/graphql/profile'
 import AUTHENTICATE from '../../../../../src/graphql/auth'
 
 import '../wallet/index.scss'
 // import { ReactComponent as SampleGame } from 'assets/images/sample-game.svg'
-
-const { TabPane } = Tabs;
 
 const WalletContainer = (props) => {
   const { isShowing, toggle } = useModal()
@@ -65,7 +62,7 @@ const WalletContainer = (props) => {
                 <div className={data.getWalletBalance.balance.unconfirmed_incoming !== 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing !== 0.0 ? '-unconfirmed' : 'title '}>GWX</div>
                 <span style={{ fontSize: '3.5rem' }} className={data.getWalletBalance.balance.unconfirmed_incoming !== 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing !== 0.0 ? 'unconfirmed' : ''}>{isNaN(newBalance) ? 0 : newBalance.toLocaleString()}</span>
                 <span className={data.getWalletBalance.balance.unconfirmed_incoming !== 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing !== 0.0 ? 'unconfirmed' : ''}>.</span>
-                <span style={{ fontSize: '1.5rem' }} className={data.getWalletBalance.balance.unconfirmed_incoming !== 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing !== 0.0 ? 'unconfirmed' : ''}>{isNaN(convertedBalance) ? '000000' : convertedBalance[1]}</span>
+                <span style={{ fontSize: '1.5rem' }} className={data.getWalletBalance.balance.unconfirmed_incoming !== 0.0 || data.getWalletBalance.balance.unconfirmed_outgoing !== 0.0 ? 'unconfirmed' : ''}>{isNaN(convertedBalance[1]) ? '000000' : convertedBalance[1]}</span>
               </div>
             )
           }}
@@ -122,116 +119,137 @@ const WalletContainer = (props) => {
     })
   }
 
-  return(
+  return (
     <div className="body-container">
     {token()}
       <Query query={GET_PROFILE}>
         {({ data, loading, error }) => {
           if (loading) return <Spin />
           if (error) return <p>ERROR</p>
-          const firstName = data.getProfile.data.attributes.firstName
-          const lastName = data.getProfile.data.attributes.lastName.slice(-1) === 's' ?
-            data.getProfile.data.attributes.lastName : data.getProfile.data.attributes.lastName+"'s"
           const walletAddress = data.getProfile.data.attributes.walletAddress
           const userId = data.getProfile.data.id
           return (
             <>
-              <h1 className='header'>{firstName+' '+lastName} PERSONAL WALLET</h1>
-              <Tabs tabPosition='left'>
-                <TabPane tab={<span><Icon type='wallet' />My Wallets</span>} key='1'>
-                  <div className="body-content">
-                    <h2 className='title'>My GWX Wallet</h2>
-                    <Card>
-                      <div className='wallet-container'>
-                        <p className='top'>Amount:</p>
-                        {walletAddress && walletBalance(walletAddress, userId)}
-                      </div>
-                    </Card>
-                    {/* <h2 className='title -pad'>My XEM Wallet</h2>
-                    <Card>
-                      <div className='wallet-container'>
-                        <p className='top'>Amount:</p>
-                        {walletAddress && xemWalletBalance(walletAddress)}
-                      </div>
-                    </Card> */}
-                    <h2 className='title -pad'>My Game Wallets</h2>
-                    {// <Card>
-                    //   <div className='game-card'>
-                    //     <div className='info'>
-                    //       <div className='image'>
-                    //         <SampleGame />
-                    //       </div>
-                    //       <div className='game-details'>
-                    //         <h1 className='title'>
-                    //           Crypto Keno
-                    //         </h1>
-                    //         <div className='time'>
-                    //           <p>87 hrs on record</p>
-                    //           <p>last played on Dec, 2018</p>
-                    //         </div>
-                    //       </div>
-                    //     </div>
-                    //     <div className='right'>
-                    //       <h2 className='item'>
-                    //         GWX 225
-                    //       </h2>
-                    //       <div className='action' onClick={gameToggle}>
-                    //         + Add GWX
-                    //       </div>
-                    //     </div>
-                    //    </div>
-                    //    <div className='card-divider'></div>
-                    //    <div className='game-card'>
-                    //     <div className='info'>
-                    //       <div className='image'>
-                    //         <SampleGame />
-                    //       </div>
-                    //       <div className='game-details'>
-                    //         <h1 className='title'>
-                    //           Crypto Keno
-                    //         </h1>
-                    //         <div className='time'>
-                    //           <p>87 hrs on record</p>
-                    //           <p>last played on Dec, 2018</p>
-                    //         </div>
-                    //       </div>
-                    //     </div>
-                    //     <div className='right'>
-                    //       <h2 className='item'>
-                    //         GWX 225
-                    //       </h2>
-                    //       <div className='action' onClick={gameToggle}>
-                    //         + Add GWX
-                    //       </div>
-                    //     </div>
-                    //    </div>
-                    //    <GameWalletModal
-                    //     isGameShowing={isGameShowing}
-                    //     hide={gameToggle}
-                    //     walletAddress={walletAddress}
-                    //    />
-                    // </Card>
-                  }
+              <div className="body-content">
+                <h2 className='title'>My GWX Wallet</h2>
+                <Card>
+                  <div className='wallet-container'>
+                    <p className='top'>Amount:</p>
+                    {walletAddress && walletBalance(walletAddress, userId)}
                   </div>
-                </TabPane>
-                <TabPane tab={<span><Icon type='profile' />My Profile</span>} key='2'>
-                  <ProfileContainer />
-                  <TransactionContainer
-                    userId={userId}
-                  />
-                </TabPane>
-                {/* <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='3'>
-                  <TransactionContainer
-                    userId={userId}
-                  />
-                </TabPane> */}
-              </Tabs>
+                </Card>
+                <h2 className='title -pad'>My Game Wallets</h2>
+              </div>
             </>
           )
         }}
-      </Query>
+        </Query>
     </div>
   )
+
+  // return(
+  //   <div className="body-container">
+  //   {token()}
+  //     <Query query={GET_PROFILE}>
+  //       {({ data, loading, error }) => {
+  //         if (loading) return <Spin />
+  //         if (error) return <p>ERROR</p>
+  //         const firstName = data.getProfile.data.attributes.firstName
+  //         const lastName = data.getProfile.data.attributes.lastName.slice(-1) === 's' ?
+  //           data.getProfile.data.attributes.lastName : data.getProfile.data.attributes.lastName+"'s"
+  //         const walletAddress = data.getProfile.data.attributes.walletAddress
+  //         const userId = data.getProfile.data.id
+  //         return (
+  //           <>
+  //             {/* <h1 className='header'>{firstName+' '+lastName} PERSONAL WALLET</h1> */}
+  //             {/* <Tabs tabPosition='left'> */}
+  //               {/* <TabPane tab={<span><Icon type='wallet' />My Wallets</span>} key='1'>
+  //                 <div className="body-content">
+  //                   <h2 className='title'>My GWX Wallet</h2>
+  //                   <Card>
+  //                     <div className='wallet-container'>
+  //                       <p className='top'>Amount:</p>
+  //                       {walletAddress && walletBalance(walletAddress, userId)}
+  //                     </div>
+  //                   </Card>
+  //                   <h2 className='title -pad'>My Game Wallets</h2>
+  //                   {// <Card>
+  //                   //   <div className='game-card'>
+  //                   //     <div className='info'>
+  //                   //       <div className='image'>
+  //                   //         <SampleGame />
+  //                   //       </div>
+  //                   //       <div className='game-details'>
+  //                   //         <h1 className='title'>
+  //                   //           Crypto Keno
+  //                   //         </h1>
+  //                   //         <div className='time'>
+  //                   //           <p>87 hrs on record</p>
+  //                   //           <p>last played on Dec, 2018</p>
+  //                   //         </div>
+  //                   //       </div>
+  //                   //     </div>
+  //                   //     <div className='right'>
+  //                   //       <h2 className='item'>
+  //                   //         GWX 225
+  //                   //       </h2>
+  //                   //       <div className='action' onClick={gameToggle}>
+  //                   //         + Add GWX
+  //                   //       </div>
+  //                   //     </div>
+  //                   //    </div>
+  //                   //    <div className='card-divider'></div>
+  //                   //    <div className='game-card'>
+  //                   //     <div className='info'>
+  //                   //       <div className='image'>
+  //                   //         <SampleGame />
+  //                   //       </div>
+  //                   //       <div className='game-details'>
+  //                   //         <h1 className='title'>
+  //                   //           Crypto Keno
+  //                   //         </h1>
+  //                   //         <div className='time'>
+  //                   //           <p>87 hrs on record</p>
+  //                   //           <p>last played on Dec, 2018</p>
+  //                   //         </div>
+  //                   //       </div>
+  //                   //     </div>
+  //                   //     <div className='right'>
+  //                   //       <h2 className='item'>
+  //                   //         GWX 225
+  //                   //       </h2>
+  //                   //       <div className='action' onClick={gameToggle}>
+  //                   //         + Add GWX
+  //                   //       </div>
+  //                   //     </div>
+  //                   //    </div>
+  //                   //    <GameWalletModal
+  //                   //     isGameShowing={isGameShowing}
+  //                   //     hide={gameToggle}
+  //                   //     walletAddress={walletAddress}
+  //                   //    />
+  //                   // </Card>
+  //                 }
+  //                 </div>
+  //               </TabPane> */}
+  //               {/* <TabPane tab={<span><Icon type='profile' />My Profile</span>} key='2'>
+  //                 <ProfileContainer />
+  //                 <TransactionContainer
+  //                   userId={userId}
+  //                 />
+  //               </TabPane> */}
+  //               {/* <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='3'>
+  //                 <TransactionContainer
+  //                   userId={userId}
+  //                 />
+  //               </TabPane> */}
+  //             {/* </Tabs> */}
+  //           </>
+  //         )
+  //       }}
+  //     </Query>
+  //   </div>
+  // )
 }
 
 export default compose(

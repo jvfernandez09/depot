@@ -46,7 +46,7 @@ const Login = (props) => {
       localStorage.setItem('REF_TOKEN', responseData.data.authenticateCodeGrant.refresh_token)
       localStorage.setItem('timeStamp', new Date().getTime())
       if(isNull(response.data.loginUser.user.data.attributes.resetPasswordSentAt)){
-        props.history.push('/wallet')
+        props.history.push('/profile')
       } else {
         Notification.show({
           type: 'info',
