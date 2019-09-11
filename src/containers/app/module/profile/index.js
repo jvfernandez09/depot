@@ -13,7 +13,7 @@ const { TabPane } = Tabs
 const ProfileContainer = (props) => {
   return (
     <>
-      <div>
+      <div className="profile-container">
         <Query query={GET_PROFILE}>
           {({ data, loading, error }) => {
             if (loading) return <Spin />
@@ -28,61 +28,63 @@ const ProfileContainer = (props) => {
             )
             }}
         </Query>
-      </div>
-      <div className="body-content">
-        <h2 className='title'>User Details</h2>
-        <Card>
-          <div className="profile-header">
-            <Avatar shape="square" size={150} icon="user" />
-            <Query query={GET_PROFILE}>
-              {({ data, loading, error }) => {
-                if (loading) return <p> Loading </p>
-                if (error) return <p>ERROR</p>
-                const fullName = `${data.getProfile.data.attributes.firstName} ${data.getProfile.data.attributes.lastName}`
-                return(
-                  <div className="profile-details">
-                    <div className='top'>
-                      <div className="name">{fullName} </div>
-                      <div className="sub">{data.getProfile.data.attributes.email}</div>
-                      <div className="created">{data.getProfile.data.attributes.confirmedAt}</div>
-                    </div>
-                    <div className='bottom'>
-                      <div className='label'>
-                        Wallet Address:
-                      </div>
-                      <div className='item'>
-                        {data.getProfile.data.attributes.walletAddress}
-                      </div>
-                    </div>
-                  </div>
-                )
-              }}
-            </Query>
-          </div>
-        </Card>
-      </div>
-      <div className="body-content">
+        <div className="body-content">
+          <h2 className='title'>User Details</h2>
           <Card>
-            <Query query={GET_PROFILE}>
-              {({ data, loading, error }) => {
-                if (loading) return <Spin />
-                if (error) return <p>ERROR</p>
-                const userId = data.getProfile.data.id
-                return (
-                  <Tabs  defaultActiveKey="1" tabPosition='top'>
-                    <TabPane tab={<span><Icon type='wallet' />My Wallets</span>} key='1'>
-                      <WalletContainer />
-                    </TabPane>
-                    <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='2'>
-                      <TransactionContainer
-                        userId={userId}
-                      />
-                    </TabPane>
-                  </Tabs>
-                )
-              }}
-            </Query>
+            <div className="profile-header">
+              <Avatar shape="square" size={150} icon="user" />
+              <Query query={GET_PROFILE}>
+                {({ data, loading, error }) => {
+                  if (loading) return <p> Loading </p>
+                  if (error) return <p>ERROR</p>
+                  const fullName = `${data.getProfile.data.attributes.firstName} ${data.getProfile.data.attributes.lastName}`
+                  return(
+                    <div className="profile-details">
+                      <div className='top'>
+                        <div className="name">{fullName} </div>
+                        <div className="sub">{data.getProfile.data.attributes.email}</div>
+                        <div className="created">{data.getProfile.data.attributes.confirmedAt}</div>
+                      </div>
+                      <div className='bottom'>
+                        <div className='label'>
+                          Wallet Address:
+                        </div>
+                        <div className='item'>
+                          {data.getProfile.data.attributes.walletAddress}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }}
+              </Query>
+            </div>
           </Card>
+        </div>
+      </div>
+      <div className="tab-content">
+        <div className="body-content">
+            <div>
+              <Query query={GET_PROFILE}>
+                {({ data, loading, error }) => {
+                  if (loading) return <Spin />
+                  if (error) return <p>ERROR</p>
+                  const userId = data.getProfile.data.id
+                  return (
+                    <Tabs  defaultActiveKey="1" tabPosition='top'>
+                      <TabPane tab={<span><Icon type='wallet' />My Wallets</span>} key='1'>
+                        <WalletContainer />
+                      </TabPane>
+                      <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='2'>
+                        <TransactionContainer
+                          userId={userId}
+                        />
+                      </TabPane>
+                    </Tabs>
+                  )
+                }}
+              </Query>
+            </div>
+        </div>
       </div>
     </>
   )

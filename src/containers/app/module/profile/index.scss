@@ -8,6 +8,23 @@
   }
 }
 
+.header {
+  color: #f8d154;
+  font-weight: 900;
+  margin-bottom: 16px
+}
+
+.profile-container {
+  padding-top: 36px;
+  padding-left: 36px;
+  padding-bottom: 0;
+  padding-right: 36px;
+}
+
+.tab-content {
+  padding: 36px;
+}
+
 .body-content {
   > .title {
     margin-bottom: $pad * 2 - 4;
@@ -70,4 +87,8 @@
   color: #fff;
   border: none;
   border-radius: 8px
+}
+
+.ant-tabs-bar {
+  border-bottom: none;
 }

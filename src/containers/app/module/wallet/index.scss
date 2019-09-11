@@ -127,6 +127,14 @@
   color: rgb(235, 0, 121);
 }
 
+.wallet-card {
+  background: transparent;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 34px;
+}
+
 // overrides antdesign
 .ant-tabs {
   > .ant-tabs-left-bar,
@@ -186,10 +194,10 @@
 .ant-tabs-nav-wrap {
   color: $dark-gray
 }
-.ant-card {
-  background: $black;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  margin-bottom: 34px;
-}
+// .ant-card {
+//   background: $black;
+//   color: #fff;
+//   border: none;
+//   border-radius: 8px;
+//   margin-bottom: 34px;
+// }
