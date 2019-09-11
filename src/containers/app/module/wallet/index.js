@@ -134,11 +134,20 @@ const WalletContainer = (props) => {
                 <h2 className='title'>My GWX Wallet</h2>
                 <Card>
                   <div className='wallet-container'>
-                    <p className='top'>Amount:</p>
+                    <p className='top'></p>
                     {walletAddress && walletBalance(walletAddress, userId)}
                   </div>
                 </Card>
                 <h2 className='title -pad'>My Game Wallets</h2>
+                <Card>
+                  <div className="wallet-container">
+                    <p className='top'></p>
+                    <div className='balance'>
+                      <span>You don't have any Game Wallets.</span>
+                    </div>
+                    <Button style={{ background: 'transparent', border: 'none' }}></Button>
+                  </div>
+                </Card>
               </div>
             </>
           )

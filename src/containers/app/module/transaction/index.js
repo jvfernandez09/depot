@@ -42,7 +42,7 @@ const TransactionContainer = (props, userId) => {
     key: 'gwxToTransfer',
   },
   {
-    title: 'GWX Transferred',
+    title: 'GWX Purchased',
     dataIndex: 'quantityToReceive',
     key: 'quantityToReceive'
   },
@@ -119,13 +119,13 @@ const TransactionContainer = (props, userId) => {
 
   columns[4].render = (text, record) => (
     <>
-      <div style={{ width: '10%'}}>{record.quantityToReceive} </div>
+      <div style={{ width: '10%' }}>{record.quantityToReceive} </div>
     </>
   )
 
   columns[5].render = (text, record) => (
     <>
-      <div style={{ width: '10%'}}> {record.gwxToTransfer} </div>
+      <div style={{ width: '10%' }}> {record.gwxToTransfer} </div>
     </>
   )
 
