@@ -200,7 +200,8 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       />
     )
   }
-  
+
+
   return(
     <>
       {isShowing ? (
@@ -262,8 +263,8 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                           value={`${qrCode}`}
                         />
                         <div>
-                          <label>You will pay:</label>
-                          <p className="convert-value">{pay}</p>
+                          <label>You will pay: </label>
+                          <p className="convert-value">{pay+' '+toUpper(inputs.transactionType)}</p>
                           {/* <Input addonAfter={<Icon type="copy" onClick={handleCopy} />} value={walletAddress} /> */}
                         </div>
                         <div>
