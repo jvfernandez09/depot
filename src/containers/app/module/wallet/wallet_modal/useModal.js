@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 const useModal = (callback) => {
   const [inputs, setInputs] = useState({})
@@ -7,7 +7,6 @@ const useModal = (callback) => {
   const initialState = () => {
     setInputs({})
   }
-
   function toggle() {
     setIsShowing(!isShowing)
   }

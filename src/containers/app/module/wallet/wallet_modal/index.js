@@ -14,7 +14,13 @@ const { Option } = Select
 const { Step } = Steps
 
 const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddress }) => {
-  const { handleChange, handleChangeSelect, inputs, handleSubmit, initialState } = useModal(addFunds)
+  const {
+    handleChange,
+    handleChangeSelect,
+    inputs, handleSubmit,
+    initialState
+  } = useModal(addFunds)
+
   const [isShowQr, isSetShowQr] = useState(false)
   const [done, setDone] = useState(false)
   const [qrCode, setQrCode] = useState({})
@@ -24,6 +30,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   const [gwxToTransfer, setGwxToTransfer] = useState(0)
   const [pay, setPay] = useState(0)
   const [loading, setLoading] = useState(false)
+
   const steps = [
     {
       title: 'Top up',
@@ -89,17 +96,19 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   }
 
   function next() {
-    setLoading(true)
-    const count = current + 1
-      if(count === 1){
-        handleSubmit()
-      } else {
-        confirmTransaction(inputs.transactionType)
-        isSetShowQr(false)
-        setDone(true)
-      }
-    setCurrent(count)
-    setLoading(false)
+    if(inputs.quantityToReceive >= 500000){
+      setLoading(true)
+      const count = current + 1
+        if(count === 1){
+          handleSubmit()
+        } else {
+          confirmTransaction(inputs.transactionType)
+          isSetShowQr(false)
+          setDone(true)
+        }
+      setCurrent(count)
+      setLoading(false)
+    }
   }
 
   function doneTransaction(){
@@ -144,7 +153,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     })
   }
 
-
   function formInput(){
     return (
       <div className='content'>
@@ -158,10 +166,15 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
           <Input
             placeholder="Input GWX"
             name='quantityToReceive'
-            type='number'
+            type="number"
             onChange={handleChange}
             className='input'
           />
+          {inputs.quantityToReceive > 500000 ?
+            <>
+            <p style={{ color: 'red'}}>Maximum GWX Purchase is 500,000</p>
+            </>
+          : null}
         </div>
 
         <div className="form-group">
@@ -234,7 +247,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                 key="1"
                 type="primary"
                 loading={loading}
-                disabled={!isEmpty(inputs.quantityToReceive) && !isEmpty(inputs.transactionType) ? false : true}
+                disabled={!isEmpty(inputs.quantityToReceive) && !isEmpty(inputs.transactionType) && inputs.quantityToReceive <= 500000 ? false : true}
                 onClick={() => next()}
               >
                 Next
