@@ -89,7 +89,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       if(count === 1){
         handleSubmit()
       } else {
-        confirmTransaction()
+        confirmTransaction(inputs.transactionType)
         isSetShowQr(false)
         setDone(true)
       }
@@ -193,14 +193,16 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     )
   }
 
-  function confirmTransaction(){
+  function confirmTransaction(type){
     return(
       <ConfirmTransaction
         transactionSummary={transactionSummary}
+        type={type}
       />
     )
   }
-  
+
+
   return(
     <>
       {isShowing ? (
@@ -262,8 +264,8 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                           value={`${qrCode}`}
                         />
                         <div>
-                          <label>You will pay:</label>
-                          <p className="convert-value">{pay}</p>
+                          <label>You will pay: </label>
+                          <p className="convert-value">{pay+' '+toUpper(inputs.transactionType)}</p>
                           {/* <Input addonAfter={<Icon type="copy" onClick={handleCopy} />} value={walletAddress} /> */}
                         </div>
                         <div>
@@ -289,7 +291,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
 
             { current === steps.length - 1 &&  done ? (
               <div className="form-body">
-                {confirmTransaction()}
+                {confirmTransaction(inputs.transactionType)}
               </div>
             ) : null}
           </div>
