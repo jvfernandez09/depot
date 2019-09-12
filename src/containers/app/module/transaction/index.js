@@ -131,9 +131,11 @@ const TransactionContainer = (props, userId) => {
 
   columns[6].render = (text, record) =>(
     <>
-      {record.status === "PENDING" ?
+      {record.status === "INITIATED" || record.status === "PAYMENT_RECEIVING_WALLET_ASSIGNED"
+      || record.status === "PENDING" || record.status === "PURCHASED_CONFIRMED" ||
+      record.status === "PENDING_GWX_TRANSFER" ?
       <span style={{ color: 'orange'}}> {record.status} </span>
-      : record.status === "INITIATED" || record.status === "TRANSACTION UNSUCCESSFUL" ?
+      : record.status === "FAILED" || record.status === "CANCELLED" ?
       <span style={{ color: 'red'}}> {record.status} </span>
       : <span style={{ color: 'green'}}> {record.status} </span>}
     </>
