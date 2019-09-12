@@ -89,7 +89,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       if(count === 1){
         handleSubmit()
       } else {
-        confirmTransaction()
+        confirmTransaction(inputs.transactionType)
         isSetShowQr(false)
         setDone(true)
       }
@@ -193,10 +193,11 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     )
   }
 
-  function confirmTransaction(){
+  function confirmTransaction(type){
     return(
       <ConfirmTransaction
         transactionSummary={transactionSummary}
+        type={type}
       />
     )
   }
@@ -290,7 +291,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
 
             { current === steps.length - 1 &&  done ? (
               <div className="form-body">
-                {confirmTransaction()}
+                {confirmTransaction(inputs.transactionType)}
               </div>
             ) : null}
           </div>

@@ -1,8 +1,13 @@
 import React from 'react'
 import '../../wallet/wallet_modal/index.scss'
+import { toUpper } from 'lodash'
 
 
-const ConfirmTransaction = ({ transactionSummary }) => {
+const ConfirmTransaction = ({ transactionSummary, type }) => {
+  const transactionType = toUpper(type)
+  const amountToPay = transactionType === 'XEM' ? parseFloat(transactionSummary.data.gwx_to_transfer).toFixed(6)
+  : parseFloat(transactionSummary.data.gwx_to_transfer).toFixed(8)
+  
   return(
     <div className='content'>
       <div className='flex'>
@@ -34,10 +39,10 @@ const ConfirmTransaction = ({ transactionSummary }) => {
         </div>
         <div className='item'>
           <p className='title'>
-            quantity to receive
+            amount to pay
           </p>
           <div className='sub'>
-            {transactionSummary.data.gwx_to_transfer}
+            {amountToPay+' '+transactionType}
           </div>
         </div>
       </div>
