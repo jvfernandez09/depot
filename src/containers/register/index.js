@@ -1,12 +1,10 @@
 import React  from 'react'
 import { Link } from 'react-router-dom'
-
-import stepOne from 'assets/images/stepOne.png'
-import stepTwo from 'assets/images/stepTwo.png'
-import stepThree from 'assets/images/stepThree.png'
-
+import { ReactComponent as StepOne }  from 'assets/images/stepOne.svg'
+import { ReactComponent as StepTwo }  from 'assets/images/stepTwo.svg'
+import { ReactComponent as StepThree }  from 'assets/images/stepThree.svg'
 import { ReactComponent as Logo } from 'assets/images/LOGO-tokendepot.svg'
-import {ReactComponent as GooglePlay} from 'assets/images/google-play.svg'
+import { ReactComponent as GooglePlay } from 'assets/images/google-play.svg'
 
 import './index.scss'
 const Register = () => {
@@ -31,10 +29,10 @@ const Register = () => {
                 <div className='google-play'>
                   <GooglePlay onClick={() => window.open('https://play.google.com/store/apps/details?id=com.gameworksmobilewallet&hl=en','_blank')} />
                 </div>
-                <div className='sub'>
-                  <img alt={stepOne} src={stepOne} />
-                  <img alt={stepTwo} src={stepTwo} />
-                  <img alt={stepThree} src={stepThree} />
+                <div className='image'>
+                  <StepOne />
+                  <StepTwo />
+                  <StepThree />
                 </div>
               </div>
             </div>

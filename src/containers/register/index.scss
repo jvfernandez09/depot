@@ -107,6 +107,15 @@
     margin-bottom: 2rem;
     cursor: pointer;
   }
+
+  > .content-register > .head-register > .image {
+    display: flex;
+  }
+
+  > .content-register > .head-register > .image > svg {
+    width: 300px;
+    height: 580px;
+  }
 }
 
 .link-action {
