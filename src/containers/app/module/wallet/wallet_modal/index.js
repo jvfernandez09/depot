@@ -96,19 +96,17 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   }
 
   function next() {
-    if(inputs.quantityToReceive >= 500000){
-      setLoading(true)
-      const count = current + 1
-        if(count === 1){
-          handleSubmit()
-        } else {
-          confirmTransaction(inputs.transactionType)
-          isSetShowQr(false)
-          setDone(true)
-        }
-      setCurrent(count)
-      setLoading(false)
-    }
+    setLoading(true)
+    const count = current + 1
+      if(count === 1){
+        handleSubmit()
+      } else {
+        confirmTransaction(inputs.transactionType)
+        isSetShowQr(false)
+        setDone(true)
+      }
+    setCurrent(count)
+    setLoading(false)
   }
 
   function doneTransaction(){

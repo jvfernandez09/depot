@@ -25,6 +25,50 @@
   }
 }
 
+.wallet-container {
+  & {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  > .balance {
+    display: flex;
+    color: $primary-color;
+    align-items: baseline;
+    font-weight: 500;
+  }
+
+  .balance.-small {
+    color: #fff;
+    font-weight: 400;
+
+    > .title {
+      font-size: 12px;
+    }
+  }
+
+  > .balance > .title {
+    bottom: 21px;
+    position: relative;
+    margin-right: 4px;
+    font-weight: 600;
+  }
+
+  > .balance > .-unconfirmed {
+    bottom: 21px;
+    position: relative;
+    margin-right: 4px;
+    font-weight: 600;
+    color: rgb(235, 0, 121);
+  }
+
+  > button {
+    padding-left: $pad * 3;
+    padding-right: $pad * 3;
+  }
+}
+
 // overrides antDesign
 .ant-calendar-picker:focus .ant-calendar-picker-input:not(.ant-input-disabled) {
   box-shadow: none;
