@@ -55,13 +55,7 @@ const TransactionContainer = (props, userId) => {
 ]
 
   useEffect(() => {
-    try{
-      setInterval(async () => {
-        getTransaction(props)
-      }, 15000)
-    } catch(e){
-      console.log(e)
-    }
+    getTransaction(props)
   }, [props])
 
   async function getTransaction(props){
@@ -167,13 +161,13 @@ const TransactionContainer = (props, userId) => {
               />
             </div>
             <div className='table-container'>
-                <Table
-                  dataSource={filterSource === '' ? dataSource : filterSource}
-                  columns={columns}
-                  loading={isLoading}
-                  pagination={{ pageSize: 5 }}
-                  scroll={{ x: 'fit-content' }}
-                />
+              <Table
+                dataSource={filterSource === '' ? dataSource : filterSource}
+                columns={columns}
+                loading={isLoading}
+                pagination={{ pageSize: 5 }}
+                scroll={{ x: 'fit-content' }}
+              />
             </div>
           </Card>
         </div> : <EmptyTransaction />}
