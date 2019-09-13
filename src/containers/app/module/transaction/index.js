@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { compose, withApollo } from 'react-apollo'
 import { Table, DatePicker, Card, Spin } from 'antd'
-import { upperFirst, upperCase, toUpper, isNaN } from 'lodash'
+import { upperFirst, upperCase, toUpper, isNaN, isEmpty} from 'lodash'
+import EmptyTransaction  from './emptyTransaction'
 import TRANSACTIONS from '../../../../../src/graphql/transaction'
 import dayjs from 'dayjs'
 
@@ -141,35 +142,41 @@ const TransactionContainer = (props, userId) => {
     </>
   )
 
+  console.log(dataSource)
   return(
-    <div className='body-content'>
-      <h2 className='title'>Transaction History</h2>
-      <Card>
-        <div className='action-container'>
-          <div className='sub'>
-            Filter transactions by date:
-          </div>
-          <RangePicker
-            style={{ width: '50%'}}
-            className='date'
-            onChange={(date, dateString) => {
-              filterDate(dateString)
-            }}
-          />
+    <>
+      {!isEmpty(dataSource) ? (
+        <div className='body-content'>
+          <h2 className='title'>Transaction History</h2>
+          <Card>
+            <div className='action-container'>
+              <div className='sub'>
+                Filter transactions by date:
+              </div>
+              <RangePicker
+                style={{ width: '50%'}}
+                className='date'
+                onChange={(date, dateString) => {
+                  filterDate(dateString)
+                }}
+              />
+            </div>
+            <div className='table-container'>
+              {isLoading ? <Spin /> :
+                <Table
+                  dataSource={filterSource === '' ? dataSource : filterSource}
+                  columns={columns}
+                  loading={isLoading}
+                  pagination={{ pageSize: 5 }}
+                  scroll={{ x: 'fit-content' }}
+                />
+              }
+            </div>
+          </Card>
         </div>
-        <div className='table-container'>
-          {isLoading ? <Spin /> :
-            <Table
-              dataSource={filterSource === '' ? dataSource : filterSource}
-              columns={columns}
-              loading={isLoading}
-              pagination={{ pageSize: 5 }}
-              scroll={{ x: 'fit-content' }}
-            />
-          }
-        </div>
-      </Card>
-    </div>
+      ) : <EmptyTransaction />
+      }
+    </>
   )
 }
 
