@@ -55,7 +55,13 @@ const TransactionContainer = (props, userId) => {
 ]
 
   useEffect(() => {
-    getTransaction(props)
+    try{
+      setInterval(async () => {
+        getTransaction(props)
+      }, 15000)
+    } catch(e){
+      console.log(e)
+    }
   }, [props])
 
   async function getTransaction(props){
@@ -142,11 +148,10 @@ const TransactionContainer = (props, userId) => {
     </>
   )
 
-  console.log(dataSource)
   return(
     <>
-      {!isEmpty(dataSource) ? (
-        <div className='body-content'>
+      {isLoading ? <Spin/> : !isEmpty(dataSource) ?
+       <div className='body-content'>
           <h2 className='title'>Transaction History</h2>
           <Card>
             <div className='action-container'>
@@ -162,7 +167,6 @@ const TransactionContainer = (props, userId) => {
               />
             </div>
             <div className='table-container'>
-              {isLoading ? <Spin /> :
                 <Table
                   dataSource={filterSource === '' ? dataSource : filterSource}
                   columns={columns}
@@ -170,12 +174,9 @@ const TransactionContainer = (props, userId) => {
                   pagination={{ pageSize: 5 }}
                   scroll={{ x: 'fit-content' }}
                 />
-              }
             </div>
           </Card>
-        </div>
-      ) : <EmptyTransaction />
-      }
+        </div> : <EmptyTransaction />}
     </>
   )
 }
