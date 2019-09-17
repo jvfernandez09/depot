@@ -32,7 +32,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   const [current, setCurrent] = useState(0)
   const [gwxToTransfer, setGwxToTransfer] = useState(0)
   const [pay, setPay] = useState(0)
-  const [loading, setLoading] = useState(false)
 
   const steps = [
     {
@@ -241,7 +240,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     <>
       {isShowing ? (
         <Modal
-          confirmLoading={true}
           title={
             <div className='header-container'>
               <div className='title'>Buy GWX</div>
@@ -264,7 +262,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                 className="button btn-primary"
                 key="1"
                 type="primary"
-                loading={loading}
                 disabled={!isEmpty(inputs.quantityToReceive) && !isEmpty(inputs.transactionType) && inputs.quantityToReceive <= 500000 ? false : true}
                 onClick={() => current === 0 ? showConfirm() : next()}
               >
