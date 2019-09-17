@@ -88,7 +88,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1999;
+  z-index: 2000;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.65);
 }
@@ -257,4 +257,28 @@
 
 .ant-select-dropdown-menu-item {
   color: #fff;
+}
+
+.ant-modal-confirm-body .ant-modal-confirm-title {
+  color: #F8D154;
+}
+
+.ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
+  color: white;
+}
+
+
+.ant-modal-confirm-btns{
+  .ant-btn {
+    color: #37393C;
+    background-color: #F8D154;
+    border-color: #F8D154;
+  }
+}
+
+.ant-notification.ant-notification-topRight{
+  right: 0px;
+  top: 24px;
+  bottom: auto;
+  z-index: 2001;
 }

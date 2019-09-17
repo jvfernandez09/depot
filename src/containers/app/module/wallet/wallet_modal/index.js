@@ -6,19 +6,22 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 import '../../wallet/wallet_modal/index.scss'
 import ConfirmTransaction from './confirmTransaction'
-import QRCode from "qrcode.react";
+import QRCode from "qrcode.react"
+import Notification from 'utils/notification'
 
 import TRANSACTIONS from '../../../../../../src/graphql/transaction'
 
 const { Option } = Select
 const { Step } = Steps
+const { confirm } = Modal
 
 const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddress }) => {
   const {
     handleChange,
     handleChangeSelect,
-    inputs, handleSubmit,
-    initialState
+    inputs,
+    handleSubmit,
+    initialState,
   } = useModal(addFunds)
 
   const [isShowQr, isSetShowQr] = useState(false)
@@ -95,8 +98,8 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     )
   }
 
+
   function next() {
-    setLoading(true)
     const count = current + 1
       if(count === 1){
         handleSubmit()
@@ -106,7 +109,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
         setDone(true)
       }
     setCurrent(count)
-    setLoading(false)
   }
 
   function doneTransaction(){
@@ -118,12 +120,29 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     hide()
   }
 
+  function showConfirm() {
+    confirm({
+      style: { marginTop: '180px' },
+      title: 'Do you want to proceed?',
+      content: 'NOTE: Please review transaction details. Click OK to continue.',
+      onOk() {
+        return new Promise((resolve, reject) => {
+          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000)
+          next()
+        }).catch(() => console.log('Something went wrong'));
+      },
+      onCancel() {
+        isSetShowQr(false)
+      },
+    })
+  }
+
   async function addFunds(){
     const variables = { ...inputs, gwxWalletAddress, userId, gwxToTransfer}
 
     const parameter = { input: variables }
 
-    createTransaction({ variables: parameter }).then(response => {
+    createTransaction({ variables: parameter }).then(async response => {
       isSetShowQr(true)
       if(response.data.createTransaction.data.attributes.transaction_type === 'btc'){
         setQrCode(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
@@ -222,6 +241,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     <>
       {isShowing ? (
         <Modal
+          confirmLoading={true}
           title={
             <div className='header-container'>
               <div className='title'>Buy GWX</div>
@@ -246,7 +266,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                 type="primary"
                 loading={loading}
                 disabled={!isEmpty(inputs.quantityToReceive) && !isEmpty(inputs.transactionType) && inputs.quantityToReceive <= 500000 ? false : true}
-                onClick={() => next()}
+                onClick={() => current === 0 ? showConfirm() : next()}
               >
                 Next
               </Button>
@@ -281,12 +301,18 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                         <div>
                           <label>You will pay: </label>
                           <p className="convert-value">{pay+' '+toUpper(inputs.transactionType)}</p>
-                          {/* <Input addonAfter={<Icon type="copy" onClick={handleCopy} />} value={walletAddress} /> */}
                         </div>
                         <div>
                           <label>WALLET ADDRESS:</label>
                           <p className="convert-value">{walletAddress}
-                            <CopyToClipboard text={walletAddress}>
+                            <CopyToClipboard
+                              onCopy={(e) => {
+                                Notification.show({
+                                  type: 'success',
+                                  message: 'Wallet address copied.'
+                                })
+                              }}
+                              text={walletAddress}>
                               <Icon
                                 type="copy"
                                 theme="twoTone"
@@ -294,8 +320,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                               />
                             </CopyToClipboard>
                           </p>
-
-                          {/* <Input addonAfter={<Icon type="copy" onClick={handleCopy} />} value={walletAddress} /> */}
                         </div>
                       </div>
                     </>
