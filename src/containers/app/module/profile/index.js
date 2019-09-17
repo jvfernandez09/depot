@@ -46,7 +46,7 @@ const ProfileContainer = (props) => {
                       <div className='top'>
                         <div className="name">{fullName} </div>
                         <div className="sub">{data.getProfile.data.attributes.email}</div>
-                        <div className="created">{dayjs(data.getProfile.data.attributes.lastLogin).format('DD-MMM-YYYY, HH:mm')}</div>
+                        <div className="created">Last logged in: {dayjs(data.getProfile.data.attributes.lastLogin).format('DD-MMM-YYYY,  HH:mm')}</div>
                       </div>
                       <div className='bottom'>
                         <div className='label'>
