@@ -6,7 +6,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 import '../../wallet/wallet_modal/index.scss'
 import ConfirmTransaction from './confirmTransaction'
-import QRCode from "qrcode.react";
+import QRCode from "qrcode.react"
+import Notification from 'utils/notification'
 
 import TRANSACTIONS from '../../../../../../src/graphql/transaction'
 
@@ -304,7 +305,14 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                         <div>
                           <label>WALLET ADDRESS:</label>
                           <p className="convert-value">{walletAddress}
-                            <CopyToClipboard text={walletAddress}>
+                            <CopyToClipboard
+                              onCopy={(e) => {
+                                Notification.show({
+                                  type: 'success',
+                                  message: 'Wallet address copied.'
+                                })
+                              }}
+                              text={walletAddress}>
                               <Icon
                                 type="copy"
                                 theme="twoTone"

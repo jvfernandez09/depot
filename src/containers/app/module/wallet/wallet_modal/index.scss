@@ -275,3 +275,10 @@
     border-color: #F8D154;
   }
 }
+
+.ant-notification.ant-notification-topRight{
+  right: 0px;
+  top: 24px;
+  bottom: auto;
+  z-index: 2001;
+}
