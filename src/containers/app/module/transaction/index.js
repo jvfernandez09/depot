@@ -136,7 +136,7 @@ const TransactionContainer = (props, userId) => {
       || record.status === "PENDING" || record.status === "PURCHASED_CONFIRMED" ||
       record.status === "PENDING_GWX_TRANSFER" ?
       <span style={{ color: 'orange'}}> {record.status} </span>
-      : record.status === "FAILED" || record.status === "CANCELLED" || record.status === "UNRECOGNIZED_STATUS" ?
+      : record.status === "FAILED" || record.status === "CANCELLED" || record.status === "UNRECOGNIZED STATUS" ?
       <span style={{ color: 'red'}}> {record.status} </span>
       : <span style={{ color: 'green'}}> {record.status} </span>}
     </>
