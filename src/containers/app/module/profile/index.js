@@ -2,12 +2,14 @@ import React from 'react'
 import { compose, withApollo, Query } from 'react-apollo'
 import { Spin, Tabs, Icon, Card, Avatar } from 'antd'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import dayjs from 'dayjs'
 
 import GET_PROFILE from '../../../../../src/graphql/profile'
 import '../profile/index.scss'
 
 import WalletContainer from 'app/module/wallet'
 import TransactionContainer from 'app/module/transaction'
+import Notification from 'utils/notification'
 
 const { TabPane } = Tabs
 
@@ -39,12 +41,13 @@ const ProfileContainer = (props) => {
                   if (loading) return <p> Loading </p>
                   if (error) return <p>ERROR</p>
                   const fullName = `${data.getProfile.data.attributes.firstName} ${data.getProfile.data.attributes.lastName}`
+                  console.log(data.getProfile.data.attributes.lastLogin)
                   return(
                     <div className="profile-details">
                       <div className='top'>
                         <div className="name">{fullName} </div>
                         <div className="sub">{data.getProfile.data.attributes.email}</div>
-                        <div className="created">{data.getProfile.data.attributes.confirmedAt}</div>
+                        <div className="created">{dayjs(data.getProfile.data.attributes.lastLogin).format('DD-MMM-YYYY, HH:mm')}</div>
                       </div>
                       <div className='bottom'>
                         <div className='label'>
@@ -52,7 +55,14 @@ const ProfileContainer = (props) => {
                         </div>
                         <div className='item'>
                           {data.getProfile.data.attributes.walletAddress}
-                          <CopyToClipboard text={data.getProfile.data.attributes.walletAddress}>
+                          <CopyToClipboard
+                            onCopy={(e) => {
+                              Notification.show({
+                                type: 'success',
+                                message: 'Wallet address copied.'
+                              })
+                            }}
+                            text={data.getProfile.data.attributes.walletAddress}>
                               <Icon
                                 type="copy"
                                 theme="twoTone"
