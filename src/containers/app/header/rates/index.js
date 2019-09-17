@@ -24,11 +24,18 @@ const Rate = (props) => {
       query: REAL_TIME_RATES
     }).then((result) => {
       let btc = 0.019 / parseFloat(result.data.rates.data.attributes.btc_rate)
+      let btc_rate = btc * 0.02
+      btc_rate = btc_rate + btc
       let eth = 0.019 / parseFloat(result.data.rates.data.attributes.eth_rate)
+      let eth_rate = eth * 0.02
+      eth_rate = eth_rate + eth
       let xem = 0.019 / parseFloat(result.data.rates.data.attributes.xem_rate)
-      setBtc(btc.toFixed(8))
-      setEth(eth.toFixed(8))
-      setXem(xem.toFixed(6))
+      let xem_rate = xem * 0.02
+      xem_rate = xem_rate + xem
+      
+      setBtc(btc_rate.toFixed(8))
+      setEth(eth_rate.toFixed(8))
+      setXem(xem_rate.toFixed(6))
     }).catch((e) => {
       console.log(e)
     })

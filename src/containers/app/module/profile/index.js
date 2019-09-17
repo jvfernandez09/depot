@@ -41,7 +41,6 @@ const ProfileContainer = (props) => {
                   if (loading) return <p> Loading </p>
                   if (error) return <p>ERROR</p>
                   const fullName = `${data.getProfile.data.attributes.firstName} ${data.getProfile.data.attributes.lastName}`
-                  console.log(data.getProfile.data.attributes.lastLogin)
                   return(
                     <div className="profile-details">
                       <div className='top'>
