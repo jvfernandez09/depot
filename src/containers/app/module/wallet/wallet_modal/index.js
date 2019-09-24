@@ -119,11 +119,16 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
     hide()
   }
 
-  function showConfirm() {
+  function showConfirm(gwx) {
     confirm({
       style: { marginTop: '180px' },
       title: 'Do you want to proceed?',
-      content: 'NOTE: Please review transaction details. Click OK to continue.',
+      content: (
+        <>
+          <p style={{ color: 'white' }}>NOTE: Please review transaction details. Click OK to continue.</p>
+          <p style={{ color: '#F8D154' }}>{`You will buy: ${parseFloat(gwx).toFixed(6)} GWX`}</p>
+        </>
+      ),
       onOk() {
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 0.5 ? resolve : reject, 1000)
@@ -141,28 +146,36 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
 
     const parameter = { input: variables }
 
-    createTransaction({ variables: parameter }).then(async response => {
+    createTransaction({
+      variables: parameter,
+      refetchQueries: [{
+        query: TRANSACTIONS.ALL_TRANSACTIONS,
+        variables: { userId }
+      }]
+    }).then(async response => {
+      const data = response.data.createTransaction.data.attributes
+
       isSetShowQr(true)
-      if(response.data.createTransaction.data.attributes.transaction_type === 'btc'){
-        setQrCode(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
-        setWalletAddress(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
+      if(data.transaction_type === 'btc'){
+        setQrCode(data.top_up_receiving_wallet_address)
+        setWalletAddress(data.top_up_receiving_wallet_address)
       }
-      else if(response.data.createTransaction.data.attributes.transaction_type === 'eth'){
-        setQrCode(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
-        setWalletAddress(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
+      else if(data.transaction_type === 'eth'){
+        setQrCode(data.top_up_receiving_wallet_address)
+        setWalletAddress(data.top_up_receiving_wallet_address)
       }
       else {
-        setQrCode(JSON.stringify({ data: { addr: toUpper(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)}}))
-        setWalletAddress(response.data.createTransaction.data.attributes.top_up_receiving_wallet_address)
+        setQrCode(JSON.stringify({ data: { addr: toUpper(data.top_up_receiving_wallet_address)}}))
+        setWalletAddress(data.top_up_receiving_wallet_address)
       }
 
       setTransactionSummary({ data: {
-        wallet_address: response.data.createTransaction.data.attributes.top_up_receiving_wallet_address,
-        gwx_to_transfer: response.data.createTransaction.data.attributes.gwx_to_transfer,
-        quantity_to_receive: response.data.createTransaction.data.attributes.quantity_to_receive,
+        wallet_address: data.top_up_receiving_wallet_address,
+        gwx_to_transfer: data.gwx_to_transfer,
+        quantity_to_receive: data.quantity_to_receive,
         status: 'Pending',
-        transaction_id: response.data.createTransaction.data.attributes.transaction_id,
-        created_at: response.data.createTransaction.data.attributes.created_at
+        transaction_id: data.transaction_id,
+        created_at: data.created_at
       }})
     }).catch((errors) => {
       console.log(errors)
@@ -172,11 +185,6 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   function formInput(){
     return (
       <div className='content'>
-        <div className="item">
-          <p className="title" >Your wallet address:</p>
-          <div className='sub'>{gwxWalletAddress}</div>
-        </div>
-
         <div className="form-group">
           <label className="form-label"> Amount: </label>
           <Input
@@ -188,7 +196,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
           />
           {inputs.quantityToReceive > 500000 ?
             <>
-            <p style={{ color: 'red'}}>Maximum GWX Purchase is 500,000</p>
+              <p style={{ color: 'red'}}>Maximum GWX Purchase is 500,000</p>
             </>
           : null}
         </div>
@@ -245,7 +253,10 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
               <div className='title'>Buy GWX</div>
               <Steps current={current}>
                 {steps.map(item => (
-                  <Step key={item.title} title={item.title} />
+                  <Step
+                    key={item.title}
+                    title={item.title}
+                  />
                 ))}
               </Steps>
             </div>
@@ -263,7 +274,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                 key="1"
                 type="primary"
                 disabled={!isEmpty(inputs.quantityToReceive) && !isEmpty(inputs.transactionType) && inputs.quantityToReceive <= 500000 ? false : true}
-                onClick={() => current === 0 ? showConfirm() : next()}
+                onClick={() => current === 0 ? showConfirm(inputs.quantityToReceive) : next()}
               >
                 Next
               </Button>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { compose, withApollo, Query } from 'react-apollo'
 import { Spin, Tabs, Icon, Card, Avatar } from 'antd'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -14,6 +14,7 @@ import Notification from 'utils/notification'
 const { TabPane } = Tabs
 
 const ProfileContainer = (props) => {
+  const [tab, setTab] = useState()
   return (
     <>
       <div className="profile-container">
@@ -40,20 +41,21 @@ const ProfileContainer = (props) => {
                 {({ data, loading, error }) => {
                   if (loading) return <p> Loading </p>
                   if (error) return <p>ERROR</p>
-                  const fullName = `${data.getProfile.data.attributes.firstName} ${data.getProfile.data.attributes.lastName}`
+                  const response = data.getProfile.data.attributes
+                  const fullName = `${response.firstName} ${response.lastName}`
                   return(
                     <div className="profile-details">
                       <div className='top'>
                         <div className="name">{fullName} </div>
-                        <div className="sub">{data.getProfile.data.attributes.email}</div>
-                        <div className="created">Last logged in: {dayjs(data.getProfile.data.attributes.lastLogin).format('DD-MMM-YYYY,  HH:mm')}</div>
+                        <div className="sub">{response.email}</div>
+                        <div className="created">Last logged in: {dayjs(response.lastLogin).format('DD-MMM-YYYY,  HH:mm')}</div>
                       </div>
                       <div className='bottom'>
                         <div className='label'>
                           Wallet Address:
                         </div>
                         <div className='item'>
-                          {data.getProfile.data.attributes.walletAddress}
+                          {response.walletAddress}
                           <CopyToClipboard
                             onCopy={(e) => {
                               Notification.show({
@@ -61,7 +63,7 @@ const ProfileContainer = (props) => {
                                 message: 'Wallet address copied.'
                               })
                             }}
-                            text={data.getProfile.data.attributes.walletAddress}>
+                            text={response.walletAddress}>
                               <Icon
                                 type="copy"
                                 theme="twoTone"
@@ -87,13 +89,24 @@ const ProfileContainer = (props) => {
                   if (error) return <p>ERROR</p>
                   const userId = data.getProfile.data.id
                   return (
-                    <Tabs  defaultActiveKey="1" tabPosition='top'>
-                      <TabPane tab={<span><Icon type='wallet' />My Wallets</span>} key='1'>
+                    <Tabs
+                      onTabClick={(e) => setTab(e)}
+                      defaultActiveKey="1"
+                      tabPosition='top'
+                    >
+                      <TabPane
+                        tab={<span><Icon type='wallet' />My Wallets</span>}
+                        key='1'
+                      >
                         <WalletContainer />
                       </TabPane>
-                      <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='2'>
+                      <TabPane
+                        tab={<span><Icon type='table' />Transaction History</span>}
+                        key='2'
+                      >
                         <TransactionContainer
                           userId={userId}
+                          tab={tab}
                         />
                       </TabPane>
                     </Tabs>

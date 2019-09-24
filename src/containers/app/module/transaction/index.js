@@ -9,10 +9,11 @@ import dayjs from 'dayjs'
 import '../transaction/index.scss'
 const { RangePicker } = DatePicker
 
-const TransactionContainer = (props, userId) => {
+const TransactionContainer = (props, userId ) => {
   const [dataSource, setDataSource] = useState()
   const [filterSource, setFilterSource] = useState('')
   const [isLoading, setLoading] = useState(false)
+
   const columns = [
   {
     title: 'ID',
@@ -58,6 +59,7 @@ const TransactionContainer = (props, userId) => {
     getTransaction(props)
   }, [props])
 
+
   async function getTransaction(props){
     setLoading(true)
     let rowItems = []
@@ -68,7 +70,8 @@ const TransactionContainer = (props, userId) => {
       query: TRANSACTIONS.ALL_TRANSACTIONS,
       variables: {
         userId
-      }
+      },
+      fetchPolicy: 'network-only',
     }).then(result => [result][0].data.getAllTransaction.data.map((value, i) => (
         rowItems.push({
           key: i,
@@ -111,11 +114,25 @@ const TransactionContainer = (props, userId) => {
 
 
   columns[3].render = (text, record) => (
-    <a
-      rel="noopener noreferrer"
-      target="_blank" href={`http://explorer.nemtool.com/?fbclid=IwAR16X2gZe-pC0gUDpjzGKvbNc8AoLaLjWFO9-HIRuzbDE1dhj2J6MPewoI0#/s_tx?hash=${record.gwxTransactionHash}`}>
-      {record.gwxTransactionHash}
-    </a>
+    <>
+      {process.env.REACT_APP_ENV === 'staging' || process.env.REACT_APP_ENV === 'development' ?
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          href={`http://testnet-explorer.nemtool.com/#/s_tx?hash=${record.gwxTransactionHash}`}
+        >
+          {record.gwxTransactionHash}
+        </a>
+      :
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          href={`http://explorer.nemtool.com/?fbclid=IwAR16X2gZe-pC0gUDpjzGKvbNc8AoLaLjWFO9-HIRuzbDE1dhj2J6MPewoI0#/s_tx?hash=${record.gwxTransactionHash}`}
+        >
+          {record.gwxTransactionHash}
+        </a>
+      }
+    </>
   )
 
   columns[4].render = (text, record) => (
@@ -126,15 +143,15 @@ const TransactionContainer = (props, userId) => {
 
   columns[5].render = (text, record) => (
     <>
-      <div> {parseFloat(record.gwxToTransfer).toFixed(2)} </div>
+      <div> {parseFloat(record.gwxToTransfer).toFixed(6)} </div>
     </>
   )
 
   columns[6].render = (text, record) =>(
     <>
-      {record.status === "INITIATED" || record.status === "PAYMENT_RECEIVING_WALLET_ASSIGNED"
-      || record.status === "PENDING" || record.status === "PURCHASED_CONFIRMED" ||
-      record.status === "PENDING_GWX_TRANSFER" ?
+      {record.status === "INITIATED" || record.status === "PAYMENT RECEIVING WALLET ASSIGNED"
+      || record.status === "PENDING" || record.status === "PURCHASED CONFIRMED" ||
+      record.status === "PENDING GWX TRANSFER" ?
       <span style={{ color: 'orange'}}> {record.status} </span>
       : record.status === "FAILED" || record.status === "CANCELLED" || record.status === "UNRECOGNIZED STATUS" ?
       <span style={{ color: 'red'}}> {record.status} </span>
