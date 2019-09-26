@@ -1,7 +1,4 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import PrivateRoute from './privateRoutes'
-
 import ReactDOM from 'react-dom'
 
 import { ApolloClient } from "apollo-client"
@@ -10,12 +7,11 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { RestLink } from 'apollo-link-rest'
 import { setContext } from 'apollo-link-context'
 
-import App from './App'
+import Routes from './routes'
 import './index.scss'
-import Login from 'login'
-import Register from 'register'
-import ForgotPassword from 'forgotPassword'
+
 import * as serviceWorker from './serviceWorker'
+
 
 import humps from 'humps'
 
@@ -53,16 +49,10 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 })
 
+
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <Router>
-      <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <Route path="/reset" component={ForgotPassword} />
-        <PrivateRoute exac path="/" component={App} />
-      </Switch>
-    </Router>
+    <Routes />
   </ApolloProvider>
 , document.getElementById('root')
 );

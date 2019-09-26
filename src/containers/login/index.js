@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from 'react-router-dom'
 import { compose, graphql, withApollo } from 'react-apollo'
 
@@ -14,6 +14,7 @@ import LOGIN_USER from '../../../src/graphql/login'
 import AUTHENTICATE from '../../../src/graphql/auth'
 
 import Notification from 'utils/notification'
+import { isGeolocation } from 'utils/helpers'
 
 const Login = (props) => {
   const {
@@ -24,6 +25,27 @@ const Login = (props) => {
   } = useForm(login, validateLogin)
 
   const [isLoading, setLoading] = useState(false)
+  const [, isBlock] = useState(false)
+  const blackListed = [
+    'Philippines',
+    'Korea'
+  ]
+
+  useEffect(() => {
+    getGeoLocation()
+  })
+
+  async function getGeoLocation(){
+     isGeolocation().then(response => {
+      if(blackListed.includes(response)){
+        isBlock(true)
+        props.history.push('/error')
+      } else {
+        props.history.push('/login')
+        isBlock(false)
+      }
+    })
+  }
 
   async function login(){
     setLoading(true)
@@ -160,8 +182,8 @@ const Login = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 
 export default compose(

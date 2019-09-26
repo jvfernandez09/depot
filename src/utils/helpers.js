@@ -6,3 +6,10 @@ export const isLoggedIn = _ => {
 
   return localStorage.getItem('AUTH_TOKEN') !== undefined && elapse < validity;
 }
+
+export const isGeolocation = async () => {
+  const response = await fetch('http://ip-api.com/json')
+  const responseJSON = await response.json()
+
+  return responseJSON.country
+}
