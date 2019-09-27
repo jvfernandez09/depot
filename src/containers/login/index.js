@@ -10,11 +10,14 @@ import Button from 'components/button'
 import {ReactComponent as Logo} from 'assets/images/LOGO.svg'
 import { isNull } from 'lodash'
 
+import { isGeolocation } from 'utils/helpers'
+import { Spin } from 'antd'
+
 import LOGIN_USER from '../../../src/graphql/login'
 import AUTHENTICATE from '../../../src/graphql/auth'
 
+import ErrorContainer from 'login/error'
 import Notification from 'utils/notification'
-import { isGeolocation } from 'utils/helpers'
 
 const Login = (props) => {
   const {
@@ -25,27 +28,28 @@ const Login = (props) => {
   } = useForm(login, validateLogin)
 
   const [isLoading, setLoading] = useState(false)
-  const [, isBlock] = useState(false)
+  const [countryName, setCountryName] = useState('')
   const blackListed = [
-    'Philippines',
-    'Korea'
+    'China',
+    'Singapore',
+    'United States',
+    'Syria',
+    'Cuba',
+    'Canada',
+    'Vietnam',
+    'Iran',
+    'Sudan',
+    'North Korea'
   ]
 
   useEffect(() => {
-    getGeoLocation()
-  })
+    async function getCountry(){
+      const countryName = await isGeolocation()
+      setCountryName(countryName)
+    }
+    getCountry()
+  }, [])
 
-  async function getGeoLocation(){
-     isGeolocation().then(response => {
-      if(blackListed.includes(response)){
-        isBlock(true)
-        props.history.push('/error')
-      } else {
-        props.history.push('/login')
-        isBlock(false)
-      }
-    })
-  }
 
   async function login(){
     setLoading(true)
@@ -120,68 +124,78 @@ const Login = (props) => {
     }
   }
 
-  return (
-    <div>
-      <div>
-        <div className='session-container'>
-          <div className='content'>
-            <div className='head'>
-              <Logo className='logo' />
-            </div>
-            <form>
-              <div className='form-group'>
-                <label>Email Address</label>
-                <div>
-                  <Input
-                    type="text"
-                    name="email"
-                    onChange={handleChange}
-                    onKeyPress={onKeyPress}
-                    value={inputs.email || ''}
-                    required
-                  />
-                  {errors.email && (
-                    <p style={{ color: 'red'}}>{errors.email}</p>
-                  )}
-                </div>
-              </div>
+  if(!countryName){
+    return <Spin />
+  }
 
-              <div className='form-group'>
-                <label>Password</label>
-                <div>
-                  <Input
-                    type="password"
-                    name="password"
-                    onChange={handleChange}
-                    onKeyPress={onKeyPress}
-                    value={inputs.password || ''}
-                    required
-                  />
+  return (
+    <>
+      {blackListed.includes(countryName) ?
+        <ErrorContainer/>
+      : (
+        <div>
+          <div>
+            <div className='session-container'>
+              <div className='content'>
+                <div className='head'>
+                  <Logo className='logo' />
                 </div>
-                {errors.password && (
-                  <p style={{ color: 'red'}}>{errors.password}</p>
-                )}
-                <div className='forgot-pass'>
-                  <a href='/reset'> Forgot password? </a>
-                </div>
+                <form>
+                  <div className='form-group'>
+                    <label>Email Address</label>
+                    <div>
+                      <Input
+                        type="text"
+                        name="email"
+                        onChange={handleChange}
+                        onKeyPress={onKeyPress}
+                        value={inputs.email || ''}
+                        required
+                      />
+                      {errors.email && (
+                        <p style={{ color: 'red'}}>{errors.email}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className='form-group'>
+                    <label>Password</label>
+                    <div>
+                      <Input
+                        type="password"
+                        name="password"
+                        onChange={handleChange}
+                        onKeyPress={onKeyPress}
+                        value={inputs.password || ''}
+                        required
+                      />
+                    </div>
+                    {errors.password && (
+                      <p style={{ color: 'red'}}>{errors.password}</p>
+                    )}
+                    <div className='forgot-pass'>
+                      <a href='/reset'> Forgot password? </a>
+                    </div>
+                  </div>
+                  <Button
+                    onClick={handleSubmit}
+                    loading={isLoading}
+                    className='button btn-primary btn-block btn-lg'
+                  >Login
+                  </Button>
+                  <div className='form-group'>
+                    <div className='register'>
+                      <span className='register-font'>Don't have any account? </span>
+                      <Link to="/register"> Register Now! </Link>
+                    </div>
+                  </div>
+                </form>
               </div>
-              <Button
-                onClick={handleSubmit}
-                loading={isLoading}
-                className='button btn-primary btn-block btn-lg'
-              >Login
-              </Button>
-              <div className='form-group'>
-                <div className='register'>
-                  <span className='register-font'>Don't have any account? </span>
-                  <Link to="/register"> Register Now! </Link>
-                </div>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   )
 }
 
