@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react"
-import { Link } from 'react-router-dom'
 import { compose, graphql, withApollo } from 'react-apollo'
 
 import useForm from "utils/useForm"
 import validateLogin from 'utils/LoginFormValidationRules'
-import 'login/index.scss'
-import Input from 'components/input'
-import Button from 'components/button'
-import {ReactComponent as Logo} from 'assets/images/LOGO.svg'
+
 import { isNull } from 'lodash'
 
 import { isGeolocation } from 'utils/helpers'
@@ -16,6 +12,8 @@ import { Spin } from 'antd'
 import LOGIN_USER from '../../../src/graphql/login'
 import AUTHENTICATE from '../../../src/graphql/auth'
 
+
+import LoginForm from 'login/loginForm'
 import ErrorContainer from 'login/error'
 import Notification from 'utils/notification'
 
@@ -117,13 +115,6 @@ const Login = (props) => {
     return authenticateCodeGrant({ variables: newVariables })
   }
 
-  function onKeyPress(e){
-    if(e.which === 13) {
-      e.preventDefault()
-      handleSubmit()
-    }
-  }
-
   if(!countryName){
     return <Spin />
   }
@@ -133,67 +124,13 @@ const Login = (props) => {
       {blackListed.includes(countryName) ?
         <ErrorContainer/>
       : (
-        <div>
-          <div>
-            <div className='session-container'>
-              <div className='content'>
-                <div className='head'>
-                  <Logo className='logo' />
-                </div>
-                <form>
-                  <div className='form-group'>
-                    <label>Email Address</label>
-                    <div>
-                      <Input
-                        type="text"
-                        name="email"
-                        onChange={handleChange}
-                        onKeyPress={onKeyPress}
-                        value={inputs.email || ''}
-                        required
-                      />
-                      {errors.email && (
-                        <p style={{ color: 'red'}}>{errors.email}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className='form-group'>
-                    <label>Password</label>
-                    <div>
-                      <Input
-                        type="password"
-                        name="password"
-                        onChange={handleChange}
-                        onKeyPress={onKeyPress}
-                        value={inputs.password || ''}
-                        required
-                      />
-                    </div>
-                    {errors.password && (
-                      <p style={{ color: 'red'}}>{errors.password}</p>
-                    )}
-                    <div className='forgot-pass'>
-                      <a href='/reset'> Forgot password? </a>
-                    </div>
-                  </div>
-                  <Button
-                    onClick={handleSubmit}
-                    loading={isLoading}
-                    className='button btn-primary btn-block btn-lg'
-                  >Login
-                  </Button>
-                  <div className='form-group'>
-                    <div className='register'>
-                      <span className='register-font'>Don't have any account? </span>
-                      <Link to="/register"> Register Now! </Link>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+        <LoginForm
+          inputs={inputs}
+          errors={errors}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          isLoading={isLoading}
+        />
       )}
     </>
   )

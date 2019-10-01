@@ -311,3 +311,9 @@
   background: lighten($primary-color, 15%);
   color: lighten($black, 10%) !important;
 }
+
+.ant-table-body {
+  @media (max-width: 1180px) {
+    overflow-x: scroll;
+  }
+}

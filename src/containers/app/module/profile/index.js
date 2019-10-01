@@ -36,7 +36,6 @@ const ProfileContainer = (props) => {
           <h2 className='title'>User Details</h2>
           <Card>
             <div className="profile-header">
-              <Avatar shape="square" size={150} icon="user" />
               <Query query={GET_PROFILE}>
                 {({ data, loading, error }) => {
                   if (loading) return <p> Loading </p>
@@ -44,35 +43,45 @@ const ProfileContainer = (props) => {
                   const response = data.getProfile.data.attributes
                   const fullName = `${response.firstName} ${response.lastName}`
                   return(
-                    <div className="profile-details">
-                      <div className='top'>
-                        <div className="name">{fullName} </div>
-                        <div className="sub">{response.email}</div>
-                        <div className="created">Last logged in: {dayjs(response.lastLogin).format('DD-MMM-YYYY,  HH:mm')}</div>
-                      </div>
-                      <div className='bottom'>
-                        <div className='label'>
-                          Wallet Address:
+                    <>
+                      {response.avatar.url === undefined
+                        ? <Avatar shape="square" size={150} icon="user" />
+                        : <img
+                            style={{ height:'150px', width:'150px', minHeight:'150px', minWidth:'150px' }}
+                            src={response.avatar.url}
+                            alt=""
+                          />
+                      }
+                      <div className="profile-details">
+                        <div className='top'>
+                          <div className="name">{fullName} </div>
+                          <div className="sub">{response.email}</div>
+                          <div className="created">Last logged in: {dayjs(response.lastLogin).format('DD-MMM-YYYY,  HH:mm')}</div>
                         </div>
-                        <div className='item'>
-                          {response.walletAddress}
-                          <CopyToClipboard
-                            onCopy={(e) => {
-                              Notification.show({
-                                type: 'success',
-                                message: 'Wallet address copied.'
-                              })
-                            }}
-                            text={response.walletAddress}>
-                              <Icon
-                                type="copy"
-                                theme="twoTone"
-                                style={{ marginLeft: '4px'}}
-                              />
-                            </CopyToClipboard>
+                        <div className='bottom'>
+                          <div className='label'>
+                            Wallet Address:
+                          </div>
+                          <div className='item'>
+                            {response.walletAddress}
+                            <CopyToClipboard
+                              onCopy={(e) => {
+                                Notification.show({
+                                  type: 'success',
+                                  message: 'Wallet address copied.'
+                                })
+                              }}
+                              text={response.walletAddress}>
+                                <Icon
+                                  type="copy"
+                                  theme="twoTone"
+                                  style={{ marginLeft: '4px'}}
+                                />
+                              </CopyToClipboard>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </>
                   )
                 }}
               </Query>

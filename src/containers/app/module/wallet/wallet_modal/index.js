@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { graphql, compose, withApollo, Query } from 'react-apollo'
 import { isEmpty, toUpper } from 'lodash'
 import { Steps, Modal, Input, Select, Button, Spin, Icon } from 'antd'
@@ -133,7 +134,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 0.5 ? resolve : reject, 1000)
           next()
-        }).catch(() => console.log('Something went wrong'));
+        }).catch(() => console.log(''));
       },
       onCancel() {
         isSetShowQr(false)
@@ -353,3 +354,12 @@ export default compose(
   withApollo,
   graphql(TRANSACTIONS.CREATE_TRANSACTION, { name: 'createTransaction' })
 )(WalletModal)
+
+
+WalletModal.propTypes = {
+  createTransaction: PropTypes.func,
+  userId: PropTypes.string.isRequired,
+  isShowing: PropTypes.bool,
+  hide: PropTypes.func,
+  gwxWalletAddress: PropTypes.string
+}

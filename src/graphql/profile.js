@@ -8,7 +8,20 @@ const GET_PROFILE = gql`
       method: "GET",
       endpoint: "v1"
     ) {
-      data
+      data {
+        id
+        attributes {
+          id
+          firstName
+          lastName
+          email
+          avatar
+          lastLogin
+          walletAddress
+          confirmedAt
+          confirmationSentAt
+        }
+      }
     }
   }
 `

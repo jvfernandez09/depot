@@ -1,25 +1,19 @@
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { compose, withApollo, graphql, Query } from 'react-apollo'
 import { Spin, Card, Button } from 'antd'
 
 import WalletModal from 'app/module/wallet/wallet_modal'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 
-// import GameWalletModal from 'app/module/wallet/game_wallet_modal'
-// import useGameModal from 'app/module/wallet/game_wallet_modal/useGameModal'
-// import TransactionContainer from 'app/module/transaction'
-// import ProfileContainer from 'app/module/profile'
-
 import WALLET from '../../../../../src/graphql/wallet'
 import GET_PROFILE from '../../../../../src/graphql/profile'
 import AUTHENTICATE from '../../../../../src/graphql/auth'
 
 import '../wallet/index.scss'
-// import { ReactComponent as SampleGame } from 'assets/images/sample-game.svg'
 
 const WalletContainer = (props) => {
   const { isShowing, toggle } = useModal()
-  // const { isGameShowing, gameToggle } = useGameModal()
 
   useEffect(() => {
     try{
@@ -56,7 +50,7 @@ const WalletContainer = (props) => {
           pollInterval={15000}>
           {({ data, loading, error, startPolling, stopPolling }) => {
             if (loading) return <Spin />
-            if (error) return <p>ERROR</p>
+            if (error) return <p>{console.log(error)}</p>
             if (data.getWalletBalance.balance.gwx === undefined) return data.getWalletBalance.balance.gwx = 0
             const convertedBalance = data.getWalletBalance.balance.gwx.toFixed(6).split(".")
             const newBalance = parseInt(convertedBalance[0])
@@ -81,28 +75,6 @@ const WalletContainer = (props) => {
     )
   }
 
-  // function xemWalletBalance(walletAddress) {
-  //   return (
-  //     <>
-  //       <Query query={WALLET.GET_WALLET_BALANCE} variables={{ walletAddress }} fetchPolicy='network-only'>
-  //         {({ data, loading, error }) => {
-  //           if (loading) return <Spin />
-  //           if (error) return <p>ERROR</p>
-  //           const convertedXEMBalance = data.getWalletBalance.balance.xem.toFixed(6).split(".")
-  //           const newBalance = parseInt(convertedXEMBalance[0])
-  //           return(
-  //             <div className='balance -small'>
-  //               <div className='title'>XEM</div>
-  //               <span style={{ fontSize: '3rem'}}>{newBalance.toLocaleString()}</span><span>.</span><span style={{ fontSize: '1rem' }}>{convertedXEMBalance[1]}</span>
-  //             </div>
-  //           )
-  //         }}
-  //       </Query>
-  //       <Button className='hide-button'> Buy GWX+ </Button>
-  //     </>
-  //   )
-  // }
-
   function token(){
     const { refToken } = props
     const refreshToken = localStorage.getItem('REF_TOKEN')
@@ -114,6 +86,7 @@ const WalletContainer = (props) => {
       }
     }
     const variables = { ...clientCred.input, refreshToken: refreshToken }
+
     refToken({ variables: { input: variables } }).then(response =>{
       localStorage.setItem('AUTH_TOKEN', response.data.refToken.access_token)
       localStorage.setItem('REF_TOKEN', response.data.refToken.refresh_token)
@@ -158,113 +131,15 @@ const WalletContainer = (props) => {
         </Query>
     </div>
   )
-
-  // return(
-  //   <div className="body-container">
-  //   {token()}
-  //     <Query query={GET_PROFILE}>
-  //       {({ data, loading, error }) => {
-  //         if (loading) return <Spin />
-  //         if (error) return <p>ERROR</p>
-  //         const firstName = data.getProfile.data.attributes.firstName
-  //         const lastName = data.getProfile.data.attributes.lastName.slice(-1) === 's' ?
-  //           data.getProfile.data.attributes.lastName : data.getProfile.data.attributes.lastName+"'s"
-  //         const walletAddress = data.getProfile.data.attributes.walletAddress
-  //         const userId = data.getProfile.data.id
-  //         return (
-  //           <>
-  //             {/* <h1 className='header'>{firstName+' '+lastName} PERSONAL WALLET</h1> */}
-  //             {/* <Tabs tabPosition='left'> */}
-  //               {/* <TabPane tab={<span><Icon type='wallet' />My Wallets</span>} key='1'>
-  //                 <div className="body-content">
-  //                   <h2 className='title'>My GWX Wallet</h2>
-  //                   <Card>
-  //                     <div className='wallet-container'>
-  //                       <p className='top'>Amount:</p>
-  //                       {walletAddress && walletBalance(walletAddress, userId)}
-  //                     </div>
-  //                   </Card>
-  //                   <h2 className='title -pad'>My Game Wallets</h2>
-  //                   {// <Card>
-  //                   //   <div className='game-card'>
-  //                   //     <div className='info'>
-  //                   //       <div className='image'>
-  //                   //         <SampleGame />
-  //                   //       </div>
-  //                   //       <div className='game-details'>
-  //                   //         <h1 className='title'>
-  //                   //           Crypto Keno
-  //                   //         </h1>
-  //                   //         <div className='time'>
-  //                   //           <p>87 hrs on record</p>
-  //                   //           <p>last played on Dec, 2018</p>
-  //                   //         </div>
-  //                   //       </div>
-  //                   //     </div>
-  //                   //     <div className='right'>
-  //                   //       <h2 className='item'>
-  //                   //         GWX 225
-  //                   //       </h2>
-  //                   //       <div className='action' onClick={gameToggle}>
-  //                   //         + Add GWX
-  //                   //       </div>
-  //                   //     </div>
-  //                   //    </div>
-  //                   //    <div className='card-divider'></div>
-  //                   //    <div className='game-card'>
-  //                   //     <div className='info'>
-  //                   //       <div className='image'>
-  //                   //         <SampleGame />
-  //                   //       </div>
-  //                   //       <div className='game-details'>
-  //                   //         <h1 className='title'>
-  //                   //           Crypto Keno
-  //                   //         </h1>
-  //                   //         <div className='time'>
-  //                   //           <p>87 hrs on record</p>
-  //                   //           <p>last played on Dec, 2018</p>
-  //                   //         </div>
-  //                   //       </div>
-  //                   //     </div>
-  //                   //     <div className='right'>
-  //                   //       <h2 className='item'>
-  //                   //         GWX 225
-  //                   //       </h2>
-  //                   //       <div className='action' onClick={gameToggle}>
-  //                   //         + Add GWX
-  //                   //       </div>
-  //                   //     </div>
-  //                   //    </div>
-  //                   //    <GameWalletModal
-  //                   //     isGameShowing={isGameShowing}
-  //                   //     hide={gameToggle}
-  //                   //     walletAddress={walletAddress}
-  //                   //    />
-  //                   // </Card>
-  //                 }
-  //                 </div>
-  //               </TabPane> */}
-  //               {/* <TabPane tab={<span><Icon type='profile' />My Profile</span>} key='2'>
-  //                 <ProfileContainer />
-  //                 <TransactionContainer
-  //                   userId={userId}
-  //                 />
-  //               </TabPane> */}
-  //               {/* <TabPane tab={<span><Icon type='table' />Transaction History</span>} key='3'>
-  //                 <TransactionContainer
-  //                   userId={userId}
-  //                 />
-  //               </TabPane> */}
-  //             {/* </Tabs> */}
-  //           </>
-  //         )
-  //       }}
-  //     </Query>
-  //   </div>
-  // )
 }
 
 export default compose(
   withApollo,
   graphql(AUTHENTICATE.REF_TOKEN, { name: 'refToken'})
 )(WalletContainer)
+
+
+WalletContainer.propTypes = {
+  isShowing: PropTypes.func,
+  toggle: PropTypes.bool
+}
