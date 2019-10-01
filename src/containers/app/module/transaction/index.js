@@ -183,7 +183,6 @@ const TransactionContainer = (props, userId ) => {
                 columns={columns}
                 loading={isLoading}
                 pagination={{ pageSize: 5 }}
-                scroll={{ x: 'fit-content' }}
               />
             </div>
           </Card>
