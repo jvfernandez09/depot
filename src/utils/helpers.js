@@ -8,8 +8,9 @@ export const isLoggedIn = _ => {
 }
 
 export const isGeolocation = async () => {
-  const response = await fetch('https://ipapi.co/json')
-  const responseJSON = await response.json()
+  const response = await fetch('https://ipapi.co/jsonp?callback=?')
+  const responseJSON = await response.text()
+  const match = responseJSON.match(/\?\((.*)\);/)
 
-  return responseJSON.country_name
+  return JSON.parse(match[1]).country_name
 }
