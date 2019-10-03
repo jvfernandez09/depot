@@ -8,9 +8,9 @@ const GET_PROFILE = gql`
       method: "GET",
       endpoint: "v1"
     ) {
-      data {
+      data  @type (name: "getProfile"){
         id
-        attributes {
+        attributes @type(name: "Attributes"){
           id
           firstName
           lastName
