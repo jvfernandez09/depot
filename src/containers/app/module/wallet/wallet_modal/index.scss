@@ -282,3 +282,8 @@
   bottom: auto;
   z-index: 2001;
 }
+
+
+.ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
+  margin-left: 0;
+}

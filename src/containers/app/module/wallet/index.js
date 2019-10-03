@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { compose, withApollo, graphql, Query } from 'react-apollo'
-import { Spin, Card, Button } from 'antd'
+import { Spin, Card, Button, Modal } from 'antd'
+import { isGeolocation } from 'utils/helpers'
 
 import WalletModal from 'app/module/wallet/wallet_modal'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
@@ -9,11 +10,29 @@ import useModal from 'app/module/wallet/wallet_modal/useModal'
 import WALLET from '../../../../../src/graphql/wallet'
 import GET_PROFILE from '../../../../../src/graphql/profile'
 import AUTHENTICATE from '../../../../../src/graphql/auth'
+import ErrorContainer from '../wallet/error'
 
 import '../wallet/index.scss'
 
 const WalletContainer = (props) => {
   const { isShowing, toggle } = useModal()
+  const [countryName, setCountryName] = useState('')
+  const blackListed = [
+    'United States',
+    'Syria',
+    'Cuba',
+    'Iran',
+    'Sudan',
+    'North Korea'
+  ]
+
+  useEffect(() => {
+    async function getCountry(){
+      const countryName = await isGeolocation()
+      setCountryName(countryName)
+    }
+    getCountry()
+  }, [])
 
   useEffect(() => {
     try{
@@ -64,7 +83,10 @@ const WalletContainer = (props) => {
             )
           }}
         </Query>
-        <Button className='button btn-primary -outline' onClick={toggle}> Buy GWX </Button>
+        {blackListed.includes(countryName) ?
+          <Button className='button btn-primary -outline' onClick={() => warning()}> Buy GWX </Button> :
+          <Button className='button btn-primary -outline' onClick={toggle}> Buy GWX </Button>
+        }
         <WalletModal
           userId={userId}
           isShowing={isShowing}
@@ -93,6 +115,20 @@ const WalletContainer = (props) => {
     }).catch((errors) => {
       console.log(errors)
     })
+  }
+
+  if(!countryName){
+    return <Spin />
+  }
+
+  function warning() {
+    Modal.warning({
+      title: 'This feature is blocked in your country.',
+      content: (
+        <ErrorContainer />
+      ),
+      onOk() {},
+    });
   }
 
   return (
@@ -128,7 +164,7 @@ const WalletContainer = (props) => {
             </>
           )
         }}
-        </Query>
+      </Query>
     </div>
   )
 }

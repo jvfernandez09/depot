@@ -248,103 +248,104 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
   return(
     <>
       {isShowing ? (
-        <Modal
-          title={
-            <div className='header-container'>
-              <div className='title'>Buy GWX</div>
-              <Steps current={current}>
-                {steps.map(item => (
-                  <Step
-                    key={item.title}
-                    title={item.title}
-                  />
-                ))}
-              </Steps>
+        <>
+          <Modal
+            title={
+              <div className='header-container'>
+                <div className='title'>Buy GWX</div>
+                  <Steps current={current}>
+                    {steps.map(item => (
+                      <Step
+                        key={item.title}
+                        title={item.title}
+                      />
+                    ))}
+                  </Steps>
+              </div>
+            }
+            visible={isShowing}
+            onCancel={()=> {
+              hide()
+              initialState()
+              setCurrent(0)
+              isSetShowQr(false)
+            }}
+            footer={[current < steps.length - 1 && (
+                <Button
+                  className="button btn-primary"
+                  key="1"
+                  type="primary"
+                  disabled={!isEmpty(inputs.quantityToReceive) && !isEmpty(inputs.transactionType) && inputs.quantityToReceive <= 500000 ? false : true}
+                  onClick={() => current === 0 ? showConfirm(inputs.quantityToReceive) : next()}
+                >
+                  Next
+                </Button>
+              ),
+              current === steps.length - 1 && (
+                <Button
+                  className="button btn-primary"
+                  key="2" type="primary"
+                  onClick={() =>  doneTransaction() }
+                >
+                  Done
+                </Button>
+              )
+            ]}>
+            <div className="steps-action">
+              {current < steps.length - 1 && isShowQr === false ? (
+                <div className="form-body">
+                  {formInput()}
+                </div>
+              ) : null }
+              {current > 0 && isShowQr ?  (
+                <div className="form-body">
+                  <div className="qr-code">{
+                    qrCode ? (
+                      <>
+                        <div>
+                          <QRCode
+                            size={220}
+                            value={`${qrCode}`}
+                          />
+                          <div>
+                            <label>You will pay: </label>
+                            <p className="convert-value">{pay+' '+toUpper(inputs.transactionType)}</p>
+                          </div>
+                          <div>
+                            <label>WALLET ADDRESS:</label>
+                            <p className="convert-value">{walletAddress}
+                              <CopyToClipboard
+                                onCopy={(e) => {
+                                  Notification.show({
+                                    type: 'success',
+                                    message: 'Wallet address copied.'
+                                  })
+                                }}
+                                text={walletAddress}>
+                                <Icon
+                                  type="copy"
+                                  theme="twoTone"
+                                  style={{ marginLeft: '4px'}}
+                                />
+                              </CopyToClipboard>
+                            </p>
+                          </div>
+                        </div>
+                      </>
+                    ) : null
+                  }</div>
+                </div>
+              ) : null }
+
+              { current === steps.length - 1 &&  done ? (
+                <div className="form-body">
+                  {confirmTransaction(inputs.transactionType)}
+                </div>
+              ) : null}
             </div>
-          }
-          visible={isShowing}
-          onCancel={()=> {
-            hide()
-            initialState()
-            setCurrent(0)
-            isSetShowQr(false)
-          }}
-          footer={[current < steps.length - 1 && (
-              <Button
-                className="button btn-primary"
-                key="1"
-                type="primary"
-                disabled={!isEmpty(inputs.quantityToReceive) && !isEmpty(inputs.transactionType) && inputs.quantityToReceive <= 500000 ? false : true}
-                onClick={() => current === 0 ? showConfirm(inputs.quantityToReceive) : next()}
-              >
-                Next
-              </Button>
-            ),
-            current === steps.length - 1 && (
-              <Button
-                className="button btn-primary"
-                key="2" type="primary"
-                onClick={() =>  doneTransaction() }
-              >
-                Done
-              </Button>
-            )
-          ]}>
-
-          <div className="steps-action">
-            {current < steps.length - 1 && isShowQr === false ? (
-              <div className="form-body">
-                {formInput()}
-              </div>
-            ) : null }
-            {current > 0 && isShowQr ?  (
-              <div className="form-body">
-                <div className="qr-code">{
-                  qrCode ? (
-                    <>
-                      <div>
-                        <QRCode
-                          size={220}
-                          value={`${qrCode}`}
-                        />
-                        <div>
-                          <label>You will pay: </label>
-                          <p className="convert-value">{pay+' '+toUpper(inputs.transactionType)}</p>
-                        </div>
-                        <div>
-                          <label>WALLET ADDRESS:</label>
-                          <p className="convert-value">{walletAddress}
-                            <CopyToClipboard
-                              onCopy={(e) => {
-                                Notification.show({
-                                  type: 'success',
-                                  message: 'Wallet address copied.'
-                                })
-                              }}
-                              text={walletAddress}>
-                              <Icon
-                                type="copy"
-                                theme="twoTone"
-                                style={{ marginLeft: '4px'}}
-                              />
-                            </CopyToClipboard>
-                          </p>
-                        </div>
-                      </div>
-                    </>
-                  ) : null
-                }</div>
-              </div>
-            ) : null }
-
-            { current === steps.length - 1 &&  done ? (
-              <div className="form-body">
-                {confirmTransaction(inputs.transactionType)}
-              </div>
-            ) : null}
-          </div>
-        </Modal>
-      ) : null
+          </Modal>
+        </>
+        ) : null
       }
     </>
   )

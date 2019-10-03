@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { compose, graphql, withApollo } from 'react-apollo'
 
 import useForm from "utils/useForm"
 import validateLogin from 'utils/LoginFormValidationRules'
 
 import { isNull } from 'lodash'
-
-import { isGeolocation } from 'utils/helpers'
-import { Spin } from 'antd'
-
 import LOGIN_USER from '../../../src/graphql/login'
 import AUTHENTICATE from '../../../src/graphql/auth'
-
-
 import LoginForm from 'login/loginForm'
-import ErrorContainer from 'login/error'
 import Notification from 'utils/notification'
 
 const Login = (props) => {
@@ -26,29 +19,7 @@ const Login = (props) => {
   } = useForm(login, validateLogin)
 
   const [isLoading, setLoading] = useState(false)
-  const [countryName, setCountryName] = useState('')
-  const blackListed = [
-    'China',
-    'Singapore',
-    'United States',
-    'Syria',
-    'Cuba',
-    'Canada',
-    'Vietnam',
-    'Iran',
-    'Sudan',
-    'North Korea'
-  ]
-
-  useEffect(() => {
-    async function getCountry(){
-      const countryName = await isGeolocation()
-      setCountryName(countryName)
-    }
-    getCountry()
-  }, [])
-
-
+  
   async function login(){
     setLoading(true)
     const { loginUser, authenticateClientCred } = props
@@ -115,23 +86,15 @@ const Login = (props) => {
     return authenticateCodeGrant({ variables: newVariables })
   }
 
-  if(!countryName){
-    return <Spin />
-  }
-
   return (
     <>
-      {blackListed.includes(countryName) ?
-        <ErrorContainer/>
-      : (
-        <LoginForm
-          inputs={inputs}
-          errors={errors}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          isLoading={isLoading}
-        />
-      )}
+      <LoginForm
+        inputs={inputs}
+        errors={errors}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        isLoading={isLoading}
+      />
     </>
   )
 }

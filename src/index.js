@@ -46,8 +46,8 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   link: authLink.concat(restLink),
-  cache: new InMemoryCache() })
-
+  cache: new InMemoryCache()
+})
 
 ReactDOM.render(
   <ApolloProvider client={client}>
