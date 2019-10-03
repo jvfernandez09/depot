@@ -53,19 +53,19 @@
 
 .error-container {
   & {
-    height: 90vh;
+    height: 8vh;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   > .content {
-    width: 580px;
+    width: 400px;
   }
 
   > .content > .head {
     text-align: center;
-    margin-bottom: $pad * 5;
+    margin-bottom: $pad * 2;
   }
 
   > .content > .head > .logo {
