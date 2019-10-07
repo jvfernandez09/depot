@@ -4,6 +4,7 @@ import { Layout } from 'antd'
 import 'app/header/index.scss'
 import { ReactComponent as Logo } from 'assets/images/LOGO-tokendepot.svg'
 import Rate from 'app/header/rates'
+import RefreshToken from 'app/header/refreshToken'
 import { Menu, Dropdown, Icon, Button } from 'antd'
 
 const { Header } = Layout;
@@ -23,6 +24,7 @@ const HeaderContainer = (props) => {
 
   return (
     <Header className='main-navbar'>
+      <RefreshToken />
       <div className="nav-container">
         <div className="action">
           <Logo className='logo'/>

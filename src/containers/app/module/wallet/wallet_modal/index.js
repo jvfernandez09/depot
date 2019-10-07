@@ -10,7 +10,7 @@ import ConfirmTransaction from './confirmTransaction'
 import QRCode from "qrcode.react"
 import Notification from 'utils/notification'
 
-import TRANSACTIONS from '../../../../../../src/graphql/transaction'
+import TRANSACTIONS from 'lib/api/transaction'
 
 const { Option } = Select
 const { Step } = Steps

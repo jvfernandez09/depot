@@ -4,13 +4,15 @@ import { compose, graphql, withApollo } from 'react-apollo'
 import useForm from "utils/useForm"
 import validateEmail from 'utils/emailFormValidationRules'
 import Notification from 'utils/notification'
+import strings from 'utils/strings'
+
 import { ReactComponent as Logo } from 'assets/images/LOGO.svg'
 
 import { Input } from 'antd'
 import Button from 'components/button'
 import 'forgotPassword/index.scss'
-import AUTHENTICATE from '../../../src/graphql/auth'
-import FORGOT_PASSWORD from '../../../src/graphql/forgotPassword'
+import AUTHENTICATE from 'lib/api/auth'
+import FORGOT_PASSWORD from 'lib/api/forgotPassword'
 
 const ForgotPassword = (props) => {
   const {
@@ -69,7 +71,7 @@ const ForgotPassword = (props) => {
               <div className='form-group'>
                 <div className='head'>
                 </div>
-                <label>Email</label>
+                <label>{strings.email}</label>
                 <div className='form-group'>
                   <Input
                     type="email"
@@ -87,7 +89,7 @@ const ForgotPassword = (props) => {
                   className='button btn-primary btn-block btn-lg'
                   onClick={handleSubmit}
                   loading={isSubmitting}
-                > Send Temporary Password
+                > {strings.temporary_password}
                 </Button>
               </div>
             </form>
