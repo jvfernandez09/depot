@@ -5,8 +5,8 @@ import useForm from "utils/useForm"
 import validateLogin from 'utils/LoginFormValidationRules'
 
 import { isNull } from 'lodash'
-import LOGIN_USER from '../../../src/graphql/login'
-import AUTHENTICATE from '../../../src/graphql/auth'
+import LOGIN_USER from 'lib/api/login'
+import AUTHENTICATE from 'lib/api/auth'
 import LoginForm from 'login/loginForm'
 import Notification from 'utils/notification'
 
@@ -19,7 +19,7 @@ const Login = (props) => {
   } = useForm(login, validateLogin)
 
   const [isLoading, setLoading] = useState(false)
-  
+
   async function login(){
     setLoading(true)
     const { loginUser, authenticateClientCred } = props

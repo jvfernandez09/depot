@@ -3,7 +3,7 @@ import { compose, withApollo } from 'react-apollo'
 import { Table, DatePicker, Card, Spin } from 'antd'
 import { upperFirst, upperCase, toUpper, isNaN, isEmpty} from 'lodash'
 import EmptyTransaction  from './emptyTransaction'
-import TRANSACTIONS from '../../../../../src/graphql/transaction'
+import TRANSACTIONS from 'lib/api/transaction'
 import dayjs from 'dayjs'
 
 import '../transaction/index.scss'
@@ -58,7 +58,6 @@ const TransactionContainer = (props, userId ) => {
   useEffect(() => {
     getTransaction(props)
   }, [props])
-
 
   async function getTransaction(props){
     setLoading(true)

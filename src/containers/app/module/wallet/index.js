@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { compose, withApollo, graphql, Query } from 'react-apollo'
+import { compose, withApollo, Query } from 'react-apollo'
 import { Spin, Card, Button, Modal } from 'antd'
 import { isGeolocation } from 'utils/helpers'
+import strings from 'utils/strings'
 
 import WalletModal from 'app/module/wallet/wallet_modal'
 import useModal from 'app/module/wallet/wallet_modal/useModal'
 
-import WALLET from '../../../../../src/graphql/wallet'
-import GET_PROFILE from '../../../../../src/graphql/profile'
-import AUTHENTICATE from '../../../../../src/graphql/auth'
+import WALLET from 'lib/api/wallet'
+import GET_PROFILE from 'lib/api/profile'
 import ErrorContainer from '../wallet/error'
 
 import '../wallet/index.scss'
@@ -33,32 +33,6 @@ const WalletContainer = (props) => {
     }
     getCountry()
   }, [])
-
-  useEffect(() => {
-    try{
-      const { refToken } = props
-      const refreshToken = localStorage.getItem('REF_TOKEN')
-      const clientCred = {
-        input: {
-          clientId: process.env.REACT_APP_GWX_CLIENT_ID,
-          clientSecret: process.env.REACT_APP_GWX_CLIENT_SECRET,
-          grantType: "refresh_token"
-        }
-      }
-      const variables = { ...clientCred.input, refreshToken: refreshToken }
-      setInterval(async () => {
-        refToken({ variables: { input: variables } }).then(response =>{
-          localStorage.setItem('AUTH_TOKEN', response.data.refToken.access_token)
-          localStorage.setItem('REF_TOKEN', response.data.refToken.refresh_token)
-        }).catch((errors) => {
-          console.log(errors)
-        })
-      },  7000000)
-    }
-    catch(e){
-      console.log(e)
-    }
-  })
 
   function walletBalance(walletAddress, userId){
     return (
@@ -97,26 +71,6 @@ const WalletContainer = (props) => {
     )
   }
 
-  function token(){
-    const { refToken } = props
-    const refreshToken = localStorage.getItem('REF_TOKEN')
-    const clientCred = {
-      input: {
-        clientId: process.env.REACT_APP_GWX_CLIENT_ID,
-        clientSecret: process.env.REACT_APP_GWX_CLIENT_SECRET,
-        grantType: "refresh_token"
-      }
-    }
-    const variables = { ...clientCred.input, refreshToken: refreshToken }
-
-    refToken({ variables: { input: variables } }).then(response =>{
-      localStorage.setItem('AUTH_TOKEN', response.data.refToken.access_token)
-      localStorage.setItem('REF_TOKEN', response.data.refToken.refresh_token)
-    }).catch((errors) => {
-      console.log(errors)
-    })
-  }
-
   if(!countryName){
     return <Spin />
   }
@@ -133,7 +87,6 @@ const WalletContainer = (props) => {
 
   return (
     <div className="body-container">
-    {token()}
       <Query query={GET_PROFILE}>
         {({ data, loading, error }) => {
           if (loading) return <Spin />
@@ -143,19 +96,19 @@ const WalletContainer = (props) => {
           return (
             <>
               <div className="body-content">
-                <h2 className='title'>My GWX Wallet</h2>
+                <h2 className='title'>{strings.my_gwx_wallet}</h2>
                 <Card>
                   <div className='wallet-container'>
                     <p className='top'></p>
                     {walletAddress && walletBalance(walletAddress, userId)}
                   </div>
                 </Card>
-                <h2 className='title -pad'>My Game Wallets</h2>
+                <h2 className='title -pad'>{strings.my_game_wallet}</h2>
                 <Card>
                   <div className="wallet-container">
                     <p className='top'></p>
                     <div className='balance'>
-                      <span>You don't have any Game Wallets.</span>
+                      <span>{strings.no_game}</span>
                     </div>
                     <Button style={{ background: 'transparent', border: 'none' }}></Button>
                   </div>
@@ -170,8 +123,7 @@ const WalletContainer = (props) => {
 }
 
 export default compose(
-  withApollo,
-  graphql(AUTHENTICATE.REF_TOKEN, { name: 'refToken'})
+  withApollo
 )(WalletContainer)
 
 

@@ -1,7 +1,7 @@
 import React,  { useEffect, useState } from 'react'
 import { compose, withApollo } from 'react-apollo'
 
-import REAL_TIME_RATES from '../../../../../src/graphql/realTimeRates'
+import REAL_TIME_RATES from 'lib/api/realTimeRates'
 
 const Rate = (props) => {
   const [btc, setBtc] = useState(0)
@@ -10,7 +10,7 @@ const Rate = (props) => {
 
   useEffect(() => {
     try{
-      setInterval(async ()=> {
+      setInterval(async () => {
         getConversion()
       },  600000)
     } catch(e){

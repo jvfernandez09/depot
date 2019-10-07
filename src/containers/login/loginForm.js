@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
 
+import strings from 'utils/strings'
 import Input from 'components/input'
 import Button from 'components/button'
 import {ReactComponent as Logo} from 'assets/images/LOGO.svg'
@@ -33,7 +34,7 @@ const LoginForm = ({
             </div>
             <form>
               <div className='form-group'>
-                <label>Email Address</label>
+                <label>{strings.email_address}</label>
                 <div>
                   <Input
                     type="text"
@@ -50,7 +51,7 @@ const LoginForm = ({
               </div>
 
               <div className='form-group'>
-                <label>Password</label>
+                <label>{strings.password}</label>
                 <div>
                   <Input
                     type="password"
@@ -65,7 +66,7 @@ const LoginForm = ({
                   <p style={{ color: 'red'}}>{errors.password}</p>
                 )}
                 <div className='forgot-pass'>
-                  <a href='/reset'> Forgot password? </a>
+                  <a href='/reset'> {strings.forgot_password}</a>
                 </div>
               </div>
               <Button
@@ -76,8 +77,8 @@ const LoginForm = ({
               </Button>
               <div className='form-group'>
                 <div className='register'>
-                  <span className='register-font'>Don't have any account? </span>
-                  <Link to="/register"> Register Now! </Link>
+                  <span className='register-font'> {strings.no_account}</span>
+                  <Link to="/register">{strings.register_now}</Link>
                 </div>
               </div>
             </form>

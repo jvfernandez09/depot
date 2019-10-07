@@ -3,10 +3,11 @@ import { compose, graphql, withApollo } from 'react-apollo'
 
 import { Input, Button } from 'antd'
 
+import strings from 'utils/strings'
 import useForm from "utils/useForm"
 import validateChangePassword from 'utils/changePasswordFormValidationRules'
 
-import CHANGE_PASSWORD from '../../../../../../src/graphql/changePassword'
+import CHANGE_PASSWORD from 'lib/api/changePassword'
 import Notification from 'utils/notification'
 
 const ChangePasswordCotainer = (props) => {
@@ -64,7 +65,7 @@ const ChangePasswordCotainer = (props) => {
             </div>
             <form>
               <div className='form-group'>
-                <label>New Password</label>
+                <label>{strings.new_password}</label>
                 <div>
                   <Input
                     type="password"
@@ -81,7 +82,7 @@ const ChangePasswordCotainer = (props) => {
               </div>
 
               <div className='form-group'>
-                <label>Confirm Password</label>
+                <label>{strings.confirm_password}</label>
                 <div>
                   <Input
                     type="password"
@@ -100,7 +101,7 @@ const ChangePasswordCotainer = (props) => {
                 className='button btn-primary btn-block btn-lg'
                 onClick={handleSubmit}
                 loading={isSubmitting}
-              >Confirm
+              >{strings.confirm}
               </Button>
             </form>
           </div>
