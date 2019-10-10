@@ -1,5 +1,6 @@
 import React from 'react'
 import { compose, graphql, withApollo } from 'react-apollo'
+import { Link } from 'react-router-dom'
 
 import useForm from "utils/useForm"
 import validateEmail from 'utils/emailFormValidationRules'
@@ -60,9 +61,9 @@ const ForgotPassword = (props) => {
   }
 
   return (
-    <div>
-      <div>
-        <div className='session-container'>
+    <div className='container session-layout'>
+      <div className='item'>
+        <div className='forgot-session-container'>
           <div className='content'>
             <div className='head'>
               <Logo className='logo' />
@@ -91,6 +92,10 @@ const ForgotPassword = (props) => {
                   loading={isSubmitting}
                 > {strings.temporary_password}
                 </Button>
+              </div>
+              <div className='link-action'>
+                <p>Already have an account?</p>
+                <Link to='/login'>Log in</Link>
               </div>
             </form>
           </div>

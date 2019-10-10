@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import strings from 'utils/strings'
 import Input from 'components/input'
 import Button from 'components/button'
-import {ReactComponent as Logo} from 'assets/images/LOGO.svg'
+import { ReactComponent as Logo } from 'assets/images/LOGO-tokendepot.svg'
 import 'login/index.scss'
 
 const LoginForm = ({
@@ -25,13 +25,17 @@ const LoginForm = ({
   }
 
   return (
-    <div>
-      <div>
+    <div className='container session-layout'>
+      <div className='item'>
+        <a href ="/"> <Logo className='logo' /> </a>
         <div className='session-container'>
           <div className='content'>
-            <div className='head'>
-              <Logo className='logo' />
+          <div className='head -smallpad'>
+            <h1 className='title'>Login</h1>
+            <div className='sub'>
+              YOUR ACCOUNT IN GAMEWORKS
             </div>
+          </div>
             <form>
               <div className='form-group'>
                 <label>{strings.email_address}</label>
@@ -76,8 +80,8 @@ const LoginForm = ({
               >Login
               </Button>
               <div className='form-group'>
-                <div className='register'>
-                  <span className='register-font'> {strings.no_account}</span>
+                <div className='link-action'>
+                  <p> {strings.no_account}</p>
                   <Link to="/register">{strings.register_now}</Link>
                 </div>
               </div>

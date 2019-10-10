@@ -24,32 +24,134 @@
   }
 }
 
-.session-container {
+.container {
+  width: 850px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+  .session-layout {
   & {
-    height: 100vh;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &.-top {
+    align-items: unset;
+  }
+
+  > .divider {
+    height: 320px;
+    border-left: 1px solid $border-color;
+  }
+
+  > .left.-half {
+    width: 50%;
+  }
+
+  > .item {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
 
-  > .content {
-    width: 350px;
-  }
-
-  > .content > .head {
-    text-align: center;
-    margin-bottom: $pad * 8;
-  }
-
-  > .content > .head > .logo {
-    width: 90%;
-  }
-
-  > .content > form > button {
-    margin-top: $pad * 2;
+  > .item > a {
+    margin: $pad * 4 0 $pad * 3;
+    z-index: 1;
   }
 }
 
+.session-container {
+  & {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0d172e;
+    padding: 56px;
+    border-radius: 8px;
+    z-index: 1;
+    margin-bottom: 16px;
+  }
+
+  > .content {
+    width: 400px;
+  }
+
+  > .width {
+    width: 100% !important;
+  }
+
+  > .content > .head {
+    margin-bottom: $pad * 8;
+    text-align: center;
+  }
+
+  > .content > .head > .title,
+  > .content > .head > .sub {
+    color: #fff;
+    text-transform: uppercase;
+    font-family: $sans
+  }
+
+  > .content > .head > .title > .highlight {
+    color: #f8d154;
+    text-transform: uppercase;
+    font-family: $sans
+  }
+
+  > .content > .head > .title {
+    font-weight: 700;
+  }
+
+  > .content > form > .others {
+    margin-top: $pad * 2;
+  }
+
+  > .content > form > .others > a {
+    color: $light-gray;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  > .content > .head > .google-play {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+  }
+
+  > .content > .head > .image {
+    display: flex;
+  }
+
+  > .content > .head > .image > svg {
+    width: 300px;
+    height: 580px;
+  }
+}
+
+
+.link-action {
+  & {
+    display: flex;
+    justify-content: center;
+  }
+
+  > a {
+    margin-left: $pad;
+    color: $primary-color;
+  }
+
+  > a:hover {
+    color: darken($primary-color, 15%);
+  }
+}
 
 .error-container {
   & {
