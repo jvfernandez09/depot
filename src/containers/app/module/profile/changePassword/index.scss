@@ -1,0 +1,47 @@
+@import "./src/styles/variables";
+
+.form-group {
+  & {
+    position: relative;
+    margin-bottom: $pad * 3;
+    width: 100%;
+  }
+}
+
+.container {
+  width: 850px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.change-session-container {
+  & {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 56px;
+    border-radius: 8px;
+    z-index: 1;
+    margin-bottom: 16px;
+    margin-top: 50px;
+  }
+
+  > .content {
+    width: 350px;
+  }
+
+  > .content > .head {
+    text-align: center;
+    margin-bottom: $pad * 8;
+  }
+
+  > .content > .head > .logo {
+    width: 90%;
+  }
+
+  > .content > form > button {
+    margin-top: $pad * 2;
+  }
+}
