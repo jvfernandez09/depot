@@ -9,6 +9,7 @@ import validateChangePassword from 'utils/changePasswordFormValidationRules'
 
 import CHANGE_PASSWORD from 'lib/api/changePassword'
 import Notification from 'utils/notification'
+import '../changePassword/index.scss'
 
 const ChangePasswordCotainer = (props) => {
   const {
@@ -35,7 +36,7 @@ const ChangePasswordCotainer = (props) => {
 
     changePassword({ variables: parameter }).then(response => {
       if(response){
-        props.history.push('/wallet')
+        props.history.push('/profile')
         Notification.show({
           type: 'success',
           message: 'Password Updated.'
@@ -59,7 +60,7 @@ const ChangePasswordCotainer = (props) => {
   return (
     <div>
       <div>
-        <div className='session-container'>
+        <div className='change-session-container'>
           <div className='content'>
             <div className='head'>
             </div>
