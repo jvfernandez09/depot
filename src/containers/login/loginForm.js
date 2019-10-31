@@ -32,7 +32,7 @@ const LoginForm = ({
         <div className='session-container'>
           <div className='content'>
           <div className='head -smallpad'>
-            <h1 className='title'>Login</h1>
+            <h1 className='title'>Log in</h1>
             <div className='sub'>
               YOUR ACCOUNT IN GAMEWORKS
             </div>

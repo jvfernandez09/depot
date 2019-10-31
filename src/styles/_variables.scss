@@ -1,26 +1,25 @@
 
 @font-face {
-  font-family: 'SoinSansNeue';
+  font-family: 'Soin Sans Neue';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 100;
   src:
+    local('Soin Sans Neue'),
     local('SoinSansNeue'),
-    local('SoinSansNeue'),
-    url(/src/assets/fonts/SoinSansNeue-Medium.otf) format('otf'),
+    url('/src/assets/fonts/SoinSansThin.woff2') format('woff2'),
 }
 
 @font-face {
-  font-family: 'SoinSansNeue';
-  font-style: bold;
-  font-weight: 900;
+  font-family: 'Soin Sans Neue';
+  font-style: normal;
+  font-weight: normal;
   src:
+    local('Soin Sans Neue'),
     local('SoinSansNeue'),
-    local('SoinSansNeue'),
-    url(/src/assets/fonts/SoinSansNeue-Bold.otf) format('otf'),
+    url('/src/assets/fonts/SoinSansNeue-Bold.otf') format('opentype'),
 }
 
-
-$sans: 'SoinSansNeue', "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$sans: 'Soin Sans Neue', "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 $sans-bold: 'SoinSansNeue-Bold', "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 
 $font-family-base:                $sans;
