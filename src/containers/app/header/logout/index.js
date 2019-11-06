@@ -22,7 +22,7 @@ const Logout = (props) => {
   const logout = () => {
     Modal.confirm({
       title: 'Logout',
-      content: "Are you sure ?",
+      content: 'Are you sure you want to Logout?',
       onOk() {
         localStorage.clear()
         window.location.replace('/')
