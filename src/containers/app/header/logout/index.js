@@ -2,7 +2,7 @@ import React,  { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { compose, withApollo } from 'react-apollo'
 import GET_PROFILE from 'lib/api/profile'
-import { Menu, Icon, Avatar, Popover, Dropdown, Modal } from 'antd'
+import { Avatar, Popover, Modal } from 'antd'
 import 'app/header/index.scss'
 
 const Logout = (props) => {
