@@ -19,6 +19,7 @@ const strings = {
   my_gwx_wallet: 'My GWX Wallet',
   my_game_wallet: 'My Game Wallets',
   no_game: "You don't have any Game Wallets.",
+  my_xem_wallet: 'My XEM Wallet',
 
   confirm: 'Confirm'
 }

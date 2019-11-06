@@ -71,6 +71,43 @@ const WalletContainer = (props) => {
     )
   }
 
+  function xemWalletBalance(walletAddress, userId){
+    return (
+      <>
+        <Query
+          query={WALLET.GET_WALLET_BALANCE}
+          variables={{ walletAddress }}
+          pollInterval={15000}>
+          {({ data, loading, error, startPolling, stopPolling }) => {
+            if (loading) return <Spin />
+            if (error) return <p>{console.log(error)}</p>
+            if (data.getWalletBalance.balance.xem === undefined) return data.getWalletBalance.balance.xem = 0
+            const convertedBalance = data.getWalletBalance.balance.xem.toFixed(6).split(".")
+            const newBalance = parseInt(convertedBalance[0])
+            return(
+              <div className='balance'>
+                <div className='title'>XEM</div>
+                <span style={{ fontSize: '3.5rem' }}>{isNaN(newBalance) ? 0 : newBalance.toLocaleString()}</span>
+                <span>.</span>
+                <span style={{ fontSize: '1.5rem' }}>{isNaN(convertedBalance[1]) ? '000000' : convertedBalance[1]}</span>
+              </div>
+            )
+          }}
+        </Query>
+        {blackListed.includes(countryName) ?
+          <Button className='button btn-primary -outline' onClick={() => warning() } style={{ visibility: 'hidden' }}> Buy GWX </Button> :
+          <Button className='button btn-primary -outline' onClick={toggle} style={{ visibility: 'hidden' }}> Buy GWX </Button>
+        }
+        <WalletModal
+          userId={userId}
+          isShowing={isShowing}
+          hide={toggle}
+          gwxWalletAddress={walletAddress}
+        />
+      </>
+    )
+  }
+
   if(!countryName){
     return <Spin />
   }
@@ -101,6 +138,13 @@ const WalletContainer = (props) => {
                   <div className='wallet-container'>
                     <p className='top'></p>
                     {walletAddress && walletBalance(walletAddress, userId)}
+                  </div>
+                </Card>
+                <h2 className='title'>{strings.my_xem_wallet}</h2>
+                <Card>
+                  <div className='wallet-container'>
+                    <p className='top'></p>
+                    {walletAddress && xemWalletBalance(walletAddress, userId)}
                   </div>
                 </Card>
                 <h2 className='title -pad'>{strings.my_game_wallet}</h2>
