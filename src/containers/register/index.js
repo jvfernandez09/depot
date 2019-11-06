@@ -20,7 +20,7 @@ const Register = () => {
             <div className='content-register width'>
               <div className='head-register'>
                 <h1 className='title-register'>
-                  CREATE ACCOUNT
+                  CREATE YOUR ACCOUNT
                 </h1>
                 <h1 className='title-register'>
                   <span>USING</span>
