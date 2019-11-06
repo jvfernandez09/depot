@@ -37,11 +37,24 @@
 
 .nav-bar {
   & {
-    background: transparent;
+    background: #0D172E;
     color: #fff;
     border-bottom: none;
   }
 }
+
+a {
+  color: #fff;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.pop-over {
+  background: #0D172E;
+}
+
 
 // overrides antDesign
 .user-icon {
@@ -83,4 +96,33 @@
 
 .ant-menu-item {
   transition: none;
+}
+
+.ant-popover-inner-content {
+  background: #0D172E;
+}
+
+.ant-popover-inner {
+  background: #0D172E;
+}
+
+.ant-popover-placement-bottomRight > .ant-popover-content > .ant-popover-arrow {
+  & {
+    border-top-color: #0D172E !important;
+    border-left-color: #0D172E !important;
+  }
+}
+.ant-popover-placement-bottomLeft > .ant-popover-content > .ant-popover-arrow {
+  & {
+    border-top-color: #0D172E !important;
+    border-left-color: #0D172E !important;
+  }
+}
+
+.ant-popover {
+  top: 52px !important;
+}
+
+.ant-menu-item>a:hover, span:hover {
+  color: #ffc000;
 }

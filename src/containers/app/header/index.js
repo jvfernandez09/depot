@@ -1,11 +1,12 @@
+
 import React, {useEffect} from 'react'
 import { withRouter } from 'react-router-dom'
 import { Layout } from 'antd'
 import 'app/header/index.scss'
 import { ReactComponent as Logo } from 'assets/images/LOGO-tokendepot.svg'
 import Rate from 'app/header/rates'
+import Logout from 'app/header/logout'
 import RefreshToken from 'app/header/refreshToken'
-import { Menu, Dropdown, Icon, Button } from 'antd'
 
 const { Header } = Layout;
 
@@ -16,12 +17,6 @@ const HeaderContainer = (props) => {
        props.history.push('/profile')
     }
   })
-
-  function logout(){
-    localStorage.clear()
-    window.location.replace('/')
-  }
-
   return (
     <Header className='main-navbar'>
       <RefreshToken />
@@ -33,15 +28,7 @@ const HeaderContainer = (props) => {
           <div className='avatar'>
           </div>
           <Rate />
-          <Dropdown overlay={
-            <Menu className='nav-bar'>
-              <Menu.Item key="1" onClick={() => logout()}>
-                <Icon style={{ marginRight: 8, color: '#F8D154' }} type="logout"/><label className="logout-icon">Logout</label>
-              </Menu.Item>
-            </Menu>
-          }>
-            <Button className="user-icon"><Icon type="user"/></Button>
-          </Dropdown>
+          <Logout />
         </div>
       </div>
     </Header>
