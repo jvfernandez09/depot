@@ -3,8 +3,8 @@
 .button {
   & {
     display: inline-block;
-    margin-bottom: 6px; 
-    font-weight: $font-weight-bold;
+    margin-bottom: 0; 
+    font-weight: 900;
     font-size: $font-size-base;
     text-align: center;
     vertical-align: middle;
@@ -21,6 +21,7 @@
     line-height: $line-height-base;
     text-transform: uppercase;
     height: unset;
+    color: $vulcan;
   }
 }
 
