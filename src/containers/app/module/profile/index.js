@@ -12,6 +12,7 @@ import strings from 'utils/strings'
 import WalletContainer from 'app/module/wallet'
 import TransactionContainer from 'app/module/transaction'
 import Notification from 'utils/notification'
+import helpers from 'utils/helpers'
 
 const { TabPane } = Tabs
 
@@ -39,8 +40,10 @@ const ProfileContainer = (props) => {
                 <h2 className='title'>{strings.user_details}</h2>
                 <Card>
                   <div className="profile-header">
-                    {response.avatar.url === undefined
-                      ? <Avatar shape="square" size={150} icon="user" />
+                    {response.avatar.url === null
+                      ? <Avatar style={{background: 'white'}}shape="square" size={150}>
+                        <span style={{ fontSize: 45, color: 'gray' }}>{helpers.getInitials(firstName)}</span>
+                        </Avatar>
                       : <img
                           style={{ height:'150px', width:'150px', minHeight:'150px', minWidth:'150px' }}
                           src={response.avatar.url}
