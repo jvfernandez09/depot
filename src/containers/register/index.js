@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ReactComponent as StepOne }  from 'assets/images/stepOne.svg'
 import { ReactComponent as StepTwo }  from 'assets/images/stepTwo.svg'
 import { ReactComponent as StepThree }  from 'assets/images/stepThree.svg'
-import { ReactComponent as Logo } from 'assets/images/LOGO-tokendepot.svg'
+import { ReactComponent as Logo } from 'assets/images/token-depot.svg'
 import { ReactComponent as GooglePlay } from 'assets/images/google-play.svg'
 
 import './index.scss'
