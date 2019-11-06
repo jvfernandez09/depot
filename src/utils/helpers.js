@@ -14,3 +14,13 @@ export const isGeolocation = async () => {
 
   return JSON.parse(match[1]).country_name
 }
+
+
+const getInitials = text => (
+  text.substring(0,2).toUpperCase()
+)
+
+
+export default {
+  getInitials
+}
