@@ -69,6 +69,31 @@
   }
 }
 
+.container {
+  & {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    @media #{$tablet} {
+      width: 850px;
+    }
+
+    @media #{$laptop} {
+      width: 1050px;
+    }
+
+    @media #{$desktop} {
+      width: 1200px;
+    }
+
+    @media #{$largedesktop} {
+      width: 1450px;
+    }
+  }
+}
+
 // overrides antDesign
 .ant-calendar-picker:focus .ant-calendar-picker-input:not(.ant-input-disabled) {
   box-shadow: none;
