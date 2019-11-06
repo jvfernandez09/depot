@@ -37,11 +37,30 @@
 
 .nav-bar {
   & {
-    background: transparent;
+    background: #0D172E;
     color: #fff;
     border-bottom: none;
   }
 }
+
+
+
+.ant-popover, .ant-popover-placement-bottomRight {
+  left: 915.906px;
+  top: 47.375px;
+  transform-origin: 76.0938px -4px;
+}
+
+
+
+.ant-popover-placement-bottomRight > .ant-popover-content > .ant-popover-arrow {
+  background: #0D172E;
+}
+
+.ant-popover-inner-content{
+  background: #0D172E;
+}
+
 
 // overrides antDesign
 .user-icon {
