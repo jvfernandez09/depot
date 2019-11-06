@@ -31,7 +31,7 @@ const Register = () => {
                   <GooglePlay onClick={() => window.open('https://play.google.com/store/apps/details?id=com.gameworksmobilewallet&hl=en','_blank')} />
                 </div>
                 <div className='apple-play'>
-                  <ApplePlay onClick={() => window.open('https://play.google.com/store/apps/details?id=com.gameworksmobilewallet&hl=en','_blank')} />
+                  <ApplePlay onClick={() => window.open('https://apps.apple.com/ph/app/gameworks-mobile-wallet/id1484020853','_blank')} />
                 </div>
                 <div className='image'>
                   <StepOne />
