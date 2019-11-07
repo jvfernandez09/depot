@@ -80,7 +80,7 @@ const LoginForm = ({
                   onClick={handleSubmit}
                   loading={isLoading}
                   className='button btn-primary btn-block btn-lg'
-                >Login
+                >{strings.log_in}
                 </Button>
               </Form.Item>
               <div className='form-group'>

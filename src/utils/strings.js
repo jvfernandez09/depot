@@ -8,7 +8,7 @@ const strings = {
   forgot_password: 'Forgot password?',
   no_account: "Don't have any account",
   register_now: ' Register Now!',
-
+  log_in: 'LOG IN',
   personal_wallet: 'PERSONAL WALLET',
   user_details: 'User Details',
   last_logged_in: 'Last logged in:',

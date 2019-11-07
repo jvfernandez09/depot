@@ -34,7 +34,7 @@ const Logout = (props) => {
     <div>
       <div>
         <Link to="#" onClick={logout}>
-          Logout
+          Log out
         </Link>
       </div>
     </div>
