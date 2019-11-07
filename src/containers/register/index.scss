@@ -104,7 +104,17 @@
 
   > .content-register > .head-register > .google-play {
     margin-top: 2rem;
+    display: inline-flex;
     margin-bottom: 2rem;
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  > .content-register > .head-register > .apple-play {
+    margin-top: 2rem;
+    display: inline-flex;
+    margin-bottom: 2rem;
+    padding: 5px;
     cursor: pointer;
   }
 
