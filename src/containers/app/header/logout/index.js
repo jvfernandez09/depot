@@ -67,7 +67,7 @@ const Logout = (props) => {
              </div>
 
             <div className="content-container">
-              Are you sure you want to Logout?
+              Are you sure you want to Log out?
             </div>
 
             <div className='button-container'>
