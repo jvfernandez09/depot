@@ -10,6 +10,11 @@
   }
 }
 
+.ant-modal {
+  width: 200px !important;
+  height: 200px !important;
+}
+
 .nav-container {
   & {
     display: flex;
@@ -125,4 +130,59 @@ a {
 
 .ant-menu-item>a:hover, span:hover {
   color: #ffc000;
+}
+
+.ant-modal {
+  width: 600px !important;
+}
+
+
+
+.confirm-modal {
+  width: 416px !important;
+  height: 500px !important;
+}
+
+
+.title-logout {
+  display: block;
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.4;
+  color: white;
+}
+
+.icon-circle {
+  float: left;
+  margin-right: 16px;
+  font-size: 22px;
+}
+
+.content-container{
+  margin-left: 38px;
+  padding-top: 8px;
+  color: white;
+}
+
+.modal-container {
+  height: 107px;
+  > .button-container {
+    float: right;
+    margin-top: 24px;
+     > .button-ok {
+       background-color: $primary-color;
+       border-color: $primary-color;
+       color: #37393c;
+       font-weight: 500;
+     }
+     > .button-cancel{
+       background-color: #fbe59d;
+       border-color: #fbe59d;
+       color: #37393c;
+       font-weight: 500;
+       margin-right: 4px;
+     }
+  }
 }
