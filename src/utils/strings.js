@@ -1,4 +1,6 @@
 const strings = {
+  yourAccountInGameworks: 'Your account in Gameworks',
+
   email_address: 'Email Address',
   email: 'Email',
   password: 'Password',

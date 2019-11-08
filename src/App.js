@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { Layout } from 'antd'
 import {BrowserRouter as Router, Switch} from 'react-router-dom';
 

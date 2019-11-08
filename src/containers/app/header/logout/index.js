@@ -2,11 +2,12 @@ import React,  { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { compose, withApollo } from 'react-apollo'
 import GET_PROFILE from 'lib/api/profile'
-import { Avatar, Popover, Modal } from 'antd'
+import { Avatar, Popover, Modal, Icon, Button } from 'antd'
 import 'app/header/index.scss'
 
 const Logout = (props) => {
   const [image, setImage] = useState()
+  const [open, isOpen] = useState(false)
 
   useEffect(() => {
     const { client } = props
@@ -19,21 +20,12 @@ const Logout = (props) => {
     })
   })
 
-  const logout = () => {
-    Modal.confirm({
-      title: 'Logout',
-      content: 'Are you sure you want to Logout?',
-      onOk() {
-        localStorage.clear()
-        window.location.replace('/')
-      }
-    });
-  }
-
   const content = (
     <div>
       <div>
-        <Link to="#" onClick={logout}>
+        <Link to="#" onClick={() => {
+          isOpen(!open)
+        }}>
           Log out
         </Link>
       </div>
@@ -41,16 +33,68 @@ const Logout = (props) => {
   );
 
   return (
-    <Popover
-      placement="bottomRight"
-      content={content}
-    >
-    <Avatar
-      style={{ marginLeft: 17 }}
-      src={image}
-      size={40}
-   />
-    </Popover>
+    <>
+      <Popover
+        placement="bottomRight"
+        content={content}
+      >
+        <Avatar
+          style={{ marginLeft: 17 }}
+          src={image}
+          size={40}
+       />
+      </Popover>
+
+      { open ? (
+        <Modal
+          className='confirm-modal'
+          visible={open}
+          closable={null}
+          bodyStyle={{
+            padding: '32px 32px 24px',
+            backgroundColor: '#15254a'
+          }}
+          footer={null}
+          >
+          <div className="modal-container">
+            <div className="title-container">
+              <Icon
+                className="icon-circle"
+                type="question-circle"
+                style={{ fontSize: '22px', color: '#F8D154'}}
+               />
+               <div className="title-logout"> Log out </div>
+             </div>
+
+            <div className="content-container">
+              Are you sure you want to Logout?
+            </div>
+
+            <div className='button-container'>
+              <Button
+                className="button-cancel"
+                key="2"
+                type="primary"
+                onClick={() => isOpen(!open)}
+              >
+                Cancel
+              </Button>,
+              <Button
+                className="button-ok"
+                key="1"
+                type="primary"
+                onClick={() => {
+                  localStorage.clear()
+                  window.location.replace('/')
+                }}
+              >
+                OK
+              </Button>
+            </div>
+          </div>
+        </Modal>
+      ) : null}
+    </>
   )
 }
 

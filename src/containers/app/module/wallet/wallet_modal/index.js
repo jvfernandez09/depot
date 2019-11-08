@@ -250,6 +250,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
       {isShowing ? (
         <>
           <Modal
+            className='wallet-modal'
             title={
               <div className='header-container'>
                 <div className='title'>Buy GWX</div>
