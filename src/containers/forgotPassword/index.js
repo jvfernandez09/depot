@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { compose, graphql, withApollo } from 'react-apollo'
 import { Link } from 'react-router-dom'
+import { Form } from 'antd'
 
 import useForm from "utils/useForm"
 import validateEmail from 'utils/emailFormValidationRules'
 import Notification from 'utils/notification'
 import strings from 'utils/strings'
 
-import { ReactComponent as Logo } from 'assets/images/LOGO.svg'
+import { ReactComponent as Logo } from 'assets/images/token-depot.svg'
 
 import { Input } from 'antd'
 import Button from 'components/button'
@@ -20,11 +21,12 @@ const ForgotPassword = (props) => {
     inputs,
     errors,
     handleChange,
-    handleSubmit,
-    isSubmitting
+    handleSubmit
   } = useForm(resetPassword, validateEmail);
+  const [isLoading, setIsLoading] = useState(false)
 
   async function resetPassword(){
+    setIsLoading(true)
     const variables = { input: inputs }
     const { forgotPassword, authenticateClientCred } = props
     const clientCred = {
@@ -46,61 +48,62 @@ const ForgotPassword = (props) => {
         props.history.push('/login')
       }
     }).catch((errors) => {
+      console.log(errors.networkError.result)
       Notification.show({
         type: 'error',
-        message: errors.networkError.result.message
+        message: "Couldn't Find User"
       })
     })
-  }
-
-  function onKeyPress(e){
-    if(e.which === 13) {
-      e.preventDefault()
-      handleSubmit()
-    }
+    setIsLoading(false)
   }
 
   return (
     <div className='container session-layout'>
-      <div className='item'>
-        <div className='forgot-session-container'>
-          <div className='content'>
-            <div className='head'>
-              <Logo className='logo' />
-            </div>
-            <form>
-              <div className='form-group'>
-                <div className='head'>
-                </div>
-                <label>{strings.email}</label>
-                <div className='form-group'>
-                  <Input
-                    type="email"
-                    name="email"
-                    onChange={handleChange}
-                    onKeyPress={onKeyPress}
-                    value={inputs.email}
-                    required
-                  />
-                  {errors.email && (
-                    <p style={{ color: 'red'}}>{errors.email}</p>
-                  )}
-                </div>
-                <Button
-                  className='button btn-primary btn-block btn-lg'
-                  onClick={handleSubmit}
-                  loading={isSubmitting}
-                > {strings.temporary_password}
-                </Button>
-              </div>
-              <div className='link-action'>
-                <p>Already have an account?</p>
-                <Link to='/login'>Log in</Link>
-              </div>
-            </form>
+    <div className='item'>
+      <Link to='/'>
+        <Logo className='logo'/>
+      </Link>
+      <div className='session-container'>
+        <div className='content'>
+          <div className='head -smallpad'>
+            <h1 className='title'>{strings.reset_password}</h1>
           </div>
+          <Form>
+            <Form.Item
+              className='form-group'
+              validateStatus={errors.email ? 'error' : ''}
+              help={errors.email ? errors.email : ''}
+            >
+              <label>{strings.email_address}</label>
+              <Input
+                type="email"
+                name="email"
+                value={inputs.email || ''}
+                onChange={handleChange}
+                required
+              />
+            </Form.Item>
+            {(errors && errors === 'Email address not found') && (
+              <p className="help is-danger">{errors}</p>
+            )}
+            <Form.Item className='button-form'>
+              <Button
+                className='button btn-primary btn-block btn-lg'
+                onClick={handleSubmit}
+                loading={isLoading}
+                htmlType="submit"
+              >
+                {strings.reset_password}
+              </Button>
+            </Form.Item>
+            <div className='link-action'>
+              <p>Already have an account?</p>
+              <Link to='/login'>Log in</Link>
+            </div>
+          </Form>
         </div>
       </div>
+    </div>
     </div>
   )
 }
