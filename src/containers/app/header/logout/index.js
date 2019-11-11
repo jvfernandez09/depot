@@ -3,17 +3,21 @@ import { Link } from 'react-router-dom'
 import { compose, withApollo } from 'react-apollo'
 import GET_PROFILE from 'lib/api/profile'
 import { Avatar, Popover, Modal, Icon, Button } from 'antd'
+
 import 'app/header/index.scss'
 
 const Logout = (props) => {
   const [image, setImage] = useState()
+  const [firstName, setFirstName] = useState()
   const [open, isOpen] = useState(false)
+
 
   useEffect(() => {
     const { client } = props
     client.query({
       query: GET_PROFILE
     }).then((result) => {
+      setFirstName(result.data.getProfile.data.attributes.firstName)
       setImage(result.data.getProfile.data.attributes.avatar.url)
     }).catch((e) => {
       console.log(e)
@@ -38,11 +42,14 @@ const Logout = (props) => {
         placement="bottomRight"
         content={content}
       >
-        <Avatar
-          style={{ marginLeft: 17 }}
-          src={image}
-          size={40}
-       />
+
+      <div style={{ display: 'inline-block', marginLeft: '17px' }}>
+        <Avatar src={image} style={{ backgroundColor: 'rgb(204, 204, 204)' }} size={40}>
+          <span className="span-avatar">
+            {firstName ? firstName.substring(0,2).toUpperCase() : null}
+          </span>
+        </Avatar>
+      </div>
       </Popover>
 
       { open ? (

@@ -129,6 +129,7 @@ a {
 }
 
 .ant-menu-item>a:hover, span:hover {
+  cursor: pointer;
   color: #ffc000;
 }
 
@@ -185,4 +186,13 @@ a {
        margin-right: 4px;
      }
   }
+}
+
+.pop-avatar{
+  display: flex;
+}
+
+.span-avatar {
+  color: #000;
+  font-weight: 600;
 }

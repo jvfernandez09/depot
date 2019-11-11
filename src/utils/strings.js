@@ -8,6 +8,9 @@ const strings = {
   confirm_password: 'Confirm Password',
   temporary_password: 'Send Temporary Password',
   forgot_password: 'Forgot password?',
+  reset_password: 'Reset Password',
+
+  
   no_account: "Don't have any account",
   register_now: ' Register Now!',
   log_in: 'LOG IN',
