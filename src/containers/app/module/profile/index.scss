@@ -44,6 +44,11 @@
   }
 }
 
+.profile-pic {
+  max-width: 136px;
+  max-height: 136px;
+}
+
 .profile-details {
   & {
     margin-left: $pad * 2;
@@ -91,4 +96,11 @@
 
 .ant-tabs-bar {
   border-bottom: none;
+}
+
+.ant-avatar > img {
+  object-fit: cover;
+  display: block;
+  width: 100%;
+  height: 100%;
 }

@@ -40,16 +40,18 @@ const ProfileContainer = (props) => {
                 <h2 className='title'>{strings.user_details}</h2>
                 <Card>
                   <div className="profile-header">
+                    <div className='profile-pic'>
                     {response.avatar.url === null
                       ? <Avatar style={{background: 'white'}}shape="square" size={150}>
                         <span style={{ fontSize: 45, color: 'gray' }}>{helpers.getInitials(firstName)}</span>
                         </Avatar>
                       : <img
-                          style={{ height:'150px', width:'150px', minHeight:'150px', minWidth:'150px' }}
+                          style={{ objectFit: 'cover', width:'128px', height:'128px' }}
                           src={response.avatar.url}
                           alt=""
                         />
                     }
+                    </div>
                     <div className="profile-details">
                       <div className='top'>
                         <div className="name">{`${response.firstName} ${response.lastName}`} </div>
