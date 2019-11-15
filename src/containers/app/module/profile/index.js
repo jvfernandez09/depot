@@ -42,7 +42,7 @@ const ProfileContainer = (props) => {
                   <div className="profile-header">
                     <div className='profile-pic'>
                     {response.avatar.url === null
-                      ? <Avatar style={{background: 'white'}}shape="square" size={150}>
+                      ? <Avatar style={{background: 'white' }}shape="square" size={128}>
                         <span style={{ fontSize: 45, color: 'gray' }}>{helpers.getInitials(firstName)}</span>
                         </Avatar>
                       : <img
