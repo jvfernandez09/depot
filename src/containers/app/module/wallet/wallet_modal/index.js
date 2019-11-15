@@ -179,7 +179,11 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
         created_at: data.created_at
       }})
     }).catch((errors) => {
-      console.log(errors)
+      setCurrent(0)
+      Notification.show({
+        type: 'error',
+        message:  errors.networkError.result.message
+      })
     })
   }
 
