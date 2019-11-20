@@ -24,7 +24,7 @@ const Register = () => {
                   CREATE YOUR ACCOUNT
                 </h1>
                 <h1 className='title-register'>
-                  <span>USING</span>
+                  USING
                   <span className='highlight-register'> GAMEWORKS WALLET MOBILE APP</span>
                 </h1>
                 <div className='google-play'>
