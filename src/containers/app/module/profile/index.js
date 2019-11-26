@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { compose, withApollo, Query } from 'react-apollo'
 import { Spin, Tabs, Icon, Card, Avatar } from 'antd'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import dayjs from 'dayjs'
-
+import moment from 'moment'
 import GET_PROFILE from 'lib/api/profile'
 import '../profile/index.scss'
 
@@ -31,7 +30,9 @@ const ProfileContainer = (props) => {
           : data.getProfile.data.attributes.lastName+"'s"
         const response = data.getProfile.data.attributes
         const userId = data.getProfile.data.id
-
+        const gmtDateTime = moment.utc(response.lastLogin, "YYYY-MM-DD HHmm")
+        const local = gmtDateTime.local().format('YYYY-MMM-DD H:mm')
+        
         return (
           <>
             <div className="profile-container">
@@ -56,7 +57,7 @@ const ProfileContainer = (props) => {
                       <div className='top'>
                         <div className="name">{`${response.firstName} ${response.lastName}`} </div>
                         <div className="sub">{response.email}</div>
-                        <div className="created">Last logged in: {dayjs(response.lastLogin).format('DD-MMM-YYYY,  HH:mm')}</div>
+                        <div className="created">Last logged in: {local}</div>
                       </div>
                       <div className='bottom'>
                         <div className='label'>
