@@ -10,6 +10,7 @@
     "apollo-link-context": "^1.0.17",
     "apollo-link-http": "^1.5.14",
     "apollo-link-rest": "^0.7.3",
+    "apollo-link-retry": "^2.2.15",
     "babel-plugin-import": "^1.11.2",
     "customize-cra": "^0.2.12",
     "dayjs": "^1.8.16",
