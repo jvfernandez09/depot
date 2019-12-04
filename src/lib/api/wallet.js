@@ -39,8 +39,6 @@ const GET_WALLET_XEM_BALANCE = gql`
     }
   }
 `
-
-
 const GET_ALL_GAMES = gql`
   query getAllGames {
     getAllGames @rest(
