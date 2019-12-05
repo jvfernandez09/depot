@@ -280,7 +280,7 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
                   className="button btn-primary"
                   key="1"
                   type="primary"
-                  disabled={!isEmpty(inputs.quantityToReceive) && !isEmpty(inputs.transactionType) && inputs.quantityToReceive <= 500000 ? false : true}
+                  disabled={!isEmpty(inputs.quantityToReceive) && !isEmpty(inputs.transactionType) && inputs.quantityToReceive <= 500000 && inputs.quantityToReceive > 0 ? false : true}
                   onClick={() => current === 0 ? showConfirm(inputs.quantityToReceive) : next()}
                 >
                   Next
