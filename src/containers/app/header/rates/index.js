@@ -38,10 +38,21 @@ const Rate = (props) => {
   return (
     <>
       {getConversion()}
-      <span style={{ color: '#F8D154'}}> BUY 1 GWX: 0.0031 USD<span style={{ marginLeft: '8px', marginRight: '8px' }}>•</span></span>
-      <span style={{ color: '#F8D154'}}> {btc}  BTC <span style={{ marginLeft: '8px', marginRight: '8px' }}>•</span></span>
-      <span style={{ color: '#F8D154'}}> {eth}  ETH <span style={{ marginLeft: '8px', marginRight: '8px' }}>•</span></span>
-      <span style={{ color: '#F8D154'}}> {xem}  XEM </span>
+        <span className='rates'>
+          BUY 1 GWX: 0.0031 USD
+          <span className='rate-dot'>•</span>
+        </span>
+        <span className='rates'>
+          {btc}  BTC
+          <span className='rate-dot'>•</span>
+        </span>
+        <span className='rates'>
+          {eth}  ETH
+          <span className='rate-dot'>•</span>
+        </span>
+        <span className='rates'>
+          {xem}  XEM
+        </span>
     </>
   )
 }
