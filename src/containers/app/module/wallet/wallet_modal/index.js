@@ -203,6 +203,11 @@ const WalletModal = ({ createTransaction, userId, isShowing, hide, gwxWalletAddr
               <p style={{ color: 'red'}}>Maximum GWX Purchase is 500,000</p>
             </>
           : null}
+          {inputs.quantityToReceive < 0  ?
+            <>
+              <p style={{ color: 'red'}}>Cannot accept negative value</p>
+            </>
+          : null}
         </div>
 
         <div className="form-group">
