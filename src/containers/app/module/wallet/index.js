@@ -51,9 +51,9 @@ const WalletContainer = (props) => {
               <>
                 <div className='balance'>
                   <div className='title '>GWX</div>
-                  <span className='span-balance'>{isNaN(newBalance) ? 0 : newBalance.toLocaleString()}</span>
-                  <span>.</span>
-                  <span style={{ fontSize: '1.5rem' }}>{isNaN(convertedBalance[1]) ? '000000' : convertedBalance[1]}</span>
+                  <span className='span-balance' style={{ cursor: 'default', fontSize: '3.5rem'}}>{isNaN(newBalance) ? 0 : newBalance.toLocaleString()}</span>
+                  <span style={{ cursor: 'default'}}>.</span>
+                  <span style={{ cursor: 'default', fontSize: '1.5rem' }}>{isNaN(convertedBalance[1]) ? '000000' : convertedBalance[1]}</span>
                 </div>
               </>
             )
@@ -90,9 +90,9 @@ const WalletContainer = (props) => {
               <>
                 <div className='balance'>
                   <div className='title '>XEM</div>
-                  <span className='span-balance'>{isNaN(newBalance) ? 0 : newBalance.toLocaleString()}</span>
-                  <span>.</span>
-                  <span style={{ fontSize: '1.5rem' }}>{isNaN(convertedBalance[1]) ? '000000' : convertedBalance[1]}</span>
+                  <span className='span-balance' style={{ cursor: 'default', fontSize: '3.5rem'}}>{isNaN(newBalance) ? 0 : newBalance.toLocaleString()}</span>
+                  <span style={{ cursor: 'default'}}>.</span>
+                  <span style={{ cursor: 'default', fontSize: '1.5rem' }}>{isNaN(convertedBalance[1]) ? '000000' : convertedBalance[1]}</span>
                 </div>
               </>
             )
@@ -156,7 +156,7 @@ const WalletContainer = (props) => {
                   <div className="wallet-container">
                     <p className='top'></p>
                     <div className='balance'>
-                      <span>{strings.no_game}</span>
+                      <span style={{ cursor: 'default'}}>{strings.no_game}</span>
                     </div>
                     <Button style={{ background: 'transparent', border: 'none' }}></Button>
                   </div>

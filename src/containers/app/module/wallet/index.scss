@@ -36,14 +36,17 @@
     color: $primary-color;
     align-items: baseline;
     font-weight: 500;
+    cursor: default;
   }
 
   .balance.-small {
     color: #fff;
     font-weight: 400;
+    cursor: default;
 
     > .title {
       font-size: 12px;
+      cursor: default;
     }
   }
 
@@ -52,6 +55,7 @@
     position: relative;
     margin-right: 4px;
     font-weight: 600;
+    cursor: default;
   }
 
   > .balance > .-unconfirmed {
@@ -60,6 +64,7 @@
     margin-right: 4px;
     font-weight: 600;
     color: rgb(235, 0, 121);
+    cursor: default;
   }
 
   > button {
@@ -195,8 +200,9 @@
   color: $dark-gray
 }
 
-.span-balance{
-  font-size: 3.5rem;
+.span-balance >a:hover, span:hover {
+  cursor: pointer;
+  color: #F8D154
 }
 // .ant-card {
 //   background: $black;
